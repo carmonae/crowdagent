@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header card-no-border pb-0">
+    <h3>File Upload</h3>
+  </div>
+  <div class="card-body">
+    <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
+      <ngx-dropzone-label>
+        <div class="dropzone-wrapper">
+          <div class="dz-message needsclick">
+            <i class="icon-cloud-up"></i>
+            <h4 class="f-w-700">Drop file here or click to upload.</h4>
+          </div>
+        </div>
+      </ngx-dropzone-label>
+      <ngx-dropzone-preview
+        *ngFor="let f of allFiles"
+        [removable]="true"
+        (removed)="onRemove(f)"
+      >
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-preview>
+    </ngx-dropzone>
+    <button class="btn btn-primary" (click)="uploadFile()">Upload</button>
+  </div>
+</div>

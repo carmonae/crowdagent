@@ -1,0 +1,66 @@
+<div class="md-sidebar">
+  <a class="btn btn-primary md-sidebar-toggle" (click)="openMenu()"
+    >contact filter</a
+  >
+  <div
+    class="md-sidebar-aside job-left-aside custom-scrollbar"
+    [class.open]="open"
+  >
+    <div class="email-left-aside">
+      <div class="card" style="height: 40rem">
+        <div class="card-body">
+          <div class="email-app-sidebar left-bookmark">
+            <div class="d-flex">
+              <div class="d-flex-size-email">
+                <img
+                  class="me-3 rounded-circle"
+                  src="assets/images/user/user.png"
+                  alt=""
+                />
+              </div>
+              <div class="flex-grow-1">
+                <h3 class="f-w-600">{{ username }}</h3>
+                <p>{{ email }}</p>
+              </div>
+            </div>
+            <ul class="nav main-menu contact-options" role="tablist">
+              <li class="nav-item">
+                <button
+                  class="badge-light-primary btn-block btn-mail w-100"
+                  type="button"
+                  (click)="openNewContact()"
+                >
+                  <app-feather-icons
+                    [icon]="'users'"
+                    [class]="'me-2'"
+                  ></app-feather-icons
+                  >New Contacts
+                </button>
+              </li>
+              <li class="nav-item">
+                <span class="main-title"> Views</span>
+              </li>
+              <li *ngFor="let views of contactSidemenu">
+                <a id="pills-personal-tab">
+                  <span class="title"> {{ views.title }}</span>
+                </a>
+              </li>
+              <li>
+                <button class="btn btn-category" type="button">
+                  <span class="f-w-700 title" (click)="openAddTag()">
+                    + Add Category</span
+                  >
+                </button>
+              </li>
+              <li *ngFor="let tags of contactSidemenu">
+                <a class="show" id="pills-organization-tab">
+                  <span class="title"> {{ tags.tag }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

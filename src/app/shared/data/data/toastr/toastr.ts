@@ -1,0 +1,73 @@
+export const stackingToastData = [
+    {
+        id : 1,
+        icon: "bell",
+        iconColor: "primary",
+        title: "Boho theme",
+        time: "just now",
+        bodyText: "Hello, I'm a web-designer.",
+        show : true,
+    },
+    {
+        id : 2,
+        icon: "bell",
+        iconColor: "warning",
+        title: "Roxo theme",
+        time: "2 sec ago",
+        bodyText: "Hello, I'm a UX-designer.",
+        show : true,
+    },
+    {
+        id : 3,
+        icon: "bell",
+        iconColor: "danger",
+        title: "Zeta theme",
+        time: "6 min ago",
+        bodyText: "Hello, I'm a Software developer.",
+        show : true,
+    },
+    {
+        id : 4,
+        icon: "bell",
+        iconColor: "success",
+        title: "Voxo theme",
+        time: "3 sec ago",
+        bodyText: "Hello, I'm a professional web-designer.",
+        show : true,
+    },
+]
+
+export const translucentToastsData = [
+    {
+        id : 1,
+        iconColor : 'info',
+        title : "Boho theme",
+        time : '11 mins ago',
+        bodyText : "Hello, I'm a web-designer.",
+        show : true,
+    },
+    {
+        id : 2,
+        iconColor: "dark",
+        title: "Koho theme",
+        time: "1 sec ago",
+        bodyText: " Hello, I'm a full-stack developer.",
+        show : true,
+    },
+    {
+        id : 3,
+        iconColor: "secondary",
+        title: "Fastkart theme",
+        time: "just now",
+        bodyText: " Hello, I'm a UX-designer.",
+        show : true,
+    },
+    {
+        id : 4,
+        iconColor: "success",
+        title: "Oslo theme",
+        time: "44 min ago",
+        bodyText: "Hello, I'm a professional web-designer.",
+        show : true,
+    },
+]

@@ -1,0 +1,26 @@
+<div class="notification-box">
+  <svg>
+    <use href="assets/svg/icon-sprite.svg#notification"></use>
+  </svg>
+  <span class="badge rounded-pill badge-secondary"> </span>
+</div>
+<div class="onhover-show-div notification-dropdown">
+  <h3 class="f-18 mb-0 dropdown-title">Notifications</h3>
+  <ul>
+    <li class="b-t-primary border-4">
+      <p><a [routerLink]="['/ecommerce/order-history']">Delivery processing </a><span class="font-danger">10 min.</span>
+      </p>
+    </li>
+    <li class="b-t-success border-4">
+      <p><a [routerLink]="['/ecommerce/order-history']">Order Complete</a><span class="font-success">1 hr</span></p>
+    </li>
+    <li class="b-t-secondary border-4">
+      <p><a [routerLink]="['/ecommerce/order-history']">Tickets Generated</a><span class="font-secondary">3 hr</span>
+      </p>
+    </li>
+    <li class="b-t-warning border-4">
+      <p><a [routerLink]="['/ecommerce/order-history']">Delivery Complete</a><span class="font-warning">6 hr</span></p>
+    </li>
+    <li class="check-button p-0"><a class="f-w-500" [routerLink]="['/email/email-compose']">Check all</a></li>
+  </ul>
+</div>

@@ -1,0 +1,7 @@
+.direct_upload {
+	padding: 20px;
+	box-sizing: content-box;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border: 4px dashed #ccc;
+  }  

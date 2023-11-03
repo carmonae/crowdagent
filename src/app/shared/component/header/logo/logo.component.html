@@ -1,0 +1,23 @@
+<div class="logo-wrapper">
+  <a [routerLink]="['/landing']">
+    <img class="img-fluid" src="assets/images/logo/logo-w.png" alt="" />
+  </a>
+</div>
+<div class="toggle-sidebar" (click)="openMenu()">
+  <i class="status_toggle middle sidebar-toggle" data-feather="align-center">
+    <div class="header-left">
+      <form class="search-form mb-0">
+        <div class="input-group">
+          <span class="input-group-text pe-0">
+            <svg class="search-bg svg-color"></svg>
+          </span>
+          <input
+            class="form-control"
+            type="search"
+            placeholder="Search anything..."
+          />
+        </div>
+      </form>
+    </div>
+  </i>
+</div>

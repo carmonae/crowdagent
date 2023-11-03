@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-sm-6 p-0"> 
+                <h3>{{ title }}</h3>
+            </div>
+            <div class="col-12 col-sm-6 p-0">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'">
+                        <svg class="stroke-icon">
+                            <use href="assets/svg/icon-sprite.svg#breadcrumb-home"></use>
+                        </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item" *ngIf="breadcrumbs?.parentBreadcrumb">{{breadcrumbs.parentBreadcrumb}}</li>
+                    <li class="breadcrumb-item active" *ngIf="breadcrumbs.childBreadcrumb">{{breadcrumbs.childBreadcrumb}}</li>
+                </ol>
+            </div>
+        </div>        
+    </div>
+</div>
+

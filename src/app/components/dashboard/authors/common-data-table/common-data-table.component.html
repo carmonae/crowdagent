@@ -1,0 +1,65 @@
+<table class="table display" id="selling-product" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="">
+                  <label class="form-check-label" for="flexCheckDefault"></label>
+                </div>
+            </th>
+            <th scope="col">#UID</th>
+            <th scope="col" sortable="product" (sort)="onSort($event)" style="cursor: pointer;">Product</th>
+            <th scope="col" sortable="category" (sort)="onSort($event)" style="cursor: pointer;">Catagory</th>
+            <th scope="col" sortable="brand" (sort)="onSort($event)" style="cursor: pointer;">Brand</th>
+            <th scope="col" sortable="price" (sort)="onSort($event)" style="cursor: pointer;">Price </th>
+            <th scope="col" sortable="stock" (sort)="onSort($event)" style="cursor: pointer;">Stock</th>
+            <th scope="col" sortable="rating" (sort)="onSort($event)" style="cursor: pointer;">Rating</th>
+            <th scope="col" sortable="order" (sort)="onSort($event)" style="cursor: pointer;">Order</th>
+            <th scope="col" sortable="sales" (sort)="onSort($event)" style="cursor: pointer;">Sales</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of selling$ | async; let i=index">
+            <td>
+                <div class="form-check">
+                  <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="">
+                  <label class="form-check-label" for="flexCheckDefault"></label>
+                </div>
+            </td>
+            <td><b>#{{data.id}}</b></td>
+            <td>
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0"><img class="img-50" src={{data.img}}>
+                    </div>
+                    <div class="flex-grow-1 ms-2"><a
+                            [routerLink]="['/ecommerce/product-page']">
+                            <h5>{{data.product}}</h5>
+                        </a></div>
+                </div>
+            </td>
+            <td><b>{{data.category}}</b></td>
+            <td><b>{{data.brand}}</b></td>
+            <td><b>${{data.price | number : '1.2-2'}}</b></td>
+            <td><b>{{data.stock}}</b></td>
+            <td><b>
+                    <p><i class="fa fa-star font-warning"></i>{{data.rating}}</p>
+                </b></td>
+            <td><b>{{data.order}}</b></td>
+            <td><b>{{data.sales}}</b></td>
+            <td class="text-center">
+                <span class="edit-option">
+                    <a href="javascript:void(0)">
+                        <app-feather-icons [icon]="'edit'"></app-feather-icons>
+                        <!-- <i data-feather="edit"></i> -->
+                    </a>
+                </span>
+                <span class="delete-option">
+                    <a href="javascript:void(0)" (click)="removeItem(data.id)">
+                        <i class="remove" data-feather="trash-2"></i>
+                    </a>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</table>

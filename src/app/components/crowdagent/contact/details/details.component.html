@@ -1,0 +1,124 @@
+<div
+  class="tab-content"
+  id="v-pills-tabContent"
+  [ngStyle]="{ display: editContact ? 'none' : '' }"
+>
+  <div
+    class="tab-pane contact-tab-0 tab-content-child fade show active"
+    id="v-pills-user"
+    role="tabpanel"
+    aria-labelledby="v-pills-user-tab"
+  >
+    <div class="profile-mail">
+      <div class="d-flex">
+        <img
+          class="img-100 img-fluid m-r-20 rounded-circle update_img_0"
+          src="assets/images/avtar/2.png"
+          alt=""
+        />
+        <input class="updateimg" type="file" name="img" />
+        <div class="flex-grow-1 mt-0">
+          <h4>
+            <span class="first_name_0">{{ selectedata.title }} </span>
+            <span class="last_name_0">{{ selectedata.subtitle }}</span>
+          </h4>
+          <ul>
+            <li>
+              <a (click)="editContact = true" style="margin-right: 4px">Edit</a>
+            </li>
+            <li>
+              <a (click)="deleteContact()" style="margin-right: 4px">Delete</a>
+            </li>
+            <li>
+              <a (click)="openHistory()" style="margin-right: 4px">History</a>
+            </li>
+            <li>
+              <a
+                (click)="PrintModal.openModal(selectedata)"
+                style="margin-right: 4px"
+                >Print</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="email-general">
+        <h3 class="mb-3">Abstract</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--div
+  class="contact-editform ps-0"
+  [ngStyle]="{ display: !editContact ? 'none' : '' }"
+>
+  <form>
+    <div class="row g-2">
+      <app-general [selectedata]="selectedata"></app-general>
+    </div>
+    <div
+      class="row g-2 more-data"
+      [ngStyle]="{ display: !editMoreDetails ? 'none' : '' }"
+    >
+      <app-personal-details></app-personal-details>
+    </div>
+    <div
+      class="mb-3 col-md-12"
+      [ngStyle]="{ display: !editMoreDetails ? 'none' : '' }"
+    >
+      <app-address-details></app-address-details>
+    </div>
+    <a
+      class="ps-0 edit-information"
+      id="edit-information"
+      (click)="editMoreDetails = true"
+      (click)="editMoreDetail()"
+      >Edit more information</a
+    >
+    <button
+      class="btn btn-secondary update-contact"
+      type="button"
+      style="margin-right: 4px"
+    >
+      Save
+    </button>
+    <button
+      class="btn btn-primary"
+      type="button"
+      data-bs-dismiss="modal"
+      id="cancle"
+      (click)="editContact = false"
+      (click)="editMoreDetails = false"
+      (click)="editMoreDetail1()"
+    >
+      Cancel
+    </button>
+  </form>
+</div>
+
+<div id="right-history" [ngClass]="open == true ? 'show' : ''">
+  <div class="modal-header p-l-20 p-r-20">
+    <h3 class="modal-title w-100">
+      Contact History<span class="pull-right"
+        ><a class="closehistory" (click)="openHistory()" style="cursor: pointer"
+          ><i class="icofont icofont-close"></i></a
+      ></span>
+    </h3>
+  </div>
+  <div class="history-details">
+    <div class="text-center">
+      <i class="icofont icofont-ui-edit"></i>
+      <p>Contact has not been modified yet.</p>
+    </div>
+    <div class="d-flex">
+      <i class="icofont icofont-star me-3"></i>
+      <div class="flex-grow-1 mt-0">
+        <h3 class="mt-0">Contact Created</h3>
+        <p class="mb-0">Contact is created via mail</p>
+        <span class="f-12">Sep 10, 2019 4:00</span>
+      </div>
+    </div>
+  </div>
+</div>
+<app-print #printModal></app-print-->

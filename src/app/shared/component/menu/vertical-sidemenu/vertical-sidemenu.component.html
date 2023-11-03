@@ -1,0 +1,63 @@
+<div>
+    <div class="logo-wrapper">
+        <a href="index.html">
+            <img class="img-fluid for-light" src="assets/images/logo/logo.png" alt="">
+            <img class="img-fluid for-dark" src="assets/images/logo/logo_dark.png" alt="">
+        </a>
+    </div>
+    <nav class="sidebar-main">
+        <div id="sidebar-menu">
+            <ul class="sidebar-links custom-scrollbar" id="simple-bar">
+                <li class="sidebar-list" *ngFor="let menu of menus">
+                    <!-- Level 1  -->
+                    <ng-container *ngIf="menu.type == 'link'; else other">
+                        <a [routerLink]="menu.path" class="sidebar-link sidebar-title"
+                            [class.active]="menu.active || menu.mainMenuActive" (click)="openSubMenu(menu)" (click)="close()">
+                            <app-svg-icon *ngIf="menu.icon" [icon]="menu.icon" style="stroke: black;">
+                            </app-svg-icon>
+                        </a>
+                    </ng-container>
+                    <ng-template #other>
+                        <a class="sidebar-link sidebar-title" [class.active]="menu.active || menu.mainMenuActive"
+                            (click)="openSubMenu(menu)">
+                            <app-svg-icon *ngIf="menu.icon" [icon]="menu.icon"
+                                style="stroke: black; cursor: pointer;"></app-svg-icon>
+                        </a>
+                    </ng-template>
+                    <!-- Level 2 -->
+                    <ng-container *ngIf="menu.children">
+                        <ul class="sidebar-submenu" [style.display]="isShow ? 'block' : 'none'">
+                            <ng-container *ngFor="let data of subMenu">
+                                <ng-container
+                                    *ngTemplateOutlet="recursiveMenu1; context: { $implicit: data.children }">
+                                </ng-container>
+                                <ng-template #recursiveMenu1 let-data.children>
+                                    <li *ngFor="let item of data.children">
+                                        <a *ngIf="!item.children; else child" [routerLink]="item.path"
+                                            (click)="active(item,data)" [ngClass]="item.active ? 'active' : ''">{{ item.title | translate }}</a>
+                                        <ng-template #child>
+                                            <a [routerLink]="item.path" (click)="openSubMenu(item)"
+                                                class="submenu-title" [ngClass]="item.active ? 'active' : '' ">{{ item.title | translate }}
+                                                <span class="sub-arrow"><i class="fa fa-angle-right"></i></span>
+                                            </a>
+                                        </ng-template>
+                                        <!-- Level 3 -->
+                                        <ul *ngIf="item.children" class="nav-sub-childmenu submenu-content"
+                                            [style.display]="item.active == true ? 'block' : 'none'">
+                                            <li *ngFor="let b of item.children">
+                                                <ng-template #simple>
+                                                  <a (click)="active(item,data)"  [routerLink]="b.path">{{b.title | translate }}</a>
+                                                </ng-template>
+                                                <a *ngIf="b.type == 'extTabLink'; else simple" href="{{ b.path }}" target="_blank"> {{ b.title | translate }} </a>
+                                              </li>
+                                        </ul>
+                                    </li>
+                                </ng-template>
+                            </ng-container>
+                        </ul>
+                    </ng-container>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
+  <button class="btn-close" type="button" (click)="activeModal.dismiss('')"></button>
+</div>
+<div class="modal-body">
+  <form class="form-bookmark needs-validation" id="bookmark-form" novalidate [ngClass]="{'was-validated': validate}" [formGroup]="myForm" (submit)="add()"> 
+    <img formControlName="img">
+    <div class="row g-2">
+      <div class="mb-3 col-md-12 mt-0">
+        <label for="con-name">Name</label>
+        <div class="row">
+          <div class="col-sm-6">
+            <input class="form-control" id="con-name" type="text" required="" placeholder="First Name" autocomplete="off" formControlName="firstName">
+            <div class="text-danger col-sm-6" *ngIf="firstName?.invalid && firstName?.touched "> Please Enter First Name</div>
+          </div>
+          <div class="col-sm-6">
+            <input class="form-control" id="con-last" type="text" required="" placeholder="Last Name" autocomplete="off" formControlName="lastName">
+              <div class="text-danger col-sm-6" *ngIf="lastName?.invalid && lastName?.touched "> Please Enter Last Name</div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 col-md-12 mt-0">
+        <label for="con-mail">Email Address</label>
+        <input class="form-control" id="con-mail" type="text" required="" autocomplete="off" formControlName="email">
+        <div class="text-danger" *ngIf="email?.invalid && email?.touched "> Please Enter Valid Email</div>
+      </div>
+      <div class="mb-3 col-md-12 my-0">
+        <label for="con-phone">Phone</label>
+        <div class="row">
+          <div class="col-sm-6">
+            <input class="form-control" id="con-phone" type="number" required="" autocomplete="off" formControlName="mobile">
+            <div class="text-danger" *ngIf="mobile?.invalid && mobile?.touched"> Please Enter Valid Phone</div>
+          </div>
+          <div class="col-sm-6">
+            <select class="form-control" id="con-select">
+              <option>Mobile</option>
+              <option>Work</option>
+              <option>Others</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input id="index_var" type="hidden" value="5">
+    <button class="btn btn-secondary" type="submit" [disabled]="myForm.invalid">Save</button>
+    <button class="btn btn-primary" style="margin-left: 4px;">Cancel</button>
+  </form>
+</div>

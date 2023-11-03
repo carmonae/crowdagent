@@ -1,0 +1,47 @@
+//Bootstrap
+@import "/node_modules/bootstrap/scss/bootstrap.scss";
+
+@import "node_modules/angular-calendar/css/angular-calendar.css";
+
+// To DO
+@import "./vendors/todo.scss";
+
+//  Light Box
+@import "~@angular/cdk/overlay-prebuilt.css";
+
+// Toast
+@import "ngx-toastr/toastr";
+@import "node_modules/ngx-toastr/toastr-bs5-alert.scss";
+
+// Rating Theme
+@import "node_modules/ngx-bar-rating/themes/br-horizontal-theme";
+@import "node_modules/ngx-bar-rating/themes/br-vertical-theme";
+@import "node_modules/ngx-bar-rating/themes/br-default-theme";
+@import "node_modules/ngx-bar-rating/themes/br-stars-theme";
+@import "node_modules/ngx-bar-rating/themes/br-movie-theme";
+@import "node_modules/ngx-bar-rating/themes/br-square-theme";
+
+// Chartist Chart
+@import "./vendors/chartist/chartist-settings";
+@import "./vendors/chartist/chartist";
+
+// Hover Effect
+@import "./vendors/photoswipe.scss";
+
+/* Leaflet Map */
+@import "~leaflet/dist/leaflet.css";
+
+// Date Time Picker
+@import "node_modules/@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
+
+// Select2
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import "node_modules/flatpickr/dist/flatpickr.css";
+
+@import "./style.scss";
+
+//Icons
+@import "./flag-icon.scss";
+@import "./themify.scss";
+@import "./weather-icon.scss";

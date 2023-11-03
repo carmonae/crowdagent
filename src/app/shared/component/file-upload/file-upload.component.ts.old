@@ -1,0 +1,61 @@
+import { Component } from '@angular/core';
+import { FileUploader } from 'ng2-file-upload';
+import { FileUploadService } from '../../services/file-upload.service';
+
+// const URL = '/api/';
+const URL = 'https://localhost:4200';
+
+@Component({
+  selector: 'file-upload',
+  templateUrl: './file-upload.component.html'
+})
+export class FileUploadComponent {
+
+  uploader: FileUploader;
+  hasBaseDropZoneOver: boolean;
+  hasAnotherDropZoneOver: boolean;
+  response: string;
+
+  constructor(private uploadService: FileUploadService) {
+    this.uploader = new FileUploader({
+      url: URL,
+      disableMultipart: false,
+    });
+
+    this.hasBaseDropZoneOver = false;
+    this.hasAnotherDropZoneOver = false;
+
+    this.response = '';
+
+    this.uploader.response.subscribe(res => this.response = res);
+  }
+
+  public fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  public fileOverAnother(e: any): void {
+    this.hasAnotherDropZoneOver = e;
+  }
+
+  public upload(item: any): void {
+    console.log(item?.file)
+    this.uploadService.pushFileToStorage(item?.file)
+  }
+
+  public uploadAll(): void {
+    console.log('upload all')
+    console.log(this.uploader.queue.length)
+    for (var item of this.uploader.queue) {
+      this.upload(item)
+    }
+  }
+
+  public cancel(item: any): void {
+    console.log(item?.file?.name)
+  }
+
+  public cancelAll(): void {
+    console.log('cancell all')
+  }
+}

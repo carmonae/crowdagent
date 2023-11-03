@@ -1,0 +1,47 @@
+<div class="notification-box">
+  <svg>
+    <use href="assets/svg/icon-sprite.svg#Message"></use>
+  </svg><span class="badge rounded-pill badge-secondary"> </span>
+</div>
+<div class="onhover-show-div">
+  <h3 class="f-18 mb-0 dropdown-title">Message</h3>
+  <ul class="message-box">
+    <li>
+      <div class="d-flex">
+        <div class="flex-shrink-0 bg-primary"><i class="fa fa-check-circle"></i></div>
+        <div class="flex-grow-1"> <a [routerLink]="['/chat/chat-app']">
+            <h4>Helen Walter</h4>
+            <p>Hi , Helen</p>
+          </a></div><span>10 min.</span>
+      </div>
+    </li>
+    <li>
+      <div class="d-flex">
+        <div class="flex-shrink-0 bg-secondary"><i class="fa fa-exclamation-circle"></i></div>
+        <div class="flex-grow-1"> <a [routerLink]="['/chat/chat-app']">
+            <h4>Vincent Porter</h4>
+            <p>Change for anyone Chat😅.</p>
+          </a></div><span>35 min.</span>
+      </div>
+    </li>
+    <li>
+      <div class="d-flex">
+        <div class="flex-shrink-0 bg-success"><i class="fa fa-times-circle"></i></div>
+        <div class="flex-grow-1"> <a [routerLink]="['/chat/chat-app']">
+            <h4>Ginger Johnston</h4>
+            <p>Hello Name</p>
+          </a></div><span>50 min.</span>
+      </div>
+    </li>
+    <li>
+      <div class="d-flex">
+        <div class="flex-shrink-0 bg-warning"><i class="fa fa-check-circle"></i></div>
+        <div class="flex-grow-1"> <a [routerLink]="['/chat/chat-app']">
+            <h4>Kori Thomas</h4>
+            <p>Well I am not sure.</p>
+          </a></div><span>27 min.</span>
+      </div>
+    </li>
+    <li class="pb-0 mt-3 check-button"><a class="f-w-500" [routerLink]="['/chat/chat-app']">Check all</a></li>
+  </ul>
+</div>

@@ -1,0 +1,34 @@
+<div class="d-flex profile-media">
+  <img class="img-60 rounded-circle" alt="" src="assets/images/user/me.jpg" />
+  <div class="flex-grow-1">
+    <span>{{ name }}</span>
+    <p class="mb-0 font-roboto">
+      Admin <i class="middle fa fa-angle-down"></i>
+    </p>
+  </div>
+</div>
+<ul class="profile-dropdown onhover-show-div">
+  <li>
+    <a [routerLink]="['/users/users-profile']"
+      ><i data-feather="user"></i><span>Account </span></a
+    >
+  </li>
+  <li>
+    <a [routerLink]="['/email/email-app']"
+      ><i data-feather="mail"></i><span>Inbox</span></a
+    >
+  </li>
+  <li>
+    <a [routerLink]="['/tasks']"
+      ><i data-feather="file-text"></i><span>Taskboard</span></a
+    >
+  </li>
+  <li>
+    <a [routerLink]="['/users/users-edit']"
+      ><i data-feather="settings"></i><span>Settings</span></a
+    >
+  </li>
+  <li>
+    <a (click)="logOut()"><i data-feather="log-in"> </i><span>Log out</span></a>
+  </li>
+</ul>

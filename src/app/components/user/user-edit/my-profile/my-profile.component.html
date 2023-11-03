@@ -1,0 +1,110 @@
+<div *ngIf="myprofile">
+  <div class="card">
+    <div class="card-header card-no-border pb-0">
+      <h3 class="card-title mb-0">My Profile</h3>
+      <div class="card-options">
+        <a
+          class="card-options-collapse"
+          href="javascript:void(0)"
+          data-bs-toggle="card-collapse"
+        >
+          <i class="fe fe-chevron-up"></i>
+        </a>
+        <a
+          class="card-options-remove"
+          href="javascript:void(0)"
+          data-bs-toggle="card-remove"
+        >
+          <i class="fe fe-x"></i>
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="row mb-2">
+          <div class="profile-title">
+            <div class="d-flex">
+              <div class="row mb-0">
+                <img
+                  class="img-60 rounded-circle"
+                  alt="my avatar"
+                  src="assets/images/user/me.jpg"
+                />
+                <button
+                  class="btn btn-xs btn-primary"
+                  (click)="onChangePicture()"
+                >
+                  Change
+                </button>
+              </div>
+              <div class="flex-grow-1">
+                <h3 class="mb-1">{{ myprofile.name }}</h3>
+                <input
+                  class="form-control"
+                  [(ngModel)]="myprofile.occupation"
+                  name="occupation"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-basic">
+          <div class="common-flex">
+            <div class="btn-group split-dropdown">
+              <button class="btn btn-outline-light" type="button">
+                Crowd Agent Role : {{ myprofile.type }}
+              </button>
+              <div class="dropdown separated-btn" ngbDropdown role="group">
+                <button class="btn btn-light" type="button" ngbDropdownToggle>
+                  <i class="icofont icofont-arrow-down"></i>
+                </button>
+                <div class="dropdown-content" ngbDropdownMenu>
+                  <a
+                    *ngFor="let items of ['Guest', 'Author', 'Reader', 'Agent']"
+                    ngbDropdownItem
+                    (click)="onSelectType($event)"
+                    >{{ items }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <h4 class="f-w-700 form-label">Slogan</h4>
+          <input
+            class="form-control"
+            [(ngModel)]="myprofile.bio"
+            name="slogan"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">email address</label>
+          <input
+            class="form-control"
+            [(ngModel)]="myprofile.email"
+            name="email"
+            email
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input
+            class="form-control"
+            type="password"
+            [(ngModel)]="myprofile.password"
+            name="password"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Website</label>
+          <input class="form-control" [(ngModel)]="myprofile.url" name="url" />
+        </div>
+        <div class="form-footer">
+          <button class="btn btn-primary btn-block" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

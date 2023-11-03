@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md col-xl-3 xl-40 box-col-4e">
+      <app-title-filter></app-title-filter>
+    </div>
+    <div class="col-md col-xl-9 xl-60 box-col-8">
+      <div class="text-center">
+        <h3>Which Titles piQues Your Interest?</h3>
+        <br />
+      </div>
+      <div
+        class="card"
+        *ngFor="
+          let titleData of titleData | slice : nextItem : nextItem + maxItems
+        "
+        [class.ribbon-vertical-left-wrapper]="true"
+      >
+        <div
+          *ngIf="false"
+          class="ribbon ribbon-bookmark ribbon-vertical-left ribbon-secondary"
+        >
+          <i class="icofont icofont-love"></i>
+        </div>
+        <div class="job-search">
+          <div class="card-body">
+            <div class="d-flex">
+              <img
+                class="img-40 img-fluid m-r-20"
+                src="{{ cardData.image }}"
+                alt=""
+              />
+              <div class="flex-grow-1">
+                <h4>
+                  <a>{{ titleData.title }}</a>
+                  <span class="badge badge-primary pull-right">{{
+                    titleData.datePublish | age
+                  }}</span>
+                </h4>
+                <p>
+                  {{ titleData.subtitle }}
+                  <span class="pull-right" (click)="pique(titleData)"
+                    ><i class="fa fa-eye"></i
+                  ></span>
+                  <!--span>
+                    <ngb-rating
+                      class="font-warning"
+                      [rate]="cardData.rating"
+                    ></ngb-rating>
+                  </span-->
+                </p>
+                <p></p>
+              </div>
+            </div>
+            <!--p>{{ cardData.desc }}</p-->
+          </div>
+        </div>
+      </div>
+      <div class="job-pagination">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination pagination-primary">
+            <li class="page-item" [class.disabled]="currentPage == 1">
+              <a class="page-link" (click)="gotoPage(currentPage - 1)"
+                >Previous</a
+              >
+            </li>
+            <li class="page-item" [class.active]="currentPage == thispage">
+              <a class="page-link" (click)="gotoPage(thispage)">{{
+                thispage
+              }}</a>
+            </li>
+            <li
+              class="page-item"
+              *ngIf="nextpage <= lastpage"
+              [class.active]="currentPage == nextpage"
+            >
+              <a class="page-link" (click)="gotoPage(nextpage)">{{
+                nextpage
+              }}</a>
+            </li>
+            <li
+              class="page-item"
+              *ngIf="pageafternext <= lastpage"
+              [class.active]="currentPage == pageafternext"
+            >
+              <a class="page-link" (click)="gotoPage(pageafternext)">{{
+                pageafternext
+              }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage == lastpage">
+              <a class="page-link" (click)="gotoPage(currentPage + 1)">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

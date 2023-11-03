@@ -1,0 +1,191 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="form theme-form projectcreate">
+          <div class="row">
+            <div class="col-8">
+              <div class="mb-3">
+                <label>Project Title</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Project name"
+                  [(ngModel)]="project.name"
+                />
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mb-3">
+                <label>Project Status</label>
+                <div class="dropdown-basic me-0 col-4">
+                  <div class="common-flex">
+                    <div class="btn-group split-dropdown">
+                      <button class="btn btn-outline-light" type="button">
+                        {{ project.status }}
+                      </button>
+                      <div
+                        class="dropdown separated-btn"
+                        ngbDropdown
+                        role="group"
+                      >
+                        <button
+                          class="btn btn-light"
+                          type="button"
+                          ngbDropdownToggle
+                        >
+                          <i class="icofont icofont-arrow-down"></i>
+                        </button>
+                        <div class="dropdown-content" ngbDropdownMenu>
+                          <a
+                            *ngFor="let item of lifeCycle[project.status]"
+                            ngbDropdownItem
+                            (click)="onChangeStatus(item)"
+                            >{{ item }}</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label>Title of Work</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Title to provoke reader"
+                  [(ngModel)]="project.title"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label>Subtitle</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Subtitle of the work"
+                  [(ngModel)]="project.subtitle"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label>Project Readership</label>
+                <select class="form-select" [(ngModel)]="project.readership">
+                  <option
+                    *ngFor="let item of readershipTypesEnum"
+                    [value]="item"
+                  >
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label>Project Type</label>
+                <select class="form-select" [(ngModel)]="project.format">
+                  <option *ngFor="let item of writingTypesEnum" [value]="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label>Genre</label>
+                <select class="form-select" [(ngModel)]="project.genre">
+                  <option *ngFor="let item of genreTypesEnum" [value]="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label>Project Size</label>
+                <select class="form-select" [(ngModel)]="project.size">
+                  <option *ngFor="let item of sizeTypesEnum" [value]="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label>Starting date</label>
+                <input
+                  class="datepicker-here form-control"
+                  type="date"
+                  data-language="en"
+                  [(ngModel)]="project.dateStart"
+                />
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label>Ending date</label>
+                <input
+                  class="datepicker-here form-control"
+                  type="date"
+                  data-language="en"
+                  [(ngModel)]="project.dateEnd"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label>Abstract ({{ count }}/ {{ maxAbstractLength }}) </label>
+                <textarea
+                  class="form-control"
+                  id="exampleFormControlTextarea4"
+                  rows="5"
+                  [(ngModel)]="project.abstract"
+                  (input)="onAbstractChange($event)"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="project.url != ''">
+            <label>Manuscript File Name: </label>
+            <a href="{{ project.url }}">
+              {{ project.fileName }}
+            </a>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <app-upload-file
+                  (fileUploadEvent)="onFilesUploaded($event)"
+                ></app-upload-file>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="text-end">
+                <a class="btn btn-success me-3" (click)="onAddProject()"
+                  >Store</a
+                ><a class="btn btn-danger" (click)="onCancelAdd()">Cancel</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

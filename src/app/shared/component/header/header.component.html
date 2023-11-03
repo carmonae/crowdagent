@@ -1,0 +1,119 @@
+<div
+  [ngClass]="navService.isDisplay ? 'page-header close_icon' : 'page-header'"
+  [ngStyle]="{ display: hidenav.show ? 'none' : 'block' }"
+>
+  <div class="header-wrapper row m-0">
+    <div class="header-logo-wrapper col-auto p-0">
+      <div class="logo-wrapper">
+        <a [routerLink]="['/landing']">
+          <img
+            class="img-100 rounded-circle"
+            src="assets/images/logo/logo-white-nobg.png"
+            alt=""
+          />
+        </a>
+      </div>
+      <div class="toggle-sidebar" (click)="openMenu()">
+        <i data-feather="align-center"></i>
+        <div class="status_toggle middle sidebar-toggle">
+          <div class="header-left">
+            <form class="search-form mb-0">
+              <div class="input-group">
+                <span class="input-group-text pe-0">
+                  <svg class="search-bg svg-color"></svg>
+                </span>
+                <input
+                  class="form-control"
+                  type="search"
+                  placeholder="Search anything..."
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto p-0">
+      <app-search></app-search>
+    </div>
+    <div class="nav-right col-auto pull-right right-header p-0 ms-auto">
+      <ul class="nav-menus">
+        <li class="onhover-dropdown serchinput">
+          <p class="mb-0 search header-search serchbox" (click)="openSearch()">
+            <svg>
+              <use href="assets/svg/icon-sprite.svg#search"></use>
+            </svg>
+          </p>
+          <div class="form-group search-form" [ngClass]="open ? 'open' : ''">
+            <input
+              [(ngModel)]="searchService.text"
+              [ngModelOptions]="{ standalone: true }"
+              (keyup)="searchService.searchTerm(searchService.text)"
+              type="text"
+              autocomplete="off"
+              placeholder="Search Boho .."
+            />
+          </div>
+        </li>
+
+        <li class="onhover-dropdown">
+          <app-notification></app-notification>
+        </li>
+        <li>
+          <app-theme-mode></app-theme-mode>
+        </li>
+        <li class="onhover-dropdown">
+          <app-bookmark></app-bookmark>
+        </li>
+        <li class="onhover-dropdown">
+          <app-message></app-message>
+        </li>
+        <li class="cart-nav onhover-dropdown">
+          <app-cart></app-cart>
+        </li>
+        <li class="language-nav" (click)="languageToggle()">
+          <app-language></app-language>
+        </li>
+        <li class="profile-nav onhover-dropdown pe-0 py-0">
+          <app-profile></app-profile>
+        </li>
+      </ul>
+      <div
+        class="Typeahead-menu custom-scrollbar"
+        [class.is-open]="searchService.searchResult"
+        *ngIf="searchService.menuItems?.length && open"
+        id="search-outer"
+      >
+        <div
+          class="ProfileCard u-cf"
+          *ngFor="let menuItem of searchService.menuItems | slice : 0 : 8"
+        >
+          <div class="ProfileCard-avatar">
+            <app-svg-icon [icon]="menuItem.icon"></app-svg-icon>
+          </div>
+          <div class="ProfileCard-details">
+            <div class="ProfileCard-realName">
+              <a
+                [routerLink]="menuItem?.path"
+                class="realname"
+                (click)="searchService.removeFix()"
+                >{{ menuItem?.title }}</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Typeahead-menu is-open"
+        [class.is-open]="searchService.searchResultEmpty"
+        *ngIf="open"
+      >
+        <div class="tt-dataset tt-dataset-0">
+          <div class="EmptyMessage" style="color: black">
+            Opps!! There are no result found.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

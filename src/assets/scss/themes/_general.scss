@@ -1,0 +1,112 @@
+$primary-color: #33bfbf;
+$dark : #000;
+$white : #fff;
+
+
+// Modal
+.modal {
+  .modal-header {
+    .product-box {
+      .product-details {
+        padding: 25px 0;
+      }
+    }
+
+    .btn-close {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+    }
+
+    .product-box {
+      .product-details {
+        .product-price {
+          font-size: 22px;
+          margin-bottom: 10px;
+        }
+
+        .product-view {
+          padding: 20px 0;
+          border-top: 1px dotted #59667a;
+          border-bottom: 1px dotted #59667a;
+        }
+
+        .product-size {
+          margin: 20px 0;
+
+          ul {
+            padding-left: 0px;
+            list-style-type: none;
+            margin-bottom: 0;
+
+            li {
+              display: inline-block;
+              padding: 4px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.modal-button {
+  position: absolute;
+  right: 15px;
+  z-index: 9999;
+}
+
+.bootstrap-touchspin-up,
+.bootstrap-touchspin-down {
+  padding: 5px 12px !important;
+  background-color: #59667a !important;
+  border: 1px solid #59667a !important;
+  border-radius: 0px !important;
+}
+
+// Dropzone
+ngx-dropzone {
+  border: 2px dashed var(--theme-default) !important;
+  background-color: rgba($white, 0.1) !important;
+  height: auto !important;
+  padding: 50px;
+
+  i {
+    font-size: 48px !important;
+    color: var(--theme-default);
+  }
+}
+
+ngx-dropzone-label {
+  z-index: 1 !important;
+}
+
+.dz-message {
+  h6 {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  span {
+    font-size: 14px;
+  }
+}
+
+.dz-message {
+  h4 {
+    font-weight: 200;
+    margin-top: 20px;
+  }
+}
+
+.node-content-wrapper.node-content-wrapper-active {
+  &:hover {
+    background-color: $white;
+    color: $white;
+  }
+}
+
+.node-content-wrapper-active.node-content-wrapper-focused {
+  background-color: $white;
+  color: $white;
+}

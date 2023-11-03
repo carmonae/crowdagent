@@ -1,0 +1,91 @@
+<div
+  class="tab-pane fade active show"
+  id="pills-personal"
+  role="tabpanel"
+  aria-labelledby="pills-personal-tab"
+>
+  <div class="card mb-0">
+    <div class="card-header d-flex">
+      <h3>Pique Titles</h3>
+      <span class="f-14 pull-right mt-0">{{ allTitles.length }} Titles</span>
+    </div>
+    <div class="card-body p-0 custom-scrollbar" style="height: 40rem">
+      <div class="row list-persons" id="addcon">
+        <div class="col-xl-4 xl-50 col-md-5">
+          <div
+            class="nav flex-column nav-pills"
+            id="v-pills-tab"
+            role="tablist"
+            aria-orientation="vertical"
+          >
+            <ng-container
+              *ngFor="
+                let data of allTitles | slice : nextItem : nextItem + maxItems
+              "
+            >
+              <a
+                class="contact-tab-0 nav-link"
+                [ngClass]="data.title ? 'active show' : ''"
+                id="v-pills-user-tab"
+                style="cursor: pointer"
+                role="tab"
+                (click)="getData(data.projectUid)"
+                aria-controls="v-pills-user"
+                aria-selected="true"
+              >
+                <div class="d-flex">
+                  <img
+                    class="img-50 img-fluid m-r-20 rounded-circle update_img_0"
+                    src="assets/images/user/2.png"
+                    alt=""
+                  />
+                  <div class="flex-grow-1">
+                    <h4>
+                      <span class="first_name_0">{{ data.title }} </span>
+                    </h4>
+                    <p class="email_add_0">{{ data.subtitle }}</p>
+                  </div>
+                </div>
+              </a>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="col-xl-8 xl-50 col-md-7">
+          <app-details [selectedata]="selectedata"></app-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="job-pagination">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination pagination-primary">
+      <li class="page-item" [class.disabled]="currentPage == 1">
+        <a class="page-link" (click)="gotoPage(currentPage - 1)">Previous</a>
+      </li>
+      <li class="page-item" [class.active]="currentPage == thispage">
+        <a class="page-link" (click)="gotoPage(thispage)">{{ thispage }}</a>
+      </li>
+      <li
+        class="page-item"
+        *ngIf="nextpage <= lastpage"
+        [class.active]="currentPage == nextpage"
+      >
+        <a class="page-link" (click)="gotoPage(nextpage)">{{ nextpage }}</a>
+      </li>
+      <li
+        class="page-item"
+        *ngIf="pageafternext <= lastpage"
+        [class.active]="currentPage == pageafternext"
+      >
+        <a class="page-link" (click)="gotoPage(pageafternext)">{{
+          pageafternext
+        }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage == lastpage">
+        <a class="page-link" (click)="gotoPage(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,51 @@
+<div class="card">
+  <div class="card-header card-no-border pb-0">
+    <div class="header-top">
+      <h3>Best Ranking Manuscripts</h3>
+      <div class="card-header-right-icon">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle"
+            id="dropdownMenuButton"
+            (click)="openMenu()"
+          >
+            Yearly
+          </button>
+          <div class="dropdown-menu dropdown-menu-end" [class.show]="isShow">
+            <a class="dropdown-item" href="javascript:void(0)">Today</a>
+            <a class="dropdown-item" href="javascript:void(0)">Tomorrow</a>
+            <a class="dropdown-item" href="javascript:void(0)">Yesterday </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body pt-0 sellingproduct">
+    <div class="table-responsive theme-scrollbar">
+      <!-- <div class="dataTables_wrapper no-footer"> -->
+      <form>
+        <div class="mb-3 row justify-content-end">
+          <span class="col col-form-label" *ngIf="service.loading$ | async"
+            >Loading...</span
+          >
+          <label
+            for="table-complete-search"
+            class="col-xs-3 col-sm-auto col-form-label"
+            >Search:</label
+          >
+          <div class="col-xs-3 col-sm-auto">
+            <input
+              id="table-complete-search"
+              type="text"
+              class="form-control"
+              name="searchTerm"
+              [(ngModel)]="service.searchTerm"
+            />
+          </div>
+        </div>
+        <app-common-data-table></app-common-data-table>
+      </form>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
