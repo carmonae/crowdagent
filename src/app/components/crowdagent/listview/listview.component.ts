@@ -8,6 +8,7 @@ import { jobCardsData } from 'src/app/shared/data/data/job-search/job-search';
 import { TitlesService } from 'src/app/shared/services/titles.service';
 import { getDatabase, ref, set } from 'firebase/database'
 import { PiquesService } from 'src/app/shared/services/piques.service';
+import { listenerCount } from 'process';
 
 @Component({
   selector: 'app-title-listview',
@@ -30,6 +31,8 @@ export class ListviewComponent implements OnInit {
   public lastpage: number = 1
   public maxItems = 5
   public nextItem = 0
+  public toast = false
+  public toastMsg = 'Piqued'
 
   constructor(
     public config: NgbRatingConfig,
@@ -76,6 +79,15 @@ export class ListviewComponent implements OnInit {
   }
 
   pique(data: any): void {
+
+    this.toast = true
+    this.toastMsg = `${data.title} placed in your pique list.`
+
+    let _this = this
+    setTimeout(function () {
+      _this.toast = false
+    }, 3000)
+
     var index = 0
     for (var entry of this.titleData) {
       if (data === entry) {
@@ -90,6 +102,10 @@ export class ListviewComponent implements OnInit {
     const piquesRef = ref(this.db, `piques/${this.uid}/${data.projectUid}`)
     set(piquesRef, pique);
 
+  }
+
+  toastClose(): void {
+    this.toast = false
   }
 
   gotoPage(page: number): void {

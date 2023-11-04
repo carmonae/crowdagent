@@ -95,3 +95,23 @@
     </div>
   </div>
 </div>
+
+<div
+  class="toast-container position-fixed top-0 end-0 p-3 toast-index toast-rtl"
+>
+  <div
+    class="toast hide toast fade"
+    id="liveToast"
+    [ngClass]="toast ? 'show' : ''"
+  >
+    <div class="toast-header toast-img">
+      <img
+        class="rounded me-2"
+        src="assets/images/avtar/profile.png"
+        alt="profile"
+      /><strong class="me-auto">piQue Msg</strong>
+      <button class="btn-close" type="button" (click)="toastClose()"></button>
+    </div>
+    <div class="toast-body toast-dark">{{ toastMsg }}</div>
+  </div>
+</div>
