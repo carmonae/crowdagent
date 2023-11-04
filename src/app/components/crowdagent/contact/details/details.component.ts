@@ -3,6 +3,8 @@ import { Component, Input, OnInit, Output, SimpleChanges, ViewChild } from '@ang
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PrintComponent } from './print/print.component';
 import { PiqueI } from 'src/app/models/pique-model';
+import { ProjectsService } from 'src/app/shared/services/projects.service';
+import { UserprojectDefault, UserprojectI } from 'src/app/models/user-project';
 const Swal = require('sweetalert2')
 
 @Component({
@@ -12,53 +14,61 @@ const Swal = require('sweetalert2')
 })
 export class DetailsComponent implements OnInit {
 
-  public editContact: boolean = false;
-  public editMoreDetails: boolean = false;
-  public open: boolean = false;
 
   @Input() selectedata!: PiqueI;
 
   @ViewChild("printModal")
   PrintModal!: PrintComponent;
 
+  public open: boolean = false;
+  public project: UserprojectI = UserprojectDefault;
 
-  constructor(private modalService: NgbModal) { }
+  public abstractEnabled = true;
+  public tocEnabled = false;
+  public manuscriptEnabled = false;
+
+  constructor(
+    private modalService: NgbModal,
+    private projService: ProjectsService) { }
 
   ngOnInit(): void {
+    this.getAbstract()
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.getAbstract()
   }
 
-  editMoreDetail() {
-    const myElement = document.getElementById("edit-information") as HTMLElement;
-    myElement.style.color = "white"
+  getAbstract(): void {
+    var _this = this
+    this.projService.getProjects(this.selectedata.userUid, this.selectedata.projectUid)
+      .subscribe({
+        next(projects) {
+          console.log('got projects:', projects)
+          if (projects.length > 0) {
+            _this.project = projects[0]
+          }
+        },
+        error(msg) {
+          console.log(msg)
+        },
+        complete() {
+          console.log('getProjects finished')
+        }
+      });
+
   }
 
-  editMoreDetail1() {
-    const myElement1 = document.getElementById("edit-information") as HTMLElement;
-    myElement1.style.color = "#33BFBF"
-  }
+  piques(thumbsUp: boolean) {
+    if (thumbsUp) {
+      console.log('user piqued')
+      this.tocEnabled = true
+    }
+    else {
+      console.log('user unpiqued')
+      this.tocEnabled = false
 
-  deleteContact() {
-    Swal.fire({
-      text: 'This contact will be deleted from your Personal Contacts and from the chat list too.',
-      title: 'Are you sure?',
-      icon: 'warning',
-      showCancelButton: true,
-      cancelButtonColor: '#EFEFEE !important',
-      confirmButtonColor: 'var(--theme-default)',
-    }).then((result: { isConfirmed: boolean; isDenied: boolean; }) => {
-      if (result.isConfirmed) {
-      } else {
-        Swal.fire('', 'Your contact is safe!')
-      }
-    })
+    }
   }
-
-  openHistory() {
-    this.open = !this.open;
-  }
-
 
 }
