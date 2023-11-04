@@ -31,15 +31,6 @@ export class AllContactComponent implements OnInit {
 
   ngOnInit(): void {
 
-    /*
-    const getstatus = this.allcontactData.filter((data) => {
-      return data.status === true
-    })
-    const getstatusData = getstatus[0]
-    this.selectedstatus = getstatusData.status
-     
-    this.selectedstatus = true
-    */
 
     var _this = this
     this.piqueService.getPiques(this.user!)
@@ -48,7 +39,7 @@ export class AllContactComponent implements OnInit {
           console.log('got piques:', piques)
           _this.allTitles = piques
           _this.lastpage = Math.ceil(_this.allTitles.length / _this.maxItems)
-
+          _this.selectedata = _this.allTitles[0]
         },
         error(msg) {
           console.log(msg)
