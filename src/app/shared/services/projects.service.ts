@@ -43,11 +43,15 @@ export class ProjectsService implements OnInit {
     var _this = this
     const observable = new Observable<UserprojectI[]>((subscriber) => {
       get(child(_this.dbRef, path)).then((snapshot) => {
-        var userProjects: UserprojectI[] = []
+        var userProjects: any[] = []
         if (snapshot.exists()) {
-          projects = snapshot.exportVal()
-          for (var p in projects) {
-            userProjects.push(projects[p])
+          if (pid === '*') {
+            snapshot.forEach((childSnapshot) => {
+              userProjects.push(childSnapshot.val())
+            })
+          }
+          else {
+            userProjects.push(snapshot.val())
           }
           subscriber.next(userProjects)
         }
