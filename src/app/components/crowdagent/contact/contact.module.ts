@@ -11,10 +11,6 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { AllContactComponent } from './all-contact/all-contact.component';
 import { DetailsComponent } from './details/details.component';
 import { AddCategoryComponent } from './modal/add-category/add-category.component';
-import { NewContactComponent } from './modal/new-contact/new-contact.component';
-import { GeneralComponent } from './details/edit-form/general/general.component';
-import { PersonalDetailsComponent } from './details/edit-form/personal-details/personal-details.component';
-import { AddressDetailsComponent } from './details/edit-form/address-details/address-details.component';
 import { PrintComponent } from './details/print/print.component';
 import 'hammerjs';
 import 'mousetrap';
@@ -27,10 +23,6 @@ import 'mousetrap';
     AllContactComponent,
     DetailsComponent,
     AddCategoryComponent,
-    NewContactComponent,
-    GeneralComponent,
-    PersonalDetailsComponent,
-    AddressDetailsComponent,
     PrintComponent
   ],
   imports: [
