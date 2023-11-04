@@ -25,19 +25,6 @@
             </div>
             <ul class="nav main-menu contact-options" role="tablist">
               <li class="nav-item">
-                <button
-                  class="badge-light-primary btn-block btn-mail w-100"
-                  type="button"
-                  (click)="openNewContact()"
-                >
-                  <app-feather-icons
-                    [icon]="'users'"
-                    [class]="'me-2'"
-                  ></app-feather-icons
-                  >New Contacts
-                </button>
-              </li>
-              <li class="nav-item">
                 <span class="main-title"> Views</span>
               </li>
               <li *ngFor="let views of contactSidemenu">
