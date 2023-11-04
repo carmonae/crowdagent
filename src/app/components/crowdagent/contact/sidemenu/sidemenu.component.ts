@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import * as Data from '../../../../shared/data/data/sidemenu'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NewContactComponent } from '../modal/new-contact/new-contact.component';
 import { AddCategoryComponent } from '../modal/add-category/add-category.component';
 
 
@@ -21,10 +20,6 @@ export class SidemenuComponent {
 
   openMenu() {
     this.open = !this.open
-  }
-
-  openNewContact() {
-    const modalRef = this.modalService.open(NewContactComponent, { size: 'lg' });
   }
 
   openAddTag() {
