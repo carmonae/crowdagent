@@ -2,14 +2,22 @@
   <div class="email-wrap bookmark-wrap">
     <div class="row">
       <div class="col-xl-3 box-col-4e">
-        <app-sidemenu [username]="username" [email]="email"></app-sidemenu>
+        <app-sidemenu
+          [username]="username"
+          [email]="email"
+          (currentViewEvent)="changeView($event)"
+        ></app-sidemenu>
       </div>
-      <div class="col-xl-9 col-md-12 box-col-8">
+      <div *ngIf="userId" class="col-xl-9 col-md-12 box-col-8">
         <div class="email-right-aside bookmark-tabcontent contacts-tabs">
           <div class="card email-body radius-left">
             <div class="ps-0">
               <div class="tab-content">
-                <app-all-contact [user]="userId"></app-all-contact>
+                <app-all-contact
+                  [user]="userId"
+                  [sideMenuRef]="sideMenuRef"
+                  [currentView]="currentView"
+                ></app-all-contact>
               </div>
             </div>
           </div>

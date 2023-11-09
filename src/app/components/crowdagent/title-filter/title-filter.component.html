@@ -35,16 +35,8 @@
                     class="form-control"
                     type="text"
                     placeholder="Search.."
+                    [(ngModel)]="searchPattern"
                   /><i class="search-icon" data-feather="search"></i>
-                </div>
-              </div>
-              <div class="job-filter">
-                <div class="faq-form">
-                  <input
-                    class="form-control"
-                    type="text"
-                    placeholder="location.."
-                  /><i class="search-icon" data-feather="map-pin"></i>
                 </div>
               </div>
               <div class="checkbox-animated">
@@ -57,17 +49,73 @@
                     class="checkbox_animated"
                     id="{{ allData.id }}"
                     type="checkbox"
+                    (click)="selectSearchBy(allData.label)"
                   />
-                  {{ allData.label }} ({{ allData.vacancy }})
+                  {{ allData.label }}
                 </label>
               </div>
-              <button class="btn btn-primary text-center" type="button">
-                Find jobs
+              <button
+                class="btn btn-primary text-center"
+                type="button"
+                (click)="searchTitles()"
+              >
+                Search Titles
               </button>
             </div>
           </div>
         </div>
-        <div *ngFor="let allData of filterData" class="card">
+
+        <div class="dropdown">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Category
+          </button>
+          <div class="dropdown show">
+            <a
+              class="btn btn-primary dropdown-toggle"
+              role="button"
+              id="dropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Category
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <li><a class="dropdown-item">Fiction</a></li>
+              <li><a class="dropdown-item">NonFiction</a></li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Arts</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item">History</a></li>
+                  <li><a class="dropdown-item">Geography</a></li>
+                  <li><a class="dropdown-item">Sociology</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button
+                class="btn btn-link btn-block text-start collapsed"
+                type="button"
+                (click)="collapse.toggle()"
+                [attr.aria-expanded]="true"
+              >
+                Genre
+              </button>
+            </h2>
+          </div>
+
+          <!--div *ngFor="let allData of filterData" class="card">
           <div class="card-header" id="headingTwo">
             <h2 class="mb-0">
               <button
@@ -76,7 +124,7 @@
                 (click)="collapse.toggle()"
                 [attr.aria-expanded]="!allData.isCollapsed"
               >
-                {{ allData.title }}
+                {{ allData.t }}
               </button>
             </h2>
           </div>
@@ -106,6 +154,7 @@
               {{ allData.button }}
             </button>
           </div>
+        </div-->
         </div>
       </div>
     </div>

@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel1">Tag Titles</h5>
+  <button
+    class="btn-close"
+    type="button"
+    (click)="activeModal.dismiss()"
+  ></button>
+</div>
+<div class="modal-body">
+  <div class="card">
+    <div class="card-header card-no-border pb-0">
+      <div class="card-body">
+        <div class="row g-3">
+          <!--div class="col-sm-6 col-xl-4"-->
+          <div class="card-wrapper border rounded-3 checkbox-checked">
+            <div *ngFor="let tagItem of possibleTags" class="form-check">
+              <input
+                class="form-check-input"
+                id="flexCheckDefault"
+                type="checkbox"
+                [checked]="isChecked(tagItem.tag)"
+                (change)="checkboxChanged($event)"
+                [name]="tagItem.tag"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                {{ tagItem.tag }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button btn btn-primary (click)="acceptTags()">Accept</button>
+  </div>
+</div>

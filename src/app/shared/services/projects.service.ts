@@ -19,7 +19,7 @@ export class ProjectsService implements OnInit {
 
   constructor(private authService: AuthService) {
     this.uid = this.authService.getUid();
-    this.firepath = `users/project/${this.uid}/`
+    this.firepath = `users/project/`
 
     console.log(`ProjectsService querying for ${this.firepath}`)
     this.dbRef = ref(this.db);
@@ -35,9 +35,9 @@ export class ProjectsService implements OnInit {
     var path = ''
 
     if (pid === '*') {
-      path = this.firepath
+      path = this.firepath + uid
     } else {
-      path = `${this.firepath}/${pid}`
+      path = `${this.firepath}/${uid}/${pid}`
     }
 
     var _this = this

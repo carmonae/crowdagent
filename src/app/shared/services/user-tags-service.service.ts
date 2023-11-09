@@ -3,25 +3,25 @@ import { getDatabase, ref, child, set, get, push, update } from 'firebase/databa
 import { Observable } from 'rxjs';
 
 import { AuthService } from 'src/app/auth/service/auth.service';
-import { PiqueI } from 'src/app/models/pique-model'
-import { TagI } from 'src/app/models/tag-interface';
+import { TagI } from 'src/app/models/tag-interface'
 
 @Injectable({
   providedIn: 'root'
 })
-export class PiquesService {
+export class UserTagsService {
 
   private db = getDatabase()
   private dbRef: any;
+
   private uid: string | undefined
   private firepath: string = ''
   private projects: any;
 
   constructor(private authService: AuthService) {
     this.uid = this.authService.getUid();
-    this.firepath = `piques`
+    this.firepath = `users/tags`
 
-    console.log(`PiquesService querying for ${this.firepath}`)
+    console.log(`UserTagsService querying for ${this.firepath}`)
     this.dbRef = ref(this.db);
 
   }
@@ -29,34 +29,23 @@ export class PiquesService {
   ngOnInit() {
   }
 
-  getPiques(userId: string): Observable<PiqueI[]> {
-    console.log(`Get Piques Method.`)
-    var titles: PiqueI[] = []
+  getTags(userId: string): Observable<TagI[]> {
+    console.log(`Get Tags Method.`)
+    var titles: TagI[] = []
     var path = userId
 
     path = `${this.firepath}/${userId}`
 
     var _this = this
-    const observable = new Observable<PiqueI[]>((subscriber) => {
+    const observable = new Observable<TagI[]>((subscriber) => {
       get(child(_this.dbRef, path)).then((snapshot) => {
-        var userTitles: PiqueI[] = []
+        var userTags: TagI[] = []
         if (snapshot.exists()) {
-          titles = snapshot.val()
-
-          //Convert tags into array
-          /*
-          for (var t in titles) {
-            let tags: TagI[] = []
-            for (var tag in titles[t].tags) {
-              tags.push(titles[t].tags[tag]);
-            }
-            titles[t].tags = tags
-          };
-          */
+          titles = snapshot.exportVal()
           for (var p in titles) {
-            userTitles.push(titles[p])
+            userTags.push(titles[p])
           }
-          subscriber.next(userTitles)
+          subscriber.next(userTags)
         }
         else {
           subscriber.next([])

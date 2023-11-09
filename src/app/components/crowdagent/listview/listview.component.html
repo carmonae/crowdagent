@@ -1,17 +1,21 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md col-xl-3 xl-40 box-col-4e">
-      <app-title-filter></app-title-filter>
+      <app-title-filter (filterEvent)="filter($event)"></app-title-filter>
     </div>
     <div class="col-md col-xl-9 xl-60 box-col-8">
-      <div class="text-center">
-        <h3>Which Titles piQues Your Interest?</h3>
+      <div *ngIf="titleData.length > 0" class="text-center">
+        <h3>Which Title(s) piQues Your Interest?</h3>
+        <br />
+      </div>
+      <div *ngIf="titleData.length == 0" class="text-center">
+        <h3>No New Titles to piQue Your Interest.</h3>
         <br />
       </div>
       <div
         class="card"
         *ngFor="
-          let titleData of titleData | slice : nextItem : nextItem + maxItems
+          let titleData of filterData | slice : nextItem : nextItem + maxItems
         "
         [class.ribbon-vertical-left-wrapper]="true"
       >
@@ -55,7 +59,7 @@
           </div>
         </div>
       </div>
-      <div class="job-pagination">
+      <div *ngIf="titleData.length > 0" class="job-pagination">
         <nav aria-label="Page navigation example">
           <ul class="pagination pagination-primary">
             <li class="page-item" [class.disabled]="currentPage == 1">

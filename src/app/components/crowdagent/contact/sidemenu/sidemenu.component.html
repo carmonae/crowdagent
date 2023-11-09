@@ -27,9 +27,9 @@
               <li class="nav-item">
                 <span class="main-title"> Views</span>
               </li>
-              <li *ngFor="let views of contactSidemenu">
-                <a id="pills-personal-tab">
-                  <span class="title"> {{ views.title }}</span>
+              <li *ngFor="let views of permanentViews">
+                <a id="pills-personal-tab" (click)="changeView(views['tag'])">
+                  <span class="title"> {{ views["tag"] }}</span>
                 </a>
               </li>
               <li>
@@ -39,9 +39,13 @@
                   >
                 </button>
               </li>
-              <li *ngFor="let tags of contactSidemenu">
-                <a class="show" id="pills-organization-tab">
-                  <span class="title"> {{ tags.tag }}</span>
+              <li *ngFor="let tag of userDefinedViews">
+                <a
+                  class="show"
+                  id="pills-organization-tab"
+                  (click)="changeView(tag['tag'])"
+                >
+                  <span class="title"> {{ tag["tag"] }}</span>
                 </a>
               </li>
             </ul>

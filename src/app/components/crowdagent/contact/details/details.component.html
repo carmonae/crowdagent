@@ -5,7 +5,7 @@
     role="tabpanel"
     aria-labelledby="v-pills-user-tab"
   >
-    <div class="card-body btn-group-showcase">
+    <div *ngIf="selectedata" class="card-body btn-group-showcase">
       <h2>{{ selectedata.title }}</h2>
       <h3>{{ selectedata.subtitle }}</h3>
       <div class="row">
@@ -44,12 +44,20 @@
           {{ project.abstract }}
       </textarea
         >
-        <button class="btn btn-block btn-primary" (click)="piques(true)">
-          <i class="fa fa-thumbs-up"><span>piQued</span></i>
-        </button>
-        <button class="btn btn-block btn-primary" (click)="piques(false)">
-          <i class="fa fa-thumbs-down"><span>unpiQued</span></i>
-        </button>
+        <div class="col">
+          <button
+            class="col-6 btn btn-block btn-primary"
+            (click)="piques(true)"
+          >
+            <i class="fa fa-thumbs-up"></i>
+          </button>
+          <button
+            class="col-6 btn btn-block btn-secondary"
+            (click)="piques(false)"
+          >
+            <i class="fa fa-thumbs-down"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>

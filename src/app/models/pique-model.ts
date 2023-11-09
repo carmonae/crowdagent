@@ -1,9 +1,12 @@
+import { TagI } from "./tag-interface"
+
 export interface PiqueI {
     projectUid: string | undefined
     userUid: string | undefined
     title: string,
     subtitle: string,
     datePublish: string
+    tags: TagI[]
 }
 
 export class Pique implements PiqueI {
@@ -13,6 +16,7 @@ export class Pique implements PiqueI {
     public title: string = ''
     public subtitle: string = ''
     public datePublish: string = ''
+    public tags: TagI[] = []
 
     constructor(title: any) {
         this.projectUid = title.projectUid
@@ -20,5 +24,6 @@ export class Pique implements PiqueI {
         this.title = title.title
         this.subtitle = title.subtitle
         this.datePublish = title.datePublish
+        this.tags = []
     }
 }

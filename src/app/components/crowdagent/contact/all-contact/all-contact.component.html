@@ -7,9 +7,15 @@
   <div class="card mb-0">
     <div class="card-header d-flex">
       <h3>Pique Titles</h3>
-      <span class="f-14 pull-right mt-0">{{ allTitles.length }} Titles</span>
+      <span class="f-14 pull-right mt-0"
+        >{{ filteredTitles.length }} Titles</span
+      >
     </div>
-    <div class="card-body p-0 custom-scrollbar" style="height: 40rem">
+    <div
+      *ngIf="filteredTitles"
+      class="card-body p-0 custom-scrollbar"
+      style="height: 40rem"
+    >
       <div class="row list-persons" id="addcon">
         <div class="col-xl-4 xl-50 col-md-5">
           <div
@@ -20,7 +26,8 @@
           >
             <ng-container
               *ngFor="
-                let data of allTitles | slice : nextItem : nextItem + maxItems
+                let data of filteredTitles
+                  | slice : nextItem : nextItem + maxItems
               "
             >
               <a
@@ -29,7 +36,8 @@
                 id="v-pills-user-tab"
                 style="cursor: pointer"
                 role="tab"
-                (click)="getData(data.projectUid)"
+                (click)="getDataForDetails(data.projectUid)"
+                (contextmenu)="contextMenu($event, data.projectUid)"
                 aria-controls="v-pills-user"
                 aria-selected="true"
               >
@@ -51,13 +59,14 @@
           </div>
         </div>
 
-        <div class="col-xl-8 xl-50 col-md-7">
+        <div *ngIf="selectedata" class="col-xl-8 xl-50 col-md-7">
           <app-details [selectedata]="selectedata"></app-details>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <div class="job-pagination">
   <nav aria-label="Page navigation example">
     <ul class="pagination pagination-primary">

@@ -96,34 +96,24 @@ export const filterData: Filter[] = [
 export const filterCheckBox = [
    {
       id: "chk-ani",
-      label: "Full-time",
+      label: "By Title",
       vacancy: 8688
    },
    {
       id: "chk-ani1",
-      label: "Contract",
+      label: "By Subtitle",
       vacancy: 503
    },
    {
       id: "chk-ani2",
-      label: "Part-time",
+      label: "By Author's Pen Name",
       vacancy: 288
    },
    {
       id: "chk-ani3",
-      label: "Internship",
+      label: "By Abstract",
       vacancy: 236
    },
-   {
-      id: "chk-ani4",
-      label: "Temporary",
-      vacancy: 146
-   },
-   {
-      id: "chk-ani5",
-      label: "Commission",
-      vacancy: 25
-   }
 ]
 
 export const jobCardsData = [

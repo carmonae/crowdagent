@@ -9,6 +9,7 @@ import { TitlesService } from 'src/app/shared/services/titles.service';
 import { getDatabase, ref, set } from 'firebase/database'
 import { PiquesService } from 'src/app/shared/services/piques.service';
 import { listenerCount } from 'process';
+import { TitleFilterI } from 'src/app/models/titleFilter-model';
 
 @Component({
   selector: 'app-title-listview',
@@ -86,7 +87,7 @@ export class ListviewComponent implements OnInit {
     let _this = this
     setTimeout(function () {
       _this.toast = false
-    }, 3000)
+    }, 4000)
 
     var index = 0
     for (var entry of this.titleData) {
@@ -98,9 +99,9 @@ export class ListviewComponent implements OnInit {
     this.titleData.splice(index, 1)
     this.lastpage = Math.ceil(this.titleData.length / this.maxItems)
 
-    const pique = new Pique(data)
+    const newPique = new Pique(data)
     const piquesRef = ref(this.db, `piques/${this.uid}/${data.projectUid}`)
-    set(piquesRef, pique);
+    set(piquesRef, newPique);
 
   }
 
@@ -122,5 +123,39 @@ export class ListviewComponent implements OnInit {
     }
     this.currentPage = page
     this.nextItem = (this.currentPage - 1) * this.maxItems
+  }
+
+  filter(event: TitleFilterI): void {
+    console.log('list-view filter event:', event)
+
+    this.filterData = this.titleData.filter((title) => {
+
+      var result: any = false;
+
+      if (event.search.pattern == '' && event.genre == '' && event.format == '') {
+        result = true
+      }
+      else {
+        if (event.search.pattern != '') {
+          const regExp = new RegExp(event.search.pattern.toLowerCase())
+          if (event.search.by.includes('By Title')) {
+            result = regExp.test(title.title.toLowerCase())
+          }
+          if (event.search.by.includes('By Subtitle')) {
+            result = result || regExp.test(title.subtitle.toLowerCase())
+          }
+
+        }
+        if (event.genre != '') {
+          title.genre == event.genre
+        }
+
+        if (event.format != '') {
+          title.format == event.format
+        }
+      }
+      return result
+    })
+
   }
 }

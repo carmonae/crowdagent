@@ -8,6 +8,7 @@ import { CrowdagentRoutingModule } from './crowdagent-routing.module';
 import { ListviewComponent } from './listview/listview.component';
 import { TitleFilterComponent } from './title-filter/title-filter.component';
 import { ContactModule } from './contact/contact.module';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ContactModule } from './contact/contact.module';
     NgbModule,
     SharedModule,
     CrowdagentRoutingModule,
-    ContactModule
+    ContactModule,
+    FormsModule
   ]
 })
 export class CrowdagentModule { }

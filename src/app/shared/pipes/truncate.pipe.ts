@@ -28,10 +28,14 @@ export class TruncatePipe implements PipeTransform {
     }
     */
 
-    var truncatedText = text.substring(0, chars);
-    if (text.length > chars) {
-      const suffix = Math.min(text.length - truncatedText.length, 10)
-      truncatedText += ' ... ' + text.substring(text.length - suffix, text.length)
+    var truncatedText: string = ''
+    if (text) {
+      truncatedText = text.substring(0, chars);
+      if (text.length > chars) {
+        const suffix = Math.min(text.length - truncatedText.length, 10)
+        truncatedText += ' ... ' + text.substring(text.length - suffix, text.length)
+      }
+
     }
     return truncatedText;
   }

@@ -1,22 +1,32 @@
-import { Component, Input, Output, OnInit } from '@angular/core';
-import { PiqueI } from 'src/app/models/pique-model';
+import { Component, Input, Output, OnInit, SimpleChanges, OnChanges } from '@angular/core';
+import { PiqueI, Pique } from 'src/app/models/pique-model';
 import { PiquesService } from 'src/app/shared/services/piques.service';
-import * as Data from '../../../../shared/data/data/contacts/all-contact'
+import { TagProjectComponent } from '../modal/tag-project/tag-project.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TagI } from '../../../../models/tag-interface'
+import { getDatabase, ref, set } from 'firebase/database'
+import { AuthService } from 'src/app/auth/service/auth.service';
+
 
 @Component({
   selector: 'app-all-contact',
   templateUrl: './all-contact.component.html',
   styleUrls: ['./all-contact.component.scss']
 })
-export class AllContactComponent implements OnInit {
+export class AllContactComponent implements OnInit, OnChanges {
 
 
 
   @Input() user: string | undefined
-  @Input() tags: string[] = []
+  @Input() sideMenuRef: any
+  @Input() currentView: string = ''
   @Output() selectedata!: PiqueI
 
+  private db = getDatabase()
+  private uid: string | undefined
+
   public allTitles: PiqueI[] = [];
+  public filteredTitles: PiqueI[] = []
 
   public thispage: number = 1
   public nextpage: number = this.thispage + 1
@@ -26,7 +36,8 @@ export class AllContactComponent implements OnInit {
   public maxItems = 5
   public nextItem = 0
 
-  constructor(private piqueService: PiquesService) {
+  constructor(private authService: AuthService, private piqueService: PiquesService, public modalService: NgbModal) {
+    this.uid = authService.getUid()
   }
 
   ngOnInit(): void {
@@ -38,8 +49,9 @@ export class AllContactComponent implements OnInit {
         next(piques) {
           console.log('got piques:', piques)
           _this.allTitles = piques
-          _this.lastpage = Math.ceil(_this.allTitles.length / _this.maxItems)
-          _this.selectedata = _this.allTitles[0]
+          _this.filteredTitles = _this.allTitles
+          _this.lastpage = Math.ceil(_this.filteredTitles.length / _this.maxItems)
+          _this.selectedata = new Pique(_this.filteredTitles[0])
         },
         error(msg) {
           console.log(msg)
@@ -49,11 +61,31 @@ export class AllContactComponent implements OnInit {
         }
       });
 
+  }
+
+  ngOnChanges(property: SimpleChanges): void {
+    console.log('all-contact received change of view', this.currentView)
+    this.filterTitles()
 
   }
 
+  filterTitles(): void {
+    if (this.currentView.toLowerCase() == 'all') {
+      this.filteredTitles = this.allTitles
+    }
+    else {
+      this.filteredTitles = this.allTitles.filter(title => {
+        let found: boolean = false
+        if (title.tags !== undefined) {
+          found = title.tags.find(tag => tag['tag'].toLowerCase() == this.currentView.toLowerCase()) != undefined
+        }
+        return found
+      })
+    }
+    this.gotoPage(1)
+  }
 
-  getData(id: string | undefined) {
+  getDataForDetails(id: string | undefined) {
 
     const getselectedData = this.allTitles.filter((data) => {
       return data.projectUid === id;
@@ -66,6 +98,7 @@ export class AllContactComponent implements OnInit {
 
   gotoPage(page: number): void {
 
+    this.lastpage = Math.ceil(this.filteredTitles.length / this.maxItems)
     if (page > this.currentPage && page > this.pageafternext) {
       this.thispage += 1
       this.nextpage = this.thispage + 1
@@ -80,5 +113,32 @@ export class AllContactComponent implements OnInit {
     this.nextItem = (this.currentPage - 1) * this.maxItems
   }
 
+  contextMenu(event: Event, id: string | undefined): void {
+    event.preventDefault()
+    this.getDataForDetails(id)
+
+    const getSelectedData = this.allTitles.filter((data) => {
+      return data.projectUid === id;
+    })
+
+    const modalRef = this.modalService.open(TagProjectComponent)
+    modalRef.componentInstance.possibleTags = this.sideMenuRef.userDefinedViews
+    modalRef.componentInstance.currentlySelectedTags = this.selectedata.tags ? this.selectedata.tags : []
+    modalRef.componentInstance.newTags.subscribe((tagList: any) => {
+      console.log(tagList)
+      this.selectedata.tags = tagList
+      this.storeTags(id)
+    })
+
+    console.log('Context Menu', event, getSelectedData)
+  }
+
+  storeTags(projectId: string | undefined) {
+    if (projectId) {
+      const tagsRef = ref(this.db, `piques/${this.uid}/${projectId}`)
+      set(tagsRef, this.selectedata);
+    }
+
+  }
 
 }

@@ -14,6 +14,7 @@ import { AddCategoryComponent } from './modal/add-category/add-category.componen
 import { PrintComponent } from './details/print/print.component';
 import 'hammerjs';
 import 'mousetrap';
+import { TagProjectComponent } from './modal/tag-project/tag-project.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import 'mousetrap';
     AllContactComponent,
     DetailsComponent,
     AddCategoryComponent,
-    PrintComponent
+    PrintComponent,
+    TagProjectComponent
   ],
   imports: [
     CommonModule,
