@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { getDatabase, ref, set } from 'firebase/database'
 
-import { AuthService } from 'src/app/auth/service/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { GenreTypes } from 'src/app/models/genreTypes-enum';
 import { ProjectStatus } from 'src/app/models/projectStatus';
 import { Readership } from 'src/app/models/readership-enum';

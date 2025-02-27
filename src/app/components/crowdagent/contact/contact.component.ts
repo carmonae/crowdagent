@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/auth/service/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { TagI } from 'src/app/models/tag-interface';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 

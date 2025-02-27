@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/service/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProjectStatus } from 'src/app/models/projectStatus';
 import { UserprofileData } from 'src/app/models/user-profile';
 //import * as Data from '../../../shared/data/data/project/project-list'

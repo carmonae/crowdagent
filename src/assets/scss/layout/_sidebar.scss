@@ -121,7 +121,7 @@
     top: $main-header-top;
     z-index: $main-header-z-index;
     transition: $sidebar-transition;
-    background-color: #31322D;
+    background-color: $header-dark;
 
     [class="dark-only"] & {
       border-bottom: 2px solid $dark-card-background;
@@ -299,7 +299,7 @@
               top: -1px;
               padding: 2px;
               border: 1.5px solid $white;
-              background-color: $secondary-color  !important;
+              background-color: $secondary-color !important;
               font-family: work-Sans, sans-serif;
             }
 
@@ -559,7 +559,7 @@
                 font-weight: 400;
 
                 [class="dark-only"] & {
-                  background-color: $primary-color  !important;
+                  background-color: $primary-color !important;
                 }
               }
             }
@@ -719,8 +719,8 @@
 
               .btn {
                 padding: 0px 7px;
-                background-color: $off-white  !important;
-                border-color: $off-white  !important;
+                background-color: $off-white !important;
+                border-color: $off-white !important;
                 border-radius: 100%;
                 font-size: 14px;
                 color: $theme-body-font-color;
@@ -949,7 +949,7 @@
                       color: $black;
 
                       [class="dark-only"] & {
-                        background-color: $dark-card-background  !important;
+                        background-color: $dark-card-background !important;
                         color: rgba($white, 0.8) !important;
                       }
                     }
@@ -2634,7 +2634,7 @@
       .sidebar-wrapper {
         div {
           nav.sidebar-main {
-            background-color: $sub-header  !important;
+            background-color: $sub-header !important;
           }
         }
       }
@@ -4039,8 +4039,8 @@
 
         &:hover {
           >svg {
-            color: $white  !important;
-            stroke: $white  !important;
+            color: $white !important;
+            stroke: $white !important;
           }
         }
       }

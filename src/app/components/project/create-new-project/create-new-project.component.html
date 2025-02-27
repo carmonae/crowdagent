@@ -167,10 +167,35 @@
             </a>
           </div>
           <div class="row">
-            <div class="col">
+            <div class="col col-3">
               <div class="mb-3">
                 <app-upload-file
                   (fileUploadEvent)="onFilesUploaded($event)"
+                  [label]="'Cover'"
+                ></app-upload-file>
+              </div>
+            </div>
+            <div class="col col-3">
+              <div class="mb-3">
+                <app-upload-file
+                  (fileUploadEvent)="onFilesUploaded($event)"
+                  label="Abstract"
+                ></app-upload-file>
+              </div>
+            </div>
+            <div class="col col-3">
+              <div class="mb-3">
+                <app-upload-file
+                  (fileUploadEvent)="onFilesUploaded($event)"
+                  label="Table of Content / Table of Characters"
+                ></app-upload-file>
+              </div>
+            </div>
+            <div class="col col-3">
+              <div class="mb-3">
+                <app-upload-file
+                  (fileUploadEvent)="onFilesUploaded($event)"
+                  label="Manuscript"
                 ></app-upload-file>
               </div>
             </div>

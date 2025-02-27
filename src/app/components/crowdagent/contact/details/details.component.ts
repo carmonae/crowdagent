@@ -5,6 +5,7 @@ import { PrintComponent } from './print/print.component';
 import { PiqueI } from 'src/app/models/pique-model';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { UserprojectDefault, UserprojectI } from 'src/app/models/user-project';
+import { PdfModalComponent } from '../modal/pdf-modal/pdf-modal.component';
 const Swal = require('sweetalert2')
 
 @Component({
@@ -28,15 +29,15 @@ export class DetailsComponent implements OnInit {
   public manuscriptEnabled = false;
 
   constructor(
-    private modalService: NgbModal,
+    private modal: NgbModal,
     private projService: ProjectsService) { }
 
   ngOnInit(): void {
-    this.getAbstract()
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.getAbstract()
+
   }
 
   getAbstract(): void {
@@ -48,6 +49,9 @@ export class DetailsComponent implements OnInit {
           if (projects.length > 0) {
             _this.project = projects[0]
           }
+          const modal = _this.modal.open(PdfModalComponent, { size: 'md' })
+          modal.componentInstance.title = _this.project.title;
+          modal.componentInstance.content = _this.project.abstract
         },
         error(msg) {
           console.log(msg)
@@ -69,6 +73,10 @@ export class DetailsComponent implements OnInit {
       this.tocEnabled = false
 
     }
+  }
+
+  close(): void {
+    this.modal.dismissAll();
   }
 
 }

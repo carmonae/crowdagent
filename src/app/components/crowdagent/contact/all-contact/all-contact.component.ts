@@ -5,7 +5,7 @@ import { TagProjectComponent } from '../modal/tag-project/tag-project.component'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TagI } from '../../../../models/tag-interface'
 import { getDatabase, ref, set } from 'firebase/database'
-import { AuthService } from 'src/app/auth/service/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({

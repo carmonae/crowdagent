@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 
 @Component({
@@ -8,6 +8,7 @@ import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 })
 export class UploadFileComponent implements OnInit {
 
+  @Input() label: string = 'Content'
   @Output() fileUploadEvent = new EventEmitter<File[]>();
 
   files: File[] = [];

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+  <defs>
+    <!-- Define a soft gradient for the background -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0f7fa"/>
+      <stop offset="100%" stop-color="#e0f2f1"/>
+    </linearGradient>
+    <!-- Define a book symbol (a simple stylized book) -->
+    <symbol id="bookSymbol" viewBox="0 0 30 40">
+      <rect x="0" y="0" width="30" height="40" rx="3" ry="3" fill="#ffab91" stroke="#e64a19" stroke-width="1"/>
+      <!-- A subtle spine detail -->
+      <line x1="5" y1="0" x2="5" y2="40" stroke="#d84315" stroke-width="1"/>
+    </symbol>
+  </defs>
+  
+  <!-- Tile background using the gradient -->
+  <rect width="200" height="200" fill="url(#bgGradient)" />
+
+  <!-- Books crossing left/right boundaries for seamless tiling -->
+  <use xlink:href="#bookSymbol" x="-10" y="50" transform="rotate(0, 5, 70)" />
+  <use xlink:href="#bookSymbol" x="180" y="50" transform="rotate(0, 5, 70)" />
+
+  <!-- Books crossing top/bottom boundaries -->
+  <use xlink:href="#bookSymbol" x="100" y="-15" transform="rotate(5, 15, 20)" />
+  <use xlink:href="#bookSymbol" x="100" y="175" transform="rotate(5, 15, 20)" />
+
+  <!-- Additional books fully within the tile -->
+  <use xlink:href="#bookSymbol" x="60" y="100" transform="rotate(-10, 15, 20)" />
+  <use xlink:href="#bookSymbol" x="120" y="30" transform="rotate(8, 15, 20)" />
+</svg>

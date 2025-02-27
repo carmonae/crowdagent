@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
 import { AuthGuard } from './auth.guard';
 import { initializer } from './keycloak-initializer'
-import { AuthService } from './service/auth.service';
+import { AuthService } from '../../services/auth.service';
+
 
 @NgModule({
   declarations: [],

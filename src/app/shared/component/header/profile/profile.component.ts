@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/auth/service/auth.service';
+import { AuthService } from 'src/app/auth/service/auth.firebase.service';
 import { Userprofile } from 'src/app/shared/data/data/users/user-profile';
 import { getDatabase, ref, child, set, get, push, update } from 'firebase/database'
 
@@ -32,5 +32,6 @@ export class ProfileComponent {
   logOut() {
     localStorage.clear();
     this.authService.logout()
+    this.router.navigate(['/landing'])
   }
 }

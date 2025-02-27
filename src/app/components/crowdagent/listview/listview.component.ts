@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService } from 'src/app/auth/service/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { UsertitlesI } from 'src/app/models/user-titles';
 import { Pique, PiqueI } from 'src/app/models/pique-model';
 import { jobCardsData } from 'src/app/shared/data/data/job-search/job-search';
 import { TitlesService } from 'src/app/shared/services/titles.service';
-import { getDatabase, ref, set } from 'firebase/database'
+import { getDatabase, ref, set, child, runTransaction, get } from 'firebase/database'
 import { PiquesService } from 'src/app/shared/services/piques.service';
-import { listenerCount } from 'process';
 import { TitleFilterI } from 'src/app/models/titleFilter-model';
+import { ScoresService } from 'src/app/shared/services/scores-service.service';
 
 @Component({
   selector: 'app-title-listview',
@@ -34,13 +34,16 @@ export class ListviewComponent implements OnInit {
   public nextItem = 0
   public toast = false
   public toastMsg = 'Piqued'
+  public piques: number = 0;
 
   constructor(
     public config: NgbRatingConfig,
     private authService: AuthService,
     private titleService: TitlesService,
     private piqueService: PiquesService,
+    private scoreService: ScoresService,
     private router: Router) {
+
     config.max = 5;
     config.readonly = true;
     this.uid = authService.getUid()
@@ -51,8 +54,10 @@ export class ListviewComponent implements OnInit {
     this.titleService.getTitles()
       .subscribe({
         next(titles) {
-          console.log('titles b4 filter:', titles)
 
+          console.log('titles b4 filter:', titles)
+          // Now that we have all available titles, lets remove the titles
+          // the reader has already piqued
           var filteredTitles: any = []
           _this.piqueService.getPiques(_this.uid!)
             .subscribe({
@@ -77,6 +82,25 @@ export class ListviewComponent implements OnInit {
           console.log('getTiles finished', _this.titleData)
         }
       });
+
+    this.getPiquesLeft()
+
+  }
+
+  getPiquesLeft(): void {
+    const dbRef = ref(this.db);
+    get(child(dbRef, `users/account/${this.uid}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.exportVal())
+        this.piques = snapshot.val()['piques']
+      }
+      else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+
   }
 
   pique(data: any): void {
@@ -103,7 +127,10 @@ export class ListviewComponent implements OnInit {
     const piquesRef = ref(this.db, `piques/${this.uid}/${data.projectUid}`)
     set(piquesRef, newPique);
 
+    this.scoreService.incrementTitleScore(this.uid, data.userUid, data.projectUid)
+    this.getPiquesLeft()
   }
+
 
   toastClose(): void {
     this.toast = false

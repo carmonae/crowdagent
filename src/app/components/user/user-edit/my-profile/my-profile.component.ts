@@ -3,7 +3,7 @@ import { FormBuilder, NgForm } from '@angular/forms'
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthService } from '../../../../auth/service/auth.service'
+import { AuthService } from '../../../../services/auth.service'
 
 import { Userprofile } from '../../../../shared/data/data/users/user-profile'
 import { getDatabase, ref, child, set, get, push, update } from 'firebase/database'

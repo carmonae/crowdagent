@@ -292,7 +292,7 @@ $i: hidden,
 /*====== Image-sizes css starts ======*/
 $i: 10;
 
-@while $i<=100 {
+@while $i<=200 {
   .img-#{$i} {
     width:#{$i}px !important;
   }
@@ -413,7 +413,7 @@ $badge-color: $primary-color,
     background-color: nth($badge-color, $i);
 
     @if($badge-name=="light") {
-      color: $theme-body-font-color  !important;
+      color: $theme-body-font-color !important;
     }
   }
 }
@@ -543,8 +543,8 @@ $btn-color in (primary, $primary-color),
 (dark-blue, $textheader-dark),
 (warning, $warning-color) {
   .btn-#{$btn-name} {
-    background-color: $btn-color  !important;
-    border-color: $btn-color  !important;
+    background-color: $btn-color !important;
+    border-color: $btn-color !important;
     -webkit-tap-highlight-color: transparent;
     transform: translateZ(0);
     color: $white;
@@ -566,8 +566,8 @@ $btn-color in (primary, $primary-color),
 
     &.disabled,
     &:disabled {
-      background-color: $btn-color  !important;
-      border-color: $btn-color  !important;
+      background-color: $btn-color !important;
+      border-color: $btn-color !important;
     }
 
     &:focus {
@@ -583,7 +583,7 @@ $btn-color in (primary, $primary-color),
   &:hover {
     background-color: rgba($primary-color, 0.1) !important;
     border-color: rgba($primary-color, 0.1) !important;
-    color: $black  !important;
+    color: $black !important;
   }
 }
 
@@ -958,7 +958,7 @@ $i: 1;
   font-weight: 400;
   z-index: 1;
   right: 0;
-  background-color: $white  !important;
+  background-color: $white !important;
   border-radius: 5px;
 }
 
@@ -1013,12 +1013,12 @@ $i: 1;
 .dropzone {
   .dz-preview {
     .dz-error-message {
-      background: $white  !important;
-      color: $primary-color  !important;
+      background: $white !important;
+      color: $primary-color !important;
       border: 1px solid $primary-color;
 
       &:after {
-        border-bottom: 6px solid $primary-color  !important;
+        border-bottom: 6px solid $primary-color !important;
       }
     }
   }

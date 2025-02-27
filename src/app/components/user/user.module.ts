@@ -9,8 +9,6 @@ import { MyProfileComponent } from './user-edit/my-profile/my-profile.component'
 import { EditProfileComponent } from './user-edit/edit-profile/edit-profile.component';
 import { ProjectsComponent } from './user-edit/projects/projects.component';
 
-import { AuthService } from '../../auth/service/auth.service'
-
 @NgModule({
   declarations: [
     UserEditComponent,

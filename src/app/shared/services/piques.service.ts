@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { getDatabase, ref, child, set, get, push, update } from 'firebase/database'
 import { Observable } from 'rxjs';
 
-import { AuthService } from 'src/app/auth/service/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { PiqueI } from 'src/app/models/pique-model'
 import { TagI } from 'src/app/models/tag-interface';
 
@@ -43,16 +43,6 @@ export class PiquesService {
         if (snapshot.exists()) {
           titles = snapshot.val()
 
-          //Convert tags into array
-          /*
-          for (var t in titles) {
-            let tags: TagI[] = []
-            for (var tag in titles[t].tags) {
-              tags.push(titles[t].tags[tag]);
-            }
-            titles[t].tags = tags
-          };
-          */
           for (var p in titles) {
             userTitles.push(titles[p])
           }
@@ -70,5 +60,6 @@ export class PiquesService {
     })
     return observable
   }
+
 }
 

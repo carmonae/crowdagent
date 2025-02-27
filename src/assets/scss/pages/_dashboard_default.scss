@@ -596,7 +596,7 @@
 
   .wadewarren {
     position: relative;
-    background-image: url('../../images/dashboard-2/greeting.png');
+    background-image: url('../../images/landing/home-bg.jpg');
     background-repeat: no-repeat;
     border-radius: 10px;
     display: block;
@@ -646,8 +646,6 @@
         }
       }
     }
-
-
 
     h3 {
       margin-top: 18px;
@@ -785,7 +783,7 @@
       background-color: rgba($primary-color, 0.2) !important;
 
       i {
-        color: $primary-color  !important;
+        color: $primary-color !important;
       }
     }
   }
@@ -807,7 +805,7 @@
       background-color: rgba($dark-color, 0.2) !important;
 
       i {
-        color: $dark-color  !important;
+        color: $dark-color !important;
       }
     }
   }

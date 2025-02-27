@@ -4,12 +4,14 @@
       <app-title-filter (filterEvent)="filter($event)"></app-title-filter>
     </div>
     <div class="col-md col-xl-9 xl-60 box-col-8">
-      <div *ngIf="titleData.length > 0" class="text-center">
-        <h3>Which Title(s) piQues Your Interest?</h3>
+      <div *ngIf="titleData.length > 0" class="row text-center">
+        <h3 class="col-10">Which Title(s) piQues Your Interest?</h3>
+        <h3 class="col-2">${{ piques }}</h3>
         <br />
       </div>
-      <div *ngIf="titleData.length == 0" class="text-center">
-        <h3>No New Titles to piQue Your Interest.</h3>
+      <div *ngIf="titleData.length == 0" class="row text-center">
+        <h3 class="col-10">No New Titles to piQue Your Interest.</h3>
+        <h3 class="col-2">${{ piques }}</h3>
         <br />
       </div>
       <div

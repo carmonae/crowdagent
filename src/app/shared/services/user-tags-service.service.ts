@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { getDatabase, ref, child, set, get, push, update } from 'firebase/database'
 import { Observable } from 'rxjs';
 
-import { AuthService } from 'src/app/auth/service/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { TagI } from 'src/app/models/tag-interface'
 
 @Injectable({

@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddCategoryComponent } from '../modal/add-category/add-category.component';
 import { getDatabase, ref, set } from 'firebase/database'
-import { AuthService } from 'src/app/auth/service/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { TagI } from '../../../../models/tag-interface'
 import { UserTagsService } from 'src/app/shared/services/user-tags-service.service';
 

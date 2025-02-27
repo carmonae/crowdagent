@@ -9,6 +9,14 @@ const routes: Routes = [
     path: '',
     children: [
       {
+        path: 'default',
+        component: AuthorsComponent,
+        data: {
+          title: 'Authors Dashboard',
+          breadcrumb: 'Authors'
+        }
+      },
+      {
         path: 'authors',
         component: AuthorsComponent,
         data: {
