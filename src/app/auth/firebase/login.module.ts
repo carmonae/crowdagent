@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component'
 import { RegisterSimpleComponent } from './register/register-simple.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
 import { CommonRegisterFormComponent } from './common-register-form/common-register-form.component';
+
 @NgModule({
   declarations: [
     LoginComponent,
