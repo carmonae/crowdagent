@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingBarService } from '@ngx-loading-bar/core'
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-root',

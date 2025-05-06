@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { VerticalNavService } from '../../services/vertical-nav.service';
-import { Menu, NavService } from '../../services/nav.service';
 import { HideNavScrollService } from '../../services/hide-nav-scroll.service';
+import { Menu, NavService } from '../../services/nav.service';
 import { SearchService } from '../../services/search.service';
+import { VerticalNavService } from '../../services/vertical-nav.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
 

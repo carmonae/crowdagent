@@ -1,3 +1,4 @@
+// Angular imports
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -6,11 +7,17 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+
+// Local imports
+import { FileUploadModule } from 'ng2-file-upload';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { DropzoneDirective } from '../directive/dropzone.directive';
 import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
 import { ColorPickerComponent } from './component/customizer/color-picker/color-picker.component';
 import { CustomizerComponent } from './component/customizer/customizer.component';
 import { QuickOptionComponent } from './component/customizer/quick-option/quick-option.component';
 import { FeatherIconsComponent } from './component/feather-icons/feather-icons.component';
+import { FileUploadComponent } from './component/file-upload/file-upload.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { BookmarkComponent } from './component/header/bookmark/bookmark.component';
 import { CartComponent } from './component/header/cart/cart.component';
@@ -30,13 +37,8 @@ import { VerticalSidemenuComponent } from './component/menu/vertical-sidemenu/ve
 import { SvgIconComponent } from './component/svg-icon/svg-icon.component';
 import { TapToTopComponent } from './component/tap-to-top/tap-to-top.component';
 import { ClickOutsideDirective } from './directive/outside.directive';
-import { FileUploadComponent } from './component/file-upload/file-upload.component';
-import { FileUploadService } from './services/file-upload.service';
-import { FileUploadModule } from 'ng2-file-upload';
-import { DropzoneDirective } from '../directive/dropzone.directive';
-import { NgxDropzoneModule } from 'ngx-dropzone';
-import { TruncatePipe } from './pipes/truncate.pipe';
 import { AgePipe } from './pipes/age.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -45,6 +47,17 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
+
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularSvgIconModule.forRoot(),
+    TranslateModule.forRoot(),
+    FileUploadModule,
+    NgxDropzoneModule,
     HeaderComponent,
     ContentComponent,
     FeatherIconsComponent,
@@ -73,16 +86,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DropzoneDirective,
     TruncatePipe,
     AgePipe
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularSvgIconModule.forRoot(),
-    TranslateModule.forRoot(),
-    FileUploadModule,
-    NgxDropzoneModule
+
   ],
   exports: [
     FeatherIconsComponent,

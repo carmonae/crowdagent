@@ -8,7 +8,15 @@ export const content: Routes = [
             title: "Landing",
             breadcrumb: "Landing"
         },
-        loadChildren: () => import('../../landing/landing.module').then(m => m.LandingModule),
+        loadChildren: () => import('@app/landing/landing.module').then(m => m.LandingModule),
+    },
+    {
+        path: 'login',
+        data: {
+            title: "Login",
+            breadcrumb: "Login"
+        },
+        loadChildren: () => import('@app/components/login/login.module').then(m => m.LoginComponentModule),
     },
     {
         path: 'users',
@@ -16,7 +24,7 @@ export const content: Routes = [
             title: 'Users',
             breadcrumb: 'Users'
         },
-        loadChildren: () => import('../../components/user/user.module').then(m => m.UserModule)
+        loadChildren: () => import('@app/components/user/user.module').then(m => m.UserModule)
     },
     {
         path: 'dashboard',
@@ -24,7 +32,7 @@ export const content: Routes = [
             title: 'Dashboard',
             breadcrumb: 'Dashboard'
         },
-        loadChildren: () => import('../../components/dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('@app/components/dashboard/dashboard.module').then(m => m.DashboardModule)
     },
     {
         path: 'projects',
@@ -32,7 +40,7 @@ export const content: Routes = [
             title: 'Projects',
             breadcrumb: 'Projects'
         },
-        loadChildren: () => import('../../components/project/project.module').then(m => m.ProjectModule)
+        loadChildren: () => import('@app/components/project/project.module').then(m => m.ProjectModule)
     },
     {
         path: 'crowdagent',

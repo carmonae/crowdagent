@@ -1,4 +1,4 @@
-import keycloakConfig from "./keycloak.config";
+import keycloakConfig from "@environments/keycloak.config";
 
 export const environment = {
   production: true,
