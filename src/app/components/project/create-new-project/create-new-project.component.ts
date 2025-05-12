@@ -1,25 +1,35 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { GetDownloadURLPipe } from '@angular/fire/compat/storage';
+
+
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { getDatabase, ref, set } from 'firebase/database'
+import { getDatabase, ref, set } from 'firebase/database';
 
-import { AuthService } from 'src/app/services/auth.service';
 import { GenreTypes } from 'src/app/models/genreTypes-enum';
 import { ProjectStatus } from 'src/app/models/projectStatus';
 import { Readership } from 'src/app/models/readership-enum';
 import { SizeTypes } from 'src/app/models/sizeTypes-enum';
-import { Userproject, UserprojectDefault, UserprojectI } from 'src/app/models/user-project';
+import { UserprojectDefault, UserprojectI } from 'src/app/models/user-project';
 import { Usertitle } from 'src/app/models/user-titles';
 import { WritingType } from 'src/app/models/writingType-enum';
+import { AuthService } from 'src/app/services/auth.service';
 import { FileUploadService } from 'src/app/shared/services/file-upload.service';
+import { UploadFileComponent } from './upload-file/upload-file.component';
+
 import { v4 as uuid } from 'uuid';
 
 @Component({
-  selector: 'app-create-new-project',
-  templateUrl: './create-new-project.component.html',
-  styleUrls: ['./create-new-project.component.scss']
+    selector: 'app-create-new-project',
+    templateUrl: './create-new-project.component.html',
+    styleUrls: ['./create-new-project.component.scss'],
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        UploadFileComponent
+    ]
 })
 export class CreateNewProjectComponent implements OnInit {
 

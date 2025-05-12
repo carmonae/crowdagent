@@ -1,16 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+
+import { FeatherIconsComponent } from '@app/shared/component/feather-icons/feather-icons.component';
+import { TruncatePipe } from '@app/shared/pipes/truncate.pipe';
 import { ProjectStatus } from 'src/app/models/projectStatus';
-import { UserprofileData } from 'src/app/models/user-profile';
-//import * as Data from '../../../shared/data/data/project/project-list'
-import { UserprojectI, UserprojectMockData as Data } from 'src/app/models/user-project';
+import { UserprojectI } from 'src/app/models/user-project';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 
 @Component({
-  selector: 'app-project-list',
-  templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.scss']
+    selector: 'app-project-list',
+    templateUrl: './project-list.component.html',
+    styleUrls: ['./project-list.component.scss'],
+    standalone: true,
+    imports: [
+      CommonModule
+        , TruncatePipe
+        , FeatherIconsComponent
+    ]
 })
 export class ProjectListComponent implements OnInit {
 

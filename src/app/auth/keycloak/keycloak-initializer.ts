@@ -1,15 +1,12 @@
-import { KeycloakOptions, KeycloakService } from "keycloak-angular";
 import { environment } from "@environments/environment";
+import { keycloakInitOptions } from "@environments/keycloak.config";
+import { KeycloakOptions, KeycloakService } from "keycloak-angular";
 
-export function initializer(keycloak: KeycloakService): () => Promise<boolean> {
+export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boolean> {
 
     const options: KeycloakOptions = {
-        config: environment.keycloak,
-        loadUserProfileAtStartUp: true,
-        initOptions: {
-            onLoad: 'login-required',
-            checkLoginIframe: false
-        },
+        config: environment.keycloakConfig,
+        initOptions: keycloakInitOptions,
         bearerExcludedUrls: []
     };
 

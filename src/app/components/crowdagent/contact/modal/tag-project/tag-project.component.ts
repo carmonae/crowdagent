@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,9 +8,11 @@ interface TagI {
 }
 
 @Component({
-  selector: 'app-tag-project',
-  templateUrl: './tag-project.component.html',
-  styleUrls: ['./tag-project.component.scss']
+    selector: 'app-tag-project',
+    templateUrl: './tag-project.component.html',
+    styleUrls: ['./tag-project.component.scss'],
+    standalone: true,
+    imports: [CommonModule]
 })
 export class TagProjectComponent implements OnInit {
 

@@ -21,32 +21,26 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SortableDirective } from 'src/app/shared/directive/sortable.directive';
 
 @NgModule({
-  declarations: [
-    AuthorsComponent,
-    ReadersComponent,
-    AgentsComponent,
-    ProfileGrettingComponent,
-    CurrentBalanceComponent,
-    WeeklyVisitorsComponent,
-    BestSellingProductComponent,
-    SalesSummaryComponent,
-    TrackOrderComponent,
-    CommonDetailsComponent,
-    SortableDirective,
-    CommonDataTableComponent
-
-  ],
-
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    SharedModule,
-    FormsModule,
-    NgApexchartsModule,
-    UserModule,
-  ],
-
-  exports: [
-  ]
+    imports: [
+        CommonModule,
+        DashboardRoutingModule,
+        SharedModule,
+        FormsModule,
+        NgApexchartsModule,
+        UserModule,
+        AuthorsComponent,
+        ReadersComponent,
+        AgentsComponent,
+        ProfileGrettingComponent,
+        CurrentBalanceComponent,
+        WeeklyVisitorsComponent,
+        BestSellingProductComponent,
+        SalesSummaryComponent,
+        TrackOrderComponent,
+        CommonDetailsComponent,
+        SortableDirective,
+        CommonDataTableComponent,
+    ],
+    exports: []
 })
 export class DashboardModule { }

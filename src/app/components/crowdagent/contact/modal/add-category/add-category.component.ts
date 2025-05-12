@@ -1,10 +1,14 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-add-category',
-  templateUrl: './add-category.component.html',
-  styleUrls: ['./add-category.component.scss']
+    selector: 'app-add-category',
+    templateUrl: './add-category.component.html',
+    styleUrls: ['./add-category.component.scss'],
+    standalone: true,
+    imports: [CommonModule, FormsModule]
 })
 export class AddCategoryComponent {
 

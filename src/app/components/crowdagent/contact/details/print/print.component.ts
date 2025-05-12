@@ -4,9 +4,10 @@ import { PiqueI } from 'src/app/models/pique-model';
 import { Allcontact } from 'src/app/shared/data/data/contacts/all-contact';
 
 @Component({
-  selector: 'app-print',
-  templateUrl: './print.component.html',
-  styleUrls: ['./print.component.scss']
+    selector: 'app-print',
+    templateUrl: './print.component.html',
+    styleUrls: ['./print.component.scss'],
+    standalone: true
 })
 export class PrintComponent {
 

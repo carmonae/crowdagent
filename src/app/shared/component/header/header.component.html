@@ -1,7 +1,6 @@
 <div
   [ngClass]="navService.isDisplay ? 'page-header close_icon' : 'page-header'"
-  [ngStyle]="{ display: hidenav.show ? 'none' : 'block' }"
->
+  [ngStyle]="{ display: hidenav.show ? 'none' : 'block' }">
   <div class="header-wrapper row m-0">
     <div class="header-logo-wrapper col-auto p-0">
       <div class="logo-wrapper">
@@ -9,10 +8,10 @@
           <img
             class="img-200 rounded-circle"
             src="assets/images/logo/logo-white-nobg.png"
-            alt="crowdagent logo"
-          />
+            alt="crowdagent logo" />
         </a>
       </div>
+
       <div class="toggle-sidebar" (click)="openMenu()">
         <i data-feather="align-center"></i>
         <div class="status_toggle middle sidebar-toggle">
@@ -25,17 +24,18 @@
                 <input
                   class="form-control"
                   type="search"
-                  placeholder="Search anything..."
-                />
+                  placeholder="Search anything..." />
               </div>
             </form>
           </div>
         </div>
       </div>
     </div>
+
     <div class="col-auto p-0">
       <app-search></app-search>
     </div>
+
     <div class="nav-right col-auto pull-right right-header p-0 ms-auto">
       <ul class="nav-menus">
         <li class="onhover-dropdown serchinput">
@@ -51,8 +51,7 @@
               (keyup)="searchService.searchTerm(searchService.text)"
               type="text"
               autocomplete="off"
-              placeholder="Search Boho .."
-            />
+              placeholder="Search Boho .." />
           </div>
         </li>
 
@@ -82,12 +81,10 @@
         class="Typeahead-menu custom-scrollbar"
         [class.is-open]="searchService.searchResult"
         *ngIf="searchService.menuItems?.length && open"
-        id="search-outer"
-      >
+        id="search-outer">
         <div
           class="ProfileCard u-cf"
-          *ngFor="let menuItem of searchService.menuItems | slice : 0 : 8"
-        >
+          *ngFor="let menuItem of searchService.menuItems | slice : 0 : 8">
           <div class="ProfileCard-avatar">
             <app-svg-icon [icon]="menuItem.icon"></app-svg-icon>
           </div>
@@ -96,9 +93,7 @@
               <a
                 [routerLink]="menuItem?.path"
                 class="realname"
-                (click)="searchService.removeFix()"
-                >{{ menuItem?.title }}</a
-              >
+                (click)="searchService.removeFix()">{{ menuItem?.title }}</a>
             </div>
           </div>
         </div>
@@ -106,8 +101,7 @@
       <div
         class="Typeahead-menu is-open"
         [class.is-open]="searchService.searchResultEmpty"
-        *ngIf="open"
-      >
+        *ngIf="open">
         <div class="tt-dataset tt-dataset-0">
           <div class="EmptyMessage" style="color: black">
             Opps!! There are no result found.

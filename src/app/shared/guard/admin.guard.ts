@@ -19,12 +19,12 @@ export class AdminGuard  {
     // Guard for user is login or not
     let user = JSON.parse(localStorage.getItem('user') || '{}');
     if (!user || user === null) {
-      this.router.navigate(['/auth/login']);
+      this.router.navigate(['/landing']);
       return true;
     }
     else if (user) {
       if (!Object.keys(user).length) {
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/login']);
         return true;
       }
     }

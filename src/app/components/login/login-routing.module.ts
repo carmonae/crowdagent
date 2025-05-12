@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterSimpleComponent } from './register/register-simple.component'
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RegisterSimpleComponent } from './register/register-simple.component';
 
 const routes: Routes = [
   {
@@ -12,7 +12,8 @@ const routes: Routes = [
         component: RegisterSimpleComponent,
         data: {
           title: 'Create Account',
-          breadcrumb: 'Register'
+          breadcrumb: 'Register',
+          role: 'anyone'
         }
       },
       {
@@ -20,7 +21,8 @@ const routes: Routes = [
         component: ForgotPasswordComponent,
         data: {
           title: 'Reset Password',
-          breadcrumb: 'ForgotPassword'
+          breadcrumb: 'ForgotPassword',
+          role: 'anyone'
         }
       },
     ]

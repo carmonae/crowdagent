@@ -1,17 +1,22 @@
-import { Component, Input, Output, OnInit, SimpleChanges, OnChanges } from '@angular/core';
-import { PiqueI, Pique } from 'src/app/models/pique-model';
-import { PiquesService } from 'src/app/shared/services/piques.service';
-import { TagProjectComponent } from '../modal/tag-project/tag-project.component';
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TagI } from '../../../../models/tag-interface'
-import { getDatabase, ref, set } from 'firebase/database'
+import { getDatabase, ref, set } from 'firebase/database';
+import { Pique, PiqueI } from 'src/app/models/pique-model';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { PiquesService } from 'src/app/shared/services/piques.service';
+import { DetailsComponent } from '../details/details.component';
+import { TagProjectComponent } from '../modal/tag-project/tag-project.component';
 
 @Component({
-  selector: 'app-all-contact',
-  templateUrl: './all-contact.component.html',
-  styleUrls: ['./all-contact.component.scss']
+    selector: 'app-all-contact',
+    templateUrl: './all-contact.component.html',
+    styleUrls: ['./all-contact.component.scss'],
+    standalone: true,
+    imports: [
+        CommonModule,
+        DetailsComponent
+    ]
 })
 export class AllContactComponent implements OnInit, OnChanges {
 

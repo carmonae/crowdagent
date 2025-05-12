@@ -1,11 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { NgxDropzoneChangeEvent, NgxDropzoneModule } from 'ngx-dropzone';
 import { FileUploadService } from '../../services/file-upload.service';
-import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 
 @Component({
     selector: 'file-upload',
     templateUrl: './file-upload.component.html',
-    styleUrls: ['./file-upload.component.scss']
+    styleUrls: ['./file-upload.component.scss'],
+    standalone: true,
+    imports: [NgxDropzoneModule],
 })
 export class FileUploadComponent {
 

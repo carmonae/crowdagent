@@ -83,21 +83,26 @@ export class AuthService {
     return this.keycloakService.loadUserProfile();
   }
 
-  public login(): void {
-    this.keycloakService.login()
-    console.log('login')
+  public async login(): Promise<void> {
+    return this.keycloakService.login().then( (value) => {
+      console.log('login:', value);
+    }).catch((error) => {
+      console.error('login error:', error);
+    })
   }
 
-  public logout(): void {
-    this.keycloakService.logout(window.location.origin);
+  public logout(redirecUrl: string): void {
+    this.keycloakService.logout(window.location.origin + redirecUrl);
   }
 
   public register(email: string, password: string): void {
     console.log('register user with email', email, 'and password', password)
   }
+
   public updateProfile(fullName: string): void {
     console.log('update user profile with full name', fullName)
   }
+
   public getCurrentUser(): KeycloakTokenParsed | undefined {
     const user: KeycloakTokenParsed | undefined = this.getLoggedUser()
     if (user == undefined) {
@@ -176,3 +181,7 @@ export class AuthService {
     return this.keycloakService.getUserRoles();
   }
 }
+function value(value: void): void | PromiseLike<void> {
+  throw new Error('Function not implemented.');
+}
+

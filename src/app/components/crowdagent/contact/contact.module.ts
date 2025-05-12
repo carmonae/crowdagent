@@ -17,26 +17,24 @@ import { PdfModalComponent } from './modal/pdf-modal/pdf-modal.component';
 
 
 @NgModule({
-  declarations: [
-    ContactComponent,
-    SidemenuComponent,
-    AllContactComponent,
-    DetailsComponent,
-    AddCategoryComponent,
-    PrintComponent,
-    TagProjectComponent,
-    PdfModalComponent
-  ],
-  imports: [
-    CommonModule,
-    ContactRoutingModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxPrintModule
-  ],
-  providers: [
-    NgbActiveModal
-  ]
+    imports: [
+        CommonModule,
+        ContactRoutingModule,
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgxPrintModule,
+        ContactComponent,
+        SidemenuComponent,
+        AllContactComponent,
+        DetailsComponent,
+        AddCategoryComponent,
+        PrintComponent,
+        TagProjectComponent,
+        PdfModalComponent
+    ],
+    providers: [
+        NgbActiveModal
+    ]
 })
 export class ContactModule { }

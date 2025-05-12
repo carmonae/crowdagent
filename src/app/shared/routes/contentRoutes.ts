@@ -1,23 +1,6 @@
 import { Routes } from "@angular/router";
-import { LandingModule } from "../../landing/landing.module";
 
-export const content: Routes = [
-    {
-        path: 'landing',
-        data: {
-            title: "Landing",
-            breadcrumb: "Landing"
-        },
-        loadChildren: () => import('@app/landing/landing.module').then(m => m.LandingModule),
-    },
-    {
-        path: 'login',
-        data: {
-            title: "Login",
-            breadcrumb: "Login"
-        },
-        loadChildren: () => import('@app/components/login/login.module').then(m => m.LoginComponentModule),
-    },
+export const contentRoutes: Routes = [
     {
         path: 'users',
         data: {

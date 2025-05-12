@@ -1,10 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 
 @Component({
   selector: 'app-quick-option',
   templateUrl: './quick-option.component.html',
-  styleUrls: ['./quick-option.component.scss']
+  styleUrls: ['./quick-option.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule
+  ],
 })
 export class QuickOptionComponent {
 

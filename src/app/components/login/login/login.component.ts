@@ -1,13 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
-import { AuthService } from '@app/auth/service/auth.keycloak.service'
+import { AuthService } from '@app/auth/service/auth.keycloak.service';
+
+import { FeatherIconsComponent } from "../../../shared/component/feather-icons/feather-icons.component";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: true,
+    imports: [
+      RouterLink,
+      CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      FeatherIconsComponent
+  ]
 })
 export class LoginComponent {
 
@@ -29,7 +40,7 @@ export class LoginComponent {
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(7)]],
+      password: ['', [Validators.required]],
     });
 
   }
@@ -46,9 +57,6 @@ export class LoginComponent {
     try {
       await this.authService.login()
 
-      if (this.rememberUser) {
-        localStorage.setItem("user", JSON.stringify({ 'email': this.email, 'password': this.password }));
-      }
       this.router.navigate(["/dashboard/default"]);
     }
     catch (error: any) {

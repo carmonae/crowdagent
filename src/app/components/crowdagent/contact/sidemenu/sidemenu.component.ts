@@ -1,18 +1,21 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddCategoryComponent } from '../modal/add-category/add-category.component';
-import { getDatabase, ref, set } from 'firebase/database'
+import { getDatabase, ref, set } from 'firebase/database';
 import { AuthService } from 'src/app/services/auth.service';
-import { TagI } from '../../../../models/tag-interface'
 import { UserTagsService } from 'src/app/shared/services/user-tags-service.service';
+import { TagI } from '../../../../models/tag-interface';
+import { AddCategoryComponent } from '../modal/add-category/add-category.component';
 
 
 //TODO: delete an existing view
 
 @Component({
-  selector: 'app-sidemenu',
-  templateUrl: './sidemenu.component.html',
-  styleUrls: ['./sidemenu.component.scss']
+    selector: 'app-sidemenu',
+    templateUrl: './sidemenu.component.html',
+    styleUrls: ['./sidemenu.component.scss'],
+    standalone: true,
+    imports: [CommonModule],
 })
 export class SidemenuComponent implements OnInit {
 

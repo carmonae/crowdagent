@@ -12,19 +12,16 @@ import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [
-    ListviewComponent,
-    TitleFilterComponent,
-
-  ],
-  imports: [
-    CommonModule,
-    NgbAccordionModule,
-    NgbModule,
-    SharedModule,
-    CrowdagentRoutingModule,
-    ContactModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        NgbAccordionModule,
+        NgbModule,
+        SharedModule,
+        CrowdagentRoutingModule,
+        ContactModule,
+        FormsModule,
+        ListviewComponent,
+        TitleFilterComponent
+    ]
 })
 export class CrowdagentModule { }

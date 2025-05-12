@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NavService } from 'src/app/shared/services/nav.service';
@@ -11,7 +12,9 @@ interface selectedlanguage{
 @Component({
   selector: 'app-language',
   templateUrl: './language.component.html',
-  styleUrls: ['./language.component.scss']
+  styleUrls: ['./language.component.scss'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class LanguageComponent {
 

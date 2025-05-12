@@ -1,12 +1,19 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TagI } from 'src/app/models/tag-interface';
+import { AuthService } from 'src/app/services/auth.service';
+import { AllContactComponent } from './all-contact/all-contact.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
-
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+    selector: 'app-contact',
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.scss'],
+    standalone: true,
+    imports: [
+        CommonModule,
+        SidemenuComponent,
+        AllContactComponent
+    ]
 })
 export class ContactComponent implements OnInit {
 

@@ -10,20 +10,18 @@ import { EditProfileComponent } from './user-edit/edit-profile/edit-profile.comp
 import { ProjectsComponent } from './user-edit/projects/projects.component';
 
 @NgModule({
-  declarations: [
-    UserEditComponent,
-    MyProfileComponent,
-    EditProfileComponent,
-    ProjectsComponent
-  ],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    UserRoutingModule
-  ],
-  exports: [
-    ProjectsComponent
-  ]
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        UserRoutingModule,
+        UserEditComponent,
+        MyProfileComponent,
+        EditProfileComponent,
+        ProjectsComponent
+    ],
+    exports: [
+        ProjectsComponent
+    ]
 })
 export class UserModule { }

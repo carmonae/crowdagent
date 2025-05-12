@@ -1,9 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { max } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
-  name: 'truncate'
+  name: 'truncate',
+  standalone: true
+  
 })
 export class TruncatePipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) { }

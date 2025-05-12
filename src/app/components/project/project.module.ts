@@ -11,17 +11,15 @@ import { UploadFileComponent } from './create-new-project/upload-file/upload-fil
 
 
 @NgModule({
-  declarations: [
-    ProjectListComponent,
-    CreateNewProjectComponent,
-    UploadFileComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ProjectRoutingModule,
-    NgxDropzoneModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ProjectRoutingModule,
+        NgxDropzoneModule,
+        SharedModule,
+        ProjectListComponent,
+        CreateNewProjectComponent,
+        UploadFileComponent
+    ]
 })
 export class ProjectModule { }

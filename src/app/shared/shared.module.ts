@@ -44,13 +44,12 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-
 @NgModule({
   declarations: [
-
   ],
   imports: [
     CommonModule,
+    HeaderComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -84,22 +83,41 @@ export function HttpLoaderFactory(http: HttpClient) {
     ClickOutsideDirective,
     FileUploadComponent,
     DropzoneDirective,
-    TruncatePipe,
-    AgePipe
-
-  ],
+    AgePipe,
+    TruncatePipe
+  ], 
   exports: [
+    HeaderComponent,
+    ContentComponent,
     FeatherIconsComponent,
+    LogoComponent,
+    SearchComponent,
+    NotificationComponent,
+    ThemeModeComponent,
+    BookmarkComponent,
+    MessageComponent,
+    CartComponent,
+    LanguageComponent,
+    ProfileComponent,
+    NavbarComponent,
     SvgIconComponent,
+    FooterComponent,
     LoaderComponent,
-    TranslateModule,
+    BreadcrumbComponent,
+    FullComponent,
+    VerticalSidemenuComponent,
+    CustomizerComponent,
+    QuickOptionComponent,
+    ColorPickerComponent,
     TapToTopComponent,
-    TruncatePipe,
-    AgePipe
+    ClickOutsideDirective,
+    FileUploadComponent,
+    DropzoneDirective,
+    AgePipe,
+    TruncatePipe
   ],
   providers: [
-    TruncatePipe,
-    AgePipe
+
   ]
 })
 

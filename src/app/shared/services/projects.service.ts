@@ -1,10 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
-import { subscribe } from 'diagnostics_channel';
-import { getDatabase, ref, child, set, get, push, update } from 'firebase/database'
+import { child, get, getDatabase, ref } from 'firebase/database';
 import { Observable } from 'rxjs';
 
+import { UserprojectI } from 'src/app/models/user-project';
 import { AuthService } from 'src/app/services/auth.service';
-import { Userproject, UserprojectI } from 'src/app/models/user-project'
 
 @Injectable({
   providedIn: 'root'

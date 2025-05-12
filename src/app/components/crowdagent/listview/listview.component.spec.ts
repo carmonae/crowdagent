@@ -8,8 +8,8 @@ describe('ListviewComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ListviewComponent]
-    });
+    imports: [ListviewComponent]
+});
     fixture = TestBed.createComponent(ListviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

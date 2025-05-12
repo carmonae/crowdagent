@@ -1,11 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { LayoutService } from '../../services/layout.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { LayoutService } from '../../services/layout.service';
+import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { QuickOptionComponent } from './quick-option/quick-option.component';
 @Component({
   selector: 'app-customizer',
   templateUrl: './customizer.component.html',
   styleUrls: ['./customizer.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ColorPickerComponent,
+    QuickOptionComponent,
+  ],
 })
 export class CustomizerComponent {
   constructor(

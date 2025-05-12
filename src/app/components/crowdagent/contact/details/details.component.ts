@@ -1,17 +1,21 @@
-import { Component, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-//import * as Data from '../../../../shared/data/data/contacts/all-contact';
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PrintComponent } from './print/print.component';
 import { PiqueI } from 'src/app/models/pique-model';
-import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { UserprojectDefault, UserprojectI } from 'src/app/models/user-project';
+import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { PdfModalComponent } from '../modal/pdf-modal/pdf-modal.component';
-const Swal = require('sweetalert2')
+import { PrintComponent } from './print/print.component';
+
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+    selector: 'app-details',
+    templateUrl: './details.component.html',
+    styleUrls: ['./details.component.scss'],
+    standalone: true,
+    imports: [
+        CommonModule,
+    ]
 })
 export class DetailsComponent implements OnInit {
 

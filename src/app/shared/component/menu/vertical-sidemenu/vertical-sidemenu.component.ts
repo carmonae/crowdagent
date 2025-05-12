@@ -1,11 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { Menu, VerticalNavService } from 'src/app/shared/services/vertical-nav.service';
-
+import { SvgIconComponent } from '../../svg-icon/svg-icon.component';
 @Component({
   selector: 'app-vertical-sidemenu',
   templateUrl: './vertical-sidemenu.component.html',
   styleUrls: ['./vertical-sidemenu.component.scss'],
+  standalone: true,
+  imports: [CommonModule, TranslateModule, RouterLink, SvgIconComponent],
 })
 export class VerticalSidemenuComponent {
   public isShow: boolean = false;

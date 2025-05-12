@@ -1,12 +1,20 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TitleFilterI, TitleFilter } from 'src/app/models/titleFilter-model';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { TitleFilter, TitleFilterI } from 'src/app/models/titleFilter-model';
 import * as Data from '../../../shared/data/data/job-search/job-search';
 
 @Component({
-  selector: 'app-title-filter',
-  templateUrl: './title-filter.component.html',
-  styleUrls: ['./title-filter.component.scss']
+    selector: 'app-title-filter',
+    templateUrl: './title-filter.component.html',
+    styleUrls: ['./title-filter.component.scss'],
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        NgbCollapseModule
+    ]
 })
 export class TitleFilterComponent {
 

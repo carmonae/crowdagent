@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms'
+import { FormBuilder, NgForm, FormsModule } from '@angular/forms'
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -8,12 +8,15 @@ import { AuthService } from '../../../../services/auth.service'
 import { Userprofile } from '../../../../shared/data/data/users/user-profile'
 import { getDatabase, ref, child, set, get, push, update } from 'firebase/database'
 import { FileUploadComponent } from 'src/app/shared/component/file-upload/file-upload.component';
+import { NgIf, NgFor } from '@angular/common';
 
 
 @Component({
-  selector: 'app-my-profile',
-  templateUrl: './my-profile.component.html',
-  styleUrls: ['./my-profile.component.scss']
+    selector: 'app-my-profile',
+    templateUrl: './my-profile.component.html',
+    styleUrls: ['./my-profile.component.scss'],
+    standalone: true,
+    imports: [NgIf, FormsModule, NgFor]
 })
 export class MyProfileComponent implements OnInit {
 

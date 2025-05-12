@@ -1,10 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-svg-icon',
   templateUrl: './svg-icon.component.html',
-  styleUrls: ['./svg-icon.component.scss']
+  styleUrls: ['./svg-icon.component.scss'],
+  standalone: true,
+  imports: [CommonModule],
 })
 export class SvgIconComponent {
 

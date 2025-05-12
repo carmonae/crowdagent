@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AgentsComponent } from './agents/agents.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { ReadersComponent } from './readers/readers.component';
-import { AgentsComponent } from './agents/agents.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     children: [
       {
         path: 'default',

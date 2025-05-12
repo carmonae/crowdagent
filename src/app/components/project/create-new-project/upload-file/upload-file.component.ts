@@ -1,10 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
+import { NgxDropzoneChangeEvent, NgxDropzoneModule } from 'ngx-dropzone';
 
 @Component({
-  selector: 'app-upload-file',
-  templateUrl: './upload-file.component.html',
-  styleUrls: ['./upload-file.component.scss']
+    selector: 'app-upload-file',
+    templateUrl: './upload-file.component.html',
+    styleUrls: ['./upload-file.component.scss'],
+    standalone: true,
+    imports: [CommonModule, NgxDropzoneModule],
 })
 export class UploadFileComponent implements OnInit {
 

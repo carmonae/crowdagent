@@ -1,14 +1,42 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+
 import { HideNavScrollService } from '../../services/hide-nav-scroll.service';
 import { Menu, NavService } from '../../services/nav.service';
 import { SearchService } from '../../services/search.service';
 import { VerticalNavService } from '../../services/vertical-nav.service';
-
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
+import { BookmarkComponent } from './bookmark/bookmark.component';
+import { CartComponent } from './cart/cart.component';
+import { LanguageComponent } from './language/language.component';
+import { MessageComponent } from './message/message.component';
+import { NotificationComponent } from './notification/notification.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SearchComponent } from './search/search.component';
+import { ThemeModeComponent } from './theme-mode/theme-mode.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule
+    , FormsModule
+    , RouterLink
+    , SvgIconComponent
+    , ProfileComponent
+    , LanguageComponent
+    , CartComponent
+    , MessageComponent
+    , BookmarkComponent
+    , ThemeModeComponent
+    , NotificationComponent
+    , SearchComponent
+  ],
 })
+
 export class HeaderComponent {
 
   public menus = this.navService.verticalMenuItem;

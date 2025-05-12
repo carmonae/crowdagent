@@ -1,15 +1,22 @@
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { Component, QueryList, ViewChildren } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { sellingProduct } from '../../../../shared/data/data/default-dashboard/best-selling-product';
 import { SortEvent, SortableDirective } from 'src/app/shared/directive/sortable.directive';
 import { TablesService } from 'src/app/shared/services/tables/tables.service';
-import { DecimalPipe } from '@angular/common';
-
+import { sellingProduct } from '../../../../shared/data/data/default-dashboard/best-selling-product';
+import { CommonDataTableComponent } from '../common-data-table/common-data-table.component';
 @Component({
-  selector: 'app-best-selling-product',
-  templateUrl: './best-selling-product.component.html',
-  styleUrls: ['./best-selling-product.component.scss'],
-  providers: [TablesService, DecimalPipe]
+    selector: 'app-best-selling-product',
+    templateUrl: './best-selling-product.component.html',
+    styleUrls: ['./best-selling-product.component.scss'],
+    providers: [TablesService, DecimalPipe],
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        CommonDataTableComponent,
+    ]
 })
 export class BestSellingProductComponent {
 

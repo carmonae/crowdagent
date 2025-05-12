@@ -1,10 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 
 @Component({
   selector: 'app-theme-mode',
   templateUrl: './theme-mode.component.html',
-  styleUrls: ['./theme-mode.component.scss']
+  styleUrls: ['./theme-mode.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule
+  ],
 })
 export class ThemeModeComponent {
 

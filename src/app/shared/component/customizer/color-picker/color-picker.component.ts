@@ -1,10 +1,17 @@
+
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 
 @Component({
   selector: 'app-color-picker',
   templateUrl: './color-picker.component.html',
   styleUrls: ['./color-picker.component.scss'],
+  standalone: true,
+  imports: [CommonModule
+    , FormsModule
+  ],
 })
 export class ColorPickerComponent {
   public primary: string = localStorage.getItem('--theme-default') || '#33BFBF';

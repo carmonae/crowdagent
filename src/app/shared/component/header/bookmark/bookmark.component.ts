@@ -1,12 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-//import { publicDecrypt } from 'crypto';
-import { Menu, NavService } from 'src/app/shared/services/nav.service';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+
+import { Menu } from 'src/app/shared/services/nav.service';
 import { VerticalNavService } from 'src/app/shared/services/vertical-nav.service';
+import { FeatherIconsComponent } from '../../feather-icons/feather-icons.component';
+import { SvgIconComponent } from '../../svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-bookmark',
   templateUrl: './bookmark.component.html',
-  styleUrls: ['./bookmark.component.scss']
+  styleUrls: ['./bookmark.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule
+    , FormsModule
+    , RouterLink
+    , SvgIconComponent
+    , FeatherIconsComponent
+  ],
 })
 export class BookmarkComponent {
 

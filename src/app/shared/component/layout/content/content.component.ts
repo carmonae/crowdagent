@@ -1,15 +1,33 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import * as feather from 'feather-icons';
-import { HideNavScrollService } from 'src/app/shared/services/hide-nav-scroll.service';
-import { LayoutService } from 'src/app/shared/services/layout.service';
-import { VerticalNavService } from 'src/app/shared/services/vertical-nav.service';
+import { Router, RouterOutlet } from '@angular/router';
 
+import * as feather from 'feather-icons';
+import { HideNavScrollService } from '../../../services/hide-nav-scroll.service';
+import { LayoutService } from '../../../services/layout.service';
+import { VerticalNavService } from '../../../services/vertical-nav.service';
+import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
+import { CustomizerComponent } from '../../customizer/customizer.component';
+import { FooterComponent } from '../../footer/footer.component';
+import { HeaderComponent } from '../../header/header.component';
+import { NavbarComponent } from '../../menu/navbar/navbar.component';
+import { VerticalSidemenuComponent } from '../../menu/vertical-sidemenu/vertical-sidemenu.component';
 
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss']
+  styleUrls: ['./content.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule
+    , HeaderComponent
+    , CustomizerComponent
+    , FooterComponent
+    , RouterOutlet
+    , BreadcrumbComponent
+    , VerticalSidemenuComponent
+    , NavbarComponent
+  ],
 })
 export class ContentComponent implements OnInit {
 

@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'age'
+  name: 'age',
+  standalone: true
 })
 export class AgePipe implements PipeTransform {
   private millisecondsInADay: number = 24 * 60 * 60 * 1000

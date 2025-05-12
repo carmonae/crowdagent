@@ -1,12 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '@app/auth/service/auth.keycloak.service';
 
-import { AuthService } from '@app/auth/service/auth.keycloak.service'
-
+import { FeatherIconsComponent } from '@app/shared/component/feather-icons/feather-icons.component';
 @Component({
-  selector: 'app-common-register-form',
-  templateUrl: './common-register-form.component.html',
-  styleUrls: ['./common-register-form.component.scss']
+    selector: 'app-common-register-form',
+    templateUrl: './common-register-form.component.html',
+    styleUrls: ['./common-register-form.component.scss'],
+    standalone: true,
+    imports: [CommonModule, RouterLink, ReactiveFormsModule, FeatherIconsComponent]
 })
 export class CommonRegisterFormComponent {
 
