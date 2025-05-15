@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { AuthorsComponent } from "@app/components/dashboard/authors/authors.component";
 
 export const contentRoutes: Routes = [
     {
@@ -13,8 +14,9 @@ export const contentRoutes: Routes = [
         path: 'dashboard',
         data: {
             title: 'Dashboard',
-            breadcrumb: 'Dashboard'
+            breadcrumb: 'Authors'
         },
+        component: AuthorsComponent,
         loadChildren: () => import('@app/components/dashboard/dashboard.module').then(m => m.DashboardModule)
     },
     {

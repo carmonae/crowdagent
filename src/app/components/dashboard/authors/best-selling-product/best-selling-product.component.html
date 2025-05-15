@@ -7,8 +7,7 @@
           <button
             class="btn dropdown-toggle"
             id="dropdownMenuButton"
-            (click)="openMenu()"
-          >
+            (click)="openMenu()">
             Yearly
           </button>
           <div class="dropdown-menu dropdown-menu-end" [class.show]="isShow">
@@ -25,27 +24,23 @@
       <!-- <div class="dataTables_wrapper no-footer"> -->
       <form>
         <div class="mb-3 row justify-content-end">
-          <span class="col col-form-label" *ngIf="service.loading$ | async"
-            >Loading...</span
-          >
+          <span class="col col-form-label"
+            *ngIf="service.loading$ | async">Loading...</span>
           <label
             for="table-complete-search"
-            class="col-xs-3 col-sm-auto col-form-label"
-            >Search:</label
-          >
+            class="col-xs-3 col-sm-auto col-form-label">Search:</label>
           <div class="col-xs-3 col-sm-auto">
             <input
               id="table-complete-search"
               type="text"
               class="form-control"
               name="searchTerm"
-              [(ngModel)]="service.searchTerm"
-            />
+              [(ngModel)]="service.searchTerm" />
           </div>
         </div>
         <app-common-data-table></app-common-data-table>
       </form>
-      <!-- </div> -->
+
     </div>
   </div>
 </div>

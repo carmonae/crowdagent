@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AuthService } from '@app/auth/service/auth.keycloak.service';
+import { Pique, PiqueI } from '@app/models/pique-model';
+import { PiquesService } from '@app/shared/services/piques.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { getDatabase, ref, set } from 'firebase/database';
-import { Pique, PiqueI } from 'src/app/models/pique-model';
-import { AuthService } from 'src/app/services/auth.service';
-import { PiquesService } from 'src/app/shared/services/piques.service';
 import { DetailsComponent } from '../details/details.component';
 import { TagProjectComponent } from '../modal/tag-project/tag-project.component';
 

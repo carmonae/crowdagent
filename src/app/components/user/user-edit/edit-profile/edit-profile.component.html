@@ -1,104 +1,181 @@
-<form class="card">
+<form [formGroup]="detailsForm" class="card"
+  (ngSubmit)="onSubmit(detailsForm.value)">
   <div class="card-header card-no-border pb-0">
-    <h3 class="card-title mb-0">Edit Profile</h3>
+    <h3 class="card-title mb-0">User Details</h3>
     <div class="card-options">
       <a
         class="card-options-collapse"
         href="javascript:void(0)"
-        data-bs-toggle="card-collapse"
-      >
+        data-bs-toggle="card-collapse">
         <i class="fe fe-chevron-up"></i>
       </a>
       <a
         class="card-options-remove"
         href="javascript:void(0)"
-        data-bs-toggle="card-remove"
-      >
+        data-bs-toggle="card-remove">
         <i class="fe fe-x"></i>
       </a>
     </div>
   </div>
+
   <div class="card-body">
     <div class="row">
-      <div class="col-md-5">
-        <div class="mb-3">
-          <label class="form-label">Company</label>
-          <input class="form-control" type="text" placeholder="Company" />
+      <div class="col-md-3">
+        <div class="row mb-2">
+
+          <div class="profile-title">
+            <div class="d-flex">
+              <div class="row mb-0">
+                <img
+                  class="img-60 rounded-circle"
+                  alt="my avatar"
+                  src="assets/images/user/me.jpg" />
+                <button
+                  class="btn btn-xs btn-primary"
+                  (click)="onChangePicture()">
+                  Change
+                </button>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="mb-3">
-          <label class="form-label">Pen Name</label>
-          <input class="form-control" type="text" placeholder="Pen Name" />
-        </div>
-      </div>
+
+      <!-- Pen Name-->
       <div class="col-sm-6 col-md-4">
         <div class="mb-3">
-          <label class="form-label">Email address</label>
-          <input class="form-control" type="email" placeholder="Email" />
+          <label for="penName" class="form-label">Pen Name</label>
+          <input class="form-control" type="text" placeholder="Pen Name"
+            id="penName" name="penName" formControlName="penName" />
         </div>
       </div>
-      <div class="col-sm-6 col-md-6">
-        <div class="mb-3">
-          <label class="form-label">First Name</label>
-          <input class="form-control" type="text" placeholder="Company" />
+
+      <!-- User Role-->
+      <div class="col-md-5">
+        <div class="dropdown-basic">
+          <div class="common-flex">
+            <div class="btn-group split-dropdown">
+              <button class="btn btn-outline-light" type="button">
+                Crowd Agent Role : {{ mydetails.role }}
+              </button>
+              <div class="dropdown separated-btn" ngbDropdown role="group">
+                <button class="btn btn-light" type="button" ngbDropdownToggle>
+                  <i class="icofont icofont-arrow-down"></i>
+                </button>
+                <div class="dropdown-content" ngbDropdownMenu>
+                  <a
+                    *ngFor="let role of roles"
+                    ngbDropdownItem
+                    (click)="onSelectType($event)">{{ role }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-sm-6 col-md-6">
-        <div class="mb-3">
-          <label class="form-label">Last Name</label>
-          <input class="form-control" type="text" placeholder="Last Name" />
-        </div>
-      </div>
+
+      <!-- Slogan -->
       <div class="col-md-12">
         <div class="mb-3">
-          <label class="form-label">Address</label>
-          <input class="form-control" type="text" placeholder="Home Address" />
+          <label for="slogan" class="form-label">Slogan</label>
+          <input class="form-control" type="text"
+            placeholder="To write is to think..."
+            id="slogan" name="slogan" formControlName="slogan" />
         </div>
       </div>
+
+      <!-- Address -->
+      <div class="col-md-12">
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <input class="form-control" type="text" placeholder="Home Address"
+            id="address" name="address" formControlName="address" />
+        </div>
+      </div>
+
+      <!-- City -->
       <div class="col-sm-6 col-md-4">
         <div class="mb-3">
-          <label class="form-label">City</label>
-          <input class="form-control" type="text" placeholder="City" />
+          <label for="city" class="form-label">City</label>
+          <input class="form-control" type="text" placeholder="City"
+            id="city" name="city" formControlName="city" />
         </div>
       </div>
-      <div class="col-sm-6 col-md-3">
+
+      <!-- State -->
+      <div class="col-sm-6 col-md-2">
         <div class="mb-3">
-          <label class="form-label">Postal Code</label>
-          <input class="form-control" type="number" placeholder="ZIP Code" />
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="mb-3">
-          <label class="form-label">Country</label>
-          <select class="form-control btn-square">
-            <option value="0">--Select--</option>
-            <option value="1">Germany</option>
-            <option value="2">Canada</option>
-            <option value="3">United States of America</option>
-            <option value="4">Australia</option>
+          <label for="state" class="form-label">State</label>
+          <select fromControlName="state" class="form-control btn-square">
+            <option *ngFor="let state of states"
+              [ngValue]="state">{{ state }}</option>
           </select>
         </div>
       </div>
-      <div class="col-sm-6 col-md-3">
+
+      <!-- Zip Code -->
+      <div class="col-sm-6 col-md-2">
         <div class="mb-3">
-          <label class="form-label">Phone Number</label>
-          <input class="form-control" type="number" placeholder="Phone #" />
+          <label for="zip" class="form-label">Postal Code</label>
+          <input class="form-control" type="number" placeholder="ZIP Code"
+            id="zip" name="zip" formControlName="zip" />
         </div>
       </div>
+
+      <!-- Country -->
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label class="form-label">Country</label>
+          <select fromControlName="country" class="form-control btn-square">
+            <option *ngFor="let country of countries"
+              [value]="country">{{ country }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- About Me -->
       <div class="col-md-12">
         <div>
-          <label class="form-label">About Me</label>
+          <label for="about" class="form-label">About Me</label>
           <textarea
             class="form-control"
             rows="3"
-            placeholder="Enter About your description"
-          ></textarea>
+            placeholder="Describe something about yourself."
+            id="about" name="about" formControlName="about"></textarea>
         </div>
       </div>
+
+      <!-- Website-->
+      <div class="mb-3">
+        <label for="website" class="form-label">Website</label>
+        <input class="form-control" placeholder="me@domain.com"
+          id="website" name="website" formControlName="website" />
+      </div>
+
+      <!-- Social Links -->
+      <div class="mb-3">
+        <label class="form-label">Social Links</label>
+        <input class="form-control" type="text" placeholder="Facebook"
+          id="facebook" name="facebook" formControlName="facebook" />
+        <input class="form-control" type="text" placeholder="Twitter"
+          id="twitter" name="twitter" formControlName="twitter" />
+        <input class="form-control" type="text" placeholder="LinkedIn"
+          id="linkedin" name="linkedin" formControlName="linkedin" />
+        <input class="form-control" type="text" placeholder="Instagram"
+          id="instagram" name="instagram" formControlName="instagram" />
+        <input class="form-control" type="text" placeholder="tiktok"
+          id="tiktok" name="tiktok" formControlName="tiktok" />
+        <input class="form-control" type="text" placeholder="YouTube"
+          id="youtube" name="youtube" formControlName="youtube" />
+        <input class="form-control" type="text" placeholder="GitHub"
+          id="github" name="github" formControlName="github" />
+      </div>
+
     </div>
   </div>
   <div class="card-footer text-end">
-    <button class="btn btn-primary" type="submit">Update Profile</button>
+    <button class="btn btn-primary" type="submit">Update Details</button>
   </div>
 </form>

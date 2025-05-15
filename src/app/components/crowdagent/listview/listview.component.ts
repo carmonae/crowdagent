@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@app/auth/service/auth.keycloak.service';
+import { Pique } from '@app/models/pique-model';
+import { TitleFilterI } from '@app/models/titleFilter-model';
+import { UsertitlesI } from '@app/models/user-titles';
+import { jobCardsData } from '@app/shared/data/data/job-search/job-search';
 import { AgePipe } from '@app/shared/pipes/age.pipe';
+import { PiquesService } from '@app/shared/services/piques.service';
+import { ScoresService } from '@app/shared/services/scores-service.service';
+import { TitlesService } from '@app/shared/services/titles.service';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { child, get, getDatabase, ref, set } from 'firebase/database';
-import { Pique } from 'src/app/models/pique-model';
-import { TitleFilterI } from 'src/app/models/titleFilter-model';
-import { UsertitlesI } from 'src/app/models/user-titles';
-import { AuthService } from 'src/app/services/auth.service';
-import { jobCardsData } from 'src/app/shared/data/data/job-search/job-search';
-import { PiquesService } from 'src/app/shared/services/piques.service';
-import { ScoresService } from 'src/app/shared/services/scores-service.service';
-import { TitlesService } from 'src/app/shared/services/titles.service';
 import { TitleFilterComponent } from '../title-filter/title-filter.component';
 @Component({
     selector: 'app-title-listview',

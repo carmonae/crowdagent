@@ -10,60 +10,47 @@
                   class="nav-link"
                   [ngClass]="{ 'active show': openTab == 'All' }"
                   (click)="tabbed('All')"
-                  style="cursor: pointer"
-                  ><app-feather-icons [icon]="'target'"></app-feather-icons
-                  >All</a
-                >
+                  style="cursor: pointer"><app-feather-icons
+                    [icon]="'target'"></app-feather-icons>All</a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  [ngClass]="{ 'active show': openTab == 'Created' }"
-                  (click)="tabbed('Created')"
-                  style="cursor: pointer"
-                  ><app-feather-icons [icon]="'target'"></app-feather-icons
-                  >Created</a
-                >
+                  [ngClass]="{ 'active show': openTab == 'Draft' }"
+                  (click)="tabbed('Draft')"
+                  style="cursor: pointer"><app-feather-icons
+                    [icon]="'target'"></app-feather-icons>Draft</a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
                   [ngClass]="{ 'active show': openTab == 'Published' }"
                   (click)="tabbed('Published')"
-                  style="cursor: pointer"
-                  ><app-feather-icons
-                    [icon]="'check-circle'"
-                  ></app-feather-icons
-                  >Published</a
-                >
+                  style="cursor: pointer"><app-feather-icons
+                    [icon]="'check-circle'"></app-feather-icons>Published</a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  [ngClass]="{ 'active show': openTab == 'Done' }"
+                  [ngClass]="{ 'active show': openTab == 'Parked' }"
                   (click)="tabbed('Parked')"
-                  style="cursor: pointer"
-                  ><app-feather-icons [icon]="'info'"></app-feather-icons
-                  >Parked</a
-                >
+                  style="cursor: pointer"><app-feather-icons
+                    [icon]="'info'"></app-feather-icons>Parked</a>
               </li>
               <li class="nav-item">
                 <a
                   class="nav-link"
-                  [ngClass]="{ 'active show': openTab == 'Done' }"
+                  [ngClass]="{ 'active show': openTab == 'Archived' }"
                   (click)="tabbed('Archived')"
-                  style="cursor: pointer"
-                  ><app-feather-icons [icon]="'info'"></app-feather-icons
-                  >Archived</a
-                >
+                  style="cursor: pointer"><app-feather-icons
+                    [icon]="'info'"></app-feather-icons>Archived</a>
               </li>
             </ul>
           </div>
           <div class="col-md-6">
             <div class="form-group mb-0 me-0"></div>
             <a class="btn btn-primary" routerLink="/projects/create-new">
-              <i data-feather="plus-square"> </i>Create New Project</a
-            >
+              <i data-feather="plus-square"> </i>Create New Project</a>
           </div>
         </div>
       </div>
@@ -80,18 +67,15 @@
                       <span
                         class="badge"
                         [ngClass]="
-                          data.status === 'Created'
+                          data.status === 'Draft'
                             ? ' badge-primary'
                             : 'badge-success'
-                        "
-                        >{{ data.status }}</span
-                      >
+                        ">{{ data.status }}</span>
                       <h3>{{ data.title }}</h3>
                       <div class="d-flex">
                         <img
                           class="img-20 me-1 rounded-circle"
-                          src="assets/images/user/3.jpg"
-                        />
+                          src="assets/images/user/3.jpg" />
                         <div class="flex-grow-1">
                           <p>{{ data.subtitle }}</p>
                         </div>
@@ -109,39 +93,70 @@
                       </div>
                       <br />
                       <div class="row details">
-                        <div class="col-6">
-                          <span>Title Score </span>
+                        <div class="col-8">
+                          <span> </span>
                         </div>
                         <div
-                          class="col-6"
+                          class="col-4"
                           [ngClass]="
-                            data.status === 'Created'
+                            data.status === 'Draft'
                               ? ' font-primary'
                               : 'font-success'
-                          "
-                        >
+                          ">
+                          piQues
+                        </div>
+                        <div class="col-8">
+                          <span>Impressions </span>
+                        </div>
+                        <div
+                          class="col-4"
+                          [ngClass]="
+                            data.status === 'Draft'
+                              ? ' font-primary'
+                              : 'font-success'
+                          ">
+                          {{ data.scoreI }}
+                        </div>
+                        <div class="col-8">
+                          <span>Title </span>
+                        </div>
+                        <div
+                          class="col-4"
+                          [ngClass]="
+                            data.status === 'Draft'
+                              ? ' font-primary'
+                              : 'font-success'
+                          ">
                           {{ data.scoreT }}
                         </div>
-                        <div class="col-6"><span>Abstract Score</span></div>
+                        <div class="col-8"><span>Table Contents </span></div>
                         <div
-                          class="col-6"
+                          class="col-4"
                           [ngClass]="
-                            data.status === 'Created'
+                            data.status === 'Draft'
                               ? ' font-primary'
                               : 'font-success'
-                          "
-                        >
+                          ">
                           {{ data.scoreA }}
                         </div>
-                        <div class="col-6"><span>Manuscript Score</span></div>
+                        <div class="col-8"><span>Abstract </span></div>
                         <div
-                          class="col-6"
+                          class="col-4"
                           [ngClass]="
-                            data.status === 'Created'
+                            data.status === 'Draft'
                               ? ' font-primary'
                               : 'font-success'
-                          "
-                        >
+                          ">
+                          {{ data.scoreA }}
+                        </div>
+                        <div class="col-8"><span>Manuscript </span></div>
+                        <div
+                          class="col-4"
+                          [ngClass]="
+                            data.status === 'Draft'
+                              ? ' font-primary'
+                              : 'font-success'
+                          ">
                           {{ data.scoreM }}
                         </div>
                       </div>
@@ -150,20 +165,17 @@
                           <li class="d-inline-block">
                             <img
                               class="img-30 rounded-circle"
-                              src="assets/images/user/3.jpg"
-                            />
+                              src="assets/images/user/3.jpg" />
                           </li>
                           <li class="d-inline-block">
                             <img
                               class="img-30 rounded-circle"
-                              src="assets/images/user/3.jpg"
-                            />
+                              src="assets/images/user/3.jpg" />
                           </li>
                           <li class="d-inline-block">
                             <img
                               class="img-30 rounded-circle"
-                              src="assets/images/user/3.jpg"
-                            />
+                              src="assets/images/user/3.jpg" />
                           </li>
                           <li class="d-inline-block ms-2">
                             <p class="f-12">+ More</p>
@@ -173,8 +185,9 @@
                       <div>
                         <br />
                         <label>Manuscript :</label>
-                        <a *ngIf="data.url != ''" href="{{ data.url }}">
-                          {{ data.fileName | truncate : 20 }}
+                        <a *ngIf="data.coverurl != ''"
+                          href="{{ data.coverurl }}">
+                          {{ data.coverurl | truncate : 20 }}
                         </a>
                       </div>
                       <div class="project-status mt-4">
@@ -188,7 +201,7 @@
                           <div
                             class="progress-bar-animated bg-primary progress-bar-striped"
                             [ngClass]="
-                              data.status === 'Created'
+                              data.status === 'Draft'
                                 ? ' badge-primary'
                                 : 'badge-success'
                             "
@@ -196,24 +209,21 @@
                             [style.width]="data.scoreM"
                             aria-valuenow="10"
                             aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
+                            aria-valuemax="100"></div>
                         </div>
                       </div>
                       <br />
                       <div class="row">
                         <div class="col-6">
                           <button
-                            *ngIf="data.status === 'Created'"
+                            *ngIf="data.status === 'Draft'"
                             class="btn btn-lg btn-outline-primary"
-                            (click)="editProject(data)"
-                          >
+                            (click)="editProject(data)">
                             Edit
                           </button>
                           <button
-                            *ngIf="data.status !== 'Created'"
-                            class="btn btn-lg btn-secondary"
-                          >
+                            *ngIf="data.status !== 'Draft'"
+                            class="btn btn-lg btn-secondary">
                             Locked
                           </button>
                         </div>
@@ -222,29 +232,24 @@
                             <div class="btn-group split-dropdown">
                               <button
                                 class="btn btn-outline-primary"
-                                type="button"
-                              >
+                                type="button">
                                 {{ data.status }}
                               </button>
                               <div
                                 class="dropdown separated-btn"
                                 ngbDropdown
-                                role="group"
-                              >
+                                role="group">
                                 <button
                                   class="btn btn-primary"
                                   type="button"
-                                  ngbDropdownToggle
-                                >
+                                  ngbDropdownToggle>
                                   <i class="icofont icofont-arrow-down"></i>
                                 </button>
                                 <div class="dropdown-content" ngbDropdownMenu>
                                   <a
                                     *ngFor="let item of lifeCycle[data.status]"
                                     (click)="changeStatus(data, item)"
-                                    ngbDropdownItem
-                                    >{{ item }}</a
-                                  >
+                                    ngbDropdownItem>{{ item }}</a>
                                 </div>
                               </div>
                             </div>

@@ -1,27 +1,42 @@
 <div class="card p-0 profile-greeting">
   <div class="card-body wadewarren">
     <div class="img-overlay">
-      <h3>Good Day,</h3>
-      {{firstName}}
+      <h3>Good {{dayPart}}, {{firstName}}</h3>
+
       <p>
         Here’s what’s happening with your books today. See the statistics at
         once
       </p>
-      <button class="btn">
-        <a [routerLink]="['/users/user-edit']"
-          ><i class="icofont icofont-plus"> </i> Add/Modify Manuscript
-        </a>
-      </button>
     </div>
     <ul class="list-unstyled confetti">
-      <li><img src="assets/images/dashboard-2/ribbon1.png" alt="" /></li>
-      <li><img src="assets/images/dashboard-2/ribbon2.png" alt="" /></li>
-      <li><img src="assets/images/dashboard-2/ribbon1.png" alt="" /></li>
-      <li><img src="assets/images/dashboard-2/ribbon2.png" alt="" /></li>
-      <li><img src="assets/images/dashboard-2/ribbon1.png" alt="" /></li>
-      <li><img src="assets/images/dashboard-2/ribbon2.png" alt="" /></li>
-      <li><img src="assets/images/dashboard-2/ribbon3.png" alt="" /></li>
-      <li><img src="assets/images/dashboard-2/ribbon4.png" alt="" /></li>
+      <li><img src="assets/images/dashboard-2/ribbon1.png" alt /></li>
+      <li><img src="assets/images/dashboard-2/ribbon2.png" alt /></li>
+      <li><img src="assets/images/dashboard-2/ribbon1.png" alt /></li>
+      <li><img src="assets/images/dashboard-2/ribbon2.png" alt /></li>
+      <li><img src="assets/images/dashboard-2/ribbon1.png" alt /></li>
+      <li><img src="assets/images/dashboard-2/ribbon2.png" alt /></li>
+      <li><img src="assets/images/dashboard-2/ribbon3.png" alt /></li>
+      <li><img src="assets/images/dashboard-2/ribbon4.png" alt /></li>
     </ul>
+    <table class="table display" id="total-books">
+      <thead>
+        <tr>
+          <th scope="col" style="cursor: pointer;">Draft</th>
+          <th scope="col" style="cursor: pointer;">In Review</th>
+          <th scope="col" style="cursor: pointer;">Published</th>
+          <th scope="col" style="cursor: pointer;">Archived </th>
+          <th scope="col" style="cursor: pointer;">Deleted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{nInDraft}}</td>
+          <td>{{nInReview}}</td>
+          <td>{{nInPublished}}</td>
+          <td>{{nInArchived}}</td>
+          <td>{{nInDeleted}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

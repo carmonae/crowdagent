@@ -19,12 +19,14 @@ export interface UserprojectI {
     dateEnd: string,
     datePublish: string,
     abstract: string,
-    manuscriptPath: string,
-    fileName: string;
-    fileUid: string | undefined;
-    url: string;
+    coverurl: string;
+    abstracturl: string;
+    tocurl: string;
+    samplechaptersurl: string;
     status: ProjectStatus,
+    scoreI: number,
     scoreT: number,
+    scoreC: number,
     scoreA: number,
     scoreM: number
 }
@@ -43,12 +45,14 @@ export const UserprojectDefault: UserprojectI = {
     dateEnd: '2023-10-30',
     datePublish: '',
     abstract: '',
-    manuscriptPath: '',
-    fileName: '<NONE>',
-    fileUid: undefined,
-    url: '',
-    status: ProjectStatus.CREATED,
+    coverurl: '',
+    abstracturl: '',
+    tocurl: '',
+    samplechaptersurl: '',
+    status: ProjectStatus.DRAFT,
+    scoreI: 0,
     scoreT: 0,
+    scoreC: 0,
     scoreA: 0,
     scoreM: 0
 
@@ -68,12 +72,14 @@ export const UserprojectMockData: UserprojectI[] = [
         dateEnd: '2023-10-30',
         datePublish: '',
         abstract: '',
-        manuscriptPath: '',
-        fileName: 'Identity v2.pdf',
-        fileUid: undefined,
-        url: '',
-        status: ProjectStatus.PUBLISHED,
+        coverurl: '',
+        abstracturl: '',
+        tocurl: '',
+        samplechaptersurl: '',
+            status: ProjectStatus.PUBLISHED,
+        scoreI: 0,
         scoreT: 1231,
+        scoreC: 12,
         scoreA: 1020,
         scoreM: 53120
     },
@@ -91,12 +97,14 @@ export const UserprojectMockData: UserprojectI[] = [
         dateEnd: '2023-10-30',
         datePublish: '',
         abstract: '',
-        manuscriptPath: '',
-        fileName: 'Identity v2.pdf',
-        fileUid: undefined,
-        url: '',
-        status: ProjectStatus.CREATED,
+        coverurl: '',
+        abstracturl: '',
+        tocurl: '',
+        samplechaptersurl: '',
+        status: ProjectStatus.DRAFT,
+        scoreI: 0,
         scoreT: 1231,
+        scoreC: 12,
         scoreA: 1020,
         scoreM: 53120
     },
@@ -114,12 +122,14 @@ export const UserprojectMockData: UserprojectI[] = [
         dateEnd: '2023-10-30',
         datePublish: '',
         abstract: '',
-        manuscriptPath: '',
-        url: '',
-        fileName: 'Identity v2.pdf',
-        fileUid: undefined,
-        status: ProjectStatus.CREATED,
+        coverurl: '',
+        abstracturl: '',
+        tocurl: '',
+        samplechaptersurl: '',
+        status: ProjectStatus.DRAFT,
+        scoreI: 0,
         scoreT: 1231,
+        scoreC: 12,
         scoreA: 1020,
         scoreM: 53120
     },
@@ -137,12 +147,14 @@ export const UserprojectMockData: UserprojectI[] = [
         dateEnd: '2023-10-30',
         datePublish: '',
         abstract: '',
-        manuscriptPath: '',
-        url: '',
-        fileName: 'Identity v2.pdf',
-        fileUid: undefined,
+        coverurl: '',
+        abstracturl: '',
+        tocurl: '',
+        samplechaptersurl: '',
         status: ProjectStatus.PARKED,
+        scoreI: 0,
         scoreT: 1231,
+        scoreC: 12,
         scoreA: 1020,
         scoreM: 53120
     },
@@ -163,12 +175,14 @@ export class Userproject implements UserprojectI {
     public dateEnd: string = '2023-10-30'
     public datePublish: string = ''
     public abstract: string = ''
-    public manuscriptPath: string = ''
-    public fileName = 'Identity v2.pdf'
-    public fileUid: string | undefined = undefined
-    public url = ''
-    public status: ProjectStatus = ProjectStatus.CREATED
+    public coverurl: string = ''
+    public abstracturl: string =''
+    public tocurl: string =''
+    public samplechaptersurl: string = ''
+    public status: ProjectStatus = ProjectStatus.DRAFT
+    public scoreI: number = 0
     public scoreT: number = 0
+    public scoreC: number = 0
     public scoreA: number = 0
     public scoreM: number = 0
 
@@ -186,11 +200,13 @@ export class Userproject implements UserprojectI {
         this.dateEnd = project.dateEnd
         this.datePublish = project.datePublish
         this.abstract = project.abstract
-        this.manuscriptPath = project.manuscriptPath
-        this.fileName = project.fileName
-        this.fileUid = project.fileUid
-        this.url = project.url
+        this.coverurl = project.coverurl
+        this.abstracturl = project.abstracturl
+        this.tocurl = project.tocurl
+        this.samplechaptersurl = project.samplechaptersurl
         this.status = project.status
+        this.scoreI = project.scoreI
+        this.scoreC = project.scoreC
         this.scoreT = project.scoreT
         this.scoreA = project.scoreA
         this.scoreM = project.scoreM

@@ -2,8 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { child, get, getDatabase, ref } from 'firebase/database';
 import { Observable } from 'rxjs';
 
-import { UserprojectI } from 'src/app/models/user-project';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '@app/auth/service/auth.keycloak.service';
+import { UserprojectI } from '@app/models/user-project';
 
 @Injectable({
   providedIn: 'root'

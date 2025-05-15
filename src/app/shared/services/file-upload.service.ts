@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
-import { getApp } from 'firebase/app'
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, StorageReference } from 'firebase/storage';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
 import { Observable } from 'rxjs';
 
-import { finalize } from 'rxjs/operators';
-import { FileUpload } from '../../models/file-upload';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadService {
 
-  private path = '/uploads';
-  private storage = getStorage(getApp());
+  //private storage = getStorage(getApp());
+  private storage = getStorage();
 
   constructor() { }
 

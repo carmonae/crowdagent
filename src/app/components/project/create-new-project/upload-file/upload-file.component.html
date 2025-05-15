@@ -1,11 +1,11 @@
-<label>Upload {{ label }}</label>
+<label> {{ label }}</label>
 <div class="dropzone dz-clickable bg-light-primary">
   <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
     <ngx-dropzone-label>
       <div>
         <div class="dz-message needsclick">
           <i class="icon-cloud-up"></i>
-          <h6>Drop file here or click to upload.</h6>
+          <h3>Drop file here or click to upload.</h3>
           <span class="dz-message needsclick"> </span>
         </div>
       </div>
@@ -13,8 +13,7 @@
     <ngx-dropzone-preview
       *ngFor="let f of files"
       [removable]="true"
-      (removed)="onRemove(f)"
-    >
+      (removed)="onRemove(f)">
       <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
     </ngx-dropzone-preview>
   </ngx-dropzone>

@@ -12,11 +12,25 @@ export interface commonDetails {
     progressColor: string;
     isCollasped: boolean;
 }
+export const titleImpressionsData: commonDetails = {
+    id: 1,
+    class: 'profit-card',
+    title: 'Title Impressions',
+    data: '6542',
+    img: 'assets/images/dashboard-2/total-icon/users.png',
+    icon: 'sort-desc',
+    iconClass: 'down',
+    profit: '- 120.1%',
+    profitColor: 'secondary',
+    progress: '3%',
+    progressColor: 'primary',
+    isCollasped: false
+}
 
 export const titlePiquesData: commonDetails = {
     id: 1,
     class: 'profit-card',
-    title: 'Title Piques',
+    title: 'Title PiQues',
     data: '6542',
     img: 'assets/images/dashboard-2/total-icon/users.png',
     icon: 'sort-desc',
@@ -31,7 +45,7 @@ export const titlePiquesData: commonDetails = {
 export const abstractPiquesData: commonDetails = {
     id: 1,
     class: 'orders-card',
-    title: 'Abstract Piques',
+    title: 'Abstract PiQues',
     data: '659',
     img: 'assets/images/dashboard-2/total-icon/order.png',
     icon: 'sort-up',
@@ -46,7 +60,7 @@ export const abstractPiquesData: commonDetails = {
 export const manuscriptsPiquesData: commonDetails = {
     id: 1,
     class: 'products-card',
-    title: 'Manuscript Piques',
+    title: 'Manuscript PiQues',
     data: '319',
     img: 'assets/images/dashboard-2/total-icon/product.png',
     icon: 'sort-up',

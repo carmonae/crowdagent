@@ -1,24 +1,17 @@
 
-export interface Userprofile {
-    uid: string | undefined,
-    type: string
-    name: string,
-    occupation: string,
-    bio: string,
+export interface UserprofileI {
+    uid: string,
+    firstname: string,
+    lastname: string,
     email: string,
-    password: string,
-    url: string
+    phone: string
 }
 
-export const UserprofileData: Userprofile[] = [
+export class Userprofile implements UserprofileI 
     {
-        uid: undefined,
-        type: 'author',
-        name: 'Edward A Carmona',
-        occupation: 'Systems Engineer',
-        bio: 'Looking to Jesus, the author and finisher of my faith',
-        email: 'edward.a.carmona@gmail.com',
-        password: 'password',
-        url: 'edwardcarmona.com',
+        uid: string = ''
+        firstname: string = 'Loading...'
+        lastname: string = 'Loading ...'
+        email: string = 'Loading ...'
+        phone: string = 'Loading ...'
     }
-]

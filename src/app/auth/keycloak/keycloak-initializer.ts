@@ -10,5 +10,7 @@ export function initializeKeycloak(keycloak: KeycloakService): () => Promise<boo
         bearerExcludedUrls: []
     };
 
-    return () => keycloak.init(options)
+    const keycloakService = keycloak.init(options)
+
+    return () => keycloakService;
 }

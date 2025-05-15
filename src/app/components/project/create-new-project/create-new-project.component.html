@@ -11,8 +11,7 @@
                   class="form-control"
                   type="text"
                   placeholder="Project name"
-                  [(ngModel)]="project.name"
-                />
+                  [(ngModel)]="project.name" />
               </div>
             </div>
             <div class="col-4">
@@ -27,22 +26,18 @@
                       <div
                         class="dropdown separated-btn"
                         ngbDropdown
-                        role="group"
-                      >
+                        role="group">
                         <button
                           class="btn btn-light"
                           type="button"
-                          ngbDropdownToggle
-                        >
+                          ngbDropdownToggle>
                           <i class="icofont icofont-arrow-down"></i>
                         </button>
                         <div class="dropdown-content" ngbDropdownMenu>
                           <a
                             *ngFor="let item of lifeCycle[project.status]"
                             ngbDropdownItem
-                            (click)="onChangeStatus(item)"
-                            >{{ item }}</a
-                          >
+                            (click)="onChangeStatus(item)">{{ item }}</a>
                         </div>
                       </div>
                     </div>
@@ -59,8 +54,7 @@
                   class="form-control"
                   type="text"
                   placeholder="Title to provoke reader"
-                  [(ngModel)]="project.title"
-                />
+                  [(ngModel)]="project.title" />
               </div>
             </div>
           </div>
@@ -72,8 +66,7 @@
                   class="form-control"
                   type="text"
                   placeholder="Subtitle of the work"
-                  [(ngModel)]="project.subtitle"
-                />
+                  [(ngModel)]="project.subtitle" />
               </div>
             </div>
           </div>
@@ -84,8 +77,7 @@
                 <select class="form-select" [(ngModel)]="project.readership">
                   <option
                     *ngFor="let item of readershipTypesEnum"
-                    [value]="item"
-                  >
+                    [value]="item">
                     {{ item }}
                   </option>
                 </select>
@@ -130,8 +122,7 @@
                   class="datepicker-here form-control"
                   type="date"
                   data-language="en"
-                  [(ngModel)]="project.dateStart"
-                />
+                  [(ngModel)]="project.dateStart" />
               </div>
             </div>
             <div class="col-sm-4">
@@ -141,8 +132,7 @@
                   class="datepicker-here form-control"
                   type="date"
                   data-language="en"
-                  [(ngModel)]="project.dateEnd"
-                />
+                  [(ngModel)]="project.dateEnd" />
               </div>
             </div>
           </div>
@@ -152,60 +142,55 @@
                 <label>Abstract ({{ count }}/ {{ maxAbstractLength }}) </label>
                 <textarea
                   class="form-control"
-                  id="exampleFormControlTextarea4"
+                  id="abstract"
                   rows="5"
                   [(ngModel)]="project.abstract"
-                  (input)="onAbstractChange($event)"
-                ></textarea>
+                  (input)="onAbstractChange($event)"></textarea>
               </div>
             </div>
           </div>
-          <div *ngIf="project.url != ''">
+          <!--div *ngIf="project.url != ''">
             <label>Manuscript File Name: </label>
             <a href="{{ project.url }}">
               {{ project.fileName }}
             </a>
-          </div>
+          </div-->
           <div class="row">
             <div class="col col-3">
               <div class="mb-3">
                 <app-upload-file
-                  (fileUploadEvent)="onFilesUploaded($event)"
-                  [label]="'Cover'"
-                ></app-upload-file>
+                  (fileUploadEvent)="onFilesUploaded($event,'cover')"
+                  [label]="'Cover'"></app-upload-file>
               </div>
             </div>
             <div class="col col-3">
               <div class="mb-3">
                 <app-upload-file
-                  (fileUploadEvent)="onFilesUploaded($event)"
-                  label="Abstract"
-                ></app-upload-file>
+                  (fileUploadEvent)="onFilesUploaded($event, 'abstract')"
+                  label="Abstract"></app-upload-file>
               </div>
             </div>
             <div class="col col-3">
               <div class="mb-3">
                 <app-upload-file
-                  (fileUploadEvent)="onFilesUploaded($event)"
-                  label="Table of Content / Table of Characters"
-                ></app-upload-file>
+                  (fileUploadEvent)="onFilesUploaded($event, 'toc')"
+                  label="Table of Content"></app-upload-file>
               </div>
             </div>
             <div class="col col-3">
               <div class="mb-3">
                 <app-upload-file
-                  (fileUploadEvent)="onFilesUploaded($event)"
-                  label="Manuscript"
-                ></app-upload-file>
+                  (fileUploadEvent)="onFilesUploaded($event, 'sample')"
+                  label="Sample Chapters"></app-upload-file>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <div class="text-end">
-                <a class="btn btn-success me-3" (click)="onAddProject()"
-                  >Store</a
-                ><a class="btn btn-danger" (click)="onCancelAdd()">Cancel</a>
+                <a class="btn btn-success me-3"
+                  (click)="onAddProject()">Store</a><a class="btn btn-danger"
+                  (click)="onCancelAdd()">Cancel</a>
               </div>
             </div>
           </div>

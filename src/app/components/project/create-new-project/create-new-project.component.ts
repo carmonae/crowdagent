@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 import { FormsModule } from '@angular/forms';
@@ -7,18 +7,22 @@ import { Router } from '@angular/router';
 
 import { getDatabase, ref, set } from 'firebase/database';
 
-import { GenreTypes } from 'src/app/models/genreTypes-enum';
-import { ProjectStatus } from 'src/app/models/projectStatus';
-import { Readership } from 'src/app/models/readership-enum';
-import { SizeTypes } from 'src/app/models/sizeTypes-enum';
-import { UserprojectDefault, UserprojectI } from 'src/app/models/user-project';
-import { Usertitle } from 'src/app/models/user-titles';
-import { WritingType } from 'src/app/models/writingType-enum';
-import { AuthService } from 'src/app/services/auth.service';
-import { FileUploadService } from 'src/app/shared/services/file-upload.service';
+import { AuthService } from '@app/auth/service/auth.keycloak.service';
+import { GenreTypes } from '@app/models/genreTypes-enum';
+import { ProjectStatus } from '@app/models/projectStatus';
+import { Readership } from '@app/models/readership-enum';
+import { SizeTypes } from '@app/models/sizeTypes-enum';
+import { UserprojectDefault, UserprojectI } from '@app/models/user-project';
+import { Usertitle } from '@app/models/user-titles';
+import { WritingType } from '@app/models/writingType-enum';
+import { FileUploadService } from '@app/shared/services/file-upload.service';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 
 import { v4 as uuid } from 'uuid';
+
+interface FileCollection<File> {
+  [key: string]: File;
+}
 
 @Component({
     selector: 'app-create-new-project',
@@ -33,17 +37,14 @@ import { v4 as uuid } from 'uuid';
 })
 export class CreateNewProjectComponent implements OnInit {
 
-  @Input()
-  set aproject(project: UserprojectI) {
-    this.project = project
-  }
 
   private db = getDatabase()
 
   public project: UserprojectI = UserprojectDefault;
   public count: number = 0
   public abstract: string = ''
-  public uploadedFiles: File[] = [];
+
+  public uploadedFiles: FileCollection<File> = {};
 
   public maxAbstractLength = 1500
 
@@ -56,7 +57,7 @@ export class CreateNewProjectComponent implements OnInit {
   private uid: string | undefined
 
   lifeCycle = {
-    Created: ['Published', 'Archived'],
+    Draft: ['Published', 'Archived'],
     Published: ['Parked', 'Archived'],
     Parked: ['Published', 'Archived'],
     Archived: []
@@ -69,35 +70,28 @@ export class CreateNewProjectComponent implements OnInit {
 
 
     const temp = this.router.getCurrentNavigation()?.extras.state
+
     if (temp) {
 
       var state: UserprojectI = UserprojectDefault
       state = JSON.parse(JSON.stringify(temp))
 
       this.project = state
-
-      if (this.project.fileUid === undefined) {
-        this.project.fileUid = uuid()
-      }
     }
     else {
       this.project = UserprojectDefault
       this.project.projectUid = uuid()
-      this.project.fileUid = uuid()
     }
 
 
+    //this.project = UserprojectDefault
+    //this.project.projectUid = uuid()
     this.uid = authService.getUid()
-    this.path.path = `manuscripts/${this.uid}/`
+    this.path.path = `project/documents/${this.uid}/${this.project.projectUid}`
     this.count = this.project.abstract.length
   }
 
   ngOnInit(): void {
-
-
-  }
-
-  xngOnInit(): void {
   }
 
   onAbstractChange(event: any) {
@@ -109,14 +103,14 @@ export class CreateNewProjectComponent implements OnInit {
 
   }
 
-  onFilesUploaded(files: File[]) {
+  onFilesUploaded(files: File[], type:string) {
 
     console.log('file selected:', files)
     if (files.length > 1) {
       console.log('Error: only one file allowed!')
     }
     else if (files.length == 1) {
-      this.uploadedFiles = files
+      this.uploadedFiles[type] = files[0]
     }
 
   }
@@ -129,20 +123,18 @@ export class CreateNewProjectComponent implements OnInit {
 
     console.log(this.project)
 
-    // upload the manuscript if one added and get the url as a reference
-    if (this.uploadedFiles.length == 1) {
-      this.path.filename = `manuscript.${this.uid}.${this.project.fileUid}.pdf`
-      this.project.fileName = this.uploadedFiles[0].name
+    // upload the document if one added and get the url as a reference
+    for( const key in this.uploadedFiles) {
+      const fileuid = uuid()
+      this.path.filename = `${key}.${this.uid}.${this.project.projectUid}.${fileuid}.pdf`
 
       var _this = this;
-      this.uploadService.pushFileToStorage(this.uploadedFiles[0], this.path)
+      this.uploadService.pushFileToStorage(this.uploadedFiles[key], this.path)
         .subscribe({
           next(url) {
             console.log('got url:', url)
-            _this.project.url = url
-            _this.project.manuscriptPath = _this.path.path + _this.path.filename
+            _this.project.coverurl = url
             _this.project.dateCreated = new Date()
-            _this.saveProject()
           },
           error(msg) {
             console.log(msg)
@@ -151,11 +143,8 @@ export class CreateNewProjectComponent implements OnInit {
             console.log('Push finished')
           }
         });
-    }
-    else {
-      this.saveProject()
-    }
-
+      }
+    this.saveProject()
     this.done()
   }
 

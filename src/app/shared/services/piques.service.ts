@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, ref, child, set, get, push, update } from 'firebase/database'
+import { child, get, getDatabase, ref } from 'firebase/database';
 import { Observable } from 'rxjs';
 
-import { AuthService } from 'src/app/services/auth.service';
-import { PiqueI } from 'src/app/models/pique-model'
-import { TagI } from 'src/app/models/tag-interface';
+import { AuthService } from '@app/auth/service/auth.keycloak.service';
+import { PiqueI } from '@app/models/pique-model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TagI } from 'src/app/models/tag-interface';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '@app/auth/service/auth.keycloak.service';
+import { TagI } from '@app/models/tag-interface';
 import { AllContactComponent } from './all-contact/all-contact.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 @Component({

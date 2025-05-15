@@ -5,11 +5,26 @@ import { KeycloakProfile, KeycloakTokenParsed } from 'keycloak-js';
 @Injectable()
 export class AuthService {
 
-  constructor(private keycloakService: KeycloakService) { }
+  private profileLoaded: boolean = false;
+  private profile: KeycloakProfile | undefined;
+
+  constructor(private keycloakService: KeycloakService) { 
+    console.log('Keycloak service initialized');
+    this.loadUserProfile().then((profile) => {
+      console.log('keycloakService.User profile loaded:', profile);
+      this.profileLoaded = true;
+      this.profile = profile;
+    }
+    ).catch((error) => {
+      console.error('Error loading user profile:', error);
+    }
+    );
+  }
 
   public getLoggedUser(): KeycloakTokenParsed | undefined {
     try {
       const userDetails: KeycloakTokenParsed | undefined = this.keycloakService.getKeycloakInstance().idTokenParsed;
+      this.keycloakService.getKeycloakInstance().idToken
       return userDetails;
     }
     catch (e) {
@@ -20,57 +35,64 @@ export class AuthService {
 
   public getUid(): string | undefined {
 
-    const user: KeycloakTokenParsed | undefined = this.getLoggedUser()
-    if (user == undefined) {
-      return ''
+    if (this.profile == undefined) {
+      return 'Loading...'
     }
     else {
-      return user['sub']
+      return this.profile['id']
     }
   }
 
   public getFirstName(): string {
 
-    const user: KeycloakTokenParsed | undefined = this.getLoggedUser()
-    if (user == undefined) {
-      return ''
+    if (this.profile == undefined) {
+      return 'Loading...'
     }
     else {
-      return user['given_name']
+      return this.profile['firstName']!
     }
 
   }
 
   public getLastName(): string {
 
-    const user: KeycloakTokenParsed | undefined = this.getLoggedUser()
-    if (user == undefined) {
-      return ''
+    if (this.profile == undefined) {
+      return 'Loading...'
     }
     else {
-      return user['family_name']
+      return this.profile['lastName']!
     }
 
   }
 
   public getFullName(): string {
-    const user: KeycloakTokenParsed | undefined = this.getLoggedUser()
-    if (user == undefined) {
-      return ''
+
+    if (this.profile == undefined) {
+      return 'Loading...'
     }
     else {
-      return user['name']
+      return this.profile['lastName'] + ' ' + this.profile['firstName']
     }
 
   }
 
   public getEmail(): string {
-    const user: KeycloakTokenParsed | undefined = this.getLoggedUser()
-    if (user == undefined) {
-      return ''
+    if (this.profile == undefined) {
+      return 'Loading...'
     }
     else {
-      return user['email']
+      return this.profile['email']!
+    }
+
+  }
+
+  public getPhone(): string {
+
+    if (this.profile == undefined) {
+      return 'Loading...'
+    }
+    else {
+      return "phone"
     }
 
   }

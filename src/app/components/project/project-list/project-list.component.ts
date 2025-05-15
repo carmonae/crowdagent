@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 import { FeatherIconsComponent } from '@app/shared/component/feather-icons/feather-icons.component';
 import { TruncatePipe } from '@app/shared/pipes/truncate.pipe';
+import { getDatabase, ref, set } from 'firebase/database';
+import { AuthService } from 'src/app/auth/service/auth.keycloak.service';
 import { ProjectStatus } from 'src/app/models/projectStatus';
 import { UserprojectI } from 'src/app/models/user-project';
-import { AuthService } from 'src/app/services/auth.service';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 
 @Component({
@@ -16,8 +17,9 @@ import { ProjectsService } from 'src/app/shared/services/projects.service';
     standalone: true,
     imports: [
       CommonModule
-        , TruncatePipe
-        , FeatherIconsComponent
+      , TruncatePipe
+      , FeatherIconsComponent
+      , RouterLink
     ]
 })
 export class ProjectListComponent implements OnInit {
@@ -26,11 +28,13 @@ export class ProjectListComponent implements OnInit {
   public openTab: string = "All";
 
   lifeCycle = {
-    Created: ['Published', 'Archived'],
+    Draft: ['Published', 'Archived'],
     Published: ['Parked', 'Archived'],
     Parked: ['Published', 'Archived'],
     Archived: []
   }
+
+  private db = getDatabase()
 
   // Data
   public projectListData: UserprojectI[] = [];
@@ -86,9 +90,15 @@ export class ProjectListComponent implements OnInit {
     //TODO: save change of project status
     //TODO: validate that we have title, abstract, and manuscript
     data.status = choice as ProjectStatus
-
+    this.saveProject(data)
     this.filterTheData()
   }
+  saveProject(project: UserprojectI): void {
+    // upload the manuscript and get the url as a reference, and save the project
+    const projectRef = ref(this.db, `users/project/${this.uid}/${project.projectUid}`)
+    set(projectRef, project);
+  }
+
 }
 
 

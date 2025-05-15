@@ -11,7 +11,7 @@ export interface UserprofileI {
 }
 
 export class Userprofile implements UserprofileI {
-    uid: string | undefined = undefined
+    uid: string | undefined = ''
     type: string = ''
     name: string = ''
     occupation: string = ''
