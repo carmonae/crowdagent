@@ -1,7 +1,8 @@
 import { Directive, EventEmitter, Input, Output } from '@angular/core';
-import { sellingProduct } from '../data/data/default-dashboard/best-selling-product';
+import { sortableTypes } from '@app/models/sortableTypes';
 
-export type SortColumn = keyof sellingProduct | '';
+//export type SortColumn = keyof sellingProduct | '';
+export type SortColumn = keyof sortableTypes | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: { [key: string]: SortDirection } = { asc: 'desc', desc: '', '': 'asc' };
 

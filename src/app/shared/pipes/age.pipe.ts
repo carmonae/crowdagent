@@ -26,10 +26,10 @@ export class AgePipe implements PipeTransform {
       age = 'Some Months Ago'
     }
     else if (duration < 365) {
-      age = 'Sometime This Year'
+      age = 'This Year'
     }
     else {
-      age = 'More Than A Year Ago'
+      age = 'Over a Year Ago'
     }
     return age;
   }

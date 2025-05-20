@@ -59,5 +59,17 @@ export const BestSellingProduct : sellingProduct[] = [
         order : 956,
         sales : 20
     },
+    {
+        id : 5,
+        img : "assets/images/dashboard-2/selling/05.png",
+        product : 'Panties',
+        category : 'Women`s',
+        brand : 'Victoria Secret',
+        price : 34,
+        stock : 756,
+        rating : '2.5 (16)',
+        order : 956,
+        sales : 20
+    },
 ]
     

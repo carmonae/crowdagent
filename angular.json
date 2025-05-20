@@ -31,7 +31,8 @@
               "src/assets/crowdagent.webflow/css/normalize.css",
               "src/assets/crowdagent.webflow/css/webflow.css",
               "src/assets/crowdagent.webflow/css/crowdagent.webflow.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "swiper/swiper-bundle.min.css"
             ],
             "scripts": []
           },

@@ -1,0 +1,138 @@
+#arrowAnim {
+    width: auto;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrowLeft {
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    border-color: black transparent transparent black;
+    transform: rotate(-45deg);
+}
+
+.arrowRight {
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    border-color: black transparent transparent black;
+    transform: rotate(135deg);
+}
+
+
+.arrowSlidingLeft {
+    position: absolute;
+    -webkit-animation: slideLeft 4s linear infinite;
+    animation: slideLeft 4s linear infinite;
+}
+
+.arrowSlidingRight {
+    position: absolute;
+    -webkit-animation: slideRight 4s linear infinite;
+    animation: slideRight 4s linear infinite;
+}
+
+.delay1 {
+    -webkit-animation-delay: 1s;
+    animation-delay: 1s;
+}
+
+.delay2 {
+    -webkit-animation-delay: 2s;
+    animation-delay: 2s;
+}
+
+.delay3 {
+    -webkit-animation-delay: 3s;
+    animation-delay: 3s;
+}
+
+@-webkit-keyframes slideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(15px);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateX(9px);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateX(-9px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+}
+
+@keyframes slideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateX(18px);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateX(-18px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+}
+
+@-webkit-keyframes slideRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateX(-9x);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateX(9px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(15px);
+    }
+}
+
+@keyframes slideRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateX(-18px);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateX(18px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+}

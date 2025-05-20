@@ -3,8 +3,7 @@
     class="tab-pane contact-tab-0 tab-content-child fade show active"
     id="v-pills-user"
     role="tabpanel"
-    aria-labelledby="v-pills-user-tab"
-  >
+    aria-labelledby="v-pills-user-tab">
     <div *ngIf="selectedata" class="card-body btn-group-showcase">
       <h2>{{ selectedata.title }}</h2>
       <h3>{{ selectedata.subtitle }}</h3>
@@ -13,27 +12,23 @@
           <div
             class="btn-group btn-light"
             role="group"
-            aria-label="View Levels"
-          >
+            aria-label="View Levels">
+            <button
+              class="btn btn-light"
+              type="button"
+              [class.disabled]="tocEnabled">
+              TOC
+            </button>
             <button
               class="btn btn-primary"
               type="button"
-              [class.disabled]="abstractEnabled"
-            >
+              [class.disabled]="abstractEnabled">
               Abstract
             </button>
             <button
               class="btn btn-light"
               type="button"
-              [class.disabled]="tocEnabled"
-            >
-              TOC
-            </button>
-            <button
-              class="btn btn-light"
-              type="button"
-              [class.disabled]="manuscriptEnabled"
-            >
+              [class.disabled]="manuscriptEnabled">
               Manuscript
             </button>
           </div>
@@ -42,19 +37,16 @@
       <div>
         <textarea disabled class="form-control" id="showAbstract" rows="20">
           {{ project.abstract }}
-      </textarea
-        >
+      </textarea>
         <div class="col">
           <button
             class="col-6 btn btn-block btn-primary"
-            (click)="piques(true)"
-          >
+            (click)="piques(true)">
             <i class="fa fa-thumbs-up"></i>
           </button>
           <button
             class="col-6 btn btn-block btn-secondary"
-            (click)="piques(false)"
-          >
+            (click)="piques(false)">
             <i class="fa fa-thumbs-down"></i>
           </button>
         </div>

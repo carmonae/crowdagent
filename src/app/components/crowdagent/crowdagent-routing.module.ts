@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListviewComponent } from './listview/listview.component';
 import { ContactComponent } from './contact/contact.component';
+import { ListviewComponent } from './listview/listview.component';
+import { TitlePickerComponent } from './titlepicker/titlepicker.component';
 
 const routes: Routes = [
     {
@@ -18,6 +19,14 @@ const routes: Routes = [
             {
                 path: 'pique',
                 component: ContactComponent,
+                data: {
+                    title: 'My Piques',
+                    breadcrumb: 'Piques'
+                }
+            },
+            {
+                path: 'swiper',
+                component: TitlePickerComponent,
                 data: {
                     title: 'My Piques',
                     breadcrumb: 'Piques'

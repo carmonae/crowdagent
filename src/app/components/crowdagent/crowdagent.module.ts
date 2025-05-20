@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { NgbAccordionModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+import { FormsModule } from '@angular/forms';
+import { SwiperModule } from 'swiper/angular';
+import { ContactModule } from './contact/contact.module';
 import { CrowdagentRoutingModule } from './crowdagent-routing.module';
 import { ListviewComponent } from './listview/listview.component';
 import { TitleFilterComponent } from './title-filter/title-filter.component';
-import { ContactModule } from './contact/contact.module';
-import { FormsModule } from '@angular/forms';
-
 
 @NgModule({
     imports: [
@@ -21,7 +21,12 @@ import { FormsModule } from '@angular/forms';
         ContactModule,
         FormsModule,
         ListviewComponent,
-        TitleFilterComponent
-    ]
+        TitleFilterComponent,
+        SwiperModule,
+        
+    ],
+    declarations: [
+    ],
+    schemas: [],
 })
 export class CrowdagentModule { }

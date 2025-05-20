@@ -1,0 +1,170 @@
+
+
+<div class="row">
+    <div class="col-2 text-center align-items-center">
+        <h1 class="badge-secondary">Pass</h1>
+    </div>
+
+    <!-- Left Arrows To Pass Table-->
+    <div class="col-2" id="arrowAnimLeft">
+        <div class="text-center">
+            <div class="arrowSlidingLeft">
+                <div class="arrowLeft"></div>
+            </div>
+            <div class="arrowSlidingLeft delay1">
+                <div class="arrowLeft"></div>
+            </div>
+            <div class="arrowSlidingLeft delay2">
+                <div class="arrowLeft"></div>
+            </div>
+            <div class="arrowSlidingLeft delay3">
+                <div class="arrowLeft"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Center Table -->
+    <swiper #swiperCenter class="col-4"
+        [loop]="true"
+        direction="horizontal"
+        (slideChange)="onSlideChange($event, 'center')">
+        <ng-template *ngFor="let title of centerBooks" swiperSlide>
+            <div class="column">
+                <div
+                    class="card"
+                    [class.ribbon-vertical-left-wrapper]="true">
+                    <div
+                        *ngIf="false"
+                        class="ribbon ribbon-bookmark ribbon-vertical-left ribbon-secondary">
+                        <i class="icofont icofont-love"></i>
+                    </div>
+                    <div class="job-search">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <img
+                                    class="img-40 img-fluid m-r-20"
+                                    src="{{ cardData.image }}"
+                                    alt />
+                                <div class="row">
+                                    <div>
+                                        <h4>
+                                            {{ title.title }}
+                                        </h4>
+                                    </div>
+                                    <div>
+                                        <h4>
+                                            {{ title.subtitle }}
+                                        </h4>
+                                    </div>
+                                    <div
+                                        class="badge badge-primary">
+                                        {{
+                                        title.datePublished | age
+                                        }}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </swiper>
+
+    <!-- Right Arrows To Pique Table-->
+    <div class="col-2" id="arrowAnimRight">
+        <div class="arrowSlidingRight">
+            <div class="arrowRight"></div>
+        </div>
+        <div class="arrowSlidingRight delay1">
+            <div class="arrowRight"></div>
+        </div>
+        <div class="arrowSlidingRight delay2">
+            <div class="arrowRight"></div>
+        </div>
+        <div class="arrowSlidingRight delay3">
+            <div class="arrowRight"></div>
+        </div>
+    </div>
+    <div class="col-2 text-center align-items-center">
+        <h1 class="badge-primary">piQue</h1>
+    </div>
+
+</div>
+
+<div class="row">
+    <!-- Pass Table -->
+    <div class="card col-6">
+        <div class="card-header card-no-border pb-0">
+            <div class="header-top">
+                <h1>{{passTableName}} ({{notInterested.length}})<</h1>
+            </div>
+        </div>
+        <div class="card-body pt-0 sellingproduct">
+            <div class="table-responsive theme-scrollbar">
+                <!-- <div class="dataTables_wrapper no-footer"> -->
+                <form>
+                    <div class="mb-3 row justify-content-end">
+                        <span class="col col-form-label"
+                            *ngIf="serviceTable1.loading$ | async">Loading...</span>
+                        <label
+                            for="table-complete-search"
+                            class="col-xs-3 col-sm-auto col-form-label">Search:</label>
+                        <div class="col-xs-3 col-sm-auto">
+                            <input
+                                id="table-complete-search"
+                                type="text"
+                                class="form-control"
+                                name="searchTerm"
+                                [(ngModel)]="serviceTable1.searchTerm" />
+                        </div>
+                    </div>
+                    <app-pique-titles-data-table
+                        [service]="serviceTable1"
+                        [tableName]="passTableName"
+                        (itemMoved)="moveToPique($event)"
+                        (itemRemoved)="removeItem($event)"></app-pique-titles-data-table>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- piQue Table -->
+    <div class="card col-md-6">
+        <div class="card-header card-no-border pb-0">
+            <div class="header-top">
+                <h1>{{piqueTableName}} ({{interested.length}})</h1>
+            </div>
+        </div>
+        <div class="card-body pt-0 sellingproduct">
+            <div class="table-responsive theme-scrollbar">
+                <!-- <div class="dataTables_wrapper no-footer"> -->
+                <form>
+                    <div class="mb-3 row justify-content-end">
+                        <span class="col col-form-label"
+                            *ngIf="serviceTable2.loading$ | async">Loading...</span>
+                        <label
+                            for="table-complete-search"
+                            class="col-xs-3 col-sm-auto col-form-label">Search:</label>
+                        <div class="col-xs-3 col-sm-auto">
+                            <input
+                                id="table-complete-search"
+                                type="text"
+                                class="form-control"
+                                name="searchTerm"
+                                [(ngModel)]="serviceTable2.searchTerm" />
+                        </div>
+                    </div>
+                    <app-pique-titles-data-table
+                        [service]="serviceTable2"
+                        [tableName]="piqueTableName"
+                        (itemMoved)="moveToPass($event)"
+                        (itemRemoved)="removeItem($event)"></app-pique-titles-data-table>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
