@@ -10,6 +10,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 
 // Local imports
 import { FileUploadModule } from 'ng2-file-upload';
+import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { DropzoneDirective } from '../directive/dropzone.directive';
 import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
@@ -37,16 +38,17 @@ import { VerticalSidemenuComponent } from './component/menu/vertical-sidemenu/ve
 import { SvgIconComponent } from './component/svg-icon/svg-icon.component';
 import { TapToTopComponent } from './component/tap-to-top/tap-to-top.component';
 import { ClickOutsideDirective } from './directive/outside.directive';
+import { ModalBookscoreComponent } from './modal/bookscore-modal/bookscore.modal.component';
 import { AgePipe } from './pipes/age.pipe';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { NumberRatingComponent } from './widget/number-rating/number-rating.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  declarations: [  
-  ],
+  declarations: [NumberRatingComponent, ModalBookscoreComponent],
   imports: [
     CommonModule,
     HeaderComponent,
@@ -84,8 +86,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FileUploadComponent,
     DropzoneDirective,
     AgePipe,
-    TruncatePipe
-  ], 
+    TruncatePipe,
+    BarRatingModule,
+  ],
   exports: [
     HeaderComponent,
     ContentComponent,
@@ -114,12 +117,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     FileUploadComponent,
     DropzoneDirective,
     AgePipe,
-    TruncatePipe
+    TruncatePipe,
+    NumberRatingComponent,
   ],
-  providers: [
-
-  ]
+  providers: [],
 })
-
-
-export class SharedModule { }
+export class SharedModule {}

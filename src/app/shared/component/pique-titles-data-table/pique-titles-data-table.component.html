@@ -46,16 +46,14 @@
                 </b></td>
             <td class="text-center">
                 <span class="edit-option">
-                    <a href="javascript:void(0)">
-                        <app-feather-icons
+                    <a href="javascript:void(0)" (click)="moveItem(title.id)">
+                        <app-feather-icons *ngIf="tableName === 'Passed Titles'"
+                            [icon]="'arrow-right-circle'">
+                        </app-feather-icons>
+                        <app-feather-icons *ngIf="tableName === 'PiQued Titles'"
                             [icon]="'arrow-left-circle'">
                         </app-feather-icons>
                         <!-- <i data-feather="edit"></i> -->
-                    </a>
-                </span>
-                <span class="move-option">
-                    <a href="javascript:void(0)" (click)="moveItem(title.id)">
-                        <i class="move" data-feather="arrow-up-circle"></i>
                     </a>
                 </span>
                 <span class="delete-option">
@@ -67,3 +65,54 @@
         </tr>
     </tbody>
 </table>
+
+<div class="row">
+    <div class="justify-content-end align-items-center my-2">
+        <label for="itemsPerPage" class="me-2 mb-0">Items per page:</label>
+        <select id="itemsPerPage" class="form-select w-auto"
+            [(ngModel)]="maxItems"
+            (change)="onItemsPerPageChange($event)">
+            <option [value]="4">4 Per Page</option>
+            <option [value]="8">8 Per Page</option>
+            <option [value]="12">12 Per Page</option>
+            <option [value]="24">24 Per Page</option>
+        </select>
+    </div>
+
+    <div class="job-pagination float-right">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-primary">
+                <li class="page-item" [class.disabled]="currentPage == 1">
+                    <a class="page-link"
+                        (click)="gotoPage(currentPage - 1)">Previous</a>
+                </li>
+                <li class="page-item" [class.active]="currentPage == thispage">
+                    <a class="page-link" (click)="gotoPage(thispage)">{{
+                        thispage
+                        }}</a>
+                </li>
+                <li
+                    class="page-item"
+                    *ngIf="nextpage <= lastpage"
+                    [class.active]="currentPage == nextpage">
+                    <a class="page-link" (click)="gotoPage(nextpage)">{{
+                        nextpage
+                        }}</a>
+                </li>
+                <li
+                    class="page-item"
+                    *ngIf="pageafternext <= lastpage"
+                    [class.active]="currentPage == pageafternext">
+                    <a class="page-link" (click)="gotoPage(pageafternext)">{{
+                        pageafternext
+                        }}</a>
+                </li>
+                <li class="page-item"
+                    [class.disabled]="currentPage == lastpage">
+                    <a class="page-link"
+                        (click)="gotoPage(currentPage + 1)">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

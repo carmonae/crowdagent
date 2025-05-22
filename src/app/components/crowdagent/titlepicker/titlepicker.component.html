@@ -1,12 +1,36 @@
 
 
 <div class="row">
-    <div class="col-2 text-center align-items-center">
-        <h1 class="badge-secondary">Pass</h1>
-    </div>
+    <div class="col-2">
 
-    <!-- Left Arrows To Pass Table-->
-    <div class="col-2" id="arrowAnimLeft">
+    </div>
+    <div *ngIf="centerBooks.length>0" class="col-8">
+        <h2>Here's what's at the bookstore shelf. Does this title piQue your
+            interest? Thumbs up or thumbs down? Or simply swipe left to pass or
+            right to pique. You
+            can change your mind about your piQues and passes
+            later.</h2>
+    </div>
+    <div *ngIf="centerBooks.length==0" class="col-8">
+        <h2>Here's your list. You can swap titles from passed to piqued and vice
+            versa using left/right arrow of a given title.</h2>
+    </div>
+    <div class="col-4">
+
+    </div>
+</div>
+<br />
+<div class="row" style="margin-bottom:0px">
+    <!--div *ngIf="centerBooks.length>0"
+        class="col-2 text-center align-items-center">
+        <button
+            class="btn btn-pill btn-air-secondary btn-secondary-gradien"
+            (click)="onPass()"><span
+                style="font-size:large">Pass</span></button>
+    </div-->
+
+    <!-- Left Arrows To Pass Table>
+    <div class="col-1" id="arrowAnimLeft">
         <div class="text-center">
             <div class="arrowSlidingLeft">
                 <div class="arrowLeft"></div>
@@ -21,14 +45,15 @@
                 <div class="arrowLeft"></div>
             </div>
         </div>
-    </div>
+    </div-->
 
     <!-- Center Table -->
-    <swiper #swiperCenter class="col-4"
+    <swiper style="margin-bottom:0px" #swiper class="col-8"
         [loop]="true"
         direction="horizontal"
         (slideChange)="onSlideChange($event, 'center')">
-        <ng-template *ngFor="let title of centerBooks" swiperSlide>
+        <ng-template *ngFor="let title of centerBooks; let i = index"
+            swiperSlide>
             <div class="column">
                 <div
                     class="card"
@@ -56,12 +81,12 @@
                                             {{ title.subtitle }}
                                         </h4>
                                     </div>
-                                    <div
-                                        class="badge badge-primary">
-                                        {{
-                                        title.datePublished | age
-                                        }}
-                                    </div>
+                                </div>
+                                <div
+                                    class="badge badge-primary">
+                                    {{
+                                    title.datePublished | age
+                                    }}
                                 </div>
                             </div>
 
@@ -72,7 +97,7 @@
         </ng-template>
     </swiper>
 
-    <!-- Right Arrows To Pique Table-->
+    <!-- Right Arrows To Pique Table>
     <div class="col-2" id="arrowAnimRight">
         <div class="arrowSlidingRight">
             <div class="arrowRight"></div>
@@ -86,11 +111,34 @@
         <div class="arrowSlidingRight delay3">
             <div class="arrowRight"></div>
         </div>
-    </div>
-    <div class="col-2 text-center align-items-center">
-        <h1 class="badge-primary">piQue</h1>
-    </div>
+    </div-->
 
+    <!--div *ngIf="centerBooks.length>0"
+        class="col-2 text-center align-items-center">
+        <button
+            class="btn btn-pill btn-air-primary btn-primary-gradien"
+            (click)="onPique()">
+            <span style="font-size:large">piQue</span>
+        </button>
+    </div-->
+
+</div>
+
+<div class="row" style="margin-top:1px; margin-bottom:40px">
+    <div class="col-2"></div>
+    <div *ngIf="centerBooks.length>0" class="col">
+        <button
+            class="col-lg-6 btn btn-block btn-secondary"
+            (click)="onPass()">
+            <i class="fa fa-thumbs-down"></i>
+        </button>
+        <button
+            class="col-lg-6 btn btn-block btn-primary"
+            (click)="onPique()">
+            <i class="fa fa-thumbs-up"></i>
+        </button>
+    </div>
+    <div class="col-2"></div>
 </div>
 
 <div class="row">
@@ -98,7 +146,7 @@
     <div class="card col-6">
         <div class="card-header card-no-border pb-0">
             <div class="header-top">
-                <h1>{{passTableName}} ({{notInterested.length}})<</h1>
+                <h1>{{passTableName}} ({{notInterested.length}})</h1>
             </div>
         </div>
         <div class="card-body pt-0 sellingproduct">
@@ -120,11 +168,17 @@
                                 [(ngModel)]="serviceTable1.searchTerm" />
                         </div>
                     </div>
-                    <app-pique-titles-data-table
-                        [service]="serviceTable1"
-                        [tableName]="passTableName"
-                        (itemMoved)="moveToPique($event)"
-                        (itemRemoved)="removeItem($event)"></app-pique-titles-data-table>
+                    <div *ngIf="notInterested.length === 0">
+                        <h4 class="text-center">No titles passed</h4>
+                    </div>
+                    <div *ngIf="notInterested.length > 0">
+                        <app-pique-titles-data-table
+                            [service]="serviceTable1"
+                            [tableName]="passTableName"
+                            (itemMoved)="moveToPique($event)"
+                            (itemRemoved)="removeItem($event)">
+                        </app-pique-titles-data-table>
+                    </div>
                 </form>
 
             </div>
@@ -157,14 +211,27 @@
                                 [(ngModel)]="serviceTable2.searchTerm" />
                         </div>
                     </div>
-                    <app-pique-titles-data-table
-                        [service]="serviceTable2"
-                        [tableName]="piqueTableName"
-                        (itemMoved)="moveToPass($event)"
-                        (itemRemoved)="removeItem($event)"></app-pique-titles-data-table>
+                    <div *ngIf="interested.length === 0">
+                        <h4 class="text-center">No titles piQued</h4>
+                    </div>
+                    <div *ngIf="interested.length > 0">
+
+                        <app-pique-titles-data-table
+                            [service]="serviceTable2"
+                            [tableName]="piqueTableName"
+                            (itemMoved)="moveToPass($event)"
+                            (itemRemoved)="removeItem($event)">
+                        </app-pique-titles-data-table>
+                    </div>
                 </form>
 
             </div>
         </div>
     </div>
+</div>
+
+<div class="text-center my-4">
+    <button class="btn btn-lg btn-success" (click)="onDonePiquing()">
+        Done piQueing
+    </button>
 </div>

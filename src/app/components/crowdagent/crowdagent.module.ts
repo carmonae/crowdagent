@@ -12,21 +12,19 @@ import { ListviewComponent } from './listview/listview.component';
 import { TitleFilterComponent } from './title-filter/title-filter.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        NgbAccordionModule,
-        NgbModule,
-        SharedModule,
-        CrowdagentRoutingModule,
-        ContactModule,
-        FormsModule,
-        ListviewComponent,
-        TitleFilterComponent,
-        SwiperModule,
-        
-    ],
-    declarations: [
-    ],
-    schemas: [],
+  imports: [
+    CommonModule,
+    NgbAccordionModule,
+    NgbModule,
+    SharedModule,
+    CrowdagentRoutingModule,
+    ContactModule,
+    FormsModule,
+    ListviewComponent,
+    TitleFilterComponent,
+    SwiperModule,
+  ],
+  declarations: [],
+  schemas: [],
 })
-export class CrowdagentModule { }
+export class CrowdagentModule {}

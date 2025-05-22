@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -25,149 +24,137 @@ interface FileCollection<File> {
 }
 
 @Component({
-    selector: 'app-create-new-project',
-    templateUrl: './create-new-project.component.html',
-    styleUrls: ['./create-new-project.component.scss'],
-    standalone: true,
-    imports: [
-        CommonModule,
-        FormsModule,
-        UploadFileComponent
-    ]
+  selector: 'app-create-new-project',
+  templateUrl: './create-new-project.component.html',
+  styleUrls: ['./create-new-project.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, UploadFileComponent],
 })
 export class CreateNewProjectComponent implements OnInit {
-
-
-  private db = getDatabase()
+  private db = getDatabase();
 
   public project: UserprojectI = UserprojectDefault;
-  public count: number = 0
-  public abstract: string = ''
+  public count: number = 0;
+  public abstract: string = '';
 
   public uploadedFiles: FileCollection<File> = {};
 
-  public maxAbstractLength = 1500
+  public maxAbstractLength = 1500;
 
-  public readershipTypesEnum = Object.values(Readership)
-  public writingTypesEnum = Object.values(WritingType)
-  public sizeTypesEnum = Object.values(SizeTypes)
-  public genreTypesEnum = Object.values(GenreTypes)
+  public readershipTypesEnum = Object.values(Readership);
+  public writingTypesEnum = Object.values(WritingType);
+  public sizeTypesEnum = Object.values(SizeTypes);
+  public genreTypesEnum = Object.values(GenreTypes);
 
-  private path = { path: 'manuscripts/', filename: 'manuscript.pdf' }
-  private uid: string | undefined
+  private path = { path: 'manuscripts/', filename: 'manuscript.pdf' };
+  private uid: string | undefined;
 
   lifeCycle = {
     Draft: ['Published', 'Archived'],
     Published: ['Parked', 'Archived'],
     Parked: ['Published', 'Archived'],
-    Archived: []
-  }
+    Archived: [],
+  };
 
   constructor(
     private authService: AuthService,
     private uploadService: FileUploadService,
-    private router: Router) {
-
-
-    const temp = this.router.getCurrentNavigation()?.extras.state
-
-    if (temp) {
-
-      var state: UserprojectI = UserprojectDefault
-      state = JSON.parse(JSON.stringify(temp))
-
-      this.project = state
-    }
-    else {
-      this.project = UserprojectDefault
-      this.project.projectUid = uuid()
-    }
-
-
-    //this.project = UserprojectDefault
-    //this.project.projectUid = uuid()
-    this.uid = authService.getUid()
-    this.path.path = `project/documents/${this.uid}/${this.project.projectUid}`
-    this.count = this.project.abstract.length
+    private router: Router
+  ) {
+    this.uid = this.authService.getUid();
   }
 
   ngOnInit(): void {
+    const temp = this.router.getCurrentNavigation()?.extras.state;
+
+    if (temp) {
+      var state: UserprojectI = UserprojectDefault;
+      state = JSON.parse(JSON.stringify(temp));
+
+      this.project = state;
+    } else {
+      this.project = UserprojectDefault;
+      this.project.projectUid = uuid();
+    }
+
+    this.path.path = `project/documents/${this.uid}/${this.project.projectUid}`;
+    this.count = this.project.abstract.length;
   }
 
   onAbstractChange(event: any) {
     if (this.project.abstract.length > this.maxAbstractLength) {
-      this.project.abstract = this.project.abstract.substring(0, this.maxAbstractLength)
-      event.target.value = this.project.abstract
+      this.project.abstract = this.project.abstract.substring(
+        0,
+        this.maxAbstractLength
+      );
+      event.target.value = this.project.abstract;
     }
-    this.count = this.project.abstract.length
-
+    this.count = this.project.abstract.length;
   }
 
-  onFilesUploaded(files: File[], type:string) {
-
-    console.log('file selected:', files)
+  onFilesUploaded(files: File[], type: string) {
+    console.log('file selected:', files);
     if (files.length > 1) {
-      console.log('Error: only one file allowed!')
+      console.log('Error: only one file allowed!');
+    } else if (files.length == 1) {
+      this.uploadedFiles[type] = files[0];
     }
-    else if (files.length == 1) {
-      this.uploadedFiles[type] = files[0]
-    }
-
   }
 
   onChangeStatus(item: string): void {
-    this.project.status = item as ProjectStatus
+    this.project.status = item as ProjectStatus;
   }
 
   onAddProject() {
-
-    console.log(this.project)
+    console.log(this.project);
 
     // upload the document if one added and get the url as a reference
-    for( const key in this.uploadedFiles) {
-      const fileuid = uuid()
-      this.path.filename = `${key}.${this.uid}.${this.project.projectUid}.${fileuid}.pdf`
+    var _this = this;
+    for (const key in this.uploadedFiles) {
+      const fileuid = uuid();
+      //this.path.filename = `${key}.${this.uid}.${this.project.projectUid}.${fileuid}.pdf`;
+      this.path.filename = `${this.uid}.${this.project.projectUid}.${key}`;
 
-      var _this = this;
-      this.uploadService.pushFileToStorage(this.uploadedFiles[key], this.path)
+      this.uploadService
+        .pushFileToStorage(this.uploadedFiles[key], this.path)
         .subscribe({
           next(url) {
-            console.log('got url:', url)
-            _this.project.coverurl = url
-            _this.project.dateCreated = new Date()
+            console.log('got url:', url);
+            _this.project.coverurl = url;
+            _this.project.dateCreated = new Date();
           },
           error(msg) {
-            console.log(msg)
+            console.log(msg);
           },
           complete() {
-            console.log('Push finished')
-          }
+            console.log('Push finished');
+          },
         });
-      }
-    this.saveProject()
-    this.done()
+    }
+    this.saveProject();
+    this.done();
   }
 
   saveProject(): void {
     // upload the manuscript and get the url as a reference, and save the project
-    const projectRef = ref(this.db, `users/project/${this.uid}/${this.project.projectUid}`)
+    const projectRef = ref(
+      this.db,
+      `users/project/${this.uid}/${this.project.projectUid}`
+    );
     set(projectRef, this.project);
 
-    const newTitle = new Usertitle(this.project, this.uid)
-    console.log(this.project, newTitle)
-    const titleRef = ref(this.db, `titles/${this.project.projectUid}`)
+    const newTitle = new Usertitle(this.project, this.uid);
+    console.log(this.project, newTitle);
+    const titleRef = ref(this.db, `titles/${this.project.projectUid}`);
 
     set(titleRef, newTitle);
-
   }
 
   onCancelAdd() {
-    this.done()
+    this.done();
   }
 
   done() {
-    this.router.navigateByUrl('projects/project-list')
-
+    this.router.navigateByUrl('projects/project-list');
   }
 }
-

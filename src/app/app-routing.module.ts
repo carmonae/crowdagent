@@ -14,30 +14,34 @@ import { fullRoutes } from './shared/routes/full-routes';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',    
-    pathMatch: 'full'
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
   },
   {
     path: 'landing',
     component: LandingComponent,
-    data: {role: 'anyone'},
-    loadChildren: () => import('@app/landing/landing.module').then(m => m.LandingModule)
+    data: { role: 'anyone' },
+    loadChildren: () =>
+      import('@app/landing/landing.module').then((m) => m.LandingModule),
   },
   {
     path: 'login',
     data: {
-        title: "Login",
-        breadcrumb: "Login",
-        role: 'anyone'
+      title: 'Login',
+      breadcrumb: 'Login',
+      role: 'anyone',
     },
     component: LoginComponent,
-    loadChildren: () => import('@app/components/login/login.module').then(m => m.LoginComponentModule),
-},
-{
+    loadChildren: () =>
+      import('@app/components/login/login.module').then(
+        (m) => m.LoginComponentModule
+      ),
+  },
+  {
     path: '',
     component: ContentComponent,
     canActivate: [ContentGuard],
-    children: contentRoutes
+    children: contentRoutes,
   },
   {
     path: '',
@@ -48,12 +52,11 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: '',
-  }
-
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { enableTracing: false })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

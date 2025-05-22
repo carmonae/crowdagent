@@ -1,12 +1,16 @@
-<div class="tab-content" id="v-pills-tabContent" [ngStyle]="{ display: '' }">
+<!--div class="tab-content" id="v-pills-tabContent" [ngStyle]="{ display: '' }">
+
   <div
     class="tab-pane contact-tab-0 tab-content-child fade show active"
     id="v-pills-user"
     role="tabpanel"
     aria-labelledby="v-pills-user-tab">
+
     <div *ngIf="selectedata" class="card-body btn-group-showcase">
       <h2>{{ selectedata.title }}</h2>
       <h3>{{ selectedata.subtitle }}</h3>
+
+      < Tabs>
       <div class="row">
         <div class="col-xl-4 col-md-6 col-sm-12" button-group-mb-sm>
           <div
@@ -34,10 +38,43 @@
           </div>
         </div>
       </div>
-      <div>
-        <textarea disabled class="form-control" id="showAbstract" rows="20">
-          {{ project.abstract }}
-      </textarea>
+
+      < Document >
+<div>
+
+
+  <pdf-viewer
+          [src]="project.abstract"
+          [render-text]="true"
+          style="display: block"
+          [autoresize]="true"
+          [original-size]="false"
+          [show-all]="true"
+          [fit-to-page]="true"
+          [zoom]="1.0"
+        </pdf-viewe>
+
+        <div class="row">
+          <label>Table of Contents :</label>
+          <a *ngIf="project.tocurl != ''"
+            href="{{ project.tocurl }}">
+            {{ project.title | truncate : 40 }} TOC
+          </a>
+
+          <label>Abstract :</label>
+          <a *ngIf="project.abstracturl != ''"
+            href="{{ project.abstracturl }}">
+            {{ project.title | truncate : 40 }} Abstract
+          </a>
+
+          <label>Manuscript :</label>
+          <a *ngIf="project.samplechaptersurl != ''"
+            href="{{ project.samplechaptersurl }}">
+            {{ project.title | truncate : 40 }} Sample Chapters
+          </a>
+        </div>
+
+        < Thumbs up/down >
         <div class="col">
           <button
             class="col-6 btn btn-block btn-primary"
@@ -53,4 +90,73 @@
       </div>
     </div>
   </div>
-</div>
+</div-->
+
+<div *ngIf="selectedata" class="card">
+  <div class="card-header card-no-border pb-0">
+    <h3>{{selectedata.title}}</h3>
+    <p class="mt-1 f-m-light">
+      {{selectedata.subtitle}}</p>
+  </div>
+  <div class="card-body">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <button ngbNavLink class="nav-link txt-secondary"
+          [disabled]="!tocEnabled"><i
+            class="icofont icofont-ui-home"></i>ToC</button>
+        <ng-template ngbNavContent>
+          <p class="pt-3 mb-0">
+            <div class="flex-space flex-wrap align-items-center">
+              <a *ngIf="project.tocurl != ''"
+                href="{{ project.tocurl }}" target="_blank">
+                {{ project.title | truncate : 40 }} TOC
+              </a>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <button ngbNavLink class="nav-link txt-secondary"
+            [disabled]="!abstractEnabled"><i
+              class="icofont icofont-man-in-glasses"></i>Abstract</button>
+          <ng-template ngbNavContent>
+            <p class="pt-3 mb-0">
+              <div class="flex-space flex-wrap align-items-center">
+                <a *ngIf="project.abstracturl != ''"
+                  href="{{ project.abstracturl }}" target="_blank">
+                  {{ project.title | truncate : 40 }} Abstract
+                </a>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="3">
+            <button ngbNavLink class="nav-link txt-secondary"
+              [disabled]="!manuscriptEnabled"><i
+                class="icofont icofont-contacts"></i>Manuscript</button>
+            <ng-template ngbNavContent>
+              <p class="pt-3 mb-0">
+                <div class="flex-space flex-wrap align-items-center">
+                  <a *ngIf="project.samplechaptersurl != ''"
+                    href="{{ project.samplechaptersurl }}" target="_blank">
+                    {{ project.title | truncate : 40 }} Sample Chapters
+                  </a>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+      </div>
+      <!-- Thumbs up/down -->
+      <div class="col">
+        <button
+          class="col-6 btn btn-block btn-primary"
+          (click)="piques(true)">
+          <i class="fa fa-thumbs-up"></i>
+        </button>
+        <button
+          class="col-6 btn btn-block btn-secondary"
+          (click)="piques(false)">
+          <i class="fa fa-thumbs-down"></i>
+        </button>
+      </div>

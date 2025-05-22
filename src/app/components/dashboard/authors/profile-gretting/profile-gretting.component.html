@@ -1,42 +1,26 @@
-<div class="card p-0 profile-greeting">
-  <div class="card-body wadewarren">
-    <div class="img-overlay">
-      <h3>Good {{dayPart}}, {{firstName}}</h3>
-
-      <p>
-        Here’s what’s happening with your books today. See the statistics at
-        once
-      </p>
+<div class="row">
+  <div class="card p-0 profile-greeting">
+    <div class="card-body wadewarren">
+      <div class="img-overlay">
+        <h3 *ngIf="firstName" class="greeting">
+          Good {{dayPart}}, {{firstName}}
+        </h3>
+        <h3 *ngIf="!firstName" class="greeting">Good {{dayPart}}</h3>
+        <p>
+          Here’s what’s happening with your books today. See the statistics at
+          once
+        </p>
+      </div>
+      <ul class="list-unstyled confetti">
+        <li><img src="assets/images/dashboard-2/ribbon1.png" alt /></li>
+        <li><img src="assets/images/dashboard-2/ribbon2.png" alt /></li>
+        <li><img src="assets/images/dashboard-2/ribbon1.png" alt /></li>
+        <li><img src="assets/images/dashboard-2/ribbon2.png" alt /></li>
+        <li><img src="assets/images/dashboard-2/ribbon1.png" alt /></li>
+        <li><img src="assets/images/dashboard-2/ribbon2.png" alt /></li>
+        <li><img src="assets/images/dashboard-2/ribbon3.png" alt /></li>
+        <li><img src="assets/images/dashboard-2/ribbon4.png" alt /></li>
+      </ul>
     </div>
-    <ul class="list-unstyled confetti">
-      <li><img src="assets/images/dashboard-2/ribbon1.png" alt /></li>
-      <li><img src="assets/images/dashboard-2/ribbon2.png" alt /></li>
-      <li><img src="assets/images/dashboard-2/ribbon1.png" alt /></li>
-      <li><img src="assets/images/dashboard-2/ribbon2.png" alt /></li>
-      <li><img src="assets/images/dashboard-2/ribbon1.png" alt /></li>
-      <li><img src="assets/images/dashboard-2/ribbon2.png" alt /></li>
-      <li><img src="assets/images/dashboard-2/ribbon3.png" alt /></li>
-      <li><img src="assets/images/dashboard-2/ribbon4.png" alt /></li>
-    </ul>
-    <table class="table display" id="total-books">
-      <thead>
-        <tr>
-          <th scope="col" style="cursor: pointer;">Draft</th>
-          <th scope="col" style="cursor: pointer;">In Review</th>
-          <th scope="col" style="cursor: pointer;">Published</th>
-          <th scope="col" style="cursor: pointer;">Archived </th>
-          <th scope="col" style="cursor: pointer;">Deleted</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{nInDraft}}</td>
-          <td>{{nInReview}}</td>
-          <td>{{nInPublished}}</td>
-          <td>{{nInArchived}}</td>
-          <td>{{nInDeleted}}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
