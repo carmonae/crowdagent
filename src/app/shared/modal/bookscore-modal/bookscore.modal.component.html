@@ -1,12 +1,18 @@
-<div class="modal-toggle-wrapper social-profile text-start dark-sign-up">
+<!--div class="modal-toggle-wrapper social-profile text-start dark-sign-up"-->
+<div class="modal-body">
   <h3 class="py-2 modal-title text-center">Manuscript Score</h3>
   <div class="modal-body">
-    <app-number-rating
+    <app-number-rating #personalRating
       scorelabel="Your Personal Rating"
-      [ratingLegend]="ratingsLegend"></app-number-rating>
-    <app-number-rating
+      [ratingLegend]="ratingsLegend"
+      (hover)="onHover($event)"></app-number-rating>
+    <app-number-rating #ratingPrediction
       scorelabel="Your Prediction of Overall Rating"
-      [ratingLegend]="ratingsLegend"></app-number-rating>
+      [ratingLegend]="ratingsLegend"
+      (hover)="onHover($event)"></app-number-rating>
   </div>
-  <button> Submit </button>
+  <h2>{{ratingDescription}}</h2>
+  <button class="btn btn-lg btn-success" (click)="submit()">
+    Submit Rating
+  </button>
 </div>

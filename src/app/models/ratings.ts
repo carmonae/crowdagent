@@ -1,3 +1,9 @@
+export interface RatingTuple {
+  projId: string;
+  personalRating: number;
+  predictedRating: number;
+}
+
 export interface legendI {
   level: Number;
   designation: string;

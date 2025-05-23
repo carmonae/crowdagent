@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-number-rating',
@@ -8,5 +8,15 @@ import { Component, Input } from '@angular/core';
 export class NumberRatingComponent {
   @Input() scorelabel: string = '';
   @Input() ratingLegend: string[] = [];
-  faRate = 0;
+  @Output() hover = new EventEmitter<number>();
+
+  public faRate = 0;
+
+  get rating() {
+    return this.faRate;
+  }
+
+  onChange(event: any) {
+    this.hover.emit(event);
+  }
 }

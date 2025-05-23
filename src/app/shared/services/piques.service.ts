@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
 import { PiqueI } from '@app/models/pique-model';
+import { RatingTuple } from '@app/models/ratings';
 
 @Injectable({
   providedIn: 'root',
@@ -124,5 +125,11 @@ export class PiquesService {
   updateLevel(userId: string, projId: string, level: string): void {
     var path = `${this.firepath}/${userId}/${projId}`;
     update(ref(this.db, path), { level: level });
+  }
+
+  updateRating(userId: string, projId: string, rating: RatingTuple): void {
+    var path = `${this.firepath}/${userId}/${projId}`;
+    update(ref(this.db, path), { personalRating: rating.personalRating });
+    update(ref(this.db, path), { predictedRating: rating.predictedRating });
   }
 }

@@ -97,9 +97,18 @@ export class TitlesService {
     update(ref(this.db, path), { scoreA: increment(1) });
   }
 
-  incrementTitleScoreM(puid: string, score: number): void {
+  incrementTitleCountM(puid: string): void {
+    console.log(`Increment Abstract Count Method.`);
+    var path = this.firepath + '/' + puid;
+    update(ref(this.db, path), { countM: increment(1) });
+  }
+
+  incrementTitleScoreM(puid: string, score1: number, score2: number): void {
     console.log(`Increment Manuscript Score Method.`);
     var path = this.firepath + '/' + puid;
-    update(ref(this.db, path), { scoreM: increment(score) });
+    update(ref(this.db, path), {
+      scoreM: increment(score1),
+      scoreM2: increment(score2),
+    });
   }
 }

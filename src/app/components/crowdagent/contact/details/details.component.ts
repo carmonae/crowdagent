@@ -11,6 +11,7 @@ import { ModalBookscoreComponent } from '@app/shared/modal/bookscore-modal/books
 import { TruncatePipe } from '@app/shared/pipes/truncate.pipe';
 import { PiquesService } from '@app/shared/services/piques.service';
 import { ScriptService } from '@app/shared/services/script.service';
+import { TitlesService } from '@app/shared/services/titles.service';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PiqueI } from 'src/app/models/pique-model';
 import { UserprojectDefault, UserprojectI } from 'src/app/models/user-project';
@@ -54,6 +55,7 @@ export class DetailsComponent implements OnInit {
     private authService: AuthService,
     private modal: NgbModal,
     private projService: ProjectsService,
+    private titleService: TitlesService,
     private piqueService: PiquesService,
     private scriptService: ScriptService
   ) {}
@@ -90,20 +92,48 @@ export class DetailsComponent implements OnInit {
   piques(thumbsUp: boolean) {
     if (thumbsUp) {
       console.log('title piqued');
+
+      // Manuscript rated
       if (this.active == 3) {
-        this.modal.open(ModalBookscoreComponent);
-      }
-      if (this.active == 2) {
+        const modalRef = this.modal.open(ModalBookscoreComponent);
+        modalRef.result.then((result) => {
+          console.log(result);
+
+          this.piqueService.updateRating(
+            this.uid!,
+            this.selectedata.projectUid!,
+            result
+          );
+
+          this.piqueService.updateLevel(
+            this.uid!,
+            this.selectedata.projectUid!,
+            'manuscript'
+          );
+
+          this.titleService.incrementTitleCountM(this.selectedata.projectUid!);
+          this.titleService.incrementTitleScoreM(
+            this.selectedata.projectUid!,
+            result.predictedRating,
+            result.personalRating
+          );
+        });
+      } else if (this.active == 2) {
+        // Abstract rated
         this.manuscriptEnabled = true;
         this.active = 3;
+
         this.piqueService.updateLevel(
           this.uid!,
           this.selectedata.projectUid!,
           'abstract'
         );
+        this.titleService.incrementTitleScoreA(this.selectedata.projectUid!);
       } else if (this.active == 1) {
+        // TOC rated
         this.abstractEnabled = true;
         this.active = 2;
+
         this.piqueService.updateLevel(
           this.uid!,
           this.selectedata.projectUid!,
