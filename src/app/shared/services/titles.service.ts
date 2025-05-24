@@ -1,12 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  child,
-  get,
-  getDatabase,
-  increment,
-  ref,
-  update,
-} from 'firebase/database';
+import { child, get, getDatabase, ref, remove } from 'firebase/database';
 import { Observable } from 'rxjs';
 
 import { UsertitlesI } from 'src/app/models/user-titles';
@@ -64,51 +57,8 @@ export class TitlesService {
     return observable;
   }
 
-  setTitleScoreM(puid: string, newscore: number): void {
-    console.log(`Set Title Score Method.`);
-    var path = this.firepath + '/' + puid;
-    var _this = this;
-    const observable = new Observable<UsertitlesI[]>((subscriber) => {
-      get(child(_this.dbRef, path))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            var title: UsertitlesI = snapshot.val();
-            var score = newscore;
-            update(ref(this.db, path), { scoreT: score });
-          } else {
-            console.log('No data available');
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    });
-  }
-
-  incrementTitleScoreT(puid: string): void {
-    console.log(`Increment Title Score Method.`);
-    var path = this.firepath + '/' + puid;
-    update(ref(this.db, path), { scoreT: increment(1) });
-  }
-
-  incrementTitleScoreA(puid: string): void {
-    console.log(`Increment Abstract Score Method.`);
-    var path = this.firepath + '/' + puid;
-    update(ref(this.db, path), { scoreA: increment(1) });
-  }
-
-  incrementTitleCountM(puid: string): void {
-    console.log(`Increment Abstract Count Method.`);
-    var path = this.firepath + '/' + puid;
-    update(ref(this.db, path), { countM: increment(1) });
-  }
-
-  incrementTitleScoreM(puid: string, score1: number, score2: number): void {
-    console.log(`Increment Manuscript Score Method.`);
-    var path = this.firepath + '/' + puid;
-    update(ref(this.db, path), {
-      scoreM: increment(score1),
-      scoreM2: increment(score2),
-    });
+  remove(projectId: string): void {
+    const titleRef = ref(this.db, `titles/${projectId}`);
+    remove(titleRef);
   }
 }

@@ -109,10 +109,11 @@ export class CreateNewProjectComponent implements OnInit {
     console.log(this.project);
 
     // upload the document if one added and get the url as a reference
+    this.project.dateCreated = new Date();
+    var urls: string[] = [];
     var _this = this;
     for (const key in this.uploadedFiles) {
       const fileuid = uuid();
-      //this.path.filename = `${key}.${this.uid}.${this.project.projectUid}.${fileuid}.pdf`;
       this.path.filename = `${this.uid}.${this.project.projectUid}.${key}`;
 
       this.uploadService
@@ -120,18 +121,21 @@ export class CreateNewProjectComponent implements OnInit {
         .subscribe({
           next(url) {
             console.log('got url:', url);
-            _this.project.coverurl = url;
-            _this.project.dateCreated = new Date();
+            urls.push(url);
           },
           error(msg) {
             console.log(msg);
           },
           complete() {
-            console.log('Push finished');
+            console.log('Push finished', urls);
+            _this.project.coverurl = urls[0];
+            _this.project.abstracturl = urls[1];
+            _this.project.tocurl = urls[2];
+            _this.project.samplechaptersurl = urls[3];
+            _this.saveProject();
           },
         });
     }
-    this.saveProject();
     this.done();
   }
 
@@ -143,11 +147,12 @@ export class CreateNewProjectComponent implements OnInit {
     );
     set(projectRef, this.project);
 
-    const newTitle = new Usertitle(this.project, this.uid);
-    console.log(this.project, newTitle);
-    const titleRef = ref(this.db, `titles/${this.project.projectUid}`);
-
-    set(titleRef, newTitle);
+    if (this.project.status === ProjectStatus.PUBLISHED) {
+      const newTitle = new Usertitle(this.project, this.uid);
+      console.log(this.project, newTitle);
+      const titleRef = ref(this.db, `titles/${this.project.projectUid}`);
+      set(titleRef, newTitle);
+    }
   }
 
   onCancelAdd() {

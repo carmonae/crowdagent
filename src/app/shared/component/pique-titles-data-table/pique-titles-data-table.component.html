@@ -13,8 +13,8 @@
                 style="cursor: pointer;">Title</th>
             <th scope="col" sortable="subtitle" (sort)="onSort($event)"
                 style="cursor: pointer;">Subtitle</th>
-            <th scope="col" sortable="score" (sort)="onSort($event)"
-                style="cursor: pointer;">Score</th>
+            <!--th scope="col" sortable="score" (sort)="onSort($event)"
+                style="cursor: pointer;">Score</th-->
             <th>Action</th>
         </tr>
     </thead>
@@ -40,13 +40,14 @@
                 </div>
             </td>
             <td><b>{{title.subtitle}}</b></td>
-            <td><b>
+            <!--td><b>
                     <p><i
                             class="fa fa-star font-warning"></i>{{title.score}}</p>
-                </b></td>
+                </b>
+            </td-->
             <td class="text-center">
                 <span class="edit-option">
-                    <a href="javascript:void(0)" (click)="moveItem(title.id)">
+                    <a href="javascript:void(0)" (click)="moveItem(title.pid)">
                         <app-feather-icons *ngIf="tableName === 'Passed Titles'"
                             [icon]="'arrow-right-circle'">
                         </app-feather-icons>
@@ -57,7 +58,8 @@
                     </a>
                 </span>
                 <span class="delete-option">
-                    <a href="javascript:void(0)" (click)="removeItem(title.id)">
+                    <a href="javascript:void(0)"
+                        (click)="removeItem(title.pid)">
                         <i class="remove" data-feather="trash-2"></i>
                     </a>
                 </span>

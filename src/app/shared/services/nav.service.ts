@@ -10,10 +10,9 @@ export interface Menu {
   icon?: string;
   active?: boolean;
   bookmark?: boolean;
-  items?: Menu[]
+  items?: Menu[];
   children?: Menu[];
 }
-
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +20,7 @@ export interface Menu {
 export class NavService {
   public language: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
   MENUITEM: Menu[] = [
     {
@@ -34,7 +33,7 @@ export class NavService {
           type: 'sub',
           active: true,
           children: [
-            { path: '/dashboard/authors', title: 'Authors', type: 'link' },
+            { path: '/dashboard', title: 'Authors', type: 'link' },
             { path: '/dashboard/readers', title: 'Readers', type: 'link' },
             { path: '/dashboard/agents', title: 'Agents', type: 'link' },
           ],
@@ -42,8 +41,8 @@ export class NavService {
       ],
     },
     {
-      headTitle1: 'Applications',
-      headTitle2: 'Ready To Use Apps ',
+      headTitle1: 'Authors',
+      headTitle2: 'Create the art ',
       items: [
         {
           title: 'Projects',
@@ -52,20 +51,43 @@ export class NavService {
           active: false,
           children: [
             {
-              path: '/project/project-list',
+              path: '/projects/project-list',
               title: 'Project List',
               type: 'link',
             },
-            { path: '/project/create-new', title: 'Create New', type: 'link' },
+            {
+              path: '/projects/create-new',
+              title: 'Create New',
+              type: 'link',
+            },
           ],
         },
+      ],
+    },
+    {
+      headTitle1: 'CrowdAgent',
+      headTitle2: 'Ready To Go To Work ',
+      items: [
         {
-          title: 'File Manager',
-          icon: 'file',
+          title: 'PiQue',
+          icon: 'eye',
           type: 'link',
-          path: '/file-manager',
+          path: '/reader',
           bookmark: true,
+          children: [
+            {
+              path: '/crowdagent/swiper',
+              title: 'piQue Titles',
+              type: 'link',
+            },
+            {
+              path: '/crowdagent/pique',
+              title: 'Review Content',
+              type: 'link',
+            },
+          ],
         },
+        /*
         {
           title: 'Ecommerce',
           icon: 'ecommerce',
@@ -182,9 +204,10 @@ export class NavService {
           type: 'link',
           path: '/search-result',
         },
+      */
       ],
     },
-    {
+    /*{
       headTitle1: 'Forms & Table',
       headTitle2: 'Ready To Use Forms & Tables',
       items: [
@@ -725,10 +748,9 @@ export class NavService {
           type: 'link',
         },
       ],
-    },
+    },*/
   ];
 
   // Array
   items = new BehaviorSubject<Menu[]>(this.MENUITEM);
 }
-

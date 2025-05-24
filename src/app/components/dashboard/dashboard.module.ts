@@ -19,28 +19,31 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ReadersComponent } from './readers/readers.component';
 
 import { SortableDirective } from 'src/app/shared/directive/sortable.directive';
+import { CountsComponent } from './authors/counts/counts.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        DashboardRoutingModule,
-        SharedModule,
-        FormsModule,
-        NgApexchartsModule,
-        UserModule,
-        AuthorsComponent,
-        ReadersComponent,
-        AgentsComponent,
-        ProfileGrettingComponent,
-        CurrentBalanceComponent,
-        WeeklyVisitorsComponent,
-        BestSellingProductComponent,
-        SalesSummaryComponent,
-        TrackOrderComponent,
-        CommonDetailsComponent,
-        SortableDirective,
-        CommonDataTableComponent,
-    ],
-    exports: []
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    SharedModule,
+    FormsModule,
+    NgApexchartsModule,
+    UserModule,
+    AuthorsComponent,
+    ReadersComponent,
+    AgentsComponent,
+    ProfileGrettingComponent,
+    CurrentBalanceComponent,
+    WeeklyVisitorsComponent,
+    BestSellingProductComponent,
+    SalesSummaryComponent,
+    TrackOrderComponent,
+    CommonDetailsComponent,
+    SortableDirective,
+    CommonDataTableComponent,
+    CountsComponent,
+  ],
+  exports: [],
+  declarations: [],
 })
-export class DashboardModule { }
+export class DashboardModule {}

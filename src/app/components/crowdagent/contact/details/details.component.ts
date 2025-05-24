@@ -54,7 +54,7 @@ export class DetailsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private modal: NgbModal,
-    private projService: ProjectsService,
+    private projectsService: ProjectsService,
     private titleService: TitlesService,
     private piqueService: PiquesService,
     private scriptService: ScriptService
@@ -71,7 +71,7 @@ export class DetailsComponent implements OnInit {
 
   getAbstract(): void {
     var _this = this;
-    this.projService
+    this.projectsService
       .getProjects(this.selectedata.userUid, this.selectedata.projectUid)
       .subscribe({
         next(projects) {
@@ -111,8 +111,12 @@ export class DetailsComponent implements OnInit {
             'manuscript'
           );
 
-          this.titleService.incrementTitleCountM(this.selectedata.projectUid!);
-          this.titleService.incrementTitleScoreM(
+          this.projectsService.incrementTitleCountM(
+            this.selectedata.userUid!,
+            this.selectedata.projectUid!
+          );
+          this.projectsService.incrementTitleScoreM(
+            this.selectedata.userUid!,
             this.selectedata.projectUid!,
             result.predictedRating,
             result.personalRating
@@ -128,7 +132,10 @@ export class DetailsComponent implements OnInit {
           this.selectedata.projectUid!,
           'abstract'
         );
-        this.titleService.incrementTitleScoreA(this.selectedata.projectUid!);
+        this.projectsService.incrementTitleScoreA(
+          this.selectedata.userUid!,
+          this.selectedata.projectUid!
+        );
       } else if (this.active == 1) {
         // TOC rated
         this.abstractEnabled = true;
@@ -138,6 +145,10 @@ export class DetailsComponent implements OnInit {
           this.uid!,
           this.selectedata.projectUid!,
           'toc'
+        );
+        this.projectsService.incrementTitleScoreC(
+          this.selectedata.userUid!,
+          this.selectedata.projectUid!
         );
       }
     } else {

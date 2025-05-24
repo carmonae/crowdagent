@@ -5,11 +5,10 @@
 
     </div>
     <div *ngIf="centerBooks.length>0" class="col-8">
-        <h2>Here's what's at the bookstore shelf. Does this title piQue your
-            interest? Thumbs up or thumbs down? Or simply swipe left to pass or
-            right to pique. You
-            can change your mind about your piQues and passes
-            later.</h2>
+        <h2>Here's what's at the bookstore. Does this title piQue your
+            interest? Thumbs up or thumbs down? Or simply swipe left or
+            right. You can change your mind later.
+        </h2>
     </div>
     <div *ngIf="centerBooks.length==0" class="col-8">
         <h2>Here's your list. You can swap titles from passed to piqued and vice
@@ -153,7 +152,8 @@
             <div class="table-responsive theme-scrollbar">
                 <!-- <div class="dataTables_wrapper no-footer"> -->
                 <form>
-                    <div class="mb-3 row justify-content-end">
+                    <div *ngIf="notInterested.length>1"
+                        class="mb-3 row justify-content-end">
                         <span class="col col-form-label"
                             *ngIf="serviceTable1.loading$ | async">Loading...</span>
                         <label
@@ -196,7 +196,8 @@
             <div class="table-responsive theme-scrollbar">
                 <!-- <div class="dataTables_wrapper no-footer"> -->
                 <form>
-                    <div class="mb-3 row justify-content-end">
+                    <div *ngIf="interested.length>1"
+                        class="mb-3 row justify-content-end">
                         <span class="col col-form-label"
                             *ngIf="serviceTable2.loading$ | async">Loading...</span>
                         <label

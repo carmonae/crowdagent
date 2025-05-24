@@ -10,6 +10,7 @@ import { PiquedTitlesType } from '@app/shared/data/data/default-dashboard/piqued
 import { jobCardsData } from '@app/shared/data/data/job-search/job-search';
 import { AgePipe } from '@app/shared/pipes/age.pipe';
 import { PiquesService } from '@app/shared/services/piques.service';
+import { ProjectsService } from '@app/shared/services/projects.service';
 import { TitlesService } from '@app/shared/services/titles.service';
 import { PiquedTitleTablesService } from '@app/util/piqued-tables.util';
 import { KeycloakProfile } from 'keycloak-js';
@@ -52,6 +53,7 @@ export class TitlePickerComponent {
 
   uid: string | undefined;
 
+  /*
   centerBooks: PiquedTitlesType[] = [
     {
       id: '1',
@@ -126,6 +128,8 @@ export class TitlePickerComponent {
       datePublished: '1925',
     },
   ];
+*/
+  centerBooks: PiquedTitlesType[] = [];
   notInterested: PiquedTitlesType[] = [];
   interested: PiquedTitlesType[] = [];
 
@@ -144,6 +148,7 @@ export class TitlePickerComponent {
     private authService: AuthService,
     private titlesService: TitlesService,
     private piqueService: PiquesService,
+    private projectService: ProjectsService,
     private NgZone: NgZone
   ) {
     this.titles$ = this.serviceTable1.titles$;
@@ -158,27 +163,47 @@ export class TitlePickerComponent {
     console.log('uid=', this.myprofile.uid);
 
     var _this = this;
-    this.titlesService.getTitles().subscribe({
-      next(projects) {
-        console.log('got projects:', projects);
-        _this.allTitles = projects;
-        for (let i = 0; i < _this.allTitles.length; i++) {
-          _this.centerBooks.push({
-            id: _this.allTitles[i].projectUid!,
-            img: 'assets/images/dashboard-2/selling/01.png',
-            title: _this.allTitles[i].title,
-            subtitle: _this.allTitles[i].subtitle,
-            score: _this.allTitles[i].scoreA,
-            datePublished: _this.allTitles[i].datePublish,
-          });
-        }
-        console.log('centerBooks', _this.centerBooks);
+    var alreadyPiqued: string[] = [];
+    this.piqueService.getPiques(this.uid!).subscribe({
+      next(piques) {
+        console.log('titlepicker.ngoninit got piques', piques);
+        alreadyPiqued = piques
+          .map((item) => item.projectUid)
+          .filter((uid): uid is string => uid !== undefined);
       },
       error(msg) {
-        console.log(msg);
+        console.log('error:', msg);
       },
       complete() {
-        console.log('getPiques finished');
+        // get titles that have been published
+        _this.titlesService.getTitles().subscribe({
+          next(projects) {
+            console.log('got projects:', projects);
+
+            // consider projects that are not already piqued
+            _this.allTitles = projects.filter(
+              (item) => !alreadyPiqued.includes(item.projectUid!)
+            );
+
+            for (let i = 0; i < _this.allTitles.length; i++) {
+              _this.centerBooks.push({
+                uid: _this.allTitles[i].userUid!,
+                pid: _this.allTitles[i].projectUid!,
+                img: 'assets/images/dashboard-2/selling/01.png',
+                title: _this.allTitles[i].title,
+                subtitle: _this.allTitles[i].subtitle,
+                datePublished: _this.allTitles[i].datePublish,
+              });
+            }
+            console.log('centerBooks', _this.centerBooks);
+          },
+          error(msg) {
+            console.log(msg);
+          },
+          complete() {
+            console.log('getPiques finished');
+          },
+        });
       },
     });
   }
@@ -205,6 +230,10 @@ export class TitlePickerComponent {
 
   onPass() {
     console.log('onPass', this.swiper);
+    this.projectService.incrementTitleScoreI(
+      this.centerBooks[0].uid,
+      this.centerBooks[0].pid
+    );
     this.notInterested.push(this.centerBooks[0]);
     this.centerBooks.splice(0, 1);
     this.serviceTable1.thedata = this.notInterested;
@@ -212,6 +241,10 @@ export class TitlePickerComponent {
 
   onPique() {
     console.log('onPique', this.swiper);
+    this.projectService.incrementTitleScoreI(
+      this.centerBooks[0].uid,
+      this.centerBooks[0].pid
+    );
     this.interested.push(this.centerBooks[0]);
     this.centerBooks.splice(0, 1);
     this.serviceTable2.thedata = this.interested;
@@ -236,7 +269,7 @@ export class TitlePickerComponent {
   moveToPass(id: string) {
     console.log('move to pass', id, this.interested);
     this.interested.map((elem: PiquedTitlesType, i: number) => {
-      elem.id == id && this.notInterested.push(elem);
+      elem.pid == id && this.notInterested.push(elem);
     });
     this.removeItemFrom(id, this.interested);
     this.serviceTable1.thedata = this.notInterested;
@@ -246,7 +279,7 @@ export class TitlePickerComponent {
   moveToPique(id: string) {
     console.log('move to pique', id, this.notInterested, this.interested);
     this.notInterested.map((elem: PiquedTitlesType, i: number) => {
-      elem.id == id && this.interested.push(elem);
+      elem.pid == id && this.interested.push(elem);
     });
     this.removeItemFrom(id, this.notInterested);
     this.serviceTable1.thedata = this.notInterested;
@@ -256,17 +289,17 @@ export class TitlePickerComponent {
   removeItemFrom(id: string, collection: PiquedTitlesType[]) {
     console.log('remove item', id);
     collection.map((elem: PiquedTitlesType, i: number) => {
-      elem.id == id && collection.splice(i, 1);
+      elem.pid == id && collection.splice(i, 1);
     });
   }
 
   removeItem(id: string) {
     console.log('remove item', id);
     this.notInterested.map((elem: PiquedTitlesType, i: number) => {
-      elem.id == id && this.removeItemFrom(id, this.notInterested);
+      elem.pid == id && this.removeItemFrom(id, this.notInterested);
     });
     this.interested.map((elem: PiquedTitlesType, i: number) => {
-      elem.id == id && this.removeItemFrom(id, this.interested);
+      elem.pid == id && this.removeItemFrom(id, this.interested);
     });
     this.serviceTable1.thedata = this.interested;
     this.serviceTable2.thedata = this.notInterested;
@@ -276,15 +309,19 @@ export class TitlePickerComponent {
     console.log('onDonePiquing', this.allTitles);
     var idsOfInterest = new Set<string>();
     for (let i = 0; i < this.interested.length; i++) {
-      idsOfInterest.add(this.interested[i].id);
+      idsOfInterest.add(this.interested[i].pid);
     }
+    console.log('onDonePiquing.idsOfInterest=', idsOfInterest);
 
     for (let i = 0; i < this.allTitles.length; i++) {
       if (idsOfInterest.has(this.allTitles[i].projectUid!)) {
         console.log('onDonePiquing', this.allTitles[i]);
         let newPique = new Pique(this.allTitles[i]);
         this.piqueService.addPique(this.myprofile.uid!, newPique);
-        this.titlesService.incrementTitleScoreT(this.allTitles[i].projectUid!);
+        this.projectService.incrementTitleScoreT(
+          this.allTitles[i].userUid!,
+          this.allTitles[i].projectUid!
+        );
       }
     }
     this.interested = [];

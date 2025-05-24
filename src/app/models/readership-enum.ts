@@ -1,6 +1,7 @@
 export enum Readership {
-    PUBLIC = 'Public',
-    GENRE = 'Genre',
-    PRIVATE = 'Private',
-    FEATURED = 'Featured'
+  PUBLIC = 'Public',
+  INVITED = 'Invited',
+  GENRE = 'Genre',
+  PRIVATE = 'Private',
+  FEATURED = 'Featured',
 }
