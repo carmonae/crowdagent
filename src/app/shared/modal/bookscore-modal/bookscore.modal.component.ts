@@ -18,14 +18,14 @@ export class ModalBookscoreComponent {
   @ViewChild('personalRating') personalRatingView!: NumberRatingComponent;
   @ViewChild('ratingPrediction') ratingPredictionView!: NumberRatingComponent;
 
-  @Input() maxAmount: number = 100;
+  @Input() maxAmount: number = 20;
   @Output() rating = new EventEmitter<RatingTuple>();
 
   validate: boolean = false;
 
   ratingsLegend: string[] = [];
   ratingDescription: string = '';
-  bet: number = 50;
+  bet: number = 0;
 
   constructor(private modal: NgbActiveModal) {
     for (const item of legendData) {
@@ -48,8 +48,8 @@ export class ModalBookscoreComponent {
 
   increment() {
     this.bet += 1;
-    if (this.bet >= 100) {
-      this.bet = 100;
+    if (this.bet >= 20) {
+      this.bet = 20;
     }
   }
 
@@ -65,7 +65,6 @@ export class ModalBookscoreComponent {
     console.log('personal rating:', this.personalRatingView.rating);
     console.log('predicted rating:', this.ratingPredictionView.rating);
     var result = {
-      projId: '',
       personalRating: this.personalRatingView.rating,
       predictedRating: this.ratingPredictionView.rating,
       bet: this.bet,
