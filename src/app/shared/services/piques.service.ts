@@ -129,7 +129,8 @@ export class PiquesService {
 
   updateRating(userId: string, projId: string, rating: RatingTuple): void {
     var path = `${this.firepath}/${userId}/${projId}`;
-    update(ref(this.db, path), { personalRating: rating.personalRating });
-    update(ref(this.db, path), { predictedRating: rating.predictedRating });
+    update(ref(this.db, path), {
+      rating: rating,
+    });
   }
 }

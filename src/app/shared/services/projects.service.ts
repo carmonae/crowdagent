@@ -4,6 +4,7 @@ import {
   get,
   getDatabase,
   increment,
+  push,
   ref,
   update,
 } from 'firebase/database';
@@ -129,13 +130,17 @@ export class ProjectsService implements OnInit {
     uid: string,
     puid: string,
     score1: number,
-    score2: number
+    score2: number,
+    bet: number
   ): void {
     console.log(`Increment Manuscript Score Method.`);
-    var path = `${this.firepath}/${uid}/${puid}`;
-    update(ref(this.db, path), {
+    var path = `${this.firepath}/${uid}/${puid}/ratings`;
+    push(ref(this.db, path), {
+      readerId: uid,
       scoreM: increment(score1),
       scoreM2: increment(score2),
+      bet: increment(bet),
+      timestamp: Date(),
     });
   }
 }

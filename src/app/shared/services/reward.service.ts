@@ -149,9 +149,9 @@ class BookRewardService {
 async function main() {
   // Simulated submissions (for testing)
   const submissions: ReaderSubmission[] = [
-    { readerId: '1', predictedRating: { rating: 12, bet: 4 } },
-    { readerId: '2', predictedRating: { rating: 10, bet: 3 } },
-    { readerId: '3', predictedRating: { rating: 7, bet: 2 } },
+    { readerId: '1', predictedRating: 12, personalRating: 12, bet: 4 },
+    { readerId: '2', predictedRating: 10, personalRating: 10, bet: 3 },
+    { readerId: '3', predictedRating: 7, personalRating: 7, bet: 2 },
     // Add more submissions (e.g., 1000 readers)
     // For brevity, simulate 1000 readers with normal distribution
     ...Array.from({ length: 997 }, (_, i) => {

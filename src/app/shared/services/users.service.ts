@@ -67,9 +67,9 @@ export class UserService {
 
     var ratedAmount: number = 0;
     if (amount <= 0) {
-      ratedAmount = -(10 + Math.ceil((-amount / 100) * 10 * 10) / 10);
+      ratedAmount = -(20 + amount);
     } else {
-      ratedAmount = 10 + Math.ceil((amount / 100) * 10 * 10) / 10;
+      ratedAmount = 20 + amount;
     }
 
     set(userPiquesRef, increment(ratedAmount))

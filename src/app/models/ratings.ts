@@ -1,7 +1,9 @@
 export interface RatingTuple {
   projId: string;
+  readerId: string;
   personalRating: number;
   predictedRating: number;
+  bet: number;
 }
 
 export interface legendI {
