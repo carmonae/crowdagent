@@ -101,7 +101,6 @@ export class DetailsComponent implements OnInit {
       this.piqueService.updateRating(
         this.uid!,
         this.selectedata.projectUid!,
-
         result
       );
 
@@ -125,7 +124,8 @@ export class DetailsComponent implements OnInit {
         this.selectedata.userUid!,
         this.selectedata.projectUid!,
         result.predictedRating,
-        result.personalRating
+        result.personalRating,
+        result.bet
       );
     });
   }
