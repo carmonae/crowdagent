@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../../auth/service/auth.keycloak.service';
+import { AuthService } from '../../../auth/service/auth.keycloak.service';
 
 @Component({
   selector: 'app-profile-gretting',
