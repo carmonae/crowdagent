@@ -1,5 +1,12 @@
 import { TagI } from './tag-interface';
 
+export enum PiqueLevel {
+  TITLE = 1,
+  TOC = 2,
+  ABSTRACT = 3,
+  MANUSCRIPT = 4,
+}
+
 export interface PiqueI {
   projectUid: string | undefined;
   userUid: string | undefined;

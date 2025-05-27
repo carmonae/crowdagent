@@ -38,6 +38,8 @@ export class PiqueTitlesDataTableComponent {
     []
   );
   @Input() tableName: string = '?';
+  @Output() itemMoved = new EventEmitter<string>();
+  @Output() itemRemoved = new EventEmitter<string>();
 
   public titles$: Observable<PiquedTitlesType[]>;
   public total$: Observable<number>;
@@ -50,8 +52,6 @@ export class PiqueTitlesDataTableComponent {
   public maxItems: number = 4;
   public nextItem: number = 0;
 
-  @Output() itemMoved = new EventEmitter<string>();
-  @Output() itemRemoved = new EventEmitter<string>();
   public isShow: boolean = false;
 
   @ViewChildren(SortableDirective) headers!: QueryList<SortableDirective>;
@@ -126,5 +126,13 @@ export class PiqueTitlesDataTableComponent {
     this.maxItems = this.service.pageSize;
     this.currentPage = 1;
     this.service.page = this.currentPage;
+  }
+
+  getTitleImage(title: PiquedTitlesType): string {
+    if (title.img && title.img !== '') {
+      return title.img;
+    } else {
+      return 'assets/images/blankBookCover.jpg';
+    }
   }
 }

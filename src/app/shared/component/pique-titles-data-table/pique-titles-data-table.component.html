@@ -30,8 +30,8 @@
             </td>
             <td>
                 <div class="d-flex align-items-center">
-                    <div class="flex-shrink-0"><img class="img-50"
-                            src={{title.img}}>
+                    <div class="flex-shrink-0">
+                        <img class="b-r-8 img-60" src={{getTitleImage(title)}}>
                     </div>
                     <div class="flex-grow-1 ms-2"><a
                             [routerLink]="['/ecommerce/product-page']">
@@ -48,10 +48,12 @@
             <td class="text-center">
                 <span class="edit-option">
                     <a href="javascript:void(0)" (click)="moveItem(title.pid)">
-                        <app-feather-icons *ngIf="tableName === 'Passed Titles'"
+                        <app-feather-icons
+                            *ngIf="tableName === 'Pass On These Titles'"
                             [icon]="'arrow-right-circle'">
                         </app-feather-icons>
-                        <app-feather-icons *ngIf="tableName === 'PiQued Titles'"
+                        <app-feather-icons
+                            *ngIf="tableName === 'Titles PiQued My Interest'"
                             [icon]="'arrow-left-circle'">
                         </app-feather-icons>
                         <!-- <i data-feather="edit"></i> -->

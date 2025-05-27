@@ -1,8 +1,6 @@
 from datetime import datetime, timedelta
 from collections import deque, defaultdict
 
-import pandas as pd
-
 # Configurable settings
 MAX_DAILY_BUCKETS = 7  # for "last 7 days"
 daily_buckets = deque(maxlen=MAX_DAILY_BUCKETS)  # rolling window

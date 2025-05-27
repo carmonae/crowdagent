@@ -8,21 +8,22 @@ import {
 } from '@angular/core';
 import { AuthService } from '@app/auth//service/auth.keycloak.service';
 import { ModalBookscoreComponent } from '@app/shared/modal/bookscore-modal/bookscore.modal.component';
+import { SafePipe } from '@app/shared/pipes/safe.pipe';
 import { TruncatePipe } from '@app/shared/pipes/truncate.pipe';
 import { PiquesService } from '@app/shared/services/piques.service';
 import { ScriptService } from '@app/shared/services/script.service';
 import { TitlesService } from '@app/shared/services/titles.service';
+import { UserService } from '@app/shared/services/users.service';
 import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PiqueI } from 'src/app/models/pique-model';
 import { UserprojectDefault, UserprojectI } from 'src/app/models/user-project';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
 import { PrintComponent } from './print/print.component';
-
 enum levelOpen {
   title = 1,
   toc = 2,
   abstract = 3,
-  manuscipt = 4,
+  manuscript = 3,
 }
 
 @Component({
@@ -31,6 +32,7 @@ enum levelOpen {
   styleUrls: ['./details.component.scss'],
   standalone: true,
   imports: [CommonModule, TruncatePipe, NgbModule],
+  providers: [SafePipe],
 })
 export class DetailsComponent implements OnInit {
   @Input() selectedata!: PiqueI;
@@ -57,7 +59,9 @@ export class DetailsComponent implements OnInit {
     private projectsService: ProjectsService,
     private titleService: TitlesService,
     private piqueService: PiquesService,
-    private scriptService: ScriptService
+    private userService: UserService,
+    private scriptService: ScriptService,
+    private safe: SafePipe
   ) {}
 
   ngOnInit(): void {
@@ -89,39 +93,50 @@ export class DetailsComponent implements OnInit {
       });
   }
 
+  getScore(): void {
+    const modalRef = this.modal.open(ModalBookscoreComponent);
+    modalRef.result.then((result) => {
+      console.log(result);
+
+      this.piqueService.updateRating(
+        this.uid!,
+        this.selectedata.projectUid!,
+
+        result
+      );
+
+      this.piqueService.updateLevel(
+        this.uid!,
+        this.selectedata.projectUid!,
+        'manuscript'
+      );
+
+      this.userService.decrementUserPiques(
+        this.selectedata.userUid!,
+        result.bet
+      );
+
+      this.projectsService.incrementTitleCountM(
+        this.selectedata.userUid!,
+        this.selectedata.projectUid!
+      );
+
+      this.projectsService.incrementTitleScoreM(
+        this.selectedata.userUid!,
+        this.selectedata.projectUid!,
+        result.predictedRating,
+        result.personalRating
+      );
+    });
+  }
+
   piques(thumbsUp: boolean) {
     if (thumbsUp) {
       console.log('title piqued');
 
       // Manuscript rated
       if (this.active == 3) {
-        const modalRef = this.modal.open(ModalBookscoreComponent);
-        modalRef.result.then((result) => {
-          console.log(result);
-
-          this.piqueService.updateRating(
-            this.uid!,
-            this.selectedata.projectUid!,
-            result
-          );
-
-          this.piqueService.updateLevel(
-            this.uid!,
-            this.selectedata.projectUid!,
-            'manuscript'
-          );
-
-          this.projectsService.incrementTitleCountM(
-            this.selectedata.userUid!,
-            this.selectedata.projectUid!
-          );
-          this.projectsService.incrementTitleScoreM(
-            this.selectedata.userUid!,
-            this.selectedata.projectUid!,
-            result.predictedRating,
-            result.personalRating
-          );
-        });
+        this.getScore();
       } else if (this.active == 2) {
         // Abstract rated
         this.manuscriptEnabled = true;
@@ -153,7 +168,9 @@ export class DetailsComponent implements OnInit {
       }
     } else {
       console.log('title unpiqued');
-      if (this.active == 2) {
+      if (this.active == 3) {
+        this.getScore();
+      } else if (this.active == 2) {
         this.manuscriptEnabled = false;
         this.abstractEnabled = false;
         this.piqueService.updateLevel(
@@ -172,6 +189,26 @@ export class DetailsComponent implements OnInit {
       }
     }
     console.log('active tab = ', this.active);
+  }
+
+  highestLevelReached(): number {
+    let key = this.selectedata.level as keyof typeof levelOpen;
+    return levelOpen[key];
+  }
+  moveTab(tabName: string) {
+    console.log(tabName);
+    //let tabLevel = levelOpen[tabName as keyof typeof levelOpen];
+    //if (this.highestLevelReached > tabLevel)
+  }
+
+  noVoteYet(): boolean {
+    let result: boolean = true;
+
+    if (this.highestLevelReached() > this.active) {
+      result = false;
+    }
+
+    return result;
   }
 
   close(): void {

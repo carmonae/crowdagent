@@ -11,8 +11,7 @@
         </h2>
     </div>
     <div *ngIf="centerBooks.length==0" class="col-8">
-        <h2>Here's your list. You can swap titles from passed to piqued and vice
-            versa using left/right arrow of a given title.</h2>
+        <h2>No more books to piQue your interest.</h2>
     </div>
     <div class="col-4">
 
@@ -20,31 +19,6 @@
 </div>
 <br />
 <div class="row" style="margin-bottom:0px">
-    <!--div *ngIf="centerBooks.length>0"
-        class="col-2 text-center align-items-center">
-        <button
-            class="btn btn-pill btn-air-secondary btn-secondary-gradien"
-            (click)="onPass()"><span
-                style="font-size:large">Pass</span></button>
-    </div-->
-
-    <!-- Left Arrows To Pass Table>
-    <div class="col-1" id="arrowAnimLeft">
-        <div class="text-center">
-            <div class="arrowSlidingLeft">
-                <div class="arrowLeft"></div>
-            </div>
-            <div class="arrowSlidingLeft delay1">
-                <div class="arrowLeft"></div>
-            </div>
-            <div class="arrowSlidingLeft delay2">
-                <div class="arrowLeft"></div>
-            </div>
-            <div class="arrowSlidingLeft delay3">
-                <div class="arrowLeft"></div>
-            </div>
-        </div>
-    </div-->
 
     <!-- Center Table -->
     <swiper style="margin-bottom:0px" #swiper class="col-8"
@@ -67,7 +41,7 @@
                             <div class="d-flex">
                                 <img
                                     class="img-40 img-fluid m-r-20"
-                                    src="{{ cardData.image }}"
+                                    src="assets/images/blankBookCover.jpg"
                                     alt />
                                 <div class="row">
                                     <div>
@@ -95,31 +69,6 @@
             </div>
         </ng-template>
     </swiper>
-
-    <!-- Right Arrows To Pique Table>
-    <div class="col-2" id="arrowAnimRight">
-        <div class="arrowSlidingRight">
-            <div class="arrowRight"></div>
-        </div>
-        <div class="arrowSlidingRight delay1">
-            <div class="arrowRight"></div>
-        </div>
-        <div class="arrowSlidingRight delay2">
-            <div class="arrowRight"></div>
-        </div>
-        <div class="arrowSlidingRight delay3">
-            <div class="arrowRight"></div>
-        </div>
-    </div-->
-
-    <!--div *ngIf="centerBooks.length>0"
-        class="col-2 text-center align-items-center">
-        <button
-            class="btn btn-pill btn-air-primary btn-primary-gradien"
-            (click)="onPique()">
-            <span style="font-size:large">piQue</span>
-        </button>
-    </div-->
 
 </div>
 

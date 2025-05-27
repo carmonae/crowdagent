@@ -48,8 +48,8 @@ export class TitlePickerComponent {
   public titles$: Observable<PiquedTitlesType[]>;
   public total$: Observable<number>;
 
-  public passTableName: string = 'Passed Titles';
-  public piqueTableName: string = 'PiQued Titles';
+  public passTableName: string = 'Pass On These Titles';
+  public piqueTableName: string = 'Titles PiQued My Interest';
 
   uid: string | undefined;
 
@@ -189,7 +189,7 @@ export class TitlePickerComponent {
               _this.centerBooks.push({
                 uid: _this.allTitles[i].userUid!,
                 pid: _this.allTitles[i].projectUid!,
-                img: 'assets/images/dashboard-2/selling/01.png',
+                img: '',
                 title: _this.allTitles[i].title,
                 subtitle: _this.allTitles[i].subtitle,
                 datePublished: _this.allTitles[i].datePublish,

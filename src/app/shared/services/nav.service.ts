@@ -42,7 +42,7 @@ export class NavService {
     },
     {
       headTitle1: 'Authors',
-      headTitle2: 'Create the art ',
+      headTitle2: 'Share the Masterpiece ',
       items: [
         {
           title: 'Projects',
@@ -66,7 +66,7 @@ export class NavService {
     },
     {
       headTitle1: 'CrowdAgent',
-      headTitle2: 'Ready To Go To Work ',
+      headTitle2: 'Read Baby Read',
       items: [
         {
           title: 'PiQue',
@@ -76,12 +76,12 @@ export class NavService {
           bookmark: true,
           children: [
             {
-              path: '/crowdagent/swiper',
+              path: '/crowdagent/piquetitle',
               title: 'piQue Titles',
               type: 'link',
             },
             {
-              path: '/crowdagent/pique',
+              path: '/crowdagent/reviewpiques',
               title: 'Review Content',
               type: 'link',
             },

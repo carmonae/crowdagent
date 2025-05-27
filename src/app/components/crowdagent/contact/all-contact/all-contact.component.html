@@ -2,34 +2,30 @@
   class="tab-pane fade active show"
   id="pills-personal"
   role="tabpanel"
-  aria-labelledby="pills-personal-tab"
->
+  aria-labelledby="pills-personal-tab">
   <div class="card mb-0">
     <div class="card-header d-flex">
       <h3>Pique Titles</h3>
-      <span class="f-14 pull-right mt-0"
-        >{{ filteredTitles.length }} Titles</span
-      >
+      <span class="f-18 pull-right mt-0"> {{ amountLeft }} piQues Left </span>
+      <span class="f-18 pull-right mt-0">{{ filteredTitles.length }}
+        Titles</span>
     </div>
     <div
       *ngIf="filteredTitles"
       class="card-body p-0 custom-scrollbar"
-      style="height: 40rem"
-    >
+      style="height: 40rem">
       <div class="row list-persons" id="addcon">
-        <div class="col-xl-4 xl-50 col-md-5">
-          <div
-            class="nav flex-column nav-pills"
-            id="v-pills-tab"
-            role="tablist"
-            aria-orientation="vertical"
-          >
-            <ng-container
-              *ngFor="
+        <div
+          class="nav flex-column nav-pills"
+          id="v-pills-tab"
+          role="tablist"
+          aria-orientation="vertical">
+          <ng-container
+            *ngFor="
                 let data of filteredTitles
                   | slice : nextItem : nextItem + maxItems
-              "
-            >
+              ">
+            <div class="col-lg-12" style="margin-bottom:20px">
               <a
                 class="contact-tab-0 nav-link"
                 [ngClass]="data.title ? 'active show' : ''"
@@ -39,29 +35,43 @@
                 (click)="getDataForDetails(data.projectUid)"
                 (contextmenu)="contextMenu($event, data.projectUid)"
                 aria-controls="v-pills-user"
-                aria-selected="true"
-              >
+                aria-selected="true">
                 <div class="d-flex">
                   <img
-                    class="img-50 img-fluid m-r-20 rounded-circle update_img_0"
-                    src="assets/images/user/2.png"
-                    alt=""
-                  />
-                  <div class="flex-grow-1">
+                    class="b-r-8 img-80"
+                    src="assets/images/blankBookCover.jpg"
+                    alt />
+                  <div class="flex-grow-1" style="margin-left: 10px">
                     <h4>
                       <span class="first_name_0">{{ data.title }} </span>
                     </h4>
-                    <p class="email_add_0">{{ data.subtitle }}</p>
+                    <h6>
+                      <span class="first_name_0">{{ data.subtitle }} </span>
+                    </h6>
+                    <p class="email_add_0">by: Pen Name</p>
+                  </div>
+
+                  <div class="col-md-2">
+                    <ul style="margin-right:10px">
+                      <li><span><app-feather-icons
+                            [icon]="checkOrCircle(data, 'title')"></app-feather-icons></span>Title</li>
+                      <li><span><app-feather-icons
+                            [icon]="checkOrCircle(data, 'toc')"></app-feather-icons></span>Table
+                        of
+                        Contents</li>
+                      <li><span><app-feather-icons
+                            [icon]="checkOrCircle(data, 'abstract')"></app-feather-icons></span>Abstract</li>
+                      <li><span><app-feather-icons
+                            [icon]="checkOrCircle(data, 'manuscript')"></app-feather-icons></span>Manuscript</li>
+                    </ul>
                   </div>
                 </div>
               </a>
-            </ng-container>
-          </div>
+            </div>
+
+          </ng-container>
         </div>
 
-        <div *ngIf="selectedata" class="col-xl-8 xl-50 col-md-7">
-          <app-details [selectedata]="selectedata"></app-details>
-        </div>
       </div>
     </div>
   </div>
@@ -79,22 +89,24 @@
       <li
         class="page-item"
         *ngIf="nextpage <= lastpage"
-        [class.active]="currentPage == nextpage"
-      >
+        [class.active]="currentPage == nextpage">
         <a class="page-link" (click)="gotoPage(nextpage)">{{ nextpage }}</a>
       </li>
       <li
         class="page-item"
         *ngIf="pageafternext <= lastpage"
-        [class.active]="currentPage == pageafternext"
-      >
+        [class.active]="currentPage == pageafternext">
         <a class="page-link" (click)="gotoPage(pageafternext)">{{
           pageafternext
-        }}</a>
+          }}</a>
       </li>
       <li class="page-item" [class.disabled]="currentPage == lastpage">
         <a class="page-link" (click)="gotoPage(currentPage + 1)">Next</a>
       </li>
     </ul>
   </nav>
+</div>
+
+<div *ngIf="selectedata" class="col-xl-12 xl-50 col-md-7">
+  <app-details [selectedata]="selectedata"></app-details>
 </div>
