@@ -52,16 +52,26 @@ export class ProjectsService implements OnInit {
     const observable = new Observable<UserprojectI[]>((subscriber) => {
       get(child(_this.dbRef, path))
         .then((snapshot) => {
-          var userProjects: any[] = [];
-          if (snapshot.exists()) {
-            snapshot.forEach((childSnapshot) => {
-              userProjects.push(childSnapshot.val());
-            });
+          if (pid == '*') {
+            var userProjects: any[] = [];
+            if (snapshot.exists()) {
+              snapshot.forEach((childSnapshot) => {
+                userProjects.push(childSnapshot.val());
+              });
 
-            subscriber.next(userProjects);
+              subscriber.next(userProjects);
+            } else {
+              subscriber.next([]);
+              console.log('No data available');
+            }
           } else {
-            subscriber.next([]);
-            console.log('No data available');
+            var userProject: any = {};
+            if (snapshot.exists()) {
+              subscriber.next([snapshot.val()]);
+            } else {
+              subscriber.next();
+              console.log('No data avail');
+            }
           }
           subscriber.complete();
         })

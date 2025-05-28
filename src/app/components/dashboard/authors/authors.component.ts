@@ -11,13 +11,14 @@ import { AuthService } from '@app/auth/service/auth.keycloak.service';
 import { UserprojectI } from '@app/models/user-project';
 import { ProjectsService } from '@app/shared/services/projects.service';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { CurrentBalanceComponent } from '../current-balance/current-balance.component';
-import { ProfileGrettingComponent } from '../profile-gretting/profile-gretting.component';
 import { BestSellingProductComponent } from './best-selling-product/best-selling-product.component';
 import { CommonDetailsComponent } from './common-details/common-details.component';
 import { CountsComponent } from './counts/counts.component';
+import { CurrentBalanceComponent } from './current-balance/current-balance.component';
+import { ProfileGrettingComponent } from './profile-gretting/profile-gretting.component';
 import { SalesSummaryComponent } from './sales-summary/sales-summary.component';
 import { WeeklyVisitorsComponent } from './weekly-visitors/weekly-visitors.component';
+
 @Component({
   selector: 'app-authors',
   templateUrl: './authors.component.html',

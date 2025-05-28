@@ -32,6 +32,14 @@ const routes: Routes = [
           breadcrumb: 'PiqueTitle',
         },
       },
+      {
+        path: 'listreviews',
+        component: ListviewComponent,
+        data: {
+          title: 'List Reviews',
+          breadcrumb: 'List Reviews',
+        },
+      },
     ],
   },
 ];

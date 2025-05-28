@@ -1,12 +1,12 @@
 // Types for clarity and type safety
-interface ReaderSubmission {
+export interface ReaderSubmission {
   readerId: string; // Unique identifier for the reader
   personalRating: number; // Reader's personal rating and contribution
   predictedRating: number; // Rating from 1 to 20
   bet: number; // Contribution amount in piques (2 to 4)
 }
 
-interface RewardResult {
+export interface RewardResult {
   readerId: string;
   score: number; // Quadratic score (-1 to 1)
   reward: number; // Final reward in $
@@ -18,7 +18,7 @@ const MAX_CONTRIBUTION = 4;
 const MIN_RATING = 1;
 const MAX_RATING = 20;
 
-class BookRewardService {
+export class BookRewardService {
   /**
    * Validates a single reader submission
    * @throws Error if rating or contribution is invalid

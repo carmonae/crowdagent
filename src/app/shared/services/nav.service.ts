@@ -33,7 +33,7 @@ export class NavService {
           type: 'sub',
           active: true,
           children: [
-            { path: '/dashboard', title: 'Authors', type: 'link' },
+            { path: '/dashboard/authors', title: 'Authors', type: 'link' },
             { path: '/dashboard/readers', title: 'Readers', type: 'link' },
             { path: '/dashboard/agents', title: 'Agents', type: 'link' },
           ],
@@ -83,6 +83,11 @@ export class NavService {
             {
               path: '/crowdagent/reviewpiques',
               title: 'Review Content',
+              type: 'link',
+            },
+            {
+              path: '/crowdagent/listreviews',
+              title: 'List Reviews',
               type: 'link',
             },
           ],

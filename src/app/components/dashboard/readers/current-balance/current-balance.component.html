@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header card-no-border">
+    <div class="header-top">
+      <h3>Your Total piQues</h3>
+    </div>
+  </div>
+  <div class="card-body pt-0">
+    <ul class="list-unstyled balance-card">
+      <li>
+        <h3>${{totalPiques | number:'1.0':"en-US"}} </h3>
+      </li>
+      <li class="d-flex justify-content-between">
+        <p>Number of books piqued</p><span>{{nBooks |
+          number:'1.0':"en-US"}}</span>
+      </li>
+      <li class="d-flex justify-content-between">
+        <p>Average piQue per book</p><span>{{averagePiques |
+          number:'1.1':"en-US"}}</span>
+      </li>
+      <li class="d-flex justify-content-between">
+        <p>Max piQue from any book</p><span>{{maxPiques |
+          number:'1.0':"en-US"}}</span>
+      </li>
+      <li class="d-flex justify-content-between">
+        <p>PiQues This Week</p><span>{{piquesThisWeek |
+          number:'1.0':"en-US"}}</span>
+      </li>
+      <li>
+        <div class="d-flex justify-content-center gap-4"> <a
+            [routerLink]="['/ecommerce/checkout']">
+            <button class="transfer btn">Redeem </button></a><a
+            [routerLink]="['/ecommerce/invoice']">
+            <button class="receive btn">ReInvest </button></a></div>
+      </li>
+
+    </ul>
+  </div>
+</div>

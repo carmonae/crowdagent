@@ -17,6 +17,7 @@ export interface PiqueI {
   personalRating: number;
   predictedRating: number;
   tags: TagI[];
+  bet: number;
 }
 
 export class Pique implements PiqueI {
@@ -29,6 +30,7 @@ export class Pique implements PiqueI {
   public personalRating: number = 0;
   public predictedRating: number = 0;
   public tags: TagI[] = [];
+  public bet: number = 0;
 
   constructor(title: any) {
     this.projectUid = title.projectUid;
@@ -39,5 +41,6 @@ export class Pique implements PiqueI {
     this.personalRating = 0;
     this.predictedRating = 0;
     this.tags = [];
+    this.bet = 0;
   }
 }

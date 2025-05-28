@@ -13,9 +13,7 @@ import { CommonDetailsComponent } from './authors/common-details/common-details.
 import { SalesSummaryComponent } from './authors/sales-summary/sales-summary.component';
 import { TrackOrderComponent } from './authors/track-order/track-order.component';
 import { WeeklyVisitorsComponent } from './authors/weekly-visitors/weekly-visitors.component';
-import { CurrentBalanceComponent } from './current-balance/current-balance.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { ProfileGrettingComponent } from './profile-gretting/profile-gretting.component';
 import { ReadersComponent } from './readers/readers.component';
 
 import { SortableDirective } from 'src/app/shared/directive/sortable.directive';
@@ -32,8 +30,6 @@ import { CountsComponent } from './authors/counts/counts.component';
     AuthorsComponent,
     ReadersComponent,
     AgentsComponent,
-    ProfileGrettingComponent,
-    CurrentBalanceComponent,
     WeeklyVisitorsComponent,
     BestSellingProductComponent,
     SalesSummaryComponent,
