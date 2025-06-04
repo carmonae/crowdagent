@@ -90,7 +90,9 @@ export class AuthService {
 
   public async login(): Promise<void> {
     return this.keycloakService
-      .login()
+      .login({
+        redirectUri: window.location.origin + '/dashboard',
+      })
       .then((value) => {
         console.log('login:', value);
       })

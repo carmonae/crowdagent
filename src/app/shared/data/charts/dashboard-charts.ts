@@ -9,9 +9,9 @@ import {
   ApexXAxis,
   ApexYAxis,
 } from 'ng-apexcharts';
-let white = '#fff'
+let white = '#fff';
 var darkcolor = '#31322D';
-var lightcolor = "#F1F8F1"
+var lightcolor = '#F1F8F1';
 
 export type ChartOptions = {
   series?: ApexAxisChartSeries | ApexAxisChartSeries;
@@ -23,15 +23,16 @@ export type ChartOptions = {
   xaxis?: ApexXAxis | ApexXAxis[];
   yaxis?: ApexYAxis | ApexYAxis[];
   responsive?: ApexResponsive[];
-}
-
+};
 
 //Weekly Visitor Chart For Default Dashboard
 export const WeeklyVisitor: ChartOptions | any = {
-  series: [{
-    name: 'Average : 26,546 ',
-    data: [20, 120, 40, 30, 65, 120, 44],
-  }],
+  series: [
+    {
+      name: 'Visitors',
+      data: [1, 2, 3, 4, 5, 6, 7],
+    },
+  ],
   chart: {
     height: 300,
     type: 'radar',
@@ -47,27 +48,27 @@ export const WeeklyVisitor: ChartOptions | any = {
       size: 110,
       offsetY: -20,
       polygons: {
-        strokeColor: "#e9e9e9",
+        strokeColor: '#e9e9e9',
         fill: {
-          colors: [lightcolor, "#fff"]
-        }
+          colors: [lightcolor, '#fff'],
+        },
       },
       dataLabels: {
         name: {
           show: true,
-        }
+        },
       },
-    }
+    },
   },
   title: {
-    text: "Average : 26,546",
-    align: "center",
+    text: 'Average : 26,546',
+    align: 'center',
     offsetY: 272,
     style: {
       fontSize: '16px',
       fontWeight: '400',
       fontFamily: 'Secular One',
-      color: '#1F2F3E'
+      color: '#1F2F3E',
     },
   },
   labels: ['Average : 26,546 '],
@@ -79,7 +80,15 @@ export const WeeklyVisitor: ChartOptions | any = {
     strokeWidth: 3,
   },
   xaxis: {
-    categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    categories: [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ],
   },
   yaxis: {
     show: false,
@@ -91,9 +100,9 @@ export const WeeklyVisitor: ChartOptions | any = {
         plotOptions: {
           radar: {
             size: 90,
-          }
+          },
         },
-      }
+      },
     },
     {
       breakpoint: 1334,
@@ -101,9 +110,9 @@ export const WeeklyVisitor: ChartOptions | any = {
         plotOptions: {
           radar: {
             size: 70,
-          }
+          },
         },
-      }
+      },
     },
     {
       breakpoint: 1200,
@@ -111,9 +120,9 @@ export const WeeklyVisitor: ChartOptions | any = {
         plotOptions: {
           radar: {
             size: 110,
-          }
+          },
         },
-      }
+      },
     },
     {
       breakpoint: 405,
@@ -121,9 +130,9 @@ export const WeeklyVisitor: ChartOptions | any = {
         plotOptions: {
           radar: {
             size: 90,
-          }
+          },
         },
-      }
+      },
     },
     {
       breakpoint: 360,
@@ -131,9 +140,9 @@ export const WeeklyVisitor: ChartOptions | any = {
         plotOptions: {
           radar: {
             size: 68,
-          }
+          },
         },
-      }
+      },
     },
   ],
 };
@@ -141,7 +150,11 @@ export const WeeklyVisitor: ChartOptions | any = {
 // ==================================================
 
 //Sales Summary Chart For Default Dashboard
-function generateData(baseval: number, count: number, yrange: { min: any; max: any; }) {
+function generateData(
+  baseval: number,
+  count: number,
+  yrange: { min: any; max: any }
+) {
   var i = 0;
   var series = [];
   while (i < count) {
@@ -157,7 +170,7 @@ function generateData(baseval: number, count: number, yrange: { min: any; max: a
 export const SalesSummary: ChartOptions | any = {
   chart: {
     height: 400,
-    type: "bubble",
+    type: 'bubble',
     toolbar: {
       show: false,
     },
@@ -167,43 +180,43 @@ export const SalesSummary: ChartOptions | any = {
   },
   series: [
     {
-      name: "Product1",
-      data: generateData(new Date("01 Jan 2023 GMT").getTime(), 20, {
+      name: 'Product1',
+      data: generateData(new Date('01 Jan 2023 GMT').getTime(), 20, {
         min: 10,
         max: 55,
       }),
     },
     {
-      name: "Product2",
-      data: generateData(new Date("01 Jan 2023 GMT").getTime(), 20, {
+      name: 'Product2',
+      data: generateData(new Date('01 Jan 2023 GMT').getTime(), 20, {
         min: 10,
         max: 55,
       }),
     },
     {
-      name: "Product3",
-      data: generateData(new Date("01 Jan 2023 GMT").getTime(), 20, {
+      name: 'Product3',
+      data: generateData(new Date('01 Jan 2023 GMT').getTime(), 20, {
         min: 10,
         max: 55,
       }),
     },
     {
-      name: "Product4",
-      data: generateData(new Date("01 Jan 2023 GMT").getTime(), 20, {
+      name: 'Product4',
+      data: generateData(new Date('01 Jan 2023 GMT').getTime(), 20, {
         min: 10,
         max: 55,
       }),
     },
   ],
   fill: {
-    type: "gradient",
+    type: 'gradient',
   },
   legend: {
     show: false,
   },
   xaxis: {
     tickAmount: 12,
-    type: "datetime",
+    type: 'datetime',
     labels: {
       rotate: 0,
     },
@@ -211,20 +224,19 @@ export const SalesSummary: ChartOptions | any = {
   yaxis: {
     labels: {
       formatter: function (value: string) {
-        return value + "K";
+        return value + 'K';
       },
       style: {
         colors: [darkcolor],
-        fontFamily: "Secular One",
+        fontFamily: 'Secular One',
       },
     },
   },
   theme: {
-    palette: "palette2",
+    palette: 'palette2',
   },
-  colors: ["#1F2F3E", "#C1E9C1", "#1F2F3E", "#C1E9C1"],
-
-}
+  colors: ['#1F2F3E', '#C1E9C1', '#1F2F3E', '#C1E9C1'],
+};
 
 //========================================================================
 
@@ -278,8 +290,8 @@ export const EarningChart: ChartOptions | any = {
   },
   stroke: {
     lineCap: 'round',
-  }
-}
+  },
+};
 
 //========================================================================
 
@@ -287,13 +299,13 @@ export const EarningChart: ChartOptions | any = {
 export const EcommerceSalesSummary: ChartOptions | any = {
   series: [
     {
-      name: "Activity",
+      name: 'Activity',
       data: [4, 5, 5.7, 3, 5, 5.4, 5.8, 4, 4.5, 3, 5],
     },
   ],
   chart: {
     height: 300,
-    type: "bar",
+    type: 'bar',
     toolbar: {
       show: false,
     },
@@ -302,19 +314,31 @@ export const EcommerceSalesSummary: ChartOptions | any = {
     bar: {
       distributed: true,
       borderRadius: 3,
-      columnWidth: "30%",
+      columnWidth: '30%',
     },
   },
   dataLabels: {
     enabled: false,
   },
   xaxis: {
-    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"],
+    categories: [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+    ],
     labels: {
       style: {
-        fontSize: "12px",
-        fontFamily: "Rubik, sans-serif",
-        colors: "var(--chart-text-color)",
+        fontSize: '12px',
+        fontFamily: 'Rubik, sans-serif',
+        colors: 'var(--chart-text-color)',
       },
     },
     axisBorder: {
@@ -339,21 +363,32 @@ export const EcommerceSalesSummary: ChartOptions | any = {
     },
     labels: {
       formatter: function (val: string) {
-        return val + "0" + "k";
+        return val + '0' + 'k';
       },
       style: {
-        fontSize: "14px",
-        fontFamily: "Secular One",
-        colors: "$black",
+        fontSize: '14px',
+        fontFamily: 'Secular One',
+        colors: '$black',
       },
     },
   },
   grid: {
-    borderColor: "var(--chart-dashed-border)",
+    borderColor: 'var(--chart-dashed-border)',
   },
-  colors: [lightcolor, lightcolor, lightcolor, lightcolor, lightcolor, lightcolor, darkcolor, lightcolor, lightcolor, lightcolor, lightcolor],
-
-}
+  colors: [
+    lightcolor,
+    lightcolor,
+    lightcolor,
+    lightcolor,
+    lightcolor,
+    lightcolor,
+    darkcolor,
+    lightcolor,
+    lightcolor,
+    lightcolor,
+    lightcolor,
+  ],
+};
 
 //========================================================================
 
@@ -361,37 +396,43 @@ export const EcommerceSalesSummary: ChartOptions | any = {
 export const TrafficChart: ChartOptions | any = {
   series: [
     {
-      type: "area",
-      data: [50, 70, 65, 80, 40, 50, 48, 60, 48, 50, 70, 80, 75, 50, 60, 50, 50, 10, 30, 20, 70, 65, 95, 45, 70, 50, 80, 75, 90, 60, 65, 50, 70, 65, 50, 55, 50],
+      type: 'area',
+      data: [
+        50, 70, 65, 80, 40, 50, 48, 60, 48, 50, 70, 80, 75, 50, 60, 50, 50, 10,
+        30, 20, 70, 65, 95, 45, 70, 50, 80, 75, 90, 60, 65, 50, 70, 65, 50, 55,
+        50,
+      ],
     },
   ],
   chart: {
     height: 235,
-    type: "area",
+    type: 'area',
     toolbar: {
       show: false,
     },
   },
   stroke: {
-    curve: "smooth",
+    curve: 'smooth',
     width: [3, 1],
     dashArray: [0, 5],
   },
   annotations: {
-    points: [{
-      x: 347,
-      y: 65,
-      marker: {
-        size: 8,
-        fillColor: darkcolor,
-        strokeColor: '#ffffff',
-        strokeWidth: 5,
-        radius: 2,
+    points: [
+      {
+        x: 347,
+        y: 65,
+        marker: {
+          size: 8,
+          fillColor: darkcolor,
+          strokeColor: '#ffffff',
+          strokeWidth: 5,
+          radius: 2,
+        },
       },
-    }]
+    ],
   },
   fill: {
-    type: "gradient",
+    type: 'gradient',
     gradient: {
       shadeIntensity: 1,
       opacityFrom: 0.5,
@@ -434,7 +475,7 @@ export const TrafficChart: ChartOptions | any = {
     crosshairs: {
       show: true,
       width: 1,
-      position: "back",
+      position: 'back',
       stroke: {
         color: darkcolor,
         width: 1,
@@ -448,7 +489,7 @@ export const TrafficChart: ChartOptions | any = {
     },
     fixed: {
       enabled: false,
-      position: "bottomRight",
+      position: 'bottomRight',
       offsetX: 0,
       offsetY: 0,
     },
@@ -460,4 +501,4 @@ export const TrafficChart: ChartOptions | any = {
     show: false,
   },
   colors: [darkcolor],
-}
+};

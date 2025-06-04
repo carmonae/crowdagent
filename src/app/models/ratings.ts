@@ -4,6 +4,7 @@ export interface RatingTuple {
   personalRating: number;
   predictedRating: number;
   bet: number;
+  timestamp: Date;
 }
 
 export interface legendI {

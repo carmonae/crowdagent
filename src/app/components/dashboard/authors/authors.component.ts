@@ -18,7 +18,6 @@ import { CurrentBalanceComponent } from './current-balance/current-balance.compo
 import { ProfileGrettingComponent } from './profile-gretting/profile-gretting.component';
 import { SalesSummaryComponent } from './sales-summary/sales-summary.component';
 import { WeeklyVisitorsComponent } from './weekly-visitors/weekly-visitors.component';
-
 @Component({
   selector: 'app-authors',
   templateUrl: './authors.component.html',
@@ -42,7 +41,7 @@ export class AuthorsComponent {
   public totalManuscriptData = manuscriptsPiquesData;
   public totalTitleData = titlePiquesData;
 
-  private uid: string | undefined;
+  public uid: string | undefined;
   public projectListData: UserprojectI[] = [];
 
   constructor(
@@ -71,27 +70,32 @@ export class AuthorsComponent {
   getData() {
     //TODO : allow user to define the goals...currently hardcoded
 
+    let impressionGoal = 1000;
+    let titleGoal = 100;
+    let abstractGoal = 100;
+    let manuscriptGoal = 100;
+
     console.log('getChartData:', this.projectListData);
     let impressions: number = this.projectListData
       .filter((proj) => proj.scoreI)
       .reduce((sum, current) => sum + current.scoreI, 0);
     this.totalImpressionsData.data = impressions.toString();
     this.totalImpressionsData.progress =
-      Math.floor((impressions * 100) / 1000).toString() + '%';
+      Math.floor((impressions * 100) / impressionGoal).toString() + '%';
 
     let scoreT: number = this.projectListData
       .filter((proj) => proj.scoreI)
       .reduce((sum, current) => sum + current.scoreT, 0);
     this.totalTitleData.data = scoreT.toString();
     this.totalTitleData.progress =
-      Math.floor((scoreT * 100) / 100).toString() + '%';
+      Math.floor((scoreT * 100) / titleGoal).toString() + '%';
 
     let scoreA: number = this.projectListData
       .filter((proj) => proj.scoreI)
       .reduce((sum, current) => sum + current.scoreA, 0);
     this.totalAbstractData.data = scoreA.toString();
     this.totalAbstractData.progress =
-      Math.floor((scoreA * 100) / 100).toString() + '%';
+      Math.floor((scoreA * 100) / abstractGoal).toString() + '%';
 
     this.totalManuscriptData.data = this.projectListData
       .filter((proj) => proj.scoreI)

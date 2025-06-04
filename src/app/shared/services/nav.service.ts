@@ -77,7 +77,7 @@ export class NavService {
           children: [
             {
               path: '/crowdagent/piquetitle',
-              title: 'piQue Titles',
+              title: 'piQue New Titles',
               type: 'link',
             },
             {
@@ -87,7 +87,7 @@ export class NavService {
             },
             {
               path: '/crowdagent/listreviews',
-              title: 'List Reviews',
+              title: 'Show My Reviews',
               type: 'link',
             },
           ],

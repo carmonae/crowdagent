@@ -1,0 +1,18 @@
+
+<div class="card">
+    <div class="card-header card-no-border pb-0">
+        <h3>{{chartLabel}}</h3>
+    </div>
+    <div class="card-body">
+        <div id="basic-bar">
+            <apx-chart #histchart
+                [chart]="histogram.chart!"
+                [plotOptions]="histogram.plotOptions!"
+                [dataLabels]="histogram.dataLabels!"
+                [series]="histogram.series!"
+                [xaxis]="histogram.xaxis!"
+                [colors]="histogram.colors!">
+            </apx-chart>
+        </div>
+    </div>
+</div>

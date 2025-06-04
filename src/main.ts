@@ -1,6 +1,14 @@
-import { APP_INITIALIZER, enableProdMode, importProvidersFrom } from '@angular/core';
+import {
+  APP_INITIALIZER,
+  enableProdMode,
+  importProvidersFrom,
+} from '@angular/core';
 
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,36 +31,36 @@ if (environment.production) {
   enableProdMode();
 }
 
-
 bootstrapApplication(AppComponent, {
-    providers: [
-        importProvidersFrom(
-            BrowserModule, 
-            AppRoutingModule, 
-            AngularFireModule.initializeApp(environment.firebaseConfig), 
-            AngularFireAuthModule, FormsModule, 
-            ReactiveFormsModule, 
-            SharedModule, 
-            NgbModule, 
-            TranslateModule.forRoot({
-                loader: {
-                    provide: TranslateLoader,
-                    useFactory: HttpLoaderFactory,
-                    deps: [HttpClient]
-                }
-            }), 
-            KeycloakAngularModule, 
-            LoginComponentModule),
-        AuthService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initializeKeycloak,
-            multi: true,
-            deps: [KeycloakService]
+  providers: [
+    importProvidersFrom(
+      BrowserModule,
+      AppRoutingModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireAuthModule,
+      FormsModule,
+      ReactiveFormsModule,
+      SharedModule,
+      NgbModule,
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient],
         },
-        provideHttpClient(withInterceptorsFromDi()),
-        provideAnimations(),
-        provideRouter(routes, withComponentInputBinding())
-    ]
-})
-  .catch(err => console.error(err));
+      }),
+      KeycloakAngularModule,
+      LoginComponentModule
+    ),
+    AuthService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+    provideHttpClient(withInterceptorsFromDi()),
+    provideAnimations(),
+    provideRouter(routes, withComponentInputBinding()),
+  ],
+}).catch((err) => console.error(err));

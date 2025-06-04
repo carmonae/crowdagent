@@ -11,6 +11,7 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
+import { RatingTuple } from '@app/models/ratings';
 import { UserprojectI } from '@app/models/user-project';
 
 @Injectable({
@@ -73,11 +74,62 @@ export class ProjectsService implements OnInit {
               console.log('No data avail');
             }
           }
-          subscriber.complete();
         })
         .catch((error) => {
           console.error(error);
           subscriber.error(error);
+        })
+        .finally(() => {
+          subscriber.complete();
+        });
+    });
+    return observable;
+  }
+
+  getProjectRatings(
+    uid: string | undefined,
+    pid: string
+  ): Observable<RatingTuple[]> {
+    console.log(`Get Projects Method. uid=${uid}, pid=${pid}`);
+    var projects: UserprojectI[] = [];
+    var path = '';
+
+    path = `${this.firepath}/${uid}/${pid}`;
+
+    var _this = this;
+    const observable = new Observable<RatingTuple[]>((subscriber) => {
+      get(child(_this.dbRef, path))
+        .then((snapshot) => {
+          var userProject: any = {};
+          if (snapshot.exists()) {
+            userProject = snapshot.val();
+
+            let ratings = userProject.ratings;
+            let results: RatingTuple[] = [];
+            console.log('book ratings:', ratings);
+            for (let id in ratings) {
+              console.log('rating id:', id);
+              results.push({
+                projId: '',
+                readerId: ratings[id].readerId,
+                personalRating: ratings[id].scoreM,
+                predictedRating: ratings[id].scoreM2,
+                bet: ratings[id].bet,
+                timestamp: ratings[id].timestamp,
+              });
+            }
+            subscriber.next(results);
+          } else {
+            subscriber.next();
+            console.log('No data avail');
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          subscriber.error(error);
+        })
+        .finally(() => {
+          subscriber.complete();
         });
     });
     return observable;

@@ -35,6 +35,7 @@ import { FullComponent } from './component/layout/full/full.component';
 import { LoaderComponent } from './component/loader/loader.component';
 import { NavbarComponent } from './component/menu/navbar/navbar.component';
 import { VerticalSidemenuComponent } from './component/menu/vertical-sidemenu/vertical-sidemenu.component';
+import { RatingHistogramComponent } from './component/rating-histogram/rating-histogram.component';
 import { SvgIconComponent } from './component/svg-icon/svg-icon.component';
 import { TapToTopComponent } from './component/tap-to-top/tap-to-top.component';
 import { ClickOutsideDirective } from './directive/outside.directive';
@@ -88,6 +89,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AgePipe,
     TruncatePipe,
     BarRatingModule,
+    RatingHistogramComponent,
   ],
   exports: [
     HeaderComponent,
@@ -119,6 +121,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AgePipe,
     TruncatePipe,
     NumberRatingComponent,
+    RatingHistogramComponent,
   ],
   providers: [],
 })

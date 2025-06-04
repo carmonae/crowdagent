@@ -1,4 +1,5 @@
 import {
+  ApexAnnotations,
   ApexAxisChartSeries,
   ApexChart,
   ApexDataLabels,
@@ -23,6 +24,7 @@ export type ChartOptions = {
   responsive?: ApexResponsive[];
   tooltip?: any;
   colors?: string[];
+  annotations?: ApexAnnotations;
 };
 
 let primary = localStorage.getItem('--theme-default') || '#33BFBF';

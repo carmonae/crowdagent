@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
 import { UserprojectI } from '@app/models/user-project';
 import { ProjectsService } from '@app/shared/services/projects.service';
-import { ChartComponent, NgApexchartsModule } from 'ng-apexcharts';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { ChartOptions } from 'src/app/shared/data/charts/charts/apex-chart';
 
 @Component({
@@ -13,8 +13,6 @@ import { ChartOptions } from 'src/app/shared/data/charts/charts/apex-chart';
   imports: [NgApexchartsModule],
 })
 export class CountsComponent {
-  @ViewChild('barchart') barchart!: ChartComponent;
-
   primary = localStorage.getItem('--theme-default') || '#33BFBF';
   secondary = localStorage.getItem('--theme-secondary') || '#ff6150';
 
@@ -54,7 +52,7 @@ export class CountsComponent {
         },
       ],
       xaxis: {
-        categories: ['Impressions', 'Title', 'Table of Contents', 'Abstract'],
+        categories: ['Impressions', 'Title', 'Table of Contents', 'Synopsis'],
       },
       colors: [this.primary],
     };

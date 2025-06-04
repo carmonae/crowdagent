@@ -8,14 +8,14 @@
   <!-- Thumbs up/down -->
   <div *ngIf="noVoteYet()" class="col">
     <button
-      class="col-6 btn btn-block btn-primary"
-      (click)="piques(true)">
-      <i class="fa fa-thumbs-up"></i>
-    </button>
-    <button
       class="col-6 btn btn-block btn-secondary"
       (click)="piques(false)">
       <i class="fa fa-thumbs-down"></i>
+    </button>
+    <button
+      class="col-6 btn btn-block btn-primary"
+      (click)="piques(true)">
+      <i class="fa fa-thumbs-up"></i>
     </button>
   </div>
 
@@ -40,13 +40,13 @@
         <li [ngbNavItem]="2">
           <button ngbNavLink class="nav-link txt-secondary"
             [disabled]="!abstractEnabled" (click)="moveTab('abstract')"><i
-              class="icofont icofont-man-in-glasses"></i>Abstract</button>
+              class="icofont icofont-man-in-glasses"></i>Synopsis</button>
           <ng-template ngbNavContent>
             <p class="pt-3 mb-0">
               <div class="flex-space flex-wrap align-items-center">
                 <a *ngIf="project.abstracturl != ''"
                   href="{{ project.abstracturl }}" target="_blank">
-                  {{ project.title | truncate : 40 }} Abstract
+                  {{ project.title | truncate : 40 }} Synopsis
                 </a>
               </div>
             </ng-template>

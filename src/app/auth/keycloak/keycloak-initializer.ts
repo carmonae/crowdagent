@@ -13,5 +13,14 @@ export function initializeKeycloak(
   };
 
   const keycloakService = keycloak.init(options);
+  /*
+  return () =>
+    new Promise<boolean>((result) => {
+      keycloak.loadUserProfile().then((result) => {
+        return result;
+      });
+    });
+
+    */
   return () => keycloakService;
 }

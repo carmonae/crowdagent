@@ -25,6 +25,14 @@ export const contentRoutes: Routes = [
       ),
   },
   {
+    path: 'dashboard/authors',
+    data: {
+      title: 'Dashboard',
+      breadcrumb: 'Authors',
+    },
+    component: AuthorsComponent,
+  },
+  {
     path: 'dashboard/readers',
     data: {
       title: 'Dashboard',

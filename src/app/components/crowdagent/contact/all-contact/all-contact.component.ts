@@ -175,4 +175,12 @@ export class AllContactComponent implements OnInit, OnChanges {
     let result: string = actualLevel < requestedLevel ? 'circle' : 'check';
     return result;
   }
+  badgeColor(data: PiqueI, segment: string): string {
+    const requestedLevel =
+      PiqueLevel[segment.toUpperCase() as keyof typeof PiqueLevel];
+    const actualLevel =
+      PiqueLevel[data.level.toUpperCase() as keyof typeof PiqueLevel];
+    let result: string = actualLevel < requestedLevel ? 'warning' : 'primary';
+    return result;
+  }
 }

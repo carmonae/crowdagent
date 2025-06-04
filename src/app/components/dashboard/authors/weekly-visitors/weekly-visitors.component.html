@@ -1,15 +1,19 @@
 <div class="card">
-    <div class="card-header card-no-border">
-      <div class="header-top">
-        <h3>Weekly Visitors </h3>
-      </div>
-    </div>
-    <div class="card-body py-0">
-      <div id="weekly-visitors">
-        <apx-chart [series]="salesChart.series" [chart]="salesChart.chart" [dataLabels]="salesChart.dataLabels" [stroke]="salesChart.stroke"  
-          [fill]="salesChart.fill" [colors]="salesChart.colors" [labels]="salesChart.labels" [markers]="salesChart.markers" 
-          [yaxis]="salesChart.yaxis" [xaxis]="salesChart.xaxis" [plotOptions]="salesChart.plotOptions" [title]="salesChart.title"> 
-        </apx-chart>
-      </div>
+  <div class="card-header card-no-border">
+    <div class="header-top">
+      <h3>Weekly Visitors </h3>
     </div>
   </div>
+  <div class="card-body py-0">
+    <div id="weekly-visitors">
+      <apx-chart #radialApexChart
+        [series]="radialChart.series" [chart]="radialChart.chart"
+        [dataLabels]="radialChart.dataLabels" [stroke]="radialChart.stroke"
+        [fill]="radialChart.fill" [colors]="radialChart.colors"
+        [labels]="radialChart.labels" [markers]="radialChart.markers"
+        [yaxis]="radialChart.yaxis" [xaxis]="radialChart.xaxis"
+        [plotOptions]="radialChart.plotOptions" [title]="radialChart.title">
+      </apx-chart>
+    </div>
+  </div>
+</div>

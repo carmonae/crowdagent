@@ -1,5 +1,6 @@
 import { GenreTypes } from './genreTypes-enum';
 import { ProjectStatus } from './projectStatus';
+import { RatingTuple } from './ratings';
 import { Readership } from './readership-enum';
 import { SizeTypes } from './sizeTypes-enum';
 import { WritingType } from './writingType-enum';
@@ -29,7 +30,7 @@ export interface UserprojectI {
   scoreA: number;
   scoreM: number;
   scoreM2: number;
-  ratings: any;
+  ratings: RatingTuple[];
 }
 
 export const UserprojectDefault: UserprojectI = {

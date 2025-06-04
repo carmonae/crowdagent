@@ -14,10 +14,12 @@ export interface PiqueI {
   subtitle: string;
   datePublish: string;
   level: string;
-  personalRating: number;
-  predictedRating: number;
+  rating: {
+    personalRating: number;
+    predictedRating: number;
+    bet: number;
+  };
   tags: TagI[];
-  bet: number;
 }
 
 export class Pique implements PiqueI {
@@ -27,10 +29,12 @@ export class Pique implements PiqueI {
   public subtitle: string = '';
   public datePublish: string = '';
   public level: string = 'title';
-  public personalRating: number = 0;
-  public predictedRating: number = 0;
+  public rating!: {
+    personalRating: number;
+    predictedRating: number;
+    bet: number;
+  };
   public tags: TagI[] = [];
-  public bet: number = 0;
 
   constructor(title: any) {
     this.projectUid = title.projectUid;
@@ -38,9 +42,9 @@ export class Pique implements PiqueI {
     this.title = title.title;
     this.subtitle = title.subtitle;
     this.datePublish = title.datePublish;
-    this.personalRating = 0;
-    this.predictedRating = 0;
+    this.rating.personalRating = 0;
+    this.rating.predictedRating = 0;
+    this.rating.bet = 0;
     this.tags = [];
-    this.bet = 0;
   }
 }

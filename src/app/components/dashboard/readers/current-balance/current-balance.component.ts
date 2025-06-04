@@ -60,11 +60,12 @@ export class CurrentBalanceComponent {
     console.log('getChartData:', this.piqueListData);
 
     let rewardService = new BookRewardService();
-
+    let histogram: number[] = [];
     //TODO: remove BookReward test
     this.test();
 
     var _this = this;
+    /*
     for (let pique of this.piqueListData) {
       console.log('getting reward for title:', pique);
       this.projectsService
@@ -83,8 +84,47 @@ export class CurrentBalanceComponent {
                 predictedRating: ratings[id].scoreM2,
                 bet: ratings[id].bet,
               });
+              histogram.push(ratings[id].scoreM2);
             }
             console.log('ratingTuples', _this.ratings);
+            console.log('histogram', histogram);
+          },
+          error(msg) {
+            console.log('error: ', msg);
+          },
+          complete() {
+            for (let reward of rewardService.calculateRewards(_this.ratings)) {
+              if (reward.readerId == _this.uid) {
+                console.log('reward:', reward.reward);
+                _this.reward.reward += reward.reward;
+                _this.maxPiques = Math.max(
+                  _this.reward.reward,
+                  _this.maxPiques
+                );
+              }
+            }
+            console.log('total reward=', _this.reward);
+            _this.totalPiques = _this.reward.reward;
+            _this.averagePiques = _this.totalPiques / _this.nBooks;
+          },
+        });
+    }
+    */
+
+    for (let pique of this.piqueListData) {
+      console.log('getting reward for title:', pique);
+      this.projectsService
+        .getProjectRatings(pique.userUid, pique.projectUid!)
+        .subscribe({
+          next(ratings) {
+            _this.ratings = ratings;
+            console.log('book ratings:', ratings);
+            for (let id in ratings) {
+              console.log('rating id:', id);
+              histogram.push(ratings[id].predictedRating);
+            }
+            console.log('ratingTuples', _this.ratings);
+            console.log('histogram', histogram);
           },
           error(msg) {
             console.log('error: ', msg);

@@ -13,6 +13,11 @@ import { FileUploadComponent } from '@app/shared/component/file-upload/file-uplo
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { child, get, getDatabase, ref, set, update } from 'firebase/database';
+import {
+  getDownloadURL,
+  getStorage,
+  ref as storageRef,
+} from 'firebase/storage';
 import { UserDetails } from 'src/app/models/user-details';
 
 @Component({
@@ -26,9 +31,12 @@ export class EditProfileComponent implements OnInit {
   @Input() myprofile!: Userprofile;
 
   private db = getDatabase();
+  private storage = getStorage();
 
   private myuid: string | undefined;
   protected mydetails = new UserDetails();
+  public avatarUrl = 'assets/images/user/user.png';
+
   protected roles = [
     'Guest',
     'Author',
@@ -130,10 +138,10 @@ export class EditProfileComponent implements OnInit {
   ngOnInit(): void {
     console.log('uid=', this.myprofile.uid);
     this.readUserDetails();
+    this.getAvatar();
   }
 
   readUserDetails(): void {
-    //TODO: create a service to get the user details
     const dbRef = ref(getDatabase());
     const url = `users/account/${this.myprofile.uid}/details`;
     console.log('url:', url);
@@ -170,6 +178,37 @@ export class EditProfileComponent implements OnInit {
       });
   }
 
+  getAvatar(): void {
+    const storeRef = storageRef(
+      this.storage,
+      `avatars/${this.myprofile.uid}/avatar.jpg`
+    );
+    // Get the download URL
+    getDownloadURL(storeRef)
+      .then((url) => {
+        this.avatarUrl = url;
+      })
+      .catch((error) => {
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+          case 'storage/object-not-found':
+            console.log('document doesnt exist.');
+            break;
+          case 'storage/unauthorized':
+            console.log('User doesnt have permission to access the object');
+            break;
+          case 'storage/canceled':
+            console.log('User canceled the upload');
+            break;
+
+          case 'storage/unknown':
+            console.log('Unknown error occurred, inspect the server response');
+            break;
+        }
+      });
+  }
+
   onSelectType(event: any): void {
     console.log(event);
     this.mydetails.role = event.srcElement.innerText;
@@ -184,6 +223,13 @@ export class EditProfileComponent implements OnInit {
 
     const modalRef = this.modal.open(FileUploadComponent);
     modalRef.componentInstance.path = path;
+    modalRef.result
+      .then((url) => {
+        this.avatarUrl = url;
+      })
+      .catch((error) => {
+        console.error('Error uploading avatar', error);
+      });
   }
 
   onSubmit(form: NgForm): void {

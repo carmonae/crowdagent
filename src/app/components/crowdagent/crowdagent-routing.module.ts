@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContactComponent } from './contact/contact.component';
 import { ListviewComponent } from './listview/listview.component';
+import { ReviewListComponent } from './reviewlist/review-list.component';
 import { TitlePickerComponent } from './titlepicker/titlepicker.component';
 
 const routes: Routes = [
@@ -34,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: 'listreviews',
-        component: ListviewComponent,
+        component: ReviewListComponent,
         data: {
           title: 'List Reviews',
           breadcrumb: 'List Reviews',

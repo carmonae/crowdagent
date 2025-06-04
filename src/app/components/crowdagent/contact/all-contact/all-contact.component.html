@@ -36,12 +36,12 @@
                 (contextmenu)="contextMenu($event, data.projectUid)"
                 aria-controls="v-pills-user"
                 aria-selected="true">
-                <div class="d-flex">
+                <div class="col-md-12 d-flex">
                   <img
                     class="b-r-8 img-80"
                     src="assets/images/blankBookCover.jpg"
                     alt />
-                  <div class="flex-grow-1" style="margin-left: 10px">
+                  <div class="col-md-4 flex-grow-1" style="margin-left: 10px">
                     <h4>
                       <span class="first_name_0">{{ data.title }} </span>
                     </h4>
@@ -51,19 +51,35 @@
                     <p class="email_add_0">by: Pen Name</p>
                   </div>
 
-                  <div class="col-md-2">
+                  <div class="col-md-8 list-persons">
                     <ul style="margin-right:10px">
-                      <li><span><app-feather-icons
-                            [icon]="checkOrCircle(data, 'title')"></app-feather-icons></span>Title</li>
-                      <li><span><app-feather-icons
-                            [icon]="checkOrCircle(data, 'toc')"></app-feather-icons></span>Table
+                      <li class="btn badge-{{badgeColor(data, 'title')}}">
+                        <span
+                          class="badge rounded-circle btn-p-space badge-light text-dark ms-2">
+                          <app-feather-icons
+                            [icon]="checkOrCircle(data, 'title')">
+                          </app-feather-icons></span>Title</li>
+                      <li class="btn badge-{{badgeColor(data, 'toc')}}"><span
+                          class="badge rounded-circle btn-p-space badge-light text-dark ms-2">
+                          <app-feather-icons
+                            [icon]="checkOrCircle(data, 'toc')">
+                          </app-feather-icons></span>Table
                         of
                         Contents</li>
-                      <li><span><app-feather-icons
-                            [icon]="checkOrCircle(data, 'abstract')"></app-feather-icons></span>Abstract</li>
-                      <li><span><app-feather-icons
-                            [icon]="checkOrCircle(data, 'manuscript')"></app-feather-icons></span>Manuscript</li>
+                      <li
+                        class="btn badge-{{badgeColor(data, 'abstract')}}"><span
+                          class="badge rounded-circle btn-p-space badge-light text-dark ms-2">
+                          <app-feather-icons
+                            [icon]="checkOrCircle(data, 'abstract')">
+                          </app-feather-icons></span>Synopsis</li>
+                      <li
+                        class="btn badge-{{badgeColor(data, 'manuscript')}}"><span
+                          class="badge rounded-circle btn-p-space badge-light text-dark ms-2">
+                          <app-feather-icons
+                            [icon]="checkOrCircle(data, 'manuscript')">
+                          </app-feather-icons></span>Manuscript</li>
                     </ul>
+
                   </div>
                 </div>
               </a>
