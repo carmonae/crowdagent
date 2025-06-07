@@ -51,13 +51,13 @@ export class NavService {
           active: false,
           children: [
             {
-              path: '/projects/project-list',
-              title: 'Project List',
+              path: '/projects/create-new',
+              title: 'Create New',
               type: 'link',
             },
             {
-              path: '/projects/create-new',
-              title: 'Create New',
+              path: '/projects/project-list',
+              title: 'Project List',
               type: 'link',
             },
           ],
