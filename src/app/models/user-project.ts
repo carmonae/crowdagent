@@ -7,7 +7,8 @@ import { WritingType } from './writingType-enum';
 
 export interface UserprojectI {
   projectUid: string | undefined;
-  name: string;
+  projectname: string;
+  penname: string;
   dateCreated: Date | undefined;
   title: string;
   subtitle: string;
@@ -35,7 +36,8 @@ export interface UserprojectI {
 
 export const UserprojectDefault: UserprojectI = {
   projectUid: undefined,
-  name: '',
+  projectname: '',
+  penname: '',
   dateCreated: new Date(),
   title: '',
   subtitle: '',
@@ -63,7 +65,8 @@ export const UserprojectDefault: UserprojectI = {
 export const UserprojectMockData: UserprojectI[] = [
   {
     projectUid: undefined,
-    name: 'First Book',
+    projectname: 'First Book',
+    penname: 'Mark Twain',
     dateCreated: new Date(),
     title: 'Identity',
     subtitle: 'Restoring the Image of God on the Mind of Man',
@@ -90,7 +93,8 @@ export const UserprojectMockData: UserprojectI[] = [
   },
   {
     projectUid: undefined,
-    name: 'Second Book',
+    projectname: 'Second Book',
+    penname: 'Mark Twain',
     dateCreated: new Date(),
     title: 'Rethinking Self-Esteem',
     subtitle: 'A better way of seeing yourself',
@@ -117,7 +121,8 @@ export const UserprojectMockData: UserprojectI[] = [
   },
   {
     projectUid: undefined,
-    name: 'Apologetics',
+    projectname: 'Apologetics',
+    penname: 'Mark Twain',
     dateCreated: new Date(),
     title: 'The Atheists Predicament',
     subtitle: 'Coming to terms with the materialist world model',
@@ -144,7 +149,8 @@ export const UserprojectMockData: UserprojectI[] = [
   },
   {
     projectUid: undefined,
-    name: 'Own Your Person',
+    projectname: 'Own Your Person',
+    penname: 'Mark Twain',
     dateCreated: new Date(),
     title: 'The Cain Effect',
     subtitle: 'Own who you are',
@@ -173,7 +179,8 @@ export const UserprojectMockData: UserprojectI[] = [
 
 export class Userproject implements UserprojectI {
   projectUid: undefined;
-  public name: string = '';
+  public projectname: string = '';
+  public penname: string = 'Mark Twain';
   public dateCreated: Date | undefined;
   public title: string = '';
   public subtitle: string = '';
@@ -199,8 +206,9 @@ export class Userproject implements UserprojectI {
   public ratings: any = [];
 
   constructor(project: UserprojectI = UserprojectDefault) {
-    projectUid: undefined;
-    this.name = project.name;
+    this.projectUid = undefined;
+    this.projectname = project.projectname;
+    this.penname = project.penname;
     this.dateCreated = project.dateCreated;
     this.title = project.title;
     this.subtitle = project.subtitle;

@@ -15,10 +15,9 @@ import { UserprojectDefault, UserprojectI } from '@app/models/user-project';
 import { Usertitle } from '@app/models/user-titles';
 import { WritingType } from '@app/models/writingType-enum';
 import { FileUploadService } from '@app/shared/services/file-upload.service';
-import { UploadFileComponent } from './upload-file/upload-file.component';
-
+import { GeneratePenName } from '@app/util/genpenname.util';
 import { v4 as uuid } from 'uuid';
-
+import { UploadFileComponent } from './upload-file/upload-file.component';
 interface FileCollection<File> {
   [key: string]: File;
 }
@@ -59,7 +58,8 @@ export class CreateNewProjectComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private uploadService: FileUploadService,
-    private router: Router
+    private router: Router,
+    private penNameService: GeneratePenName
   ) {
     this.uid = this.authService.getUid();
   }
@@ -75,10 +75,26 @@ export class CreateNewProjectComponent implements OnInit {
     } else {
       this.project = UserprojectDefault;
       this.project.projectUid = uuid();
+      this.project.penname = 'Pen Name';
+      this.onGetPenName();
     }
 
     this.path.path = `project/documents/${this.uid}/${this.project.projectUid}`;
     this.count = this.project.abstract.length;
+  }
+
+  onGetPenName(): void {
+    let _this = this;
+    this.penNameService.getPenName('e', 'male', 'English').subscribe({
+      next(penname) {
+        _this.project.penname = penname;
+        console.log('pen name:', _this.project.penname);
+      },
+      error(err: any) {
+        console.log(err);
+      },
+      complete() {},
+    });
   }
 
   onAbstractChange(event: any) {

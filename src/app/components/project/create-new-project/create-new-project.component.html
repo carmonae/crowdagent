@@ -4,14 +4,24 @@
       <div class="card-body">
         <div class="form theme-form projectcreate">
           <div class="row">
-            <div class="col-8">
+            <div class="col-4">
               <div class="mb-3">
                 <label>Project Title</label>
                 <input
                   class="form-control"
                   type="text"
                   placeholder="Project name"
-                  [(ngModel)]="project.name" />
+                  [(ngModel)]="project.projectname" />
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="mb-3">
+                <label>Pen Name Assigned To Book</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Project name"
+                  [(ngModel)]="project.penname" />
               </div>
             </div>
             <div class="col-4">
