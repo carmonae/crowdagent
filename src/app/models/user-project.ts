@@ -1,4 +1,4 @@
-import { GenreTypes } from './genreTypes-enum';
+import { GenreTypes, NonFictionSubtypes } from './genreTypes-enum';
 import { ProjectStatus } from './projectStatus';
 import { Ratings } from './ratings';
 import { Readership } from './readership-enum';
@@ -15,6 +15,7 @@ export interface UserprojectI {
   readership: Readership;
   format: WritingType;
   genre: GenreTypes;
+  subgenre: any;
   size: SizeTypes;
   dateStart: string;
   dateEnd: string;
@@ -44,6 +45,7 @@ export const UserprojectDefault: UserprojectI = {
   readership: Readership.PUBLIC,
   format: WritingType.BOOK,
   genre: GenreTypes.NONFICTION,
+  subgenre: NonFictionSubtypes.PHILOSOPHY,
   size: SizeTypes.MEDIUM,
   dateStart: '2023-10-30',
   dateEnd: '2023-10-30',
@@ -73,6 +75,7 @@ export const UserprojectMockData: UserprojectI[] = [
     readership: Readership.PUBLIC,
     format: WritingType.BOOK,
     genre: GenreTypes.NONFICTION,
+    subgenre: NonFictionSubtypes.PHILOSOPHY,
     size: SizeTypes.MEDIUM,
     dateStart: '2023-10-30',
     dateEnd: '2023-10-30',
@@ -101,6 +104,7 @@ export const UserprojectMockData: UserprojectI[] = [
     readership: Readership.PUBLIC,
     format: WritingType.BOOK,
     genre: GenreTypes.NONFICTION,
+    subgenre: NonFictionSubtypes.PHILOSOPHY,
     size: SizeTypes.MEDIUM,
     dateStart: '2023-10-30',
     dateEnd: '2023-10-30',
@@ -129,6 +133,7 @@ export const UserprojectMockData: UserprojectI[] = [
     readership: Readership.PUBLIC,
     format: WritingType.BOOK,
     genre: GenreTypes.NONFICTION,
+    subgenre: NonFictionSubtypes.PHILOSOPHY,
     size: SizeTypes.MEDIUM,
     dateStart: '2023-10-30',
     dateEnd: '2023-10-30',
@@ -157,6 +162,7 @@ export const UserprojectMockData: UserprojectI[] = [
     readership: Readership.PUBLIC,
     format: WritingType.BOOK,
     genre: GenreTypes.NONFICTION,
+    subgenre: NonFictionSubtypes.PHILOSOPHY,
     size: SizeTypes.MEDIUM,
     dateStart: '2023-10-30',
     dateEnd: '2023-10-30',
@@ -187,6 +193,7 @@ export class Userproject implements UserprojectI {
   public readership: Readership = Readership.PUBLIC;
   public format: WritingType = WritingType.BOOK;
   public genre: GenreTypes = GenreTypes.FICTION;
+  public subgenre: NonFictionSubtypes = NonFictionSubtypes.PHILOSOPHY;
   public size: SizeTypes = SizeTypes.LARGE;
   public dateStart: string = '2023-10-30';
   public dateEnd: string = '2023-10-30';
@@ -215,6 +222,7 @@ export class Userproject implements UserprojectI {
     this.readership = project.readership;
     this.format = project.format;
     this.genre = project.genre;
+    this.subgenre = project.subgenre;
     this.size = project.size;
     this.dateStart = project.dateStart;
     this.dateEnd = project.dateEnd;

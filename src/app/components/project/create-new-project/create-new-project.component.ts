@@ -7,7 +7,11 @@ import { Router } from '@angular/router';
 import { getDatabase, ref, set } from 'firebase/database';
 
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
-import { GenreTypes } from '@app/models/genreTypes-enum';
+import {
+  FictionSubtypes,
+  GenreTypes,
+  NonFictionSubtypes,
+} from '@app/models/genreTypes-enum';
 import { ProjectStatus } from '@app/models/projectStatus';
 import { Readership } from '@app/models/readership-enum';
 import { SizeTypes } from '@app/models/sizeTypes-enum';
@@ -44,6 +48,7 @@ export class CreateNewProjectComponent implements OnInit {
   public writingTypesEnum = Object.values(WritingType);
   public sizeTypesEnum = Object.values(SizeTypes);
   public genreTypesEnum = Object.values(GenreTypes);
+  public subgenreTypesEnum: any = Object.values(NonFictionSubtypes);
 
   private path = { path: 'manuscripts/', filename: 'manuscript.pdf' };
   private uid: string | undefined;
@@ -106,6 +111,17 @@ export class CreateNewProjectComponent implements OnInit {
       event.target.value = this.project.abstract;
     }
     this.count = this.project.abstract.length;
+  }
+
+  onGenreChange(event: any) {
+    let genre = event.target.value;
+    if (genre == 'Non-Fiction') {
+      this.subgenreTypesEnum = Object.values(NonFictionSubtypes);
+      this.project.subgenre = NonFictionSubtypes.PHILOSOPHY.valueOf;
+    } else {
+      this.subgenreTypesEnum = Object.values(FictionSubtypes);
+      this.project.subgenre = FictionSubtypes.ADVENTURE.valueOf;
+    }
   }
 
   onFilesUploaded(files: File[], type: string) {

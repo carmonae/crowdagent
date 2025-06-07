@@ -10,7 +10,7 @@
                 <input
                   class="form-control"
                   type="text"
-                  placeholder="Project name"
+                  placeholder="Unique project name for each submission of same book."
                   [(ngModel)]="project.projectname" />
               </div>
             </div>
@@ -25,13 +25,14 @@
                   [(ngModel)]="project.penname" />
               </div>
             </div>
-            <div class="col-4">
+            <!--div class="col-4 justify-content-end">
               <div class="mb-3">
                 <label>Project Status</label>
                 <div class="dropdown-basic me-0 col-4">
                   <div class="common-flex">
                     <div class="btn-group split-dropdown">
-                      <button class="btn btn-outline-light" type="button">
+                      <button class="btn btn-outline-light" disabled="true"
+                        type="button">
                         {{ project.status }}
                       </button>
                       <div
@@ -41,6 +42,7 @@
                         <button
                           class="btn btn-light"
                           type="button"
+                          disabled="true"
                           ngbDropdownToggle>
                           <i class="icofont icofont-arrow-down"></i>
                         </button>
@@ -55,7 +57,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div-->
           </div>
           <div class="row">
             <div class="col">
@@ -107,7 +109,8 @@
             <div class="col-sm-4">
               <div class="mb-3">
                 <label>Genre</label>
-                <select class="form-select" [(ngModel)]="project.genre">
+                <select class="form-select" [(ngModel)]="project.genre"
+                  (change)="onGenreChange($event)">
                   <option *ngFor="let item of genreTypesEnum" [value]="item">
                     {{ item }}
                   </option>
@@ -115,6 +118,20 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-sm-8"></div>
+            <div class="col-sm-4">
+              <div class="mb-3">
+                <label>Subgenre</label>
+                <select class="form-select" [(ngModel)]="project.subgenre">
+                  <option *ngFor="let item of subgenreTypesEnum" [value]="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-sm-4">
               <div class="mb-3">
@@ -128,20 +145,22 @@
             </div>
             <div class="col-sm-4">
               <div class="mb-3">
-                <label>Starting date</label>
+                <label>Starting date (Assigned when submitted)</label>
                 <input
                   class="datepicker-here form-control"
                   type="date"
                   data-language="en"
+                  disabled="true"
                   [(ngModel)]="project.dateStart" />
               </div>
             </div>
             <div class="col-sm-4">
               <div class="mb-3">
-                <label>Ending date</label>
+                <label>Ending date (Assigned when submitted)</label>
                 <input
                   class="datepicker-here form-control"
                   type="date"
+                  disabled="true"
                   data-language="en"
                   [(ngModel)]="project.dateEnd" />
               </div>
@@ -150,7 +169,7 @@
           <div class="row">
             <div class="col">
               <div class="mb-3">
-                <label>Abstract ({{ count }}/ {{ maxAbstractLength }}) </label>
+                <label>Synopsis ({{ count }}/ {{ maxAbstractLength }}) </label>
                 <textarea
                   class="form-control"
                   id="abstract"
@@ -200,7 +219,7 @@
             <div class="col">
               <div class="text-end">
                 <a class="btn btn-success me-3"
-                  (click)="onAddProject()">Store</a><a class="btn btn-danger"
+                  (click)="onAddProject()">Save</a><a class="btn btn-danger"
                   (click)="onCancelAdd()">Cancel</a>
               </div>
             </div>
