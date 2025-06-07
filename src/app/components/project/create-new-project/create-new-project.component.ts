@@ -75,7 +75,7 @@ export class CreateNewProjectComponent implements OnInit {
     } else {
       this.project = UserprojectDefault;
       this.project.projectUid = uuid();
-      this.project.penname = 'Pen Name';
+      this.project.penname = 'Mark Twain';
       this.onGetPenName();
     }
 
