@@ -223,8 +223,8 @@ export const SalesSummary: ChartOptions | any = {
   },
   yaxis: {
     labels: {
-      formatter: function (value: string) {
-        return value + 'K';
+      formatter: function (value: number) {
+        return value;
       },
       style: {
         colors: [darkcolor],

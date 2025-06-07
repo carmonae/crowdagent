@@ -25,7 +25,7 @@
       <form>
         <div class="mb-3 row justify-content-end">
           <span class="col col-form-label"
-            *ngIf="service.loading$ | async">Loading...</span>
+            *ngIf="projectTableService.loading$ | async">Loading...</span>
           <label
             for="table-complete-search"
             class="col-xs-3 col-sm-auto col-form-label">Search:</label>
@@ -35,10 +35,11 @@
               type="text"
               class="form-control"
               name="searchTerm"
-              [(ngModel)]="service.searchTerm" />
+              [(ngModel)]="projectTableService.searchTerm" />
           </div>
         </div>
-        <app-common-data-table></app-common-data-table>
+        <app-project-data-table #projectDataTable
+          [service]="projectTableService"></app-project-data-table>
       </form>
 
     </div>

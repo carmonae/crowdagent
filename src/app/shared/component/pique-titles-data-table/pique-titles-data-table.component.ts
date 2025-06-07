@@ -33,6 +33,7 @@ import {
   providers: [DecimalPipe],
 })
 export class PiqueTitlesDataTableComponent {
+  @ViewChildren(SortableDirective) headers!: QueryList<SortableDirective>;
   @Input() service: PiquedTitleTablesService = new PiquedTitleTablesService(
     new DecimalPipe('en'),
     []
@@ -53,8 +54,6 @@ export class PiqueTitlesDataTableComponent {
   public nextItem: number = 0;
 
   public isShow: boolean = false;
-
-  @ViewChildren(SortableDirective) headers!: QueryList<SortableDirective>;
 
   constructor(private decimalPipe: DecimalPipe) {
     this.titles$ = this.service.titles$;

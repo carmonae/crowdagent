@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
 import { UserprojectI } from '@app/models/user-project';
@@ -19,8 +19,12 @@ export class CurrentBalanceComponent {
   public maxPiques: number = 0;
 
   public uid: string | undefined;
-  public projectListData: UserprojectI[] = [];
-
+  public projectListData$: UserprojectI[] | null = [];
+  @Input()
+  set projectListData(list: UserprojectI[] | null) {
+    this.projectListData$ = list;
+    this.getChartData();
+  }
   constructor(
     private authService: AuthService,
     private projectsService: ProjectsService
@@ -29,10 +33,11 @@ export class CurrentBalanceComponent {
   }
 
   ngOnInit(): void {
+    /*
     var _this = this;
     this.projectsService.getProjects(this.uid).subscribe({
       next(projects) {
-        _this.projectListData = projects;
+        _this.projectListData$ = projects;
         _this.getChartData();
       },
       error(msg) {
@@ -42,18 +47,19 @@ export class CurrentBalanceComponent {
         console.log('getProjects finished');
       },
     });
+    */
   }
 
   getChartData(): void {
-    console.log('getChartData:', this.projectListData);
-    this.totalPiques = this.projectListData
-      .filter((proj) => proj.scoreM)
-      .reduce((sum, current) => sum + current.scoreM, 0);
+    console.log('getChartData:', this.projectListData$);
+    this.totalPiques = this.projectListData$!.filter(
+      (proj) => proj.scoreM
+    ).reduce((sum, current) => sum + current.scoreM, 0);
 
-    this.nBooks = this.projectListData.map((proj) => proj.projectUid).length;
+    this.nBooks = this.projectListData$!.map((proj) => proj.projectUid).length;
     this.averagePiques = this.totalPiques / this.nBooks;
     this.maxPiques = Math.max(
-      ...this.projectListData.map((proj) => proj.scoreM)
+      ...this.projectListData$!.map((proj) => proj.scoreM)
     );
   }
 }

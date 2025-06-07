@@ -10,7 +10,7 @@ import { AgentsComponent } from './agents/agents.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { BestSellingProductComponent } from './authors/best-selling-product/best-selling-product.component';
 import { CommonDetailsComponent } from './authors/common-details/common-details.component';
-import { SalesSummaryComponent } from './authors/sales-summary/sales-summary.component';
+import { ReadSummaryComponent } from './authors/read-summary/read-summary.component';
 import { TrackOrderComponent } from './authors/track-order/track-order.component';
 import { WeeklyVisitorsComponent } from './authors/weekly-visitors/weekly-visitors.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -32,7 +32,7 @@ import { CountsComponent } from './authors/counts/counts.component';
     AgentsComponent,
     WeeklyVisitorsComponent,
     BestSellingProductComponent,
-    SalesSummaryComponent,
+    ReadSummaryComponent,
     TrackOrderComponent,
     CommonDetailsComponent,
     SortableDirective,

@@ -7,6 +7,13 @@ export interface RatingTuple {
   timestamp: Date;
 }
 
+export interface Ratings {
+  bet: number;
+  readerId: string;
+  scoreM: number;
+  scoreM2: number;
+  timestamp: Date;
+}
 export interface legendI {
   level: Number;
   designation: string;

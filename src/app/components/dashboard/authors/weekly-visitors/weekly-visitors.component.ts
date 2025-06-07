@@ -23,12 +23,17 @@ const enum DayOfWeek {
   imports: [NgApexchartsModule],
 })
 export class WeeklyVisitorsComponent implements OnInit {
+  private _projectListData!: UserprojectI[] | null;
+
   @Input() uid: string | undefined = '';
-  @Input() projectListData: UserprojectI[] = [];
+  @Input()
+  set projectListData(list: UserprojectI[] | null) {
+    this._projectListData = list;
+    this.getWeeklyCounts();
+  }
 
   //public radialChart!: Partial<ChartOptions>;
   public radialChart = WeeklyVisitor;
-  //public projectListData: UserprojectI[] = [];
 
   constructor(
     private projectsService: ProjectsService,
@@ -37,32 +42,16 @@ export class WeeklyVisitorsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.radialChart);
-    /*
-    var _this = this;
-    this.projectsService.getProjects(this.uid).subscribe({
-      next(projects) {
-        _this.projectListData = projects;
-      },
-      error(msg) {
-        console.log(msg);
-      },
-      complete() {
-        console.log('weekly-visitors.radialChart before=', _this.radialChart);
-        _this.getWeeklyCounts();
-        console.log('weekly-visitors.radialChart after=', _this.radialChart);
-        console.log('getProjects finished');
-      },
-    });
-    */
   }
 
   getWeeklyCounts() {
     // Initialize histogram with 5 bins (Sunday - Saturday)
     let histogram = new Array(7).fill(0);
+
     var dates: Date[] = [];
 
     let today: Date = new Date();
-    for (let project of this.projectListData) {
+    for (let project of this._projectListData!) {
       if (project.ratings) {
         dates = [];
         for (const key in project.ratings) {
@@ -78,22 +67,37 @@ export class WeeklyVisitorsComponent implements OnInit {
           let dayofweek = value.getDay();
           console.log(value, howLongAgo, dayofweek);
           // Keep track if within last seven days
-          if (howLongAgo < 7) {
+          if (howLongAgo > 0 && howLongAgo <= 7) {
             histogram[dayofweek]++;
           }
         });
       }
     }
+    let min = Math.min(...histogram);
+    let max = Math.max(...histogram);
+    let avg =
+      histogram.reduce((sum, current) => sum + current, 0) / histogram.length;
     console.log('getweeklhCounts.histogram', histogram);
     this.radialChart = {
       ...this.radialChart,
       ...{
         series: [
           {
-            name: '',
+            name: 'Visitors',
             data: histogram,
           },
         ],
+        title: {
+          text: `Min=${min}; Max=${max}; Avg=${avg.toFixed(2)}`,
+          align: 'center',
+          offsetY: 272,
+          style: {
+            fontSize: '16px',
+            fontWeight: '400',
+            fontFamily: 'Secular One',
+            color: '#1F2F3E',
+          },
+        },
       },
     };
   }

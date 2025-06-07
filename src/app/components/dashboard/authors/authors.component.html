@@ -5,17 +5,18 @@
       <app-profile-gretting></app-profile-gretting>
     </div>
     <div class="col-xl-3 col-md-6 col-sm-12 box-col-4e">
-      <app-current-balance></app-current-balance>
+      <app-current-balance
+        [projectListData]="projects$ | async"></app-current-balance>
     </div>
     <div class="col-xl-3 col-md-6 col-sm-12 box-col-4e">
       <app-weekly-visitors [uid]="uid"
-        [projectListData]="projectListData"></app-weekly-visitors>
+        [projectListData]="projects$ | async"></app-weekly-visitors>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-12 col-xl-12 box-col-6">
-      <app-counts></app-counts>
+      <app-counts [projectListData]="projects$ | async"></app-counts>
     </div>
   </div>
 
@@ -32,10 +33,11 @@
   </div>
 
   <div class="col-12">
-    <app-best-selling-product></app-best-selling-product>
+    <app-best-selling-product
+      [projectListData]="projects$ | async"></app-best-selling-product>
   </div>
   <div class="col-xl-7 col-md-12 col-lg-6 box-col-6">
-    <app-sales-summary></app-sales-summary>
+    <app-read-summary [projectListData]="projects$ | async"></app-read-summary>
   </div>
   <div class="col-xl-5 col-md-12 col-lg-6 box-col-6">
     <app-track-order></app-track-order>

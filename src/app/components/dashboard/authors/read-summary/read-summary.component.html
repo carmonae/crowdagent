@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-header card-no-border relative">
+    <div class="header-top">
+      <h3 class="m-0">Picks Summary</h3>
+      <p>Hover over bubble to see Day, # Readers of the book title, and Sum of
+        Ratings for that day for that book</p>
+    </div>
+  </div>
+  <div class="card-body py-0">
+    <div id="salessummary">
+      <apx-chart
+        [series]="timelineChart.series"
+        [chart]="timelineChart.chart"
+        [dataLabels]="timelineChart.dataLabels"
+        [fill]="timelineChart.fill"
+        [legend]="timelineChart.legend"
+        [xaxis]="timelineChart.xaxis"
+        [yaxis]="timelineChart.yaxis"
+        [theme]="timelineChart.theme"
+        [colors]="timelineChart.colors"></apx-chart>
+    </div>
+  </div>
+</div>

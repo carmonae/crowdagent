@@ -1,0 +1,139 @@
+<div class="row">
+    <table class="table display" id="selling-product" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value>
+                        <label class="form-check-label"
+                            for="flexCheckDefault"></label>
+                    </div>
+                </th>
+                <th scope="col">#UID</th>
+                <th scope="col" sortable="title" (sort)="onSort($event)"
+                    style="cursor: pointer;">Title</th>
+                <th scope="col" sortable="subtitle" (sort)="onSort($event)"
+                    style="cursor: pointer;">Subtitle</th>
+                <th scope="col" sortable="status" (sort)="onSort($event)"
+                    style="cursor: pointer;">State</th>
+                <th scope="col" sortable="scoreI" (sort)="onSort($event)"
+                    style="cursor: pointer;">Impressions</th>
+                <th scope="col" sortable="scoreT" (sort)="onSort($event)"
+                    style="cursor: pointer;">Piques </th>
+                <th scope="col" sortable="scoreC" (sort)="onSort($event)"
+                    style="cursor: pointer;">ToC</th>
+                <th scope="col" sortable="scoreA" (sort)="onSort($event)"
+                    style="cursor: pointer;">Synopsis</th>
+                <th scope="col" sortable="scoreM" (sort)="onSort($event)"
+                    style="cursor: pointer;">Manuscript1</th>
+                <th scope="col" sortable="scoreM2" (sort)="onSort($event)"
+                    style="cursor: pointer;">Manuscript2</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of projects$ | async; let i=index">
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" id="flexCheckDefault"
+                            type="checkbox" value>
+                        <label class="form-check-label"
+                            for="flexCheckDefault"></label>
+                    </div>
+                </td>
+                <td><b>{{data.projectUid | slice:0:10}} ...</b></td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0"><img class="img-30"
+                                src={{getTitleImage(data)}}>
+                        </div>
+                        <div class="flex-grow-1 ms-2"><a
+                                [routerLink]="['/ecommerce/product-page']">
+                                <h5>{{data.title}}</h5>
+                            </a></div>
+                    </div>
+                </td>
+                <td><b>{{data.subtitle}}</b></td>
+                <td><b>{{data.status}}</b></td>
+                <td><b>{{data.scoreI}}</b></td>
+                <td><b>{{data.scoreT}}</b></td>
+                <td><b>{{data.scoreC}}</b></td>
+                <td><b>{{data.scoreA}}</b></td>
+                <td><b>{{data.scoreM}}</b></td>
+                <td><b>{{data.scoreM2}}</b></td>
+
+                <td class="text-center">
+                    <span class="edit-option">
+                        <a href="javascript:void(0)">
+                            <app-feather-icons
+                                [icon]="'edit'"></app-feather-icons>
+                            <!-- <i data-feather="edit"></i> -->
+                        </a>
+                    </span>
+                    <span class="delete-option">
+                        <a href="javascript:void(0)"
+                            (click)="removeItem(data.projectUid!)">
+                            <i class="remove" data-feather="trash-2"></i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+
+        <div class="job-pagination float-right">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-primary">
+                    <li class="page-item" [class.disabled]="currentPage == 1">
+                        <a class="page-link"
+                            (click)="gotoPage(currentPage - 1)">Previous</a>
+                    </li>
+                    <li class="page-item"
+                        [class.active]="currentPage == thispage">
+                        <a class="page-link" (click)="gotoPage(thispage)">{{
+                            thispage
+                            }}</a>
+                    </li>
+                    <li
+                        class="page-item"
+                        *ngIf="nextpage <= lastpage"
+                        [class.active]="currentPage == nextpage">
+                        <a class="page-link" (click)="gotoPage(nextpage)">{{
+                            nextpage
+                            }}</a>
+                    </li>
+                    <li
+                        class="page-item"
+                        *ngIf="pageafternext <= lastpage"
+                        [class.active]="currentPage == pageafternext">
+                        <a class="page-link"
+                            (click)="gotoPage(pageafternext)">{{
+                            pageafternext
+                            }}</a>
+                    </li>
+                    <li class="page-item"
+                        [class.disabled]="currentPage == lastpage">
+                        <a class="page-link"
+                            (click)="gotoPage(currentPage + 1)">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!--div class="justify-content-end align-items-center my-2"-->
+        <div class="my-2">
+            <label for="itemsPerPage" class="me-2 mb-0">Items per page:</label>
+            <select id="itemsPerPage" class="form-select w-auto"
+                [(ngModel)]="maxItems"
+                (change)="onItemsPerPageChange($event)">
+                <option [value]="4">4 Per Page</option>
+                <option [value]="8">8 Per Page</option>
+                <option [value]="12">12 Per Page</option>
+                <option [value]="24">24 Per Page</option>
+            </select>
+        </div>
+
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
 import { UserprojectI } from '@app/models/user-project';
 import { ProjectsService } from '@app/shared/services/projects.service';
@@ -19,7 +19,12 @@ export class CountsComponent {
   public basicBarChart!: Partial<ChartOptions>;
 
   uid: string | undefined;
-  public projectListData: UserprojectI[] = [];
+  public _projectListData: UserprojectI[] | null = [];
+  @Input()
+  set projectListData(list: UserprojectI[] | null) {
+    this._projectListData = list;
+    this.getChartData();
+  }
 
   constructor(
     private authService: AuthService,
@@ -47,7 +52,7 @@ export class CountsComponent {
       },
       series: [
         {
-          name: 'Depths',
+          name: 'Counts',
           data: [],
         },
       ],
@@ -57,10 +62,11 @@ export class CountsComponent {
       colors: [this.primary],
     };
 
+    /*
     var _this = this;
     this.projectsService.getProjects(this.uid).subscribe({
       next(projects) {
-        _this.projectListData = projects;
+        _this._projectListData = projects;
         _this.getChartData();
       },
       error(msg) {
@@ -70,22 +76,23 @@ export class CountsComponent {
         console.log('getProjects finished');
       },
     });
+    */
   }
 
   getChartData(): void {
-    console.log('getChartData:', this.projectListData);
-    let impressions: number = this.projectListData
-      .filter((proj) => proj.scoreI)
-      .reduce((sum, current) => sum + current.scoreI, 0);
-    let titles: number = this.projectListData
-      .filter((proj) => proj.scoreI)
-      .reduce((sum, current) => sum + current.scoreT, 0);
-    let toc: number = this.projectListData
-      .filter((proj) => proj.scoreI)
-      .reduce((sum, current) => sum + current.scoreC, 0);
-    let abstract: number = this.projectListData
-      .filter((proj) => proj.scoreI)
-      .reduce((sum, current) => sum + current.scoreA, 0);
+    console.log('getChartData:', this._projectListData);
+    let impressions: number = this._projectListData!.filter(
+      (proj) => proj.scoreI
+    ).reduce((sum, current) => sum + current.scoreI, 0);
+    let titles: number = this._projectListData!.filter(
+      (proj) => proj.scoreI
+    ).reduce((sum, current) => sum + current.scoreT, 0);
+    let toc: number = this._projectListData!.filter(
+      (proj) => proj.scoreI
+    ).reduce((sum, current) => sum + current.scoreC, 0);
+    let abstract: number = this._projectListData!.filter(
+      (proj) => proj.scoreI
+    ).reduce((sum, current) => sum + current.scoreA, 0);
 
     this.basicBarChart = {
       ...this.basicBarChart,
