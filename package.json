@@ -23,6 +23,8 @@
     "@asymmetrik/ngx-leaflet": "^16.0.1",
     "@ckeditor/ckeditor5-angular": "^7.0.0",
     "@ckeditor/ckeditor5-build-classic": "^38.1.1",
+    "@coreui/coreui": "^5.4.0",
+    "@coreui/react": "^5.7.0",
     "@danielmoncada/angular-datetime-picker": "^16.0.1",
     "@fortawesome/angular-fontawesome": "^0.13.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
