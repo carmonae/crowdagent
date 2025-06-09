@@ -7,9 +7,7 @@ import {
   NgForm,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { AuthService } from '@app/auth/service/auth.keycloak.service';
-import { Userprofile } from '@app/models/user-profile';
-import { FileUploadComponent } from '@app/shared/component/file-upload/file-upload.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { child, get, getDatabase, ref, set, update } from 'firebase/database';
@@ -18,6 +16,16 @@ import {
   getStorage,
   ref as storageRef,
 } from 'firebase/storage';
+
+import { AuthService } from '@app/auth/service/auth.keycloak.service';
+import { Userprofile } from '@app/models/user-profile';
+import { FileUploadComponent } from '@app/shared/component/file-upload/file-upload.component';
+
+import { Router } from '@angular/router';
+import {
+  FictionSubtypes,
+  NonFictionSubtypes,
+} from '@app/models/genreTypes-enum';
 import { UserDetails } from 'src/app/models/user-details';
 
 @Component({
@@ -25,7 +33,7 @@ import { UserDetails } from 'src/app/models/user-details';
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule],
 })
 export class EditProfileComponent implements OnInit {
   @Input() myprofile!: Userprofile;
@@ -69,6 +77,7 @@ export class EditProfileComponent implements OnInit {
     'Czech Republic',
   ];
   protected states = [
+    'None',
     'Alabama',
     'Alaska',
     'Arizona',
@@ -113,11 +122,19 @@ export class EditProfileComponent implements OnInit {
   ];
   detailsForm!: FormGroup;
 
-  constructor(private authService: AuthService, private modal: NgbModal) {
+  public genreTypesEnum: any;
+  public selectedGenres: string[] = [];
+
+  constructor(
+    private authService: AuthService,
+    private modal: NgbModal,
+    private router: Router
+  ) {
     this.detailsForm = new FormGroup({
       penName: new FormControl(''),
       role: new FormControl(''),
       slogan: new FormControl(''),
+      genre: new FormControl(''),
       address: new FormControl(''),
       city: new FormControl(''),
       state: new FormControl(''),
@@ -139,7 +156,17 @@ export class EditProfileComponent implements OnInit {
     console.log('uid=', this.myprofile.uid);
     this.readUserDetails();
     this.getAvatar();
+    this.generateGenreList();
   }
+
+  generateGenreList(): void {
+    this.genreTypesEnum = [
+      ...Object.values(FictionSubtypes),
+      ...Object.values(NonFictionSubtypes),
+    ];
+  }
+
+  onGenreChange(event: any) {}
 
   readUserDetails(): void {
     const dbRef = ref(getDatabase());
@@ -154,6 +181,7 @@ export class EditProfileComponent implements OnInit {
             penName: this.mydetails.penName,
             role: this.mydetails.role,
             slogan: this.mydetails.slogan,
+            genre: this.mydetails.genre,
             address: this.mydetails.address,
             city: this.mydetails.city,
             state: this.mydetails.state,
@@ -209,7 +237,7 @@ export class EditProfileComponent implements OnInit {
       });
   }
 
-  onSelectType(event: any): void {
+  onRoleSelectType(event: any): void {
     console.log(event);
     this.mydetails.role = event.srcElement.innerText;
   }
@@ -244,5 +272,8 @@ export class EditProfileComponent implements OnInit {
     } else {
       update(usersRef, form);
     }
+    this.router.navigate(['dashboard']);
   }
 }
+//TODO: allow multiple roles
+//TODO: align avatar and change button

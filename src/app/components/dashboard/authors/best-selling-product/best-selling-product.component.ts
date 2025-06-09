@@ -1,7 +1,9 @@
 import { CommonModule, DecimalPipe } from '@angular/common';
 import {
   Component,
+  EventEmitter,
   Input,
+  Output,
   QueryList,
   ViewChild,
   ViewChildren,
@@ -35,6 +37,7 @@ export class BestSellingProductComponent {
     this.projects$ = this.projectTableService.projects$;
     this.total$ = this.projectTableService.total$;
   }
+  @Output('bookSelected') bookSelected = new EventEmitter<string>();
 
   projectTableService = new ProjectsTableService(this.projectListData$!);
 
@@ -70,7 +73,13 @@ export class BestSellingProductComponent {
     });
   }
 
-  openMenu() {
+  filterBooks() {
     this.isShow = !this.isShow;
+    console.log('filterBooks:');
+  }
+
+  rowSelected(id: string) {
+    console.log('row received:', id);
+    this.bookSelected.emit(id);
   }
 }

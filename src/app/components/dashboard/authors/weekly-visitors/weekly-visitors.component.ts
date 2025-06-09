@@ -34,6 +34,10 @@ export class WeeklyVisitorsComponent implements OnInit {
 
   //public radialChart!: Partial<ChartOptions>;
   public radialChart = WeeklyVisitor;
+  public isShow: boolean = false;
+  public prevDisabled: boolean = true;
+  public nextDisabled: boolean = true;
+  public weekToShow: number = 1; // this week
 
   constructor(
     private projectsService: ProjectsService,
@@ -65,9 +69,13 @@ export class WeeklyVisitorsComponent implements OnInit {
             (today.getTime() - value.getTime()) / (1000 * 3600 * 24)
           );
           let dayofweek = value.getDay();
-          console.log(value, howLongAgo, dayofweek);
+
+          //console.log(value, howLongAgo, dayofweek);
           // Keep track if within last seven days
-          if (howLongAgo > 0 && howLongAgo <= 7) {
+          if (
+            howLongAgo > (this.weekToShow - 1) * 7 &&
+            howLongAgo <= this.weekToShow * 7
+          ) {
             histogram[dayofweek]++;
           }
         });
@@ -77,7 +85,7 @@ export class WeeklyVisitorsComponent implements OnInit {
     let max = Math.max(...histogram);
     let avg =
       histogram.reduce((sum, current) => sum + current, 0) / histogram.length;
-    console.log('getweeklhCounts.histogram', histogram);
+    //console.log('getweeklhCounts.histogram', histogram);
     this.radialChart = {
       ...this.radialChart,
       ...{
@@ -100,5 +108,20 @@ export class WeeklyVisitorsComponent implements OnInit {
         },
       },
     };
+  }
+
+  changeWeek(week: number) {
+    this.isShow = !this.isShow;
+    if (week >= 1 && week <= 4) {
+      this.weekToShow = week;
+    }
+    this.getWeeklyCounts();
+  }
+
+  prev() {
+    this.changeWeek(this.weekToShow - 1);
+  }
+  next() {
+    this.changeWeek(this.weekToShow + 1);
   }
 }

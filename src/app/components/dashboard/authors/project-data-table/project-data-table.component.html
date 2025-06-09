@@ -25,14 +25,15 @@
                 <th scope="col" sortable="scoreA" (sort)="onSort($event)"
                     style="cursor: pointer;">Synopsis</th>
                 <th scope="col" sortable="scoreM" (sort)="onSort($event)"
-                    style="cursor: pointer;">Manuscript1</th>
+                    style="cursor: pointer;">Predicted Score</th>
                 <th scope="col" sortable="scoreM2" (sort)="onSort($event)"
-                    style="cursor: pointer;">Manuscript2</th>
+                    style="cursor: pointer;">Personal Score</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of projects$ | async; let i=index">
+            <tr (click)="onRowSelected(data.projectUid!)"
+                *ngFor="let data of projects$ | async; let i=index">
                 <td>
                     <div class="form-check">
                         <input class="form-check-input" id="flexCheckDefault"
@@ -41,14 +42,14 @@
                             for="flexCheckDefault"></label>
                     </div>
                 </td>
-                <td><b>{{data.projectUid | slice:0:10}} ...</b></td>
+                <td><b>{{data.projectUid |
+                        slice:0:10}} ...</b></td>
                 <td>
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0"><img class="img-30"
                                 src={{getTitleImage(data)}}>
                         </div>
-                        <div class="flex-grow-1 ms-2"><a
-                                [routerLink]="['/ecommerce/product-page']">
+                        <div class="flex-grow-1 ms-2"><a>
                                 <h5>{{data.title}}</h5>
                             </a></div>
                     </div>

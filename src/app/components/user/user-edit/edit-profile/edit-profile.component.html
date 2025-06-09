@@ -20,18 +20,18 @@
 
   <div class="card-body">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="row mb-2">
 
           <div class="profile-title">
             <div class="d-flex">
-              <div class="row mb-0">
+              <div class="row align-items-center mb-0">
                 <img
                   class="img-120 rounded-circle"
                   alt="my avatar"
                   src={{avatarUrl}} />
                 <button
-                  class="btn btn-lg btn-primary"
+                  class="btn btn-sm btn-primary"
                   (click)="onChangePicture()">
                   Change
                 </button>
@@ -67,7 +67,7 @@
                   <a
                     *ngFor="let role of roles"
                     ngbDropdownItem
-                    (click)="onSelectType($event)">{{ role }}
+                    (click)="onRoleSelectType($event)">{{ role }}
                   </a>
                 </div>
               </div>
@@ -84,6 +84,14 @@
             placeholder="To write is to think..."
             id="slogan" name="slogan" formControlName="slogan" />
         </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="col-form-label">What genres interest you?</label>
+        <ng-select [items]="genreTypesEnum" bindLabel="name" bindValue="id"
+          [multiple]="true"
+          placeholder="Select genre interests" formControlName="genre">
+        </ng-select>
       </div>
 
       <!-- Address -->
@@ -108,10 +116,11 @@
       <div class="col-sm-6 col-md-2">
         <div class="mb-3">
           <label for="state" class="form-label">State</label>
-          <select fromControlName="state" class="form-control btn-square">
-            <option *ngFor="let state of states"
-              [ngValue]="state">{{ state }}</option>
-          </select>
+          <ng-select [items]="states" bindLabel="state" bindValue="id"
+            class="btn-square"
+            [multiple]="false"
+            placeholder="State" formControlName="state">
+          </ng-select>
         </div>
       </div>
 
@@ -125,13 +134,14 @@
       </div>
 
       <!-- Country -->
-      <div class="col-md-4">
+      <div class="col-sm-6 col-md-2">
         <div class="mb-3">
-          <label class="form-label">Country</label>
-          <select fromControlName="country" class="form-control btn-square">
-            <option *ngFor="let country of countries"
-              [value]="country">{{ country }}</option>
-          </select>
+          <label for="state" class="form-label">Country</label>
+          <ng-select [items]="countries" bindLabel="country" bindValue="id"
+            class="btn-square"
+            [multiple]="false"
+            placeholder="Country" formControlName="country">
+          </ng-select>
         </div>
       </div>
 

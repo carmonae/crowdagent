@@ -1,58 +1,77 @@
-<div class="card" *ngFor="let data of trackOrder">
-    <div class="card-header card-no-border">
-      <div class="header-top">
-        <h3 class="m-0">Track Order</h3>
-      </div>
+<div class="card">
+  <div class="card-header card-no-border">
+    <div class="header-top">
+      <h3 class="m-0">Track Project</h3>
+      <p>Select a row from the Best Ranking Manuscripts Table</p>
     </div>
-    <div class="card-body pt-0">
-      <ul class="track-order">
-        <div class="order-box"> 
-          <div class="d-flex">
-            <div class="flex-shrink-0"><img src="{{data.img}}"></div>
-            <div class="flex-grow-1"> <a [routerLink]="['/chat/chat-app']"> 
-                <h3>{{data.productname}}</h3>
-                <p>{{data.soldby}}</p>
-                <p>{{data.id}}</p></a></div><span>${{data.price}}</span>
+  </div>
+  <div *ngIf="project" class="card-body pt-0">
+    <ul class="track-order">
+      <div class="order-box">
+        <div class="d-flex">
+          <div class="flex-shrink-0"><img class="img-30"
+              src="{{projectTimeline.img}}"></div>
+          <div class="flex-grow-1"> <a [routerLink]="['/chat/chat-app']">
+              <h3>{{projectTimeline.title}}</h3>
+              <p>{{projectTimeline.subtitle}}</p>
+              <p>{{projectTimeline.id}}</p></a></div><span>${{projectTimeline.pique}}</span>
+        </div>
+      </div>
+      <li>
+        <div class="d-flex">
+          <div class="flex-shrink-0 bg-dark"><img
+              src="assets/images/dashboard-2/total-icon/1.png"></div>
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between"> <a
+                [routerLink]="['/chat/chat-app']">
+                <h5>Project Created</h5>
+                <p class="text-truncate">Project Material Safely
+                  Stored</p></a><span
+                class="font-primary f-w-600">{{projectTimeline.createDate}}</span></div>
           </div>
         </div>
-        <li> 
-          <div class="d-flex">
-            <div class="flex-shrink-0 bg-dark"><img src="assets/images/dashboard-2/total-icon/1.png"></div>
-            <div class="flex-grow-1"> 
-              <div class="d-flex justify-content-between"> <a [routerLink]="['/chat/chat-app']"> 
-                  <h5>Order Placed</h5>
-                  <p class="text-truncate">We have received Your Order</p></a><span class="font-primary f-w-600">{{data.placeorderdate}}</span></div>
-            </div>
+      </li>
+      <li>
+        <div class="d-flex">
+          <div class="flex-shrink-0 bg-dark"><img
+              src="assets/images/dashboard-2/total-icon/2.png"></div>
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between"> <a
+                [routerLink]="['/chat/chat-app']">
+                <h5>Project First Published</h5>
+                <p *ngIf="didItStart(projectTimeline.publishDate)"
+                  class="text-truncate">Reviews
+                  started</p></a><span
+                class="font-primary f-w-600">{{projectTimeline.publishDate}}</span></div>
           </div>
-        </li>
-        <li> 
-          <div class="d-flex">
-            <div class="flex-shrink-0 bg-dark"><img src="assets/images/dashboard-2/total-icon/2.png"></div>
-            <div class="flex-grow-1"> 
-              <div class="d-flex justify-content-between"> <a [routerLink]="['/chat/chat-app']"> 
-                  <h5>Order Packed</h5>
-                  <p class="text-truncate">Your Product Packed and ready to shipped</p></a><span class="font-primary f-w-600">{{data.packedorderdate}}</span></div>
-            </div>
+        </div>
+      </li>
+      <li>
+        <div class="d-flex">
+          <div class="flex-shrink-0"><img
+              src="assets/images/dashboard-2/total-icon/3.png"></div>
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between"> <a
+                [routerLink]="['/chat/chat-app']">
+                <h5>Project Influencer Review Phase</h5>
+                <p *ngIf="didItStart(projectTimeline.endPhaseIDate)"
+                  class="text-truncate">Influencer Review Ended.</p></a><span
+                class="f-w-600">{{projectTimeline.endPhaseIDate}}</span></div>
           </div>
-        </li>
-        <li> 
-          <div class="d-flex">
-            <div class="flex-shrink-0"><img src="assets/images/dashboard-2/total-icon/3.png"></div>
-            <div class="flex-grow-1"> 
-              <div class="d-flex justify-content-between"> <a [routerLink]="['/chat/chat-app']"> 
-                  <h5>On the way</h5>
-                  <p class="text-truncate">Your Ordeis placed successfully.</p></a><span class="f-w-600">{{data.onwaydate}}</span></div>
-            </div>
+        </div>
+      </li>
+      <li>
+        <div class="d-flex">
+          <div class="flex-shrink-0"><img
+              src="assets/images/dashboard-2/total-icon/4.png"></div>
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between"> <a
+                [routerLink]="['/chat/chat-app']">
+                <h5>Project Archived</h5>
+                <p *ngIf="didItStart(projectTimeline.archiveDate)"
+                  class="text-truncate">Project was archived</p></a><span
+                class="f-w-600">{{projectTimeline.archiveDate}}</span></div>
           </div>
-        </li>
-        <li> 
-          <div class="d-flex">
-            <div class="flex-shrink-0"><img src="assets/images/dashboard-2/total-icon/4.png"></div>
-            <div class="flex-grow-1"> 
-              <div class="d-flex justify-content-between"> <a [routerLink]="['/chat/chat-app']"> 
-                  <h5>Product Deliverd</h5>
-                  <p class="text-truncate">Our courier partner will deliver our stuff on {{data.delivereddate}}...</p></a></div>
-            </div>
-          </div>
-        </li>
-      </ul>
+        </div>
+      </li>
+    </ul>

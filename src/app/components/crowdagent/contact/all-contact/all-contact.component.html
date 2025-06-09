@@ -39,9 +39,9 @@
                 <div class="col-md-12 d-flex">
                   <img
                     class="b-r-8 img-80"
-                    src="assets/images/blankBookCover.jpg"
+                    src="getBookCover(data)"
                     alt />
-                  <div class="col-md-4 flex-grow-1" style="margin-left: 10px">
+                  <div class="col-sm-4 flex-grow-1" style="margin-left: 10px">
                     <h4>
                       <span class="first_name_0">{{ data.title }} </span>
                     </h4>
@@ -51,29 +51,30 @@
                     <p class="email_add_0">by: Pen Name</p>
                   </div>
 
-                  <div class="col-md-8 list-persons">
+                  <div class="col-sm-8 list-persons">
                     <ul style="margin-right:10px">
-                      <li class="btn badge-{{badgeColor(data, 'title')}}">
+                      <li
+                        class="btn fixed-btn-width badge-{{badgeColor(data, 'title')}}">
                         <span
                           class="badge rounded-circle btn-p-space badge-light text-dark ms-2">
                           <app-feather-icons
                             [icon]="checkOrCircle(data, 'title')">
                           </app-feather-icons></span>Title</li>
-                      <li class="btn badge-{{badgeColor(data, 'toc')}}"><span
+                      <li
+                        class="btn fixed-btn-width badge-{{badgeColor(data, 'toc')}}"><span
                           class="badge rounded-circle btn-p-space badge-light text-dark ms-2">
                           <app-feather-icons
                             [icon]="checkOrCircle(data, 'toc')">
-                          </app-feather-icons></span>Table
-                        of
-                        Contents</li>
+                          </app-feather-icons></span>ToC
+                      </li>
                       <li
-                        class="btn badge-{{badgeColor(data, 'abstract')}}"><span
+                        class="btn fixed-btn-width badge-{{badgeColor(data, 'abstract')}}"><span
                           class="badge rounded-circle btn-p-space badge-light text-dark ms-2">
                           <app-feather-icons
                             [icon]="checkOrCircle(data, 'abstract')">
                           </app-feather-icons></span>Synopsis</li>
                       <li
-                        class="btn badge-{{badgeColor(data, 'manuscript')}}"><span
+                        class="btn fixed-btn-width badge-{{badgeColor(data, 'manuscript')}}"><span
                           class="badge rounded-circle btn-p-space badge-light text-dark ms-2">
                           <app-feather-icons
                             [icon]="checkOrCircle(data, 'manuscript')">
@@ -123,6 +124,6 @@
   </nav>
 </div>
 
-<div *ngIf="selectedata" class="col-xl-12 xl-50 col-md-7">
+<div *ngIf="selectedata" class="col-xl-12 xl-50">
   <app-details [selectedata]="selectedata"></app-details>
 </div>

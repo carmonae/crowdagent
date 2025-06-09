@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, QueryList, ViewChildren } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { UserprojectI } from '@app/models/user-project';
@@ -31,6 +38,7 @@ export class ProjectDataTableComponent {
     this._service = theService;
     this.updateTable();
   }
+  @Output('rowSelected') rowSelected = new EventEmitter<string>();
 
   private _service: ProjectsTableService = new ProjectsTableService([]);
 
@@ -124,5 +132,10 @@ export class ProjectDataTableComponent {
     this.currentPage = page;
     this._service.page = this.currentPage;
     this.nextItem = (this.currentPage - 1) * this.maxItems;
+  }
+
+  onRowSelected(id: string) {
+    console.log('row selected:', id);
+    this.rowSelected.emit(id);
   }
 }

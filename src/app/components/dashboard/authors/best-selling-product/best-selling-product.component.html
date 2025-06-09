@@ -7,13 +7,15 @@
           <button
             class="btn dropdown-toggle"
             id="dropdownMenuButton"
-            (click)="openMenu()">
-            Yearly
+            (click)="filterBooks()">
+            All
           </button>
           <div class="dropdown-menu dropdown-menu-end" [class.show]="isShow">
-            <a class="dropdown-item" href="javascript:void(0)">Today</a>
-            <a class="dropdown-item" href="javascript:void(0)">Tomorrow</a>
-            <a class="dropdown-item" href="javascript:void(0)">Yesterday </a>
+            <a class="dropdown-item" href="javascript:void(0)">All</a>
+            <a class="dropdown-item" href="javascript:void(0)">Draft</a>
+            <a class="dropdown-item" href="javascript:void(0)">Published</a>
+            <a class="dropdown-item" href="javascript:void(0)">Parked </a>
+            <a class="dropdown-item" href="javascript:void(0)">Archived </a>
           </div>
         </div>
       </div>
@@ -39,7 +41,8 @@
           </div>
         </div>
         <app-project-data-table #projectDataTable
-          [service]="projectTableService"></app-project-data-table>
+          [service]="projectTableService"
+          (rowSelected)="rowSelected($event)"></app-project-data-table>
       </form>
 
     </div>

@@ -29,10 +29,10 @@ export class Pique implements PiqueI {
   public subtitle: string = '';
   public datePublish: string = '';
   public level: string = 'title';
-  public rating!: {
-    personalRating: number;
-    predictedRating: number;
-    bet: number;
+  public rating: any = {
+    personalRating: 0,
+    predictedRating: 0,
+    bet: 0,
   };
   public tags: TagI[] = [];
 

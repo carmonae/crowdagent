@@ -123,8 +123,8 @@ export class DetailsComponent implements OnInit {
       this.projectsService.incrementTitleScoreM(
         this.selectedata.userUid!,
         this.selectedata.projectUid!,
-        result.predictedRating,
         result.personalRating,
+        result.predictedRating,
         result.bet
       );
     });

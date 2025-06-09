@@ -164,10 +164,10 @@ export class ProjectsService implements OnInit {
     update(ref(this.db, path), { scoreI: increment(1) });
   }
 
-  incrementTitleScoreT(uid: string, puid: string): void {
+  incrementTitleScoreT(uid: string, puid: string, inc: number): void {
     console.log(`Increment Title Score Method.`);
     var path = `${this.firepath}/${uid}/${puid}`;
-    update(ref(this.db, path), { scoreT: increment(1) });
+    update(ref(this.db, path), { scoreT: increment(inc) });
   }
 
   incrementTitleScoreA(uid: string, puid: string): void {
@@ -195,7 +195,7 @@ export class ProjectsService implements OnInit {
     score2: number,
     bet: number
   ): void {
-    console.log(`Increment Manuscript Score Method.`);
+    console.log(`Add Manuscript Rating Record.`);
     var path = `${this.firepath}/${uid}/${puid}/ratings`;
     push(ref(this.db, path), {
       readerId: uid,
@@ -203,6 +203,11 @@ export class ProjectsService implements OnInit {
       scoreM2: increment(score2),
       bet: increment(bet),
       timestamp: Date(),
+    });
+    var scoreTotalsPath = `${this.firepath}/${uid}/${puid}`;
+    update(ref(this.db, scoreTotalsPath), {
+      scoreM: increment(score1),
+      scoreM2: increment(score2),
     });
   }
 }

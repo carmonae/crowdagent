@@ -34,12 +34,14 @@
 
   <div class="col-12">
     <app-best-selling-product
-      [projectListData]="projects$ | async"></app-best-selling-product>
+      [projectListData]="projects$ | async"
+      (bookSelected)="bookSelected($event)"></app-best-selling-product>
+  </div>
+  <div class="col-xl-5 col-md-12 col-lg-6 box-col-6">
+    <app-track-order #trackorder
+      [projectListData]="projects$ | async"></app-track-order>
   </div>
   <div class="col-xl-7 col-md-12 col-lg-6 box-col-6">
     <app-read-summary [projectListData]="projects$ | async"></app-read-summary>
-  </div>
-  <div class="col-xl-5 col-md-12 col-lg-6 box-col-6">
-    <app-track-order></app-track-order>
   </div>
 </div>

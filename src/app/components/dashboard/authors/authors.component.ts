@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   abstractPiquesData,
   manuscriptsPiquesData,
@@ -39,6 +39,8 @@ import { WeeklyVisitorsComponent } from './weekly-visitors/weekly-visitors.compo
   ],
 })
 export class AuthorsComponent {
+  @ViewChild('trackorder') trackOrder!: TrackOrderComponent;
+
   public totalImpressionsData = titleImpressionsData;
   public totalAbstractData = abstractPiquesData;
   public totalManuscriptData = manuscriptsPiquesData;
@@ -106,5 +108,9 @@ export class AuthorsComponent {
       .filter((proj) => proj.scoreI)
       .reduce((sum, current) => sum + current.scoreM, 0)
       .toString();
+  }
+
+  bookSelected(id: string) {
+    this.trackOrder.update(id);
   }
 }

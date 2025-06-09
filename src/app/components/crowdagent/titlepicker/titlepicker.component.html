@@ -1,7 +1,7 @@
 
 <div>
 
-    <div class="row">
+    <!--div class="row">
         <div class="col-2">
 
         </div>
@@ -26,12 +26,12 @@
 
         </div>
 
-    </div>
+    </div-->
     <br />
 
-    <div opacity=0.5 class="row" style="margin-bottom:0px">
+    <!--div class="row" style="margin-bottom:0px">
 
-        <!-- Center Table -->
+        <!-- Center Table >
         <swiper style="margin-bottom:0px" #swiper class="col-8"
             [loop]="true"
             direction="horizontal"
@@ -81,9 +81,55 @@
             </ng-template>
         </swiper>
 
+    </div-->
+
+    <div class="card height-equal">
+        <div class="card-header card-no-border pb-0">
+            <h3>piQue a Book ({{centerBooks.length}} New
+                Titles)</h3>
+            <h6 class="f-m-light mt-1">Here's what's at the bookstore. Do any of
+                these titles piQue your
+                interest? Thumbs up or thumbs down. You can change your mind
+                later. Each thumbs up adds {{piquesPerTitle}} piQues to the
+                author's title.</h6>
+        </div>
+        <div class="card-body">
+            <div class="carousel slide carousel-fade" id="carouselExampleFade"
+                data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <owl-carousel-o [options]="myCrossFadeOptions">
+                        <ng-template carouselSlide class="carousel-item"
+                            *ngFor="let title of centerBooks">
+                            <img
+                                class="img-60 img-fluid m-r-20"
+                                src="{{title.img}}"
+                                alt />
+                            <div class="row">
+                                <div>
+                                    <h4>
+                                        {{ title.title }}
+                                    </h4>
+                                </div>
+                                <div>
+                                    <h4>
+                                        {{ title.subtitle }}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div
+                                class="badge badge-primary">
+                                {{
+                                title.datePublished | age
+                                }}
+                            </div>
+                        </ng-template>
+                    </owl-carousel-o>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div opacity=0.5 class="row" style="margin-top:1px; margin-bottom:40px">
+    <div class="row" style="margin-top:1px; margin-bottom:40px">
         <div class="col-2"></div>
         <div *ngIf="centerBooks.length>0" class="col">
             <button
@@ -100,12 +146,12 @@
         <div class="col-2"></div>
     </div>
 
-    <div opacity=0.5 class="row">
+    <div class="row">
         <!-- Pass Table -->
         <div class="card col-6">
             <div class="card-header card-no-border pb-0">
                 <div class="header-top">
-                    <h2>{{passTableName}} ({{notInterested.length}})</h2>
+                    <h3>{{passTableName}} ({{notInterested.length}})</h3>
                 </div>
             </div>
             <div class="card-body pt-0 sellingproduct">
@@ -149,7 +195,7 @@
         <div class="card col-md-6">
             <div class="card-header card-no-border pb-0">
                 <div class="header-top">
-                    <h2>{{piqueTableName}} ({{interested.length}})</h2>
+                    <h3>{{piqueTableName}} ({{interested.length}} )</h3>
                 </div>
             </div>
             <div class="card-body pt-0 sellingproduct">
@@ -193,7 +239,7 @@
 
     <div class="text-center my-4">
         <button class="btn btn-lg btn-success" (click)="onDonePiquing()">
-            Done piQueing
+            Commit My piQues
         </button>
     </div>
 

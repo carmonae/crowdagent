@@ -2,6 +2,25 @@
   <div class="card-header card-no-border">
     <div class="header-top">
       <h3>Weekly Visitors </h3>
+      <!--div class="card-header-right-icon">
+        <div class="dropdown">
+          <button
+            class="btn dropdown-toggle"
+            id="dropdownMenuButton"
+            (click)="changeWeek()">
+            This Week
+          </button>
+          <div class="dropdown-menu dropdown-menu-end" [class.show]="isShow">
+            <a class="dropdown-item" href="javascript:void(0)">This Week</a>
+            <a class="dropdown-item" href="javascript:void(0)">One Week Ago</a>
+            <a class="dropdown-item" href="javascript:void(0)">Two Weeks Ago</a>
+            <a class="dropdown-item" href="javascript:void(0)">Three Weeks Ago
+            </a>
+            <a class="dropdown-item" href="javascript:void(0)">Four Weeks Ago
+            </a>
+          </div>
+        </div>
+      </div-->
     </div>
   </div>
   <div class="card-body py-0">
@@ -15,5 +34,39 @@
         [plotOptions]="radialChart.plotOptions" [title]="radialChart.title">
       </apx-chart>
     </div>
+  </div>
+  <div class="flex-grow-1">
+    <nav aria-label="...">
+      <ul class="pagination pagination-success pagin-border-success">
+        <li class="page-item" [class.disabled]="weekToShow==1"><a
+            class="page-link"
+            (click)="prev()" tabindex="-1">Previous</a></li>
+
+        <li class="page-item" [class.active]="weekToShow==1"><a
+            class="page-link"
+            (click)="changeWeek(1)">1<span
+              class="sr-only]"></span></a></li>
+
+        <li class="page-item" [class.active]="weekToShow==2"><a
+            class="page-link"
+            (click)="changeWeek(2)">2 <span
+              class="sr-only"></span></a></li>
+
+        <li class="page-item" [class.active]="weekToShow==3"><a
+            class="page-link"
+            (click)="changeWeek(3)">3<span
+              class="sr-only"></span></a></li>
+
+        <li class="page-item" [class.active]="weekToShow==4"><a
+            class="page-link"
+            (click)="changeWeek(4)">4<span
+              class="sr-only"></span></a></li>
+
+        <li class="page-item"
+          [class.disabled]="weekToShow==4"><a
+            class="page-link"
+            (click)="next()">Next</a></li>
+      </ul>
+    </nav>
   </div>
 </div>

@@ -3,9 +3,11 @@ import { Component, NgZone, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
 import { Pique } from '@app/models/pique-model';
+import { PiquesPerPique } from '@app/models/piquesPerPique';
 import { Userprofile } from '@app/models/user-profile';
 import { UsertitlesI } from '@app/models/user-titles';
 import { PiqueTitlesDataTableComponent } from '@app/shared/component/pique-titles-data-table/pique-titles-data-table.component';
+import { crossFadeOptions } from '@app/shared/data/data/bonus-ui/owl-carousel';
 import { PiquedTitlesType } from '@app/shared/data/data/default-dashboard/piqued-titles-mock-data';
 import { jobCardsData } from '@app/shared/data/data/job-search/job-search';
 import { AgePipe } from '@app/shared/pipes/age.pipe';
@@ -14,10 +16,10 @@ import { ProjectsService } from '@app/shared/services/projects.service';
 import { TitlesService } from '@app/shared/services/titles.service';
 import { PiquedTitleTablesService } from '@app/util/piqued-tables.util';
 import { KeycloakProfile } from 'keycloak-js';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { Observable } from 'rxjs';
 import Swiper from 'swiper';
 import { SwiperModule } from 'swiper/angular';
-
 export interface ExtendedKeycloakProfile extends KeycloakProfile {
   attributes?: { [key: string]: string };
 }
@@ -33,6 +35,7 @@ export interface ExtendedKeycloakProfile extends KeycloakProfile {
     SwiperModule,
     AgePipe,
     PiqueTitlesDataTableComponent,
+    CarouselModule,
   ],
   providers: [DecimalPipe],
   schemas: [],
@@ -50,6 +53,9 @@ export class TitlePickerComponent {
 
   public passTableName: string = 'Pass On These Titles';
   public piqueTableName: string = 'Titles PiQued My Interest';
+
+  public myCrossFadeOptions = crossFadeOptions;
+  public piquesPerTitle = PiquesPerPique.TITLE;
 
   uid: string | undefined;
 
@@ -111,9 +117,10 @@ export class TitlePickerComponent {
 
             for (let i = 0; i < _this.allTitles.length; i++) {
               _this.centerBooks.push({
+                id: i,
                 uid: _this.allTitles[i].userUid!,
                 pid: _this.allTitles[i].projectUid!,
-                img: '',
+                img: 'assets/images/blankBookCover.jpg',
                 title: _this.allTitles[i].title,
                 subtitle: _this.allTitles[i].subtitle,
                 datePublished: _this.allTitles[i].datePublish,
@@ -244,7 +251,8 @@ export class TitlePickerComponent {
         this.piqueService.addPique(this.myprofile.uid!, newPique);
         this.projectService.incrementTitleScoreT(
           this.allTitles[i].userUid!,
-          this.allTitles[i].projectUid!
+          this.allTitles[i].projectUid!,
+          this.piquesPerTitle
         );
       }
     }

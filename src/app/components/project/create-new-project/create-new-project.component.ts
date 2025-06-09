@@ -70,9 +70,8 @@ export class CreateNewProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const temp = this.router.getCurrentNavigation()?.extras.state;
-
-    if (temp) {
+    const temp = history.state;
+    if (temp.projectUid) {
       var state: UserprojectI = UserprojectDefault;
       state = JSON.parse(JSON.stringify(temp));
 
@@ -117,10 +116,10 @@ export class CreateNewProjectComponent implements OnInit {
     let genre = event.target.value;
     if (genre == 'Non-Fiction') {
       this.subgenreTypesEnum = Object.values(NonFictionSubtypes);
-      this.project.subgenre = NonFictionSubtypes.PHILOSOPHY.valueOf;
+      this.project.subgenre = NonFictionSubtypes.PHILOSOPHY.valueOf();
     } else {
       this.subgenreTypesEnum = Object.values(FictionSubtypes);
-      this.project.subgenre = FictionSubtypes.ADVENTURE.valueOf;
+      this.project.subgenre = FictionSubtypes.ADVENTURE.valueOf();
     }
   }
 

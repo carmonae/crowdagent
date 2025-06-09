@@ -114,6 +114,14 @@ export class AllContactComponent implements OnInit, OnChanges {
     this.gotoPage(1);
   }
 
+  getBookCover(data: any): string {
+    if (data.coverurl) {
+      return data.coverurl;
+    } else {
+      return 'assets/image/blankBookCover.jpg';
+    }
+  }
+
   getDataForDetails(id: string | undefined) {
     const getselectedData = this.allTitles.filter((data) => {
       return data.projectUid === id;
@@ -175,6 +183,7 @@ export class AllContactComponent implements OnInit, OnChanges {
     let result: string = actualLevel < requestedLevel ? 'circle' : 'check';
     return result;
   }
+
   badgeColor(data: PiqueI, segment: string): string {
     const requestedLevel =
       PiqueLevel[segment.toUpperCase() as keyof typeof PiqueLevel];
@@ -184,3 +193,4 @@ export class AllContactComponent implements OnInit, OnChanges {
     return result;
   }
 }
+//TODO: fix width the title, toc, synopsis, manuscript buttons

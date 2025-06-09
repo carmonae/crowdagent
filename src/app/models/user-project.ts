@@ -9,7 +9,6 @@ export interface UserprojectI {
   projectUid: string | undefined;
   projectname: string;
   penname: string;
-  dateCreated: Date | undefined;
   title: string;
   subtitle: string;
   readership: Readership;
@@ -17,6 +16,7 @@ export interface UserprojectI {
   genre: GenreTypes;
   subgenre: any;
   size: SizeTypes;
+  dateCreated: Date | undefined;
   dateStart: string;
   dateEnd: string;
   datePublish: string;

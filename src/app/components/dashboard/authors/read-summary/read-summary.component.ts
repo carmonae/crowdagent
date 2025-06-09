@@ -35,13 +35,18 @@ export class ReadSummaryComponent {
       let id: string = project.projectUid!;
       if (project.ratings) {
         for (const key in project.ratings) {
-          let newDate = new Date(project.ratings[key].timestamp)
-            .toISOString()
-            .split('T')[0];
-          //let reader = project.ratings[key].readerId;
-          let reader = (Math.random() * 3 + 1).toString();
-          let scoreM2 = project.ratings[key].scoreM2;
-          data.push([newDate, reader, scoreM2]);
+          //console.log(project.ratings[key]);
+          try {
+            let newDate = new Date(project.ratings[key].timestamp)
+              .toISOString()
+              .split('T')[0];
+            //let reader = project.ratings[key].readerId;
+            let reader = (Math.random() * 3 + 1).toString();
+            let scoreM2 = project.ratings[key].scoreM2;
+            data.push([newDate, reader, scoreM2]);
+          } catch (error) {
+            console.log(error);
+          }
         }
       }
 
@@ -57,21 +62,30 @@ export class ReadSummaryComponent {
     }
 
     const result: Record<string, SeriesEntry[]> = {};
+    let bookname: string | undefined;
     for (const book in bookMap) {
-      if (this._projectListData) {
-        let bookName = this._projectListData!.find(
+      bookname =
+        this._projectListData!.find(
           (value, index, obj) => value.projectUid == book
-        )?.title;
-        if (!result[bookName!]) result[bookName!] = [];
+        )?.title +
+        '.' +
+        book;
+
+      if (bookname) {
+        if (!result[bookname!]) {
+          result[bookname!] = [];
+        }
         for (const day in bookMap[book]) {
-          result[bookName!].push([
+          result[bookname].push([
             day,
             bookMap[book][day]['readers'].size,
             bookMap[book][day]['totalScore'],
           ]);
         }
+        console.log('result[bookname]=', result[book]);
       }
     }
+
     console.log(result);
 
     let series: any[] = [];
