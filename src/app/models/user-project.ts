@@ -32,6 +32,7 @@ export interface UserprojectI {
   scoreA: number;
   scoreM: number;
   scoreM2: number;
+  countM: number;
   ratings: Ratings[];
 }
 
@@ -62,6 +63,7 @@ export const UserprojectDefault: UserprojectI = {
   scoreA: 0,
   scoreM: 0,
   scoreM2: 0,
+  countM: 0,
   ratings: [],
 };
 export const UserprojectMockData: UserprojectI[] = [
@@ -92,6 +94,7 @@ export const UserprojectMockData: UserprojectI[] = [
     scoreA: 1020,
     scoreM: 53120,
     scoreM2: 123,
+    countM: 5,
     ratings: [],
   },
   {
@@ -121,6 +124,7 @@ export const UserprojectMockData: UserprojectI[] = [
     scoreA: 1020,
     scoreM: 53120,
     scoreM2: 123124,
+    countM: 5,
     ratings: [],
   },
   {
@@ -150,6 +154,7 @@ export const UserprojectMockData: UserprojectI[] = [
     scoreA: 1020,
     scoreM: 53120,
     scoreM2: 53120,
+    countM: 5,
     ratings: [],
   },
   {
@@ -179,6 +184,7 @@ export const UserprojectMockData: UserprojectI[] = [
     scoreA: 1020,
     scoreM: 53120,
     scoreM2: 53120,
+    countM: 5,
     ratings: [],
   },
 ];
@@ -210,6 +216,7 @@ export class Userproject implements UserprojectI {
   public scoreA: number = 0;
   public scoreM: number = 0;
   public scoreM2: number = 0;
+  public countM: number = 5;
   public ratings: any = [];
 
   constructor(project: UserprojectI = UserprojectDefault) {
@@ -239,6 +246,7 @@ export class Userproject implements UserprojectI {
     this.scoreA = project.scoreA;
     this.scoreM = project.scoreM;
     this.scoreM = project.scoreM2;
+    this.countM = project.countM;
     this.ratings = [];
   }
 }
