@@ -80,6 +80,7 @@ export class CreateNewProjectComponent implements OnInit {
       this.project = UserprojectDefault;
       this.project.projectUid = uuid();
       this.project.penname = 'Mark Twain';
+      this.project.dateCreated = new Date();
       this.onGetPenName();
     }
 
