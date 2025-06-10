@@ -79,6 +79,10 @@ export class ProjectListComponent implements OnInit {
         : this.projectListData;
   }
 
+  progress(data: any) {
+    return Math.min((data.countM / 100) * 100, 100).toString() + '%';
+  }
+
   editProject(data: UserprojectI) {
     console.log('edit project:', data);
     this.router.navigateByUrl('/projects/create-new', { state: data });
@@ -97,6 +101,16 @@ export class ProjectListComponent implements OnInit {
     ) {
       this.titleService.remove(data.projectUid!);
     }
+
+    if (data.status === ProjectStatus.PUBLISHED) {
+      this.projService.setPublishingDate(this.uid!, data.projectUid!);
+
+      // Let's add the title to allow people to pique it
+      const newTitle = new Usertitle(data, this.uid);
+      console.log(data, newTitle);
+      const titleRef = ref(this.db, `titles/${data.projectUid}`);
+      set(titleRef, newTitle);
+    }
   }
 
   saveProject(project: UserprojectI): void {
@@ -106,12 +120,5 @@ export class ProjectListComponent implements OnInit {
       `users/project/${this.uid}/${project.projectUid}`
     );
     set(projectRef, project);
-
-    if (project.status == ProjectStatus.PUBLISHED) {
-      const newTitle = new Usertitle(project, this.uid);
-      console.log(project, newTitle);
-      const titleRef = ref(this.db, `titles/${project.projectUid}`);
-      set(titleRef, newTitle);
-    }
   }
 }
