@@ -8,6 +8,7 @@ import { AdminGuard } from './shared/guard/admin.guard';
 import { ContentGuard } from './shared/guard/content.guard';
 
 import { LoginComponent } from './components/login/login/login.component';
+import { ComingSoonSimpleComponent } from './pages/coming-soon/coming-soon-simple/coming-soon-simple.component';
 import { contentRoutes } from './shared/routes/contentRoutes';
 import { fullRoutes } from './shared/routes/full-routes';
 
@@ -36,6 +37,15 @@ export const routes: Routes = [
       import('@app/components/login/login.module').then(
         (m) => m.LoginComponentModule
       ),
+  },
+  {
+    path: 'commingsoon',
+    data: {
+      title: 'Freelance',
+      breadcrumb: 'Freelance',
+      role: 'anyone',
+    },
+    component: ComingSoonSimpleComponent,
   },
   {
     path: '',

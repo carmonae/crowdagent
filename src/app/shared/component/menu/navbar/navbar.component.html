@@ -1,30 +1,84 @@
-<ul class="sidebar-body-menu">
-    <ng-container *ngFor="let menu of menus">
+ <div class="row">
+    <ul class="sidebar-body-menu">
+        <ng-container *ngFor="let menu of menus">
+            <li>
+                <div *ngIf="menu.headTitle1 && menu.headTitle2">
+                    <h3 class="lan-1">{{menu.headTitle1 | translate}}</h3><span
+                        class="lan-2">{{menu.headTitle2 | translate}}</span>
+                </div>
+                <ul class="sidebar-body-mainmenu custom-scrollbar">
+                    <div
+                        *ngTemplateOutlet="recursiveMenu; context: { $implicit: menu.items }"></div>
+                    <ng-template #recursiveMenu let-menu>
+                        <ng-container *ngFor="let item of menu">
+                            <li>
+                                <ng-template #simple>
+                                    <a [routerLink]="item.path">
+                                        <app-svg-icon *ngIf="item.icon"
+                                            [icon]="item.icon"></app-svg-icon>
+                                        {{ item.title | translate }}
+                                    </a>
+                                </ng-template>
+                                <a
+                                    *ngIf="item.type == 'extTabLink'; else simple"
+                                    href="{{ item.path }}" target="_blank"> {{
+                                    item.title | translate }} </a>
+                                <span class="sub-body-arrow"><i
+                                        class="fa fa-angle-right"
+                                        *ngIf="item.children"></i></span>
+                                <ul
+                                    class="sidebar-body-submenu custom-scrollbar"
+                                    *ngIf="item.children">
+                                    <ng-container
+                                        *ngTemplateOutlet="recursiveMenu; context: { $implicit: item.children }"></ng-container>
+                                </ul>
+                            </li>
+                        </ng-container>
+                    </ng-template>
+                </ul>
+            </li>
+        </ng-container>
         <li>
-            <div *ngIf="menu.headTitle1 && menu.headTitle2">
-                <h3 class="lan-1">{{menu.headTitle1 | translate}}</h3><span class="lan-2">{{menu.headTitle2 | translate}}</span>
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button
+                        class="btn btn-link btn-block text-start"
+                        (click)="collapse.toggle()"
+                        [attr.aria-expanded]="!isCollapsed"
+                        aria-controls="collapseExample"><span
+                            class="f-24">Action
+                            Map</span> <i
+                            class="icofont icofont-arrow-down"></i></button>
+                </h2>
             </div>
-            <ul class="sidebar-body-mainmenu custom-scrollbar">
-                <div *ngTemplateOutlet="recursiveMenu; context: { $implicit: menu.items }"></div>
-                <ng-template #recursiveMenu let-menu>
-                    <ng-container *ngFor="let item of menu">
-                        <li>
-                          <ng-template #simple>
-                            <a [routerLink]="item.path">
-                                <app-svg-icon *ngIf="item.icon" [icon]="item.icon"></app-svg-icon>
-                                {{ item.title | translate }}
-                            </a>
-                          </ng-template>
-                            <a *ngIf="item.type == 'extTabLink'; else simple" href="{{ item.path }}" target="_blank"> {{ item.title | translate }} </a>
-                            <span class="sub-body-arrow"><i class="fa fa-angle-right" *ngIf="item.children"></i></span>
-                            <ul class="sidebar-body-submenu custom-scrollbar" *ngIf="item.children">
-                                <ng-container
-                                    *ngTemplateOutlet="recursiveMenu; context: { $implicit: item.children }"></ng-container>
-                            </ul>
-                        </li>
-                    </ng-container>
-                </ng-template>
-            </ul>
         </li>
-    </ng-container>
-</ul>
+    </ul>
+
+    <div class="collapse show" id="collapseOne" #collapse="ngbCollapse"
+        [(ngbCollapse)]="isCollapsed">
+        <div class="card-body filter-cards-view animate-chk">
+            <ng-container>
+                <p>Reveal</p>
+                <div *ngFor="let lane of processMap" class="card">
+                    <div class="card-header card-no-border pb-0">
+                        <h3>{{lane.laneName}}</h3>
+                    </div>
+                    <div class="gallery my-gallery card-body row" itemscope
+                        gallerize>
+                        <figure class="col-xl-1 col-md-6 col-6"
+                            itemprop="associatedMedia"
+                            *ngFor="let process of lane.steps ">
+                            <button
+                                class="btn btn-block btn-outline-dark btn-primary"
+                                (click)="collapse.toggle(); onNavigate(process.path)">
+                                {{process.label}}
+                            </button>
+
+                        </figure>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</div>
