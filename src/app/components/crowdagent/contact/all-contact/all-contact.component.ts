@@ -118,7 +118,7 @@ export class AllContactComponent implements OnInit, OnChanges {
     if (data.coverurl) {
       return data.coverurl;
     } else {
-      return 'assets/image/blankBookCover.jpg';
+      return 'assets/images/blankBookCover.jpg';
     }
   }
 
