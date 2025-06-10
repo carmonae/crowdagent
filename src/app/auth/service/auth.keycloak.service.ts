@@ -60,7 +60,7 @@ export class AuthService {
     if (this.profile == undefined) {
       return 'Loading...';
     } else {
-      return this.profile['lastName'] + ' ' + this.profile['firstName'];
+      return this.profile['firstName'] + ' ' + this.profile['lastName'];
     }
   }
 
