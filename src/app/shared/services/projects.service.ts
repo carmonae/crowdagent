@@ -157,6 +157,18 @@ export class ProjectsService implements OnInit {
     });
   }
   */
+  setPublishingDate(uid: string, puid: string) {
+    console.log(`Set Publishing date.`);
+    var path = `${this.firepath}/${uid}/${puid}`;
+    var today = new Date();
+    today = new Date(today.getFullYear(), today.getMonth(), today.getDay());
+    var endDate = new Date();
+    endDate.setMonth(today.getMonth() + 3);
+    update(ref(this.db, path), {
+      datePublish: today,
+      dateEnd: endDate,
+    });
+  }
 
   incrementTitleScoreI(uid: string, puid: string): void {
     console.log(`Increment Impression Score Method.`);
