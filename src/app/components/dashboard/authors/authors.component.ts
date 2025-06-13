@@ -13,11 +13,11 @@ import { UserprojectI } from '@app/models/user-project';
 import { ProjectsService } from '@app/shared/services/projects.service';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { Observable } from 'rxjs';
+import { CommonDetailsComponent } from '../shared/common-details/common-details.component';
+import { ProfileGrettingComponent } from '../shared/profile-gretting/profile-gretting.component';
 import { BestSellingProductComponent } from './best-selling-product/best-selling-product.component';
-import { CommonDetailsComponent } from './common-details/common-details.component';
 import { CountsComponent } from './counts/counts.component';
 import { CurrentBalanceComponent } from './current-balance/current-balance.component';
-import { ProfileGrettingComponent } from './profile-gretting/profile-gretting.component';
 import { ReadSummaryComponent } from './read-summary/read-summary.component';
 import { WeeklyVisitorsComponent } from './weekly-visitors/weekly-visitors.component';
 @Component({
@@ -45,6 +45,8 @@ export class AuthorsComponent {
   public totalAbstractData = abstractPiquesData;
   public totalManuscriptData = manuscriptsPiquesData;
   public totalTitleData = titlePiquesData;
+
+  public greeting: string = "Here's what's happening with your books today";
 
   public uid: string | undefined;
   public projectListData: UserprojectI[] = [];
