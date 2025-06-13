@@ -53,8 +53,10 @@ export class WeeklyVisitorsComponent implements OnInit {
     let histogram = new Array(7).fill(0);
 
     var dates: Date[] = [];
-
     let today: Date = new Date();
+
+    if (!this._projectListData) return;
+
     for (let project of this._projectListData!) {
       if (project.ratings) {
         dates = [];
