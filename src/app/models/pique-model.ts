@@ -42,6 +42,7 @@ export class Pique implements PiqueI {
     this.title = title.title;
     this.subtitle = title.subtitle;
     this.datePublish = title.datePublish;
+    this.level = 'title';
     this.rating.personalRating = 0;
     this.rating.predictedRating = 0;
     this.rating.bet = 0;
