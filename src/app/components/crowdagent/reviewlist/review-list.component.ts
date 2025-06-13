@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import { PiqueI } from '@app/models/pique-model';
 import { legendData } from '@app/models/ratings';
-import { Usertitle } from '@app/models/user-titles';
 import { FeatherIconsComponent } from '@app/shared/component/feather-icons/feather-icons.component';
 import {
   RatingHistogramComponent,
@@ -12,11 +11,9 @@ import {
 } from '@app/shared/component/rating-histogram/rating-histogram.component';
 import { TruncatePipe } from '@app/shared/pipes/truncate.pipe';
 import { PiquesService } from '@app/shared/services/piques.service';
-import { TitlesService } from '@app/shared/services/titles.service';
 import { getValuesByKey } from '@app/util/utils.general.util';
-import { getDatabase, ref, set } from 'firebase/database';
+import { getDatabase } from 'firebase/database';
 import { AuthService } from 'src/app/auth/service/auth.keycloak.service';
-import { ProjectStatus } from 'src/app/models/projectStatus';
 import { UserprojectI } from 'src/app/models/user-project';
 import { ChartOptions } from 'src/app/shared/data/charts/charts/apex-chart';
 import { ProjectsService } from 'src/app/shared/services/projects.service';
@@ -58,9 +55,7 @@ export class ReviewListComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private projectService: ProjectsService,
-    private titleService: TitlesService,
-    private piqueService: PiquesService,
-    private router: Router
+    private piqueService: PiquesService
   ) {
     this.uid = authService.getUid();
   }
@@ -277,6 +272,7 @@ export class ReviewListComponent implements OnInit {
         : this.projectListData;
   }
 
+  /*
   editProject(data: UserprojectI) {
     console.log('edit project:', data);
     this.router.navigateByUrl('/projects/create-new', { state: data });
@@ -312,4 +308,5 @@ export class ReviewListComponent implements OnInit {
       set(titleRef, newTitle);
     }
   }
+    */
 }
