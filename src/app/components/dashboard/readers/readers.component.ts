@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
 import { RatingHistogramComponent } from '@app/shared/component/rating-histogram/rating-histogram.component';
+import { ProfileGrettingComponent } from '../shared/profile-gretting/profile-gretting.component';
 import { CurrentBalanceComponent } from './current-balance/current-balance.component';
-import { ProfileGrettingComponent } from './profile-gretting/profile-gretting.component';
 
 import { ChartOptions } from 'src/app/shared/data/charts/charts/apex-chart';
 
@@ -20,6 +20,8 @@ import { ChartOptions } from 'src/app/shared/data/charts/charts/apex-chart';
 })
 export class ReadersComponent {
   public histogram!: Partial<ChartOptions>;
+  public greeting: string =
+    'Here’s what’s happening today with the books you have reviewed.';
 
   constructor(private authService: AuthService) {}
 
