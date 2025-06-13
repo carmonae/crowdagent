@@ -118,7 +118,7 @@ export class AllContactComponent implements OnInit, OnChanges {
     if (data.coverurl) {
       return data.coverurl;
     } else {
-      return 'assets/images/blankBookCover.jpg';
+      return 'assets/images/book-gold.png';
     }
   }
 
@@ -193,4 +193,3 @@ export class AllContactComponent implements OnInit, OnChanges {
     return result;
   }
 }
-//TODO: fix width the title, toc, synopsis, manuscript buttons
