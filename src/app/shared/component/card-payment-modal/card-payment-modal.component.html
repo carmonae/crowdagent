@@ -1,0 +1,26 @@
+<p>card-payment-modal works!</p>
+<div class="modal fade show d-block" tabindex="-1" role="dialog"
+    style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Enter Card Details</h5>
+                <button type="button" class="btn-close" aria-label="Close"
+                    (click)="cancel()"></button>
+            </div>
+            <div class="modal-body">
+                <div #cardElement class="form-control"
+                    style="padding: 10px;"></div>
+                <div *ngIf="error" class="text-danger mt-2">{{ error }}</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary"
+                    (click)="cancel()">Cancel</button>
+                <button class="btn btn-primary" (click)="submit()"
+                    [disabled]="loading">
+                    {{ loading ? 'Processing...' : 'Submit' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
