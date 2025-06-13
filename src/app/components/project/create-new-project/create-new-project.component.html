@@ -161,6 +161,7 @@
                   [(ngModel)]="project.dateEnd" />
               </div>
             </div-->
+
           </div>
           <div class="row">
             <div class="col">
@@ -175,12 +176,14 @@
               </div>
             </div>
           </div>
+
           <!--div *ngIf="project.url != ''">
             <label>Manuscript File Name: </label>
             <a href="{{ project.url }}">
               {{ project.fileName }}
             </a>
           </div-->
+
           <div class="row">
             <div class="col col-3">
               <div class="mb-3">
@@ -206,7 +209,7 @@
             <div class="col col-3">
               <div class="mb-3">
                 <app-upload-file
-                  (fileUploadEvent)="onFilesUploaded($event, 'sample')"
+                  (fileUploadEvent)="onFilesUploaded($event, 'chapters')"
                   label="Sample Chapters"></app-upload-file>
               </div>
             </div>
@@ -225,3 +228,18 @@
     </div>
   </div>
 </div>
+
+<ng-template #uploadModalContent let-modal>
+  <div class="modal-body">
+    <div class="modal-toggle-wrapper">
+      <ul class="modal-img">
+        <li> <img src="assets/images/gif/dashboard-8/successful.gif"
+            alt="uploading"></li>
+      </ul>
+      <h3 class="text-center pb-2">Uploading your content</h3>
+      <p class="text-center">Once upload finished, you can proceed.</p>
+      <!--button class="btn btn-secondary d-flex m-auto" type="button"
+        data-bs-dismiss="modal" (click)="modal.dismiss('')">Close</button-->
+    </div>
+  </div>
+</ng-template>
