@@ -26,10 +26,10 @@ export class TrackOrderComponent implements OnInit {
     subtitle: 'Sold by Vingate Techies',
     id: '#BK739200',
     pique: 30,
-    createDate: 'Jun20 05:40PM',
-    publishDate: 'Jun22 06:30PM',
-    endPhaseIDate: 'July 20',
-    archiveDate: 'July 3, 2023',
+    createDate: '',
+    publishDate: '',
+    endPhaseIDate: '',
+    archiveDate: '',
   };
 
   ngOnInit() {}
@@ -45,7 +45,7 @@ export class TrackOrderComponent implements OnInit {
         subtitle: this.project!.subtitle,
         id: this.project!.projectUid!,
         pique: this.project!.scoreM,
-        createDate: this.project!.dateCreated?.toISOString()!,
+        createDate: this.project!.dateCreated,
         publishDate: this.project!.datePublish,
         endPhaseIDate: this.project!.dateEnd,
         archiveDate: this.project!.dateStart,
