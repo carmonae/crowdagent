@@ -14,11 +14,12 @@
             style="width: 45%"
             aria-valuenow="10"
             aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
+            aria-valuemax="100"></div>
         </div>
       </div>
-      <div class="flex-shrink-0"><img src="{{ data.img }}" /></div>
+      <!--div class="flex-shrink-0"><img src="{{ data.img }}" /></div-->
+      <div class="flex-shrink-0"><i
+          class="icofont icofont-{{ data.img }}"></i></div>
     </div>
   </div>
   <div class="card-body">
@@ -29,11 +30,9 @@
             <i class="fa fa-{{ data.icon }}"> </i>
           </div>
           <span class="f-w-500">
-            <strong class="font-{{ data.profitColor }} f-w-600"
-              >{{ data.profit }}
-            </strong></span
-          >Last 6 Month</span
-        >
+            <strong class="font-{{ data.profitColor }} f-w-600">{{ data.profit
+              }}
+            </strong></span>Last 6 Month</span>
       </div>
       <div>
         <div class="dropdown icon-dropdown">
@@ -41,8 +40,7 @@
             class="btn dropdown-toggle"
             id="userdropdown"
             type="button"
-            (click)="openMenu(data.id)"
-          >
+            (click)="openMenu(data.id)">
             <app-feather-icons [icon]="'more-vertical'"></app-feather-icons>
           </button>
           <div class="dropdown-menu dropdown-menu-end" [class.show]="isOpen">
