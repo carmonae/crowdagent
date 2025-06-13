@@ -33,6 +33,7 @@ export class NavService {
           type: 'sub',
           active: true,
           children: [
+            { path: '/dashboard/default', title: 'General', type: 'link' },
             { path: '/dashboard/authors', title: 'Authors', type: 'link' },
             { path: '/dashboard/readers', title: 'Readers', type: 'link' },
             { path: '/dashboard/agents', title: 'Agents', type: 'link' },
