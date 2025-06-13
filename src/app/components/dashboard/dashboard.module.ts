@@ -11,13 +11,14 @@ import { UserModule } from '../user/user.module';
 import { AgentsComponent } from './agents/agents.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { BestSellingProductComponent } from './authors/best-selling-product/best-selling-product.component';
-import { CommonDetailsComponent } from './authors/common-details/common-details.component';
 import { CountsComponent } from './authors/counts/counts.component';
 import { ReadSummaryComponent } from './authors/read-summary/read-summary.component';
 import { TrackOrderComponent } from './authors/track-order/track-order.component';
 import { WeeklyVisitorsComponent } from './authors/weekly-visitors/weekly-visitors.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { DashboardDefaultComponent } from './default/default.component';
 import { ReadersComponent } from './readers/readers.component';
+import { CommonDetailsComponent } from './shared/common-details/common-details.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { ReadersComponent } from './readers/readers.component';
     FormsModule,
     NgApexchartsModule,
     UserModule,
+    DashboardDefaultComponent,
     AuthorsComponent,
     ReadersComponent,
     AgentsComponent,

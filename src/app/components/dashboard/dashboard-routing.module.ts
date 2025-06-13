@@ -2,50 +2,55 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AgentsComponent } from './agents/agents.component';
 import { AuthorsComponent } from './authors/authors.component';
+import { DashboardDefaultComponent } from './default/default.component';
 import { ReadersComponent } from './readers/readers.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
+    data: {
+      title: 'Dashboard',
+      breadcrumb: 'Dashboard',
+    },
     children: [
       {
         path: 'default',
-        component: AuthorsComponent,
+        component: DashboardDefaultComponent,
         data: {
-          title: 'Authors Dashboard',
-          breadcrumb: 'Authors'
-        }
+          title: 'General Dashboard',
+          breadcrumb: 'General',
+        },
       },
       {
         path: 'authors',
         component: AuthorsComponent,
         data: {
-          title: 'Authors Dashboard',
-          breadcrumb: 'Authors'
-        }
+          title: "Author's Dashboard",
+          breadcrumb: 'Authors',
+        },
       },
       {
         path: 'readers',
         component: ReadersComponent,
         data: {
-          title: 'Readers Dashboard',
-          breadcrumb: 'Readers'
-        }
+          title: "Reader's Dashboard",
+          breadcrumb: 'Readers',
+        },
       },
       {
         path: 'agents',
         component: AgentsComponent,
         data: {
-          title: 'Agents Dashboard',
-          breadcrumb: 'Agents'
-        }
-      }
-    ]
-  }
+          title: "Agent's Dashboard",
+          breadcrumb: 'Agents',
+        },
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}
