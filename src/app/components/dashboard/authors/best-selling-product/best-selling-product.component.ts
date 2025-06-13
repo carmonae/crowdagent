@@ -32,10 +32,12 @@ export class BestSellingProductComponent {
   private projectListData$: UserprojectI[] | null = [];
   @Input()
   set projectListData(projects: UserprojectI[] | null) {
-    this.projectListData$ = projects;
-    this.projectTableService.thedata = projects!.map((project) => project);
-    this.projects$ = this.projectTableService.projects$;
-    this.total$ = this.projectTableService.total$;
+    if (projects) {
+      this.projectListData$ = projects;
+      this.projectTableService.thedata = projects!.map((project) => project);
+      this.projects$ = this.projectTableService.projects$;
+      this.total$ = this.projectTableService.total$;
+    }
   }
   @Output('bookSelected') bookSelected = new EventEmitter<string>();
 
@@ -44,6 +46,7 @@ export class BestSellingProductComponent {
   private uid: string | undefined;
 
   public isShow: boolean = false;
+  public filterSelection: string = 'All';
   public projects$: Observable<UserprojectI[]>;
   public total$: Observable<number>;
 
@@ -73,9 +76,20 @@ export class BestSellingProductComponent {
     });
   }
 
-  filterBooks() {
+  showFilter() {
     this.isShow = !this.isShow;
-    console.log('filterBooks:');
+  }
+
+  filterBooks(filter: string) {
+    this.isShow = !this.isShow;
+    this.filterSelection = filter.toLocaleUpperCase();
+
+    if (filter === 'all') {
+      this.projectTableService.searchTerm = '';
+    } else {
+      this.projectTableService.searchTerm = filter;
+    }
+    console.log('filterBooks:', filter);
   }
 
   rowSelected(id: string) {

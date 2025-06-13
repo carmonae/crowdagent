@@ -1,22 +1,24 @@
 <div class="card">
   <div class="card-header card-no-border pb-0">
     <div class="header-top">
-      <h3>Best Ranking Manuscripts</h3>
-      <p> Select a row to see progress below </p>
+      <h3>Best Ranking Manuscripts ({{total$ | async}})</h3>
+      <h6> Select a row to see progress below </h6>
       <div class="card-header-right-icon">
         <div class="dropdown">
           <button
             class="btn dropdown-toggle"
             id="dropdownMenuButton"
-            (click)="filterBooks()">
-            All
+            (click)="showFilter()">
+            {{filterSelection}}
           </button>
           <div class="dropdown-menu dropdown-menu-end" [class.show]="isShow">
-            <a class="dropdown-item" href="javascript:void(0)">All</a>
-            <a class="dropdown-item" href="javascript:void(0)">Draft</a>
-            <a class="dropdown-item" href="javascript:void(0)">Published</a>
-            <a class="dropdown-item" href="javascript:void(0)">Parked </a>
-            <a class="dropdown-item" href="javascript:void(0)">Archived </a>
+            <a class="dropdown-item" (click)="filterBooks('all')">All</a>
+            <a class="dropdown-item" (click)="filterBooks('draft')">Draft</a>
+            <a class="dropdown-item"
+              (click)="filterBooks('published')">Published</a>
+            <a class="dropdown-item" (click)="filterBooks('parked')">Parked </a>
+            <a class="dropdown-item" (click)="filterBooks('archived')">Archived
+            </a>
           </div>
         </div>
       </div>
@@ -32,7 +34,7 @@
           <label
             for="table-complete-search"
             class="col-xs-3 col-sm-auto col-form-label">Search:</label>
-          <div class="col-xs-3 col-sm-auto">
+          <div class="col-xs-2 col-sm-auto">
             <input
               id="table-complete-search"
               type="text"
