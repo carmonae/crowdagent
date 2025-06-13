@@ -696,8 +696,8 @@
         position: absolute;
 
         &:first-child {
-          right: 58%;
-          top: 12%;
+          right: 88%;
+          top: 20%;
           animation: move1 8s linear infinite;
         }
 
@@ -726,7 +726,7 @@
         }
 
         &:nth-child(6) {
-          top: 72%;
+          top: 12%;
           right: 5%;
           animation: move2 1.2s infinite alternate;
         }
