@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
 
 @Component({
@@ -10,6 +10,8 @@ import { AuthService } from '@app/auth/service/auth.keycloak.service';
   imports: [CommonModule],
 })
 export class ProfileGrettingComponent implements OnInit {
+  @Input() greeting: string = '';
+
   firstName = '?';
   dayPart = '?';
 
