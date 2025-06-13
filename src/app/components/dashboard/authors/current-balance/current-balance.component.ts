@@ -32,34 +32,22 @@ export class CurrentBalanceComponent {
     this.uid = authService.getUid();
   }
 
-  ngOnInit(): void {
-    /*
-    var _this = this;
-    this.projectsService.getProjects(this.uid).subscribe({
-      next(projects) {
-        _this.projectListData$ = projects;
-        _this.getChartData();
-      },
-      error(msg) {
-        console.log(msg);
-      },
-      complete() {
-        console.log('getProjects finished');
-      },
-    });
-    */
-  }
+  ngOnInit(): void {}
 
   getChartData(): void {
     console.log('getChartData:', this.projectListData$);
-    this.totalPiques = this.projectListData$!.filter(
-      (proj) => proj.scoreM
-    ).reduce((sum, current) => sum + current.scoreM, 0);
+    if (this.projectListData$) {
+      this.totalPiques = this.projectListData$!.filter(
+        (proj) => proj.scoreM
+      ).reduce((sum, current) => sum + current.scoreM, 0);
 
-    this.nBooks = this.projectListData$!.map((proj) => proj.projectUid).length;
-    this.averagePiques = this.totalPiques / this.nBooks;
-    this.maxPiques = Math.max(
-      ...this.projectListData$!.map((proj) => proj.scoreM)
-    );
+      this.nBooks = this.projectListData$!.map(
+        (proj) => proj.projectUid
+      ).length;
+      this.averagePiques = this.totalPiques / this.nBooks;
+      this.maxPiques = Math.max(
+        ...this.projectListData$!.map((proj) => proj.scoreM)
+      );
+    }
   }
 }
