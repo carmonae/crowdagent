@@ -1,0 +1,58 @@
+<div class="md-sidebar">
+  <a class="btn btn-primary md-sidebar-toggle" (click)="openMenu()">Genre
+    Filter</a>
+  <div
+    class="md-sidebar-aside job-left-aside custom-scrollbar"
+    [class.open]="open">
+    <div class="email-left-aside">
+      <div class="card" style="height: 60rem">
+        <div class="card-body">
+          <div class="email-app-sidebar left-bookmark">
+            <div class="d-flex">
+              <div class="d-flex-size-email">
+                <img
+                  class="me-3 rounded-circle"
+                  src="assets/images/user/user.png"
+                  alt />
+              </div>
+              <div class="flex-grow-1">
+                <h3 class="f-w-600">{{ username }} </h3>
+                <p>{{ email }} </p>
+              </div>
+            </div>
+            <ul class="nav main-menu contact-options" role="tablist">
+              <li class="nav-item">
+                <span class="main-title"> Genre</span>
+              </li>
+              <li *ngFor="let views of permanentViews">
+                <a id="pills-personal-tab" (click)="changeView(views['tag'])">
+                  <span class="title"> {{ views["tag"] }}</span>
+                </a>
+              </li>
+              <li>
+                <button class="btn btn-category" type="button">
+                  <span class="f-w-700 title" (click)="openAddTag()">
+                    + Add Category</span>
+                </button>
+              </li>
+              <li *ngFor="let tag of userDefinedViews">
+                <a
+                  class="show"
+                  id="pills-organization-tab"
+                  (click)="changeView(tag['tag'])">
+                  <span class="title"> {{ tag["tag"] }}</span>
+                </a>
+              </li>
+              <li>
+                <button class="btn btn-category" type="button">
+                  <span class="f-w-700 title" (click)="openRemoveTag()">
+                    + Remove Category</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

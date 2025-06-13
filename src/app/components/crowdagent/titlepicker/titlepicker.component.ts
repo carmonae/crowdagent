@@ -1,16 +1,21 @@
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@app/auth/service/auth.keycloak.service';
 import { Pique } from '@app/models/pique-model';
 import { PiquesPerPique } from '@app/models/piquesPerPique';
 import { Userprofile } from '@app/models/user-profile';
 import { UsertitlesI } from '@app/models/user-titles';
 import { PiqueTitlesDataTableComponent } from '@app/shared/component/pique-titles-data-table/pique-titles-data-table.component';
-import { crossFadeOptions } from '@app/shared/data/data/bonus-ui/owl-carousel';
+import {
+  crossFadeData,
+  crossFadeOptions,
+} from '@app/shared/data/data/bonus-ui/owl-carousel';
 import { PiquedTitlesType } from '@app/shared/data/data/default-dashboard/piqued-titles-mock-data';
 import { jobCardsData } from '@app/shared/data/data/job-search/job-search';
 import { AgePipe } from '@app/shared/pipes/age.pipe';
+import { ImageService } from '@app/shared/services/image.service';
 import { PiquesService } from '@app/shared/services/piques.service';
 import { ProjectsService } from '@app/shared/services/projects.service';
 import { TitlesService } from '@app/shared/services/titles.service';
@@ -20,6 +25,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { Observable } from 'rxjs';
 import Swiper from 'swiper';
 import { SwiperModule } from 'swiper/angular';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
 export interface ExtendedKeycloakProfile extends KeycloakProfile {
   attributes?: { [key: string]: string };
 }
@@ -36,6 +42,7 @@ export interface ExtendedKeycloakProfile extends KeycloakProfile {
     AgePipe,
     PiqueTitlesDataTableComponent,
     CarouselModule,
+    SidemenuComponent,
   ],
   providers: [DecimalPipe],
   schemas: [],
@@ -51,10 +58,11 @@ export class TitlePickerComponent {
   public titles$: Observable<PiquedTitlesType[]>;
   public total$: Observable<number>;
 
-  public passTableName: string = 'Pass On These Titles';
-  public piqueTableName: string = 'Titles PiQued My Interest';
+  public passTableName: string = 'Titles I Choose to Pass On';
+  public piqueTableName: string = 'Titles That PiQued My Interest';
 
   public myCrossFadeOptions = crossFadeOptions;
+  public myCrossFadeData = crossFadeData;
   public piquesPerTitle = PiquesPerPique.TITLE;
 
   uid: string | undefined;
@@ -62,6 +70,16 @@ export class TitlePickerComponent {
   centerBooks: PiquedTitlesType[] = [];
   notInterested: PiquedTitlesType[] = [];
   interested: PiquedTitlesType[] = [];
+  noMoreBooks: PiquedTitlesType = {
+    id: 1,
+    uid: '1',
+    pid: '1',
+    img: 'assets/image/book-gold.png',
+    title: 'No More Books',
+    subtitle:
+      "You've reached the end of  books available for you to pique into",
+    datePublished: '',
+  };
 
   serviceTable1 = new PiquedTitleTablesService(
     new DecimalPipe('en'),
@@ -76,10 +94,12 @@ export class TitlePickerComponent {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
     private titlesService: TitlesService,
     private piqueService: PiquesService,
     private projectService: ProjectsService,
-    private NgZone: NgZone
+    private NgZone: NgZone,
+    private imgService: ImageService
   ) {
     this.titles$ = this.serviceTable1.titles$;
     this.total$ = this.serviceTable1.total$;
@@ -120,7 +140,10 @@ export class TitlePickerComponent {
                 id: i,
                 uid: _this.allTitles[i].userUid!,
                 pid: _this.allTitles[i].projectUid!,
-                img: 'assets/images/blankBookCover.jpg',
+                img:
+                  _this.allTitles[i].coverurl != ''
+                    ? _this.allTitles[i].coverurl
+                    : 'assets/image/book-gold.png',
                 title: _this.allTitles[i].title,
                 subtitle: _this.allTitles[i].subtitle,
                 datePublished: _this.allTitles[i].datePublish,
@@ -166,8 +189,11 @@ export class TitlePickerComponent {
       this.centerBooks[0].pid
     );
     this.notInterested.push(this.centerBooks[0]);
-    this.centerBooks.splice(0, 1);
     this.serviceTable1.thedata = this.notInterested;
+    this.centerBooks.splice(0, 1);
+    if (this.centerBooks.length == 0) {
+      this.centerBooks.push(this.noMoreBooks);
+    }
   }
 
   onPique() {
@@ -177,8 +203,11 @@ export class TitlePickerComponent {
       this.centerBooks[0].pid
     );
     this.interested.push(this.centerBooks[0]);
-    this.centerBooks.splice(0, 1);
     this.serviceTable2.thedata = this.interested;
+    this.centerBooks.splice(0, 1);
+    if (this.centerBooks.length == 0) {
+      this.centerBooks.push(this.noMoreBooks);
+    }
   }
 
   onSwipe(swiper: Swiper, collection: string) {
@@ -241,6 +270,7 @@ export class TitlePickerComponent {
     var idsOfInterest = new Set<string>();
     for (let i = 0; i < this.interested.length; i++) {
       idsOfInterest.add(this.interested[i].pid);
+      this.removeItemFrom(this.interested[i].pid, this.interested);
     }
     console.log('onDonePiquing.idsOfInterest=', idsOfInterest);
 
@@ -258,4 +288,10 @@ export class TitlePickerComponent {
     }
     this.interested = [];
   }
+
+  onDoneWithPage() {
+    this.router.navigate(['dashboard']);
+  }
+
+  changeGenre(event:any){}
 }
