@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,8 +18,12 @@ import { SizeTypes } from '@app/models/sizeTypes-enum';
 import { UserprojectDefault, UserprojectI } from '@app/models/user-project';
 import { Usertitle } from '@app/models/user-titles';
 import { WritingType } from '@app/models/writingType-enum';
+import { CrowdAgentService } from '@app/shared/services/crowdagent.service';
 import { FileUploadService } from '@app/shared/services/file-upload.service';
+import { ProjectsService } from '@app/shared/services/projects.service';
 import { GeneratePenName } from '@app/util/genpenname.util';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { forkJoin, Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 interface FileCollection<File> {
@@ -34,6 +38,7 @@ interface FileCollection<File> {
   imports: [CommonModule, FormsModule, UploadFileComponent],
 })
 export class CreateNewProjectComponent implements OnInit {
+  @ViewChild('uploadModalContent') uploadModalContent!: TemplateRef<NgbModal>;
   private db = getDatabase();
 
   public project: UserprojectI = UserprojectDefault;
@@ -41,7 +46,7 @@ export class CreateNewProjectComponent implements OnInit {
   public abstract: string = '';
 
   public uploadedFiles: FileCollection<File> = {};
-
+  public isUploading: boolean = false;
   public maxAbstractLength = 1500;
 
   public readershipTypesEnum = Object.values(Readership);
@@ -52,6 +57,7 @@ export class CreateNewProjectComponent implements OnInit {
 
   private path = { path: 'manuscripts/', filename: 'manuscript.pdf' };
   private uid: string | undefined;
+  private editing: boolean = false;
 
   lifeCycle = {
     Draft: ['Published', 'Archived'],
@@ -64,7 +70,10 @@ export class CreateNewProjectComponent implements OnInit {
     private authService: AuthService,
     private uploadService: FileUploadService,
     private router: Router,
-    private penNameService: GeneratePenName
+    private penNameService: GeneratePenName,
+    private modalService: NgbModal,
+    private crowdAgentService: CrowdAgentService,
+    private projectService: ProjectsService
   ) {
     this.uid = this.authService.getUid();
   }
@@ -76,11 +85,13 @@ export class CreateNewProjectComponent implements OnInit {
       state = JSON.parse(JSON.stringify(temp));
 
       this.project = state;
+      this.editing = true;
     } else {
       this.project = UserprojectDefault;
       this.project.projectUid = uuid();
       this.project.penname = 'Mark Twain';
-      this.project.dateCreated = new Date();
+      this.project.dateCreated = new Date().toISOString();
+      this.editing = false;
       this.onGetPenName();
     }
 
@@ -140,35 +151,79 @@ export class CreateNewProjectComponent implements OnInit {
   onAddProject() {
     console.log(this.project);
 
-    // upload the document if one added and get the url as a reference
-    this.project.dateCreated = new Date();
-    var urls: string[] = [];
-    var _this = this;
-    for (const key in this.uploadedFiles) {
-      const fileuid = uuid();
-      this.path.filename = `${this.uid}.${this.project.projectUid}.${key}`;
-
-      this.uploadService
-        .pushFileToStorage(this.uploadedFiles[key], this.path)
-        .subscribe({
-          next(url) {
-            console.log('got url:', url);
-            urls.push(url);
-          },
-          error(msg) {
-            console.log(msg);
-          },
-          complete() {
-            console.log('Push finished', urls);
-            _this.project.coverurl = urls[0];
-            _this.project.abstracturl = urls[1];
-            _this.project.tocurl = urls[2];
-            _this.project.samplechaptersurl = urls[3];
-            _this.saveProject();
-          },
-        });
+    if (!this.editing) {
+      this.project.dateCreated = new Date().toISOString();
     }
-    this.done();
+    var _this = this;
+
+    this.path.filename = `${this.uid}.${this.project.projectUid}.`;
+
+    // upload the documents get the url as a reference
+    const coverSubscription: Observable<string> =
+      this.uploadService.pushFileToStorage(
+        this.uploadedFiles['cover'],
+        this.path + 'cover'
+      );
+
+    const tocSubscription: Observable<string> =
+      this.uploadService.pushFileToStorage(
+        this.uploadedFiles['toc'],
+        this.path + 'toc'
+      );
+
+    const synopsisSubscription: Observable<string> =
+      this.uploadService.pushFileToStorage(
+        this.uploadedFiles['synopsis'],
+        this.path + 'synopsis'
+      );
+
+    const chaptersSubscription: Observable<string> =
+      this.uploadService.pushFileToStorage(
+        this.uploadedFiles['chapters'],
+        this.path + 'chapters'
+      );
+
+    this.isUploading = true;
+    const modalRef = this.modalService.open(this.uploadModalContent, {
+      centered: true,
+      backdrop: 'static',
+    });
+
+    forkJoin([
+      coverSubscription,
+      tocSubscription,
+      synopsisSubscription,
+      chaptersSubscription,
+    ]).subscribe({
+      next: ([coverResults, tocResults, synopsisResults, chaptersResults]) => {
+        console.log(
+          'upload results',
+          coverResults,
+          tocResults,
+          synopsisResults,
+          chaptersResults
+        );
+        _this.project.coverurl = coverResults;
+        _this.project.tocurl = tocResults;
+        _this.project.abstracturl = synopsisResults;
+        _this.project.samplechaptersurl = chaptersResults;
+      },
+      error: (err) => {
+        console.log('Error during upload', err);
+      },
+      complete: () => {
+        _this.isUploading = false;
+        modalRef.dismiss();
+        _this.done();
+      },
+    });
+
+    // Increment number of book stats
+    // If this is the first time user creates a project
+    // we count them as new author
+    if (!this.editing) {
+      this.crowdAgentService.incrementBooks();
+    }
   }
 
   saveProject(): void {
@@ -192,6 +247,7 @@ export class CreateNewProjectComponent implements OnInit {
   }
 
   done() {
-    this.router.navigateByUrl('projects/project-list');
+    this.saveProject();
+    this.router.navigateByUrl('projects/project-list', { state: this.project });
   }
 }
