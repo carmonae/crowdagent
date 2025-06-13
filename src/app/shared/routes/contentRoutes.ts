@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthorsComponent } from '@app/components/dashboard/authors/authors.component';
+import { DashboardDefaultComponent } from '@app/components/dashboard/default/default.component';
 import { ReadersComponent } from '@app/components/dashboard/readers/readers.component';
 
 export const contentRoutes: Routes = [
@@ -15,14 +16,22 @@ export const contentRoutes: Routes = [
   {
     path: 'dashboard',
     data: {
-      title: 'Dashboard',
-      breadcrumb: 'Dashboard',
+      title: "Author's Dashboard",
+      breadcrumb: 'Authors',
     },
     component: AuthorsComponent,
     loadChildren: () =>
       import('@app/components/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
       ),
+  },
+  {
+    path: 'dashboard/default',
+    data: {
+      title: 'Dashboard',
+      breadcrumb: 'General',
+    },
+    component: DashboardDefaultComponent,
   },
   {
     path: 'dashboard/authors',
