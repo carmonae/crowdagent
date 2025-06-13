@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
   public galleryGridData = galleryGridData;
   public processMap = [
     {
-      laneName: 'Account Owner',
+      laneName: 'As Account Owner',
       color: 'blue',
       steps: [
         {
@@ -54,7 +54,7 @@ export class NavbarComponent implements OnInit {
     },
 
     {
-      laneName: 'Author',
+      laneName: 'As Author',
       color: '',
       steps: [
         {
@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit {
           path: 'users/users-edit',
         },
         {
-          label: 'Sign Royal Agreement',
+          label: 'Sign Royalty Form',
           path: 'users/users-edit',
         },
         {
@@ -74,6 +74,10 @@ export class NavbarComponent implements OnInit {
           path: 'projects/project-list',
         },
         {
+          label: 'Edit Your Project',
+          path: 'projects/project-list',
+        },
+        {
           label: 'Publish A Project',
           path: 'projects/project-list',
         },
@@ -82,7 +86,7 @@ export class NavbarComponent implements OnInit {
           path: 'dashboard',
         },
         {
-          label: 'Respond To Comment',
+          label: 'Reply To Comment',
           path: 'commingsoon',
         },
         {
@@ -96,7 +100,7 @@ export class NavbarComponent implements OnInit {
       ],
     },
     {
-      laneName: 'Reader',
+      laneName: 'As Reader',
       color: '',
       steps: [
         {
@@ -104,38 +108,48 @@ export class NavbarComponent implements OnInit {
           path: 'crowdagent/piquetitle',
         },
         {
-          label: 'Review Your piQues',
+          label: 'Rate Your piQues',
           path: 'crowdagent/reviewpiques',
         },
         {
-          label: 'Show Your Reviews',
+          label: 'View Your Reviews',
           path: 'crowdagent/listreviews',
         },
         {
-          label: 'See Your Dashboard',
+          label: 'Watch Your Dashboard',
           path: 'dashboard/readers',
         },
       ],
     },
     {
-      laneName: 'Literary Infuencer - Comming Soon',
+      laneName: 'As Literary Agent - Comming Soon',
       color: '',
-      steps: [],
+      steps: [
+        {
+          label: 'Contact Author',
+          path: 'commingsoon',
+        },
+      ],
     },
     {
-      laneName: 'Literary Agent - Comming Soon',
+      laneName: 'As Publisher - Comming Soon',
       color: '',
-      steps: [],
+      steps: [
+        {
+          label: 'Seek Lit Agent',
+          path: 'commingsoon',
+        },
+      ],
     },
     {
-      laneName: 'Publisher - Comming Soon',
+      laneName: 'As Freelancer - Comming Soon',
       color: '',
-      steps: [],
-    },
-    {
-      laneName: 'Freelancer - Comminbg Soon',
-      color: '',
-      steps: [],
+      steps: [
+        {
+          label: 'Message Author',
+          path: 'commingsoon',
+        },
+      ],
     },
   ];
 
