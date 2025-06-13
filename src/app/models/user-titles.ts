@@ -16,6 +16,7 @@ export interface UsertitlesI {
   size: SizeTypes;
   datePublish: string;
   status: ProjectStatus;
+  coverurl: string;
 }
 
 export const UsertitlesDefault: UsertitlesI = {
@@ -29,6 +30,7 @@ export const UsertitlesDefault: UsertitlesI = {
   size: SizeTypes.MEDIUM,
   datePublish: '',
   status: ProjectStatus.DRAFT,
+  coverurl: '',
 };
 
 export const UsertitlesMockData: UsertitlesI[] = [
@@ -43,6 +45,7 @@ export const UsertitlesMockData: UsertitlesI[] = [
     size: SizeTypes.MEDIUM,
     datePublish: '',
     status: ProjectStatus.PUBLISHED,
+    coverurl: '',
   },
 ];
 
@@ -57,6 +60,7 @@ export class Usertitle implements UsertitlesI {
   public size: SizeTypes = SizeTypes.LARGE;
   public datePublish: string = '';
   public status: ProjectStatus = ProjectStatus.PUBLISHED;
+  public coverurl: string = '';
 
   constructor(title: UserprojectI, uid: string | undefined) {
     this.projectUid = title.projectUid;
@@ -69,5 +73,6 @@ export class Usertitle implements UsertitlesI {
     this.size = title.size;
     this.datePublish = title.datePublish;
     this.status = title.status;
+    this.coverurl = title.coverurl;
   }
 }
