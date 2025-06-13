@@ -1,31 +1,56 @@
 
+
 <div *ngIf="selectedata" class="card col-md-12">
   <div class="card-header card-no-border pb-0">
     <h3>{{selectedata.title}}</h3>
     <p class="mt-1 f-m-light">
       {{selectedata.subtitle}}</p>
   </div>
+
   <!-- Thumbs up/down -->
-  <div *ngIf="noVoteYet()" class="col">
+  <div *ngIf="active==3 && !rated" class="col">
     <button
-      class="col-6 btn btn-block btn-secondary"
-      (click)="piques(false)">
-      <i class="fa fa-thumbs-down"></i>
-    </button>
-    <button
-      class="col-6 btn btn-block btn-primary"
+      class="col-12 btn btn-block btn-light"
       (click)="piques(true)">
-      <i class="fa fa-thumbs-up"></i>
+      <i class="fa fa-star"></i> Please Rate Manuscript
     </button>
+  </div>
+  <div *ngIf="rated">
+    <button
+      class="col-12 btn btn-block btn-light">
+      <i class="fa fa-star"></i> You Have Already Rated This Manuscript
+    </button>
+  </div>
+
+  <div *ngIf="noVoteYet()" class="col align-items-center"
+    style="margin-top:20px;">
+    <h3>If the {{getNextLevel()}} piQues your interest enough, click thumbs up.
+      Your
+      skin in the game: 2 piQues. Otherwise, thumbs down at no cost.
+    </h3>
+    <div class="row justify-content-center bg-light">
+      <button
+        class="col-4 btn btn-block btn-secondary"
+        (click)="piques(false)">
+        <i class="fa fa-thumbs-down"></i>
+      </button>
+      <button
+        class="col-4 btn btn-block btn-primary"
+        (click)="piques(true)">
+        <i class="fa fa-thumbs-up"></i>
+      </button>
+    </div>
   </div>
 
   <div class="card-body">
     <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
 
-      <li [ngbNavItem]="1">
+      <li *ngIf="tocEnabled" [ngbNavItem]="1">
         <button ngbNavLink class="nav-link txt-secondary"
           [disabled]="!tocEnabled" (click)="moveTab('toc')"><i
-            class="icofont icofont-ui-home"></i>ToC</button>
+            class="icofont icofont-ui-home"></i>
+          ToC
+        </button>
         <ng-template ngbNavContent>
           <p class="pt-3 mb-0">
             <div class="flex-space flex-wrap align-items-center">
@@ -34,10 +59,14 @@
                 {{ project.title | truncate : 40 }} TOC
               </a>
             </div>
+            <iframe
+              src="project.tocurl"
+              style="width:100%; height:800px;">
+            </iframe>
           </ng-template>
         </li>
 
-        <li [ngbNavItem]="2">
+        <li *ngIf="abstractEnabled" [ngbNavItem]="2">
           <button ngbNavLink class="nav-link txt-secondary"
             [disabled]="!abstractEnabled" (click)="moveTab('abstract')"><i
               class="icofont icofont-man-in-glasses"></i>Synopsis</button>
@@ -49,12 +78,17 @@
                   {{ project.title | truncate : 40 }} Synopsis
                 </a>
               </div>
+              <iframe
+                src="https:/docs.google.com/gview?url=https://firebasestorage.googleapis.com/v0/b/crowdagent-d7002.appspot.com/o/project%2Fdocuments%2F1b742f33-c23e-4f24-81fd-b7df0dfcaece%2F01f70872-74c0-4ffc-aa43-adba014f7b8a%2F1b742f33-c23e-4f24-81fd-b7df0dfcaece.01f70872-74c0-4ffc-aa43-adba014f7b8a.sample?alt=media&token=5f6e047b-25ad-40ec-8598-aad4949eea72&embedded=true"
+                style="width:100%; height:800px;">
+              </iframe>
             </ng-template>
           </li>
 
-          <li [ngbNavItem]="3">
+          <li *ngIf="manuscriptEnabled" [ngbNavItem]="3">
             <button ngbNavLink class="nav-link txt-secondary"
-              [disabled]="!manuscriptEnabled" (click)="moveTab('manuscript')"><i
+              [disabled]="!manuscriptEnabled"
+              (click)="moveTab('manuscript')"><i
                 class="icofont icofont-contacts"></i>Manuscript</button>
             <ng-template ngbNavContent>
               <p class="pt-3 mb-0">

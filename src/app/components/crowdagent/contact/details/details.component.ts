@@ -49,7 +49,9 @@ export class DetailsComponent implements OnInit {
   public abstractEnabled: boolean = false;
   public manuscriptEnabled: boolean = false;
 
+  public levelLabel = ['Title', 'ToC', 'Synopsis', 'Manuscript'];
   public active = 1;
+  public rated = false;
 
   public showScore: boolean = false;
 
@@ -66,11 +68,39 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.uid = this.authService.getUid();
+    this.initialize();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     let key = this.selectedata.level as keyof typeof levelOpen;
     this.active = levelOpen[key];
+    this.initialize();
+  }
+
+  initialize() {
+    const currentLevel = this.selectedata.level;
+    if (currentLevel == 'manuscript') {
+      this.abstractEnabled = true;
+      this.manuscriptEnabled = true;
+      this.active = 3;
+      this.rated = true;
+    } else if (currentLevel == 'abstract') {
+      this.abstractEnabled = true;
+      this.manuscriptEnabled = true;
+      this.active = 3;
+      this.rated = false;
+    } else if (currentLevel == 'toc') {
+      this.abstractEnabled = true;
+      this.manuscriptEnabled = false;
+      this.active = 2;
+      this.rated = false;
+    } else if (currentLevel == 'title') {
+      this.tocEnabled = true;
+      this.abstractEnabled = false;
+      this.manuscriptEnabled = false;
+      this.active = 1;
+      this.rated = false;
+    }
   }
 
   getAbstract(): void {
@@ -104,6 +134,8 @@ export class DetailsComponent implements OnInit {
         result
       );
 
+      this.selectedata.level = 'manuscript';
+      this.rated = true;
       this.piqueService.updateLevel(
         this.uid!,
         this.selectedata.projectUid!,
@@ -142,6 +174,7 @@ export class DetailsComponent implements OnInit {
         this.manuscriptEnabled = true;
         this.active = 3;
 
+        this.selectedata.level = 'abstract';
         this.piqueService.updateLevel(
           this.uid!,
           this.selectedata.projectUid!,
@@ -155,7 +188,7 @@ export class DetailsComponent implements OnInit {
         // TOC rated
         this.abstractEnabled = true;
         this.active = 2;
-
+        this.selectedata.level = 'toc';
         this.piqueService.updateLevel(
           this.uid!,
           this.selectedata.projectUid!,
@@ -195,6 +228,14 @@ export class DetailsComponent implements OnInit {
     let key = this.selectedata.level as keyof typeof levelOpen;
     return levelOpen[key];
   }
+
+  getNextLevel(): string {
+    let key = this.selectedata.level as keyof typeof levelOpen;
+    var nextLevel = this.levelLabel[levelOpen[key]];
+    console.log(levelOpen[key], nextLevel);
+    return nextLevel;
+  }
+
   moveTab(tabName: string) {
     console.log(tabName);
     //let tabLevel = levelOpen[tabName as keyof typeof levelOpen];
@@ -204,7 +245,7 @@ export class DetailsComponent implements OnInit {
   noVoteYet(): boolean {
     let result: boolean = true;
 
-    if (this.highestLevelReached() > this.active) {
+    if (this.active == 3 || this.highestLevelReached() > this.active) {
       result = false;
     }
 
