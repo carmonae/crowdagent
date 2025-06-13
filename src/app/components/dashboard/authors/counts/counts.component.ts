@@ -80,6 +80,7 @@ export class CountsComponent {
   }
 
   getChartData(): void {
+    if (!this._projectListData) return;
     console.log('getChartData:', this._projectListData);
     let impressions: number = this._projectListData!.filter(
       (proj) => proj.scoreI
