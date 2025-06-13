@@ -51,7 +51,8 @@ function sort(
 function matches(titleData: UserprojectI, term: string) {
   return (
     titleData.title.toLowerCase().includes(term.toLowerCase()) ||
-    titleData.subtitle.toLowerCase().includes(term.toLowerCase())
+    titleData.subtitle.toLowerCase().includes(term.toLowerCase()) ||
+    titleData.status.toLowerCase().includes(term.toLowerCase())
   );
 }
 
