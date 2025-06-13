@@ -16,7 +16,7 @@ export interface UserprojectI {
   genre: GenreTypes;
   subgenre: any;
   size: SizeTypes;
-  dateCreated: Date | undefined;
+  dateCreated: string;
   dateStart: string;
   dateEnd: string;
   datePublish: string;
@@ -40,7 +40,7 @@ export const UserprojectDefault: UserprojectI = {
   projectUid: undefined,
   projectname: '',
   penname: '',
-  dateCreated: new Date(),
+  dateCreated: new Date().toISOString(),
   title: '',
   subtitle: '',
   readership: Readership.PUBLIC,
@@ -71,7 +71,7 @@ export const UserprojectMockData: UserprojectI[] = [
     projectUid: undefined,
     projectname: 'First Book',
     penname: 'Mark Twain',
-    dateCreated: new Date(),
+    dateCreated: new Date().toISOString(),
     title: 'Identity',
     subtitle: 'Restoring the Image of God on the Mind of Man',
     readership: Readership.PUBLIC,
@@ -101,7 +101,7 @@ export const UserprojectMockData: UserprojectI[] = [
     projectUid: undefined,
     projectname: 'Second Book',
     penname: 'Mark Twain',
-    dateCreated: new Date(),
+    dateCreated: new Date().toISOString(),
     title: 'Rethinking Self-Esteem',
     subtitle: 'A better way of seeing yourself',
     readership: Readership.PUBLIC,
@@ -131,7 +131,7 @@ export const UserprojectMockData: UserprojectI[] = [
     projectUid: undefined,
     projectname: 'Apologetics',
     penname: 'Mark Twain',
-    dateCreated: new Date(),
+    dateCreated: new Date().toISOString(),
     title: 'The Atheists Predicament',
     subtitle: 'Coming to terms with the materialist world model',
     readership: Readership.PUBLIC,
@@ -161,7 +161,7 @@ export const UserprojectMockData: UserprojectI[] = [
     projectUid: undefined,
     projectname: 'Own Your Person',
     penname: 'Mark Twain',
-    dateCreated: new Date(),
+    dateCreated: new Date().toISOString(),
     title: 'The Cain Effect',
     subtitle: 'Own who you are',
     readership: Readership.PUBLIC,
@@ -193,7 +193,7 @@ export class Userproject implements UserprojectI {
   projectUid: undefined;
   public projectname: string = '';
   public penname: string = 'Mark Twain';
-  public dateCreated: Date | undefined;
+  public dateCreated: string = new Date().toISOString();
   public title: string = '';
   public subtitle: string = '';
   public readership: Readership = Readership.PUBLIC;
@@ -201,8 +201,8 @@ export class Userproject implements UserprojectI {
   public genre: GenreTypes = GenreTypes.FICTION;
   public subgenre: NonFictionSubtypes = NonFictionSubtypes.PHILOSOPHY;
   public size: SizeTypes = SizeTypes.LARGE;
-  public dateStart: string = '2023-10-30';
-  public dateEnd: string = '2023-10-30';
+  public dateStart: string = '';
+  public dateEnd: string = '';
   public datePublish: string = '';
   public abstract: string = '';
   public coverurl: string = '';
