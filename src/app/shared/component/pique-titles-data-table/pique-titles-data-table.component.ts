@@ -11,8 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { FeatherIconsComponent } from '@app/shared/component/feather-icons/feather-icons.component';
 import { PiquedTitlesType } from '@app/shared/data/data/default-dashboard/piqued-titles-mock-data';
+import { ImageService } from '@app/shared/services/image.service';
 import { PiquedTitleTablesService } from '@app/util/piqued-tables.util';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import {
   SortableDirective,
   SortEvent,
@@ -55,7 +56,10 @@ export class PiqueTitlesDataTableComponent {
 
   public isShow: boolean = false;
 
-  constructor(private decimalPipe: DecimalPipe) {
+  constructor(
+    private decimalPipe: DecimalPipe,
+    private imgService: ImageService
+  ) {
     this.titles$ = this.service.titles$;
     this.total$ = this.service.total$;
     console.log('pique-titles-data-table.tableName', this.tableName);
@@ -127,11 +131,19 @@ export class PiqueTitlesDataTableComponent {
     this.service.page = this.currentPage;
   }
 
-  getTitleImage(title: PiquedTitlesType): string {
-    if (title.img && title.img !== '') {
-      return title.img;
+  getTitleImage(title: PiquedTitlesType): Observable<string> {
+    if (title.img) {
+      return this.imgService.getData(title.img).pipe(
+        // Convert ArrayBuffer or undefined to string
+        map((result) => {
+          if (typeof result === 'string') return result;
+          if (result instanceof ArrayBuffer) return '';
+          // fallback to blank image if undefined
+          return 'assets/image/blankBookCover.jpg';
+        })
+      );
     } else {
-      return 'assets/images/blankBookCover.jpg';
+      return of('assets/images/blankBookCover.jpg');
     }
   }
 }
