@@ -28,8 +28,9 @@ export class ReadSummaryComponent {
       string,
       Record<string, { readers: Set<string>; totalScore: number }>
     > = {};
-
     var data: Entry[] = [];
+
+    if (!this._projectListData) return;
 
     for (let project of this._projectListData!) {
       let id: string = project.projectUid!;
