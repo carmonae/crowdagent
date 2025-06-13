@@ -16,7 +16,7 @@ export class AuthService {
         this.profile = profile;
       })
       .catch((error) => {
-        console.error('Error loading user profile:', error);
+        console.error('AuthService:Error loading user profile:', error);
       });
   }
 
