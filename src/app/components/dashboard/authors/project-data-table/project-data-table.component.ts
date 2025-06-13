@@ -108,7 +108,7 @@ export class ProjectDataTableComponent {
     if (title.coverurl && title.coverurl !== '') {
       return title.coverurl;
     } else {
-      return 'assets/images/blankBookCover.jpg';
+      return 'assets/images/book-gold.png';
     }
   }
 
