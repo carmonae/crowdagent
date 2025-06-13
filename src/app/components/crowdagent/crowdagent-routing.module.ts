@@ -37,7 +37,7 @@ const routes: Routes = [
         path: 'listreviews',
         component: ReviewListComponent,
         data: {
-          title: 'List Reviews',
+          title: 'My Reviews',
           breadcrumb: 'List Reviews',
         },
       },
