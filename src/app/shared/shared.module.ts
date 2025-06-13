@@ -13,6 +13,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { DropzoneDirective } from '../directive/dropzone.directive';
+import { BankingDetailsModalComponent } from './component/banking-details-modal/banking-details-modal.component';
 import { BreadcrumbComponent } from './component/breadcrumb/breadcrumb.component';
 import { ColorPickerComponent } from './component/customizer/color-picker/color-picker.component';
 import { CustomizerComponent } from './component/customizer/customizer.component';
@@ -49,7 +50,11 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [NumberRatingComponent, ModalBookscoreComponent],
+  declarations: [
+    NumberRatingComponent,
+    ModalBookscoreComponent,
+    BankingDetailsModalComponent,
+  ],
   imports: [
     CommonModule,
     HeaderComponent,
